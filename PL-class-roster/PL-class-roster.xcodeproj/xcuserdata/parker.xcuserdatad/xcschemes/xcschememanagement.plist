@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>sdf.xcscheme</key>
+		<key>PL-class-roster.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,12 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2C07B53A1993146600E2612E</key>
+		<key>2C15E0D51993EA27000DFF58</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2C07B54C1993146700E2612E</key>
+		<key>2C15E0E71993EA27000DFF58</key>
 		<dict>
 			<key>primary</key>
 			<true/>

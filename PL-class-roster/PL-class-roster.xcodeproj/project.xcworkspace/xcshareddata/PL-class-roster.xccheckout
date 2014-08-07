@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>FFB06FAC-13D7-4A42-964F-10085B2FB8AF</string>
+	<string>89974080-99DA-4638-A119-8F95C3A300E0</string>
 	<key>IDESourceControlProjectName</key>
-	<string>sdf</string>
+	<string>PL-class-roster</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>E71828A21DCECE3C4125E0E79397BAC5B101302F</key>
 		<string>github.com:pakalewis/PL-08.06.14.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>sdf/sdf.xcodeproj</string>
+	<string>PL-class-roster/PL-class-roster.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>E71828A21DCECE3C4125E0E79397BAC5B101302F</key>

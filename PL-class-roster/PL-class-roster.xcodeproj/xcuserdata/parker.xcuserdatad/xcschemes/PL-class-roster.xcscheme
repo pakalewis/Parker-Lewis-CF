@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C07B53A1993146600E2612E"
-               BuildableName = "sdf.app"
-               BlueprintName = "sdf"
-               ReferencedContainer = "container:sdf.xcodeproj">
+               BlueprintIdentifier = "2C15E0D51993EA27000DFF58"
+               BuildableName = "PL-class-roster.app"
+               BlueprintName = "PL-class-roster"
+               ReferencedContainer = "container:PL-class-roster.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C07B54C1993146700E2612E"
-               BuildableName = "sdfTests.xctest"
-               BlueprintName = "sdfTests"
-               ReferencedContainer = "container:sdf.xcodeproj">
+               BlueprintIdentifier = "2C15E0E71993EA27000DFF58"
+               BuildableName = "PL-class-rosterTests.xctest"
+               BlueprintName = "PL-class-rosterTests"
+               ReferencedContainer = "container:PL-class-roster.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,20 +46,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C07B54C1993146700E2612E"
-               BuildableName = "sdfTests.xctest"
-               BlueprintName = "sdfTests"
-               ReferencedContainer = "container:sdf.xcodeproj">
+               BlueprintIdentifier = "2C15E0E71993EA27000DFF58"
+               BuildableName = "PL-class-rosterTests.xctest"
+               BlueprintName = "PL-class-rosterTests"
+               ReferencedContainer = "container:PL-class-roster.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2C07B53A1993146600E2612E"
-            BuildableName = "sdf.app"
-            BlueprintName = "sdf"
-            ReferencedContainer = "container:sdf.xcodeproj">
+            BlueprintIdentifier = "2C15E0D51993EA27000DFF58"
+            BuildableName = "PL-class-roster.app"
+            BlueprintName = "PL-class-roster"
+            ReferencedContainer = "container:PL-class-roster.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -75,10 +75,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2C07B53A1993146600E2612E"
-            BuildableName = "sdf.app"
-            BlueprintName = "sdf"
-            ReferencedContainer = "container:sdf.xcodeproj">
+            BlueprintIdentifier = "2C15E0D51993EA27000DFF58"
+            BuildableName = "PL-class-roster.app"
+            BlueprintName = "PL-class-roster"
+            ReferencedContainer = "container:PL-class-roster.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -93,10 +93,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2C07B53A1993146600E2612E"
-            BuildableName = "sdf.app"
-            BlueprintName = "sdf"
-            ReferencedContainer = "container:sdf.xcodeproj">
+            BlueprintIdentifier = "2C15E0D51993EA27000DFF58"
+            BuildableName = "PL-class-roster.app"
+            BlueprintName = "PL-class-roster"
+            ReferencedContainer = "container:PL-class-roster.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

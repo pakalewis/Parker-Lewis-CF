@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  sdf
+//  PL-class-roster
 //
-//  Created by Parker Lewis on 8/6/14.
+//  Created by Parker Lewis on 8/7/14.
 //  Copyright (c) 2014 Parker Lewis. All rights reserved.
 //
 

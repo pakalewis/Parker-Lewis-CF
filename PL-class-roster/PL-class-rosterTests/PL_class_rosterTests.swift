@@ -1,15 +1,15 @@
 //
-//  testing123Tests.swift
-//  testing123Tests
+//  PL_class_rosterTests.swift
+//  PL-class-rosterTests
 //
-//  Created by Parker Lewis on 8/6/14.
+//  Created by Parker Lewis on 8/7/14.
 //  Copyright (c) 2014 Parker Lewis. All rights reserved.
 //
 
 import UIKit
 import XCTest
 
-class testing123Tests: XCTestCase {
+class PL_class_rosterTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
