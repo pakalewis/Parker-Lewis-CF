@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pdE-NW-C60">
-                                <rect key="frame" x="139" y="273" width="51" height="31"/>
+                                <rect key="frame" x="276" y="267" width="51" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="97" y="291" width="51" height="31"/>
                                 </variation>
@@ -25,17 +25,8 @@
                                     <action selector="switchToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="FQq-Hd-u36"/>
                                 </connections>
                             </switch>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-FE-ZOe">
-                                <rect key="frame" x="79" y="419" width="169" height="31"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="40" y="447" width="168" height="31"/>
-                                </variation>
-                                <connections>
-                                    <action selector="sliderSlid:" destination="BYZ-38-t0r" eventType="valueChanged" id="CLw-Es-I22"/>
-                                </connections>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ea-Vi-xTV">
-                                <rect key="frame" x="65" y="124" width="196" height="32"/>
+                                <rect key="frame" x="202" y="137" width="196" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <size key="titleShadowOffset" width="10" height="17"/>
                                 <state key="normal" title="PRESS HERE">
@@ -51,6 +42,15 @@
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Sk-Ka-XWS"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ek0-FE-ZOe">
+                                <rect key="frame" x="216" y="415" width="169" height="31"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="40" y="447" width="168" height="31"/>
+                                </variation>
+                                <connections>
+                                    <action selector="sliderSlid:" destination="BYZ-38-t0r" eventType="valueChanged" id="CLw-Es-I22"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
