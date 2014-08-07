@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var mySwitch: UISwitch!
     @IBOutlet weak var textBox: UITextView!
-
+    var people = [Person]()
     
 // make the text box display stuff when toggling the switch
     @IBAction func changer(sender: AnyObject) {
@@ -30,9 +30,13 @@ class ViewController: UIViewController {
 
 // test Person objects
     var me = Person(firstName: "Parker", lastName: "Lewis")
+    self.people.append(me)
     var person1 = Person(firstName: "Alice", lastName: "Adams")
+    self.people.append(person1)
     var person2 = Person(firstName: "Beth", lastName: "Brown")
+    self.people.append(person2)
     var person3 = Person(firstName: "Chester", lastName: "Charles")
+    self.people.append(person3)
     
     
 // new method to create array of Person objects
