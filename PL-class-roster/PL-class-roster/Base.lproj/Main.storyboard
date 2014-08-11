@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rA9-Jd-gIQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8dB-ZW-NNX">
     <dependencies>
         <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PL_class_roster" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,79 +17,105 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QpB-EP-1Jm">
-                                <rect key="frame" x="109" y="341" width="51" height="31"/>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dOl-Br-KXd">
+                                <rect key="frame" x="72" y="72" width="175" height="97"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Tap here to cycle through the class roster">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="changer:" destination="BYZ-38-t0r" eventType="valueChanged" id="UmG-Xm-0Hg"/>
+                                    <action selector="populateRoster:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nM8-iP-GQx"/>
                                 </connections>
-                            </switch>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAx-0n-gOQ">
-                                <rect key="frame" x="34" y="423" width="240" height="128"/>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gAx-0n-gOQ">
+                                <rect key="frame" x="39" y="201" width="240" height="137"/>
                                 <color key="backgroundColor" red="0.33729994053092638" green="0.8310629078795968" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Toggle the switch below to display some text in the text box" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222" translatesAutoresizingMaskIntoConstraints="NO" id="E7Z-6o-A9V">
-                                <rect key="frame" x="34" y="159" width="222" height="157"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67y-P6-IOQ">
+                                <rect key="frame" x="56" y="385" width="207" height="170"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HcY-sr-COl">
-                        <barButtonItem key="rightBarButtonItem" title="Next page" id="ORy-Hl-TnQ">
+                    <navigationItem key="navigationItem" title="Home" id="HcY-sr-COl">
+                        <barButtonItem key="rightBarButtonItem" title="More info" id="ORy-Hl-TnQ">
                             <connections>
-                                <segue destination="cOP-F6-OTg" kind="show" id="XeX-iM-qjc"/>
+                                <action selector="moreInfoButton:" destination="BYZ-38-t0r" id="UIO-Qa-tC5"/>
+                                <segue destination="V80-iO-fdx" kind="show" id="0Ih-FZ-dq7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="mySwitch" destination="QpB-EP-1Jm" id="Lz1-eX-w9u"/>
+                        <outlet property="nextPage" destination="ORy-Hl-TnQ" id="Nv0-nb-2xA"/>
+                        <outlet property="personImage" destination="67y-P6-IOQ" id="pVb-D5-Hle"/>
                         <outlet property="textBox" destination="gAx-0n-gOQ" id="51Z-OZ-cbl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="107"/>
+            <point key="canvasLocation" x="2352" y="107"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="cPr-te-tmc">
+        <!--Person View Controller-->
+        <scene sceneID="uY3-ID-8Qn">
             <objects>
-                <viewController id="cOP-F6-OTg" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="moreInfo" id="V80-iO-fdx" customClass="PersonViewController" customModule="PL_class_roster" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="euH-fh-fzJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="NCa-lg-b13"/>
+                        <viewControllerLayoutGuide type="top" id="PgV-GH-zK5"/>
+                        <viewControllerLayoutGuide type="bottom" id="ORA-um-Koz"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sU9-9M-7Jd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="D4x-9H-4t8">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="TESTING" translatesAutoresizingMaskIntoConstraints="NO" id="D3K-vA-uby">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="88" y="142" width="225" height="306"/>
+                                </variation>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="D3K-vA-uby"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="D3K-vA-uby"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="moreInfoText" destination="D3K-vA-uby" id="fof-w2-ghx"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xhF-xj-8PK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R6E-68-v5j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2259" y="107"/>
+            <point key="canvasLocation" x="3021" y="107"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="dUJ-ba-s1I">
+        <scene sceneID="XaL-3l-o4G">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rA9-Jd-gIQ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8dB-ZW-NNX" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CDM-um-FVW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gjn-ev-kBk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rN2-YP-7Cx"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uUY-cA-nX3"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9MM-S5-yX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TT5-SW-kXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="785" y="107"/>
+            <point key="canvasLocation" x="1540" y="107"/>
         </scene>
     </scenes>
 </document>
