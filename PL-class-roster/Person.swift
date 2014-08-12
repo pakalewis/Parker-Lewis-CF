@@ -33,7 +33,8 @@ class Person {
     
     
 // functions/methods
-    func fullName() -> String {
+    func fullName() -> String
+    {
         return "\(firstName) \(lastName)"
     }
     

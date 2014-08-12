@@ -11,12 +11,13 @@ import UIKit
 
 class PersonViewController: UIViewController {
     
+//    var personInfo: Person
     
     
-
     
     @IBOutlet weak var moreInfoText: UITextView!
 
+    @IBOutlet weak var moreInfoName: UILabel!
     
     
     
