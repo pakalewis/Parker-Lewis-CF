@@ -1,0 +1,4 @@
+how to hook up an item if you break it in code
+
+what goes in front of the 'func' term (like the @BI...
+

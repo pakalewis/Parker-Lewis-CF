@@ -11,21 +11,23 @@ import UIKit
 
 class PersonViewController: UIViewController {
     
-//    var personInfo: Person
     
     
+    @IBOutlet weak var personFirstName: UITextField!
+    @IBOutlet weak var personLastName: UITextField!
+    @IBOutlet weak var personImage: UIImageView!
     
-    @IBOutlet weak var moreInfoText: UITextView!
-
-    @IBOutlet weak var moreInfoName: UILabel!
-    
-    
+    var firstNamePassed : String!
+    var lastNamePassed : String!
+//    var imagePassed : UIImage!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        personFirstName.text = firstNamePassed
+        personLastName.text = lastNamePassed
+//        personImage.image = imagePassed
     }
     
     override func didReceiveMemoryWarning() {
