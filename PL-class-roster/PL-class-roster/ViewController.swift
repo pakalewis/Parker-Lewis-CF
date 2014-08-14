@@ -11,15 +11,8 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
-    
-    
-//    @IBOutlet weak var textBox: UITextView!
-//    @IBOutlet weak var personImage: UIImageView!
-//    @IBOutlet weak var nextPage: UIBarButtonItem!
-
     @IBOutlet weak var tableView: UITableView!
     var roster = [Person]()
-    var rosterIndex: Int = 0
     var currentPerson = Person(firstName: "First: ", lastName: "Last: ")
 
     
@@ -74,13 +67,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        var personInRow = roster[indexPath.row]
+        var personInRow = self.roster[indexPath.row]
         cell.textLabel.text = personInRow.fullName()
         return cell
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        println(currentPerson.image)
     }
 
     
@@ -90,13 +82,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // pass data to the other view controller
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if (segue.identifier == "personSegue") {
+
+            // get the index of the selected cell in the table
             var selectedIndexPath = self.tableView.indexPathForSelectedRow()
-            self.currentPerson = roster[selectedIndexPath.row]
             
-            var svc = segue!.destinationViewController as PersonViewController
-            svc.firstNamePassed = currentPerson.firstName
-            svc.lastNamePassed = currentPerson.lastName
-            svc.imagePassed = currentPerson.image
+            // set the Person object for this ViewController class by using the correct index in the roster
+            self.currentPerson = self.roster[selectedIndexPath.row]
+            
+            // target the next view controller
+            var personViewController = segue.destinationViewController as PersonViewController
+            
+            // set the target VC Person object
+            personViewController.currentPerson = currentPerson
         }
     }
     
@@ -106,23 +103,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    
-    // press the button to display info in textbox and image view
-//    @IBAction func populateRoster(sender: AnyObject) {
-//        
-//        currentPerson = roster[rosterIndex]
-//        //display name in text box
-//        textBox.text = "Person number " + (String)(rosterIndex + 1) + " is \n\n" + currentPerson.fullName()
-//
-//
-//        //display image in image view
-//        personImage.image = currentPerson.image
-//        
-//        
-//        // cycle through the arrays and reset to zero if the index reaches the end
-//        rosterIndex++
-//        if rosterIndex == roster.count { rosterIndex = 0 }
-//    }
     
     
     

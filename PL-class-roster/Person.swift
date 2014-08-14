@@ -13,8 +13,8 @@ import UIKit
 class Person {
 
 // properties
-    var firstName : String
-    var lastName : String
+    var firstName : String!
+    var lastName : String!
     var image : UIImage?
     
 // initializers

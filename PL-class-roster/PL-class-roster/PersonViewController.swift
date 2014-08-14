@@ -17,22 +17,19 @@ class PersonViewController: UIViewController {
     @IBOutlet weak var personLastName: UITextField!
     @IBOutlet weak var personImage: UIImageView!
     
-    var firstNamePassed : String!
-    var lastNamePassed : String!
-    var imagePassed : UIImage!
+    var currentPerson : Person?
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        personFirstName.text = firstNamePassed
-        personLastName.text = lastNamePassed
-        personImage.image = imagePassed
+        personFirstName.text = currentPerson?.firstName
+        personLastName.text = currentPerson?.lastName
+        personImage.image = currentPerson?.image
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }
