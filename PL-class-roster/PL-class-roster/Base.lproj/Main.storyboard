@@ -75,7 +75,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="152" y="110" width="97" height="30"/>
+                                    <rect key="frame" x="98" y="102" width="97" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CAz-PS-lio">
@@ -83,13 +83,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="152" y="189" width="97" height="30"/>
+                                    <rect key="frame" x="98" y="181" width="97" height="30"/>
                                 </variation>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4lW-Rs-LRs">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="80" y="255" width="240" height="250"/>
+                                    <rect key="frame" x="26" y="247" width="240" height="250"/>
                                 </variation>
                             </imageView>
                         </subviews>
@@ -110,8 +110,6 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="firstName" destination="x5x-e4-BFi" id="VcM-Tv-Zai"/>
-                        <outlet property="lastName" destination="CAz-PS-lio" id="2IY-WK-XZF"/>
                         <outlet property="personFirstName" destination="x5x-e4-BFi" id="Wdj-Ac-hvT"/>
                         <outlet property="personImage" destination="4lW-Rs-LRs" id="2qt-FJ-bZo"/>
                         <outlet property="personLastName" destination="CAz-PS-lio" id="6DE-Dd-FQw"/>

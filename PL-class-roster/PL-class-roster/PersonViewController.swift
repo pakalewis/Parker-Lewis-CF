@@ -19,7 +19,7 @@ class PersonViewController: UIViewController {
     
     var firstNamePassed : String!
     var lastNamePassed : String!
-//    var imagePassed : UIImage!
+    var imagePassed : UIImage!
     
     
     
@@ -27,7 +27,7 @@ class PersonViewController: UIViewController {
         super.viewDidLoad()
         personFirstName.text = firstNamePassed
         personLastName.text = lastNamePassed
-//        personImage.image = imagePassed
+        personImage.image = imagePassed
     }
     
     override func didReceiveMemoryWarning() {

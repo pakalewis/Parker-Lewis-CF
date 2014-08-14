@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0289BA199C503F0047AC23 /* fred-flintstone.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0289B8199C503F0047AC23 /* fred-flintstone.png */; };
+		2C0289BB199C503F0047AC23 /* eeyore.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0289B9199C503F0047AC23 /* eeyore.png */; };
+		2C0289BD199C50E40047AC23 /* goofy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0289BC199C50E40047AC23 /* goofy.png */; };
 		2C15E0DC1993EA27000DFF58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15E0DB1993EA27000DFF58 /* AppDelegate.swift */; };
 		2C15E0DE1993EA27000DFF58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15E0DD1993EA27000DFF58 /* ViewController.swift */; };
 		2C15E0E11993EA27000DFF58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C15E0DF1993EA27000DFF58 /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C0289B8199C503F0047AC23 /* fred-flintstone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fred-flintstone.png"; path = "../../../Desktop/fred-flintstone.png"; sourceTree = "<group>"; };
+		2C0289B9199C503F0047AC23 /* eeyore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eeyore.png; path = ../../../Desktop/eeyore.png; sourceTree = "<group>"; };
+		2C0289BC199C50E40047AC23 /* goofy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = goofy.png; path = ../../../Desktop/goofy.png; sourceTree = "<group>"; };
 		2C15E0D61993EA27000DFF58 /* PL-class-roster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PL-class-roster.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C15E0DA1993EA27000DFF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C15E0DB1993EA27000DFF58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,13 +73,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C15E0CD1993EA27000DFF58 = {
+		2C0289BE199C50F40047AC23 /* images */ = {
 			isa = PBXGroup;
 			children = (
 				2C561C3B199975DC004B529D /* archie-andrews.png */,
 				2C561C3C199975DC004B529D /* bugs-bunny.png */,
 				2C561C3D199975DC004B529D /* capn-crunch.png */,
 				2C561C3E199975DC004B529D /* donald-duck.png */,
+				2C0289B9199C503F0047AC23 /* eeyore.png */,
+				2C0289B8199C503F0047AC23 /* fred-flintstone.png */,
+				2C0289BC199C50E40047AC23 /* goofy.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		2C15E0CD1993EA27000DFF58 = {
+			isa = PBXGroup;
+			children = (
+				2C0289BE199C50F40047AC23 /* images */,
 				2C561C3819996EB6004B529D /* classRosterPlayground.playground */,
 				2C15E0F81993EA6C000DFF58 /* Person.swift */,
 				2C15E0D81993EA27000DFF58 /* PL-class-roster */,
@@ -212,8 +229,11 @@
 				2C15E0E11993EA27000DFF58 /* Main.storyboard in Resources */,
 				2C15E0E31993EA27000DFF58 /* Images.xcassets in Resources */,
 				2C561C3F199975DC004B529D /* archie-andrews.png in Resources */,
+				2C0289BD199C50E40047AC23 /* goofy.png in Resources */,
 				2C561C42199975DC004B529D /* donald-duck.png in Resources */,
+				2C0289BA199C503F0047AC23 /* fred-flintstone.png in Resources */,
 				2C561C41199975DC004B529D /* capn-crunch.png in Resources */,
+				2C0289BB199C503F0047AC23 /* eeyore.png in Resources */,
 				2C561C40199975DC004B529D /* bugs-bunny.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

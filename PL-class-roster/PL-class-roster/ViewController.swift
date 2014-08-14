@@ -24,22 +24,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     
 
+    
+    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        // talk to the tableView
         self.tableView.dataSource = self
         self.tableView.delegate = self
-
         
         // initialize Person objects
         var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
         var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
         var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
         var person4 = Person(firstName: "Donald", lastName: "Duck", image: UIImage(named:"donald-duck.png"))
+        var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
+        var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
+        var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
         
         //create the array of people
-        self.roster = self.makePersonArray(person1, person2, person3, person4)
+        self.roster = self.makePersonArray(person1, person2, person3, person4, person5, person6, person7)
     }
+    
+    
     
     
     // new method to create array of Person objects
@@ -54,33 +61,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     
     
-    
+    // tableView stuff
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         return roster.count
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        
         var personInRow = roster[indexPath.row]
         cell.textLabel.text = personInRow.fullName()
         return cell
     }
     
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        self.currentPerson = roster[indexPath.row]
         println(currentPerson.image)
     }
 
@@ -88,14 +87,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    
+    // pass data to the other view controller
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         if (segue.identifier == "personSegue") {
-            var svc = segue!.destinationViewController as PersonViewController
+            var selectedIndexPath = self.tableView.indexPathForSelectedRow()
+            self.currentPerson = roster[selectedIndexPath.row]
             
+            var svc = segue!.destinationViewController as PersonViewController
             svc.firstNamePassed = currentPerson.firstName
             svc.lastNamePassed = currentPerson.lastName
-//            svc.imagePassed = currentPerson.image
+            svc.imagePassed = currentPerson.image
         }
     }
     
