@@ -12,9 +12,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     @IBOutlet weak var tableView: UITableView!
+    var sectionTitles = [String]()
     var roster = [Person]()
-    var currentPerson = Person(firstName: "First: ", lastName: "Last: ")
-
+    var teachers = [Person]()
+    var currentPerson = Person()
     
 
     
@@ -22,9 +23,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // talk to the tableView
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+//        talk to the tableView ---- I hooked these up in the storyboard
+//        self.tableView.dataSource = self
+//        self.tableView.delegate = self
+        
         
         // initialize Person objects
         var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
@@ -34,9 +36,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
         var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
         var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-        
-        //create the array of people
+
+        var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
+        var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
+
+        //create the arrays of students and teachers
         self.roster = self.makePersonArray(person1, person2, person3, person4, person5, person6, person7)
+        self.teachers = self.makePersonArray(teacher1, teacher2)
+        
+        self.sectionTitles.append("Teachers")
+        self.sectionTitles.append("Students")
+
+        println("VC view did load")
+        println("full name: " + currentPerson.fullName())
+        println("\n")
+        
     }
     
     
@@ -44,35 +58,62 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // new method to create array of Person objects
     func makePersonArray(people: Person...) -> [Person] {
-        var roster = [Person]()
+        var array = [Person]()
         for i in people {
-            roster.append(i)
+            array.append(i)
         }
-        return roster
+        return array
     }
     
     
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+
 
     
     
     // tableView stuff
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return roster.count
+    func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
+        return sectionTitles[section]
     }
+
+    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+        return 2
+    }
+    
+    
+    
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+
+        // determine number of rows base on the two arrays
+        if section == 0 { return teachers.count }
+        else { return roster.count }
+    }
+    
+    
+    
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        var personInRow = self.roster[indexPath.row]
-        cell.textLabel.text = personInRow.fullName()
+        
+        // set currentPerson
+        if indexPath.section == 0 {
+            currentPerson = self.teachers[indexPath.row]
+        }
+        else {
+            currentPerson = self.roster[indexPath.row]
+        }
+        
+        // display cell label
+        cell.textLabel.text = currentPerson.fullName()
         return cell
     }
     
+    
+    
+    
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        
     }
 
     
@@ -86,20 +127,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // get the index of the selected cell in the table
             var selectedIndexPath = self.tableView.indexPathForSelectedRow()
             
-            // set the Person object for this ViewController class by using the correct index in the roster
-            self.currentPerson = self.roster[selectedIndexPath.row]
+            // set the currentPerson which is what will be passed
+            if selectedIndexPath.section == 0 {
+                self.currentPerson = self.teachers[selectedIndexPath.row]
+            }
+            else {
+                self.currentPerson = self.roster[selectedIndexPath.row]
+            }
+
             
             // target the next view controller
             var personViewController = segue.destinationViewController as PersonViewController
             
             // set the target VC Person object
-            personViewController.currentPerson = currentPerson
+            personViewController.currentDetailPerson = self.currentPerson
         }
     }
     
     
     
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
     
     

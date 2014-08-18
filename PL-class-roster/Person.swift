@@ -18,6 +18,10 @@ class Person {
     var image : UIImage?
     
 // initializers
+    init () {
+        self.firstName = ""
+        self.lastName = ""
+    }
     init (firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName

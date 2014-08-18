@@ -20,6 +20,8 @@
 		2C15E0E31993EA27000DFF58 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C15E0E21993EA27000DFF58 /* Images.xcassets */; };
 		2C15E0EF1993EA27000DFF58 /* PL_class_rosterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15E0EE1993EA27000DFF58 /* PL_class_rosterTests.swift */; };
 		2C15E0F91993EA6C000DFF58 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15E0F81993EA6C000DFF58 /* Person.swift */; };
+		2C41326A19A15B9C006F681C /* teacher2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C41326819A15B9C006F681C /* teacher2.png */; };
+		2C41326B19A15B9C006F681C /* teacher1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C41326919A15B9C006F681C /* teacher1.png */; };
 		2C561C441999887A004B529D /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C561C431999887A004B529D /* PersonViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +53,8 @@
 		2C15E0ED1993EA27000DFF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C15E0EE1993EA27000DFF58 /* PL_class_rosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PL_class_rosterTests.swift; sourceTree = "<group>"; };
 		2C15E0F81993EA6C000DFF58 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		2C41326819A15B9C006F681C /* teacher2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacher2.png; sourceTree = "<group>"; };
+		2C41326919A15B9C006F681C /* teacher1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacher1.png; sourceTree = "<group>"; };
 		2C561C3819996EB6004B529D /* classRosterPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = classRosterPlayground.playground; path = "../../../Library/Autosave Information/classRosterPlayground.playground"; sourceTree = "<group>"; };
 		2C561C431999887A004B529D /* PersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +80,8 @@
 		2C0289BE199C50F40047AC23 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2C41326819A15B9C006F681C /* teacher2.png */,
+				2C41326919A15B9C006F681C /* teacher1.png */,
 				2C0289CB199C61520047AC23 /* eeyore.png */,
 				2C0289BF199C54AB0047AC23 /* archie-andrews.png */,
 				2C0289C0199C54AB0047AC23 /* bugs-bunny.png */,
@@ -229,12 +235,14 @@
 				2C0289CA199C54AB0047AC23 /* goofy.png in Resources */,
 				2C15E0E31993EA27000DFF58 /* Images.xcassets in Resources */,
 				2C0289C9199C54AB0047AC23 /* fred-flintstone.png in Resources */,
+				2C41326B19A15B9C006F681C /* teacher1.png in Resources */,
 				2C0289CC199C61520047AC23 /* eeyore.png in Resources */,
 				2C0289C7199C54AB0047AC23 /* capn-crunch.png in Resources */,
 				2C0289C8199C54AB0047AC23 /* donald-duck.png in Resources */,
 				2C0289CF199C698D0047AC23 /* Main.storyboard in Resources */,
 				2C0289C6199C54AB0047AC23 /* bugs-bunny.png in Resources */,
 				2C0289C5199C54AB0047AC23 /* archie-andrews.png in Resources */,
+				2C41326A19A15B9C006F681C /* teacher2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
