@@ -1,4 +1,6 @@
-how to hook up an item if you break it in code
 
-what goes in front of the 'func' term (like the @BI...
+can a textfield accept an empty string
 
+how do i harness the "done" button from the nav controller?
+i want to be able to edit the text fields and then pass the Person object back to the main VC
+and store the new person in the master array and reload the tableview to see the new person

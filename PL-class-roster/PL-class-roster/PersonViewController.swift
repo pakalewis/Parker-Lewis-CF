@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PersonViewController: UIViewController {
+class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     
     
@@ -20,32 +20,70 @@ class PersonViewController: UIViewController {
     
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+//         connected in storyboard
+//        self.personFirstName.delegate = self
+//        self.personLastName.delegate = self
+
         personFirstName.text = currentDetailPerson.firstName
         personLastName.text = currentDetailPerson.lastName
-        personImage.image = currentDetailPerson.image
+        if currentDetailPerson.image == nil {
+            self.personImage.image = UIImage(named: "nopic")
+        }
+        else { self.personImage.image = currentDetailPerson.image }
+
+//        personImage.contentMode
+        
+//        self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    @IBAction func changePicture(sender: AnyObject) {
+        var imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        var newPicture = info[UIImagePickerControllerOriginalImage] as UIImage
+        personImage.image = newPicture
+        
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     
     override func viewWillDisappear(animated: Bool) {
-//        currentDetailPerson.firstName = personFirstName.text
-//        currentDetailPerson.lastName = personLastName.text
         
     }
+
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        if ( segue.identifier == "saveChangesAndGoBack") {
-            var backToTableView = segue.destinationViewController as ViewController
-            currentDetailPerson.firstName = personFirstName.text
-            currentDetailPerson.lastName = personLastName.text
-            backToTableView.currentPerson = self.currentDetailPerson
-            // how do I target the correct cell in the table to change the data??????
-            // do i need this button or can I use the navigation controller's "back" button
-            
-        }
-        
-    }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+//        if ( segue.identifier == "saveChangesAndGoBack") {
+//            println("segue back")
+//            var backToTableView = segue.destinationViewController as ViewController
+//            currentDetailPerson.firstName = personFirstName.text
+//            currentDetailPerson.lastName = personLastName.text
+//            backToTableView.currentPerson = self.currentDetailPerson
+//            // how do I target the correct cell in the table to change the data??????
+//            // do i need this button or can I use the navigation controller's "back" button
+//            
+//        }
+//        
+//    }
     
     
     
