@@ -37,13 +37,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
         var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
         var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-        var person8 = Person(firstName: "No", lastName: "Name")
 
         var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
         var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
 
         //create the arrays of students and teachers
-        self.roster = self.makePersonArray(person1, person2, person3, person4, person5, person6, person7, person8)
+        self.roster = self.makePersonArray(person1, person2, person3, person4, person5, person6, person7)
         self.teachers = self.makePersonArray(teacher1, teacher2)
         
         self.sectionTitles.append("Teachers")
@@ -108,39 +107,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // pass data to the other view controller
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        // target the next view controller
+        var personViewController = segue.destinationViewController as PersonViewController
+
+        // if clicking a cell in the tableview, target the correct Person obj
         if (segue.identifier == "personSegue") {
             // get the index of the selected cell in the table
             var selectedIndexPath = self.tableView.indexPathForSelectedRow()
             
             // set the currentPerson which is what will be passed
-            if selectedIndexPath.section == 0 {
-                self.currentPerson = self.teachers[selectedIndexPath.row]
-            }
-            else {
-                self.currentPerson = self.roster[selectedIndexPath.row]
-            }
+            self.currentPerson = masterArray[selectedIndexPath.section][selectedIndexPath.row]
+        }
 
-            
-            // target the next view controller
-            var personViewController = segue.destinationViewController as PersonViewController
-            
-            // set the target VC Person object
-            personViewController.currentDetailPerson = self.currentPerson
-        }
-        else if (segue.identifier == "AddPerson") {
-            
-            var newPerson = self.roster.last as Person!
-            var personViewController = segue.destinationViewController as PersonViewController
-            personViewController.currentDetailPerson = currentPerson
-            
-        }
+        // set the target VC Person object
+        personViewController.currentDetailPerson = self.currentPerson
     }
     
     
     @IBAction func addNewPerson(sender: AnyObject) {
-        self.currentPerson = Person(firstName: "First:", lastName: "Last:")
-//        masterArray[1].append(currentPerson)
-//        self.tableView.reloadData()
+        // make new blank person and add to masterArray
+        self.currentPerson = Person()
+        masterArray[1].append(currentPerson)
         self.performSegueWithIdentifier("AddPerson", sender: self)
     }
 

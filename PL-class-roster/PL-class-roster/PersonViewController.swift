@@ -22,21 +22,16 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//         connected in storyboard
+//        connected in storyboard
 //        self.personFirstName.delegate = self
 //        self.personLastName.delegate = self
-
-        personFirstName.text = currentDetailPerson.firstName
-        personLastName.text = currentDetailPerson.lastName
         if currentDetailPerson.image == nil {
             self.personImage.image = UIImage(named: "nopic")
         }
         else { self.personImage.image = currentDetailPerson.image }
-
-//        personImage.contentMode
         
-//        self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
         textField.resignFirstResponder()
@@ -44,6 +39,30 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // set the textField.text values from the model
+        personFirstName.text = currentDetailPerson.firstName
+        personLastName.text = currentDetailPerson.lastName
+
+        // why doesn't this work?
+        self.personImage.layer.cornerRadius = 200.0
+
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        // update the model from the textField.text values
+        currentDetailPerson.firstName = personFirstName.text
+        currentDetailPerson.lastName = personLastName.text
+        currentDetailPerson.image = personImage.image
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+//MARK: IMAGE PICKER
     @IBAction func changePicture(sender: AnyObject) {
         var imagePickerController = UIImagePickerController()
         
@@ -51,6 +70,15 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         self.presentViewController(imagePickerController, animated: true, completion: nil)
+
+        // check if sourcetype is available
+//        if UIImagePickerController.isSourceTypeAvailable(imagePickerController.sourceType) {
+//            println("test here")
+//        }
+//        else {
+//            var noCameraAlert = UIAlertController()
+//            self.presentViewController(noCameraAlert, animated: true, completion: nil)
+//        }
     }
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
@@ -65,32 +93,10 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
-        
-    }
 
     
     
-//    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-//        if ( segue.identifier == "saveChangesAndGoBack") {
-//            println("segue back")
-//            var backToTableView = segue.destinationViewController as ViewController
-//            currentDetailPerson.firstName = personFirstName.text
-//            currentDetailPerson.lastName = personLastName.text
-//            backToTableView.currentPerson = self.currentDetailPerson
-//            // how do I target the correct cell in the table to change the data??????
-//            // do i need this button or can I use the navigation controller's "back" button
-//            
-//        }
-//        
-//    }
     
     
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
 }
