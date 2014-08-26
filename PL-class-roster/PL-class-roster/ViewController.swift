@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Foundation
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, NSCoding {
     
     //MARK: OUTLETS AND PROPERTIES
     @IBOutlet weak var tableView: UITableView!
@@ -60,10 +61,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+    //MARK: ARCHIVER
+//    required init(coder aDecoder: NSCoder!) {
+//        super.init()
+//        self.masterArray = aDecoder.decodeObjectForKey("masterArray") as [[Person]]
+//    }
+//    
+//    
+//    
+//    override func encodeWithCoder(aCoder: NSCoder!) {
+//        aCoder.encodeObject(masterArray, forKey: "masterArray")
+//    }
     
     
-
-
+    
+    
     
     
     //MARK: TABLEVIEW STUFF
