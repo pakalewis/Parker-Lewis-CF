@@ -58,9 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.sectionTitles.append("Teachers")
         self.sectionTitles.append("Students")
-        self.masterArray.append(self.teachers)
-        self.masterArray.append(self.roster)
-        
+        makeMasterArray()
         //        talk to the tableView ---- I hooked these up in the storyboard
         //        self.tableView.dataSource = self
         //        self.tableView.delegate = self
@@ -104,6 +102,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return sectionTitles[section]
     }
 
+    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            if indexPath.section == 0 {
+                teachers.removeAtIndex(indexPath.row)
+            } else {
+                roster.removeAtIndex(indexPath.row)
+            }
+            makeMasterArray()
+            self.tableView.reloadData()
+        }
+    }
+    
+    
+    
+    
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
         // currently returns 2 for teachers and roster
         return masterArray.count
@@ -160,7 +178,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func addNewPerson(sender: AnyObject) {
         // make new blank person and add to masterArray
         self.currentPerson = Person()
-        masterArray[1].append(currentPerson)
+        // here's where I should decide if it's a teacher or student to add
+        roster.append(currentPerson)
+        makeMasterArray()
         self.performSegueWithIdentifier("AddPerson", sender: self)
     }
 
@@ -173,6 +193,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             array.append(i)
         }
         return array
+    }
+    
+    // refresh masterArray after adding or deleting a Person
+    func makeMasterArray() {
+        var makeMasterArray = [[Person]]()
+        makeMasterArray.append(self.teachers)
+        makeMasterArray.append(self.roster)
+        self.masterArray = makeMasterArray
     }
     
     
