@@ -16,6 +16,7 @@ class Person : NSObject, NSCoding {
     var firstName : String!
     var lastName : String!
     var image : UIImage?
+    var gitHubUserName : String?
 
     
     // encode to put in archiver
@@ -23,6 +24,7 @@ class Person : NSObject, NSCoding {
         aCoder.encodeObject(self.firstName, forKey: "firstName")
         aCoder.encodeObject(self.lastName, forKey: "lastName")
         aCoder.encodeObject(self.image, forKey: "image")
+        aCoder.encodeObject(self.gitHubUserName, forKey: "gitHubUserName")
     }
 
     // take out of the archive
@@ -30,6 +32,7 @@ class Person : NSObject, NSCoding {
         self.firstName = aDecoder.decodeObjectForKey("firstName") as String
         self.lastName = aDecoder.decodeObjectForKey("lastName") as String
         self.image = aDecoder.decodeObjectForKey("image") as? UIImage
+        self.gitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String
         super.init()
     }
     

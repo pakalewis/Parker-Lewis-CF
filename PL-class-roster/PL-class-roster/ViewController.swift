@@ -32,9 +32,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
         
         if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
-            
+            println("archiver loaded correctly" )
         } else {
-            
+            println("the archive did not work properly")
         }
 
         
@@ -59,6 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.sectionTitles.append("Teachers")
         self.sectionTitles.append("Students")
         makeMasterArray()
+        
         //        talk to the tableView ---- I hooked these up in the storyboard
         //        self.tableView.dataSource = self
         //        self.tableView.delegate = self
@@ -71,7 +72,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // set masterArray to the one that was previously saved
         var masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as [[Person]]
-        println(masterArray.count)
+        println("the array has \(masterArray.count) sections in it")
         self.tableView.reloadData()
     }
     

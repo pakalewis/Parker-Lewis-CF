@@ -16,6 +16,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var personFirstName: UITextField!
     @IBOutlet weak var personLastName: UITextField!
     @IBOutlet weak var personImage: UIImageView!
+    @IBOutlet weak var gitHubUsername: UITextField!
     var currentDetailPerson = Person(firstName: "First: ", lastName: "Last: ")
     
     
@@ -25,6 +26,8 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 //        connected in storyboard
 //        self.personFirstName.delegate = self
 //        self.personLastName.delegate = self
+
+        // set image
         if currentDetailPerson.image == nil {
             self.personImage.image = UIImage(named: "nopic")
         }
@@ -44,6 +47,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         // set the textField.text values from the model
         personFirstName.text = currentDetailPerson.firstName
         personLastName.text = currentDetailPerson.lastName
+        gitHubUsername.text = currentDetailPerson.gitHubUserName
 
         self.personImage.layer.cornerRadius = 100.0
         self.personImage.clipsToBounds = true
@@ -55,6 +59,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         // update the model from the textField.text values
         currentDetailPerson.firstName = personFirstName.text
         currentDetailPerson.lastName = personLastName.text
+        currentDetailPerson.gitHubUserName = gitHubUsername.text
         currentDetailPerson.image = personImage.image
     }
     
