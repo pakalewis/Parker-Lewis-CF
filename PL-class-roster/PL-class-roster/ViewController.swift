@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //MARK: OUTLETS AND PROPERTIES
     @IBOutlet weak var tableView: UITableView!
-    var sectionTitles = [String]()
+    var sectionTitles = ["Teachers", "Students"]
     var roster = [Person]()
     var teachers = [Person]()
     var currentPerson = Person()
@@ -33,13 +33,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
             println("archiver loaded correctly" )
+            self.masterArray = masterArray
         } else {
             println("the archive did not work properly")
+            self.loadSampleData()
         }
-
-        
-        
-        
+    }
+    
+    func loadSampleData() {
         // initialize Person objects
         var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
         var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
@@ -48,21 +49,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
         var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
         var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-
+        
         var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
         var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
-
+        
         //create the arrays of students and teachers
-        self.roster = self.makePersonArray(person1, person2, person3, person4, person5, person6, person7)
-        self.teachers = self.makePersonArray(teacher1, teacher2)
-        
-        self.sectionTitles.append("Teachers")
-        self.sectionTitles.append("Students")
-        makeMasterArray()
-        
-        //        talk to the tableView ---- I hooked these up in the storyboard
-        //        self.tableView.dataSource = self
-        //        self.tableView.delegate = self
+        self.roster = [person1, person2, person3, person4, person5, person6, person7]
+        self.teachers = [teacher1, teacher2]
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -71,15 +64,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
         
         // set masterArray to the one that was previously saved
-        var masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as [[Person]]
-        println("the array has \(masterArray.count) sections in it")
-        self.tableView.reloadData()
+        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
+            self.masterArray = masterArray
+            println("the array has \(self.masterArray.count) sections in it")
+            self.tableView.reloadData()
+        }
     }
-    
-    
-    
-    
-    
     
     //MARK: ARCHIVER
 //    required init(coder aDecoder: NSCoder!) {
@@ -92,11 +82,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    override func encodeWithCoder(aCoder: NSCoder!) {
 //        aCoder.encodeObject(masterArray, forKey: "masterArray")
 //    }
-    
-    
-    
-    
-    
     
     //MARK: TABLEVIEW STUFF
     func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
@@ -115,7 +100,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             } else {
                 roster.removeAtIndex(indexPath.row)
             }
-            makeMasterArray()
             self.tableView.reloadData()
         }
     }
@@ -181,41 +165,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.currentPerson = Person()
         // here's where I should decide if it's a teacher or student to add
         roster.append(currentPerson)
-        makeMasterArray()
         self.performSegueWithIdentifier("AddPerson", sender: self)
     }
-
-    
-    
-    // new method to create array of Person objects
-    func makePersonArray(people: Person...) -> [Person] {
-        var array = [Person]()
-        for i in people {
-            array.append(i)
-        }
-        return array
-    }
-    
-    // refresh masterArray after adding or deleting a Person
-    func makeMasterArray() {
-        var makeMasterArray = [[Person]]()
-        makeMasterArray.append(self.teachers)
-        makeMasterArray.append(self.roster)
-        self.masterArray = makeMasterArray
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    
-    
-    
-    
-    
-    
-    
 
 }
 
