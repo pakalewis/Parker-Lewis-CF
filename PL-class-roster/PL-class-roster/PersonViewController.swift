@@ -75,20 +75,11 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-
-        // create alert view
-        var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
 
         // check if sourcetype is available
-        if UIImagePickerController.isSourceTypeAvailable(imagePickerController.sourceType) {
-            println("Camera is available on device")
-            self.presentViewController(imagePickerController, animated: true, completion: nil)
-        }
-        else {
-            self.presentViewController(noCameraAlert, animated: true, completion: nil)
-        }
+        imagePickerController.sourceType = UIImagePickerController.isSourceTypeAvailable(.Camera) ? .Camera : .PhotoLibrary
+        
+        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
