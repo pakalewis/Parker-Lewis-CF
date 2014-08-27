@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, NSCoding {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate {
     
     //MARK: OUTLETS AND PROPERTIES
     @IBOutlet weak var tableView: UITableView!
@@ -25,9 +25,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        talk to the tableView ---- I hooked these up in the storyboard
-//        self.tableView.dataSource = self
-//        self.tableView.delegate = self
+        // specify path to save the file?
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        
+        // tell NSKeyedArchiver to save masterArray
+        NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
+        
+        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
+            
+        } else {
+            
+        }
+
+        
         
         
         // initialize Person objects
@@ -50,9 +60,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.sectionTitles.append("Students")
         self.masterArray.append(self.teachers)
         self.masterArray.append(self.roster)
+        
+        //        talk to the tableView ---- I hooked these up in the storyboard
+        //        self.tableView.dataSource = self
+        //        self.tableView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        
+        // set masterArray to the one that was previously saved
+        var masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as [[Person]]
+        println(masterArray.count)
         self.tableView.reloadData()
     }
     

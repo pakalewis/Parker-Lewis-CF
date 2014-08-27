@@ -53,7 +53,7 @@
 		2C15E0E81993EA27000DFF58 /* PL-class-rosterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PL-class-rosterTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C15E0ED1993EA27000DFF58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C15E0EE1993EA27000DFF58 /* PL_class_rosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PL_class_rosterTests.swift; sourceTree = "<group>"; };
-		2C15E0F81993EA6C000DFF58 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		2C15E0F81993EA6C000DFF58 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Person.swift; path = ../Person.swift; sourceTree = "<group>"; };
 		2C206BBB19A4681700799C82 /* nopic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nopic.png; sourceTree = "<group>"; };
 		2C41326819A15B9C006F681C /* teacher2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacher2.png; sourceTree = "<group>"; };
 		2C41326919A15B9C006F681C /* teacher1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacher1.png; sourceTree = "<group>"; };
@@ -101,7 +101,6 @@
 			children = (
 				2C0289BE199C50F40047AC23 /* images */,
 				2C561C3819996EB6004B529D /* classRosterPlayground.playground */,
-				2C15E0F81993EA6C000DFF58 /* Person.swift */,
 				2C15E0D81993EA27000DFF58 /* PL-class-roster */,
 				2C15E0EB1993EA27000DFF58 /* PL-class-rosterTests */,
 				2C15E0D71993EA27000DFF58 /* Products */,
@@ -120,6 +119,7 @@
 		2C15E0D81993EA27000DFF58 /* PL-class-roster */ = {
 			isa = PBXGroup;
 			children = (
+				2C15E0F81993EA6C000DFF58 /* Person.swift */,
 				2C15E0DB1993EA27000DFF58 /* AppDelegate.swift */,
 				2C15E0DD1993EA27000DFF58 /* ViewController.swift */,
 				2C561C431999887A004B529D /* PersonViewController.swift */,

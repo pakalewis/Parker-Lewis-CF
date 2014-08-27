@@ -10,18 +10,34 @@ import Foundation
 import UIKit
 
 
-class Person {
+class Person : NSObject, NSCoding {
 
 // properties
     var firstName : String!
     var lastName : String!
     var image : UIImage?
+
+    
+    // encode to put in archiver
+    func encodeWithCoder(aCoder: NSCoder!) {
+        aCoder.encodeObject(self.firstName, forKey: "firstName")
+        aCoder.encodeObject(self.lastName, forKey: "lastName")
+        aCoder.encodeObject(self.image, forKey: "image")
+    }
+
+    // take out of the archive
+    required init(coder aDecoder: NSCoder!) {
+        self.firstName = aDecoder.decodeObjectForKey("firstName") as String
+        self.lastName = aDecoder.decodeObjectForKey("lastName") as String
+        self.image = aDecoder.decodeObjectForKey("image") as? UIImage
+        super.init()
+    }
     
 // initializers
-    init () {
-        self.firstName = ""
-        self.lastName = ""
+    override init() {
+        super.init()
     }
+
     init (firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
