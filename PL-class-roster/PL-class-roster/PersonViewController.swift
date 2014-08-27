@@ -48,6 +48,8 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         personFirstName.text = currentDetailPerson.firstName
         personLastName.text = currentDetailPerson.lastName
         gitHubUsername.text = currentDetailPerson.gitHubUserName
+        buttonImage.setImage(currentDetailPerson.image, forState: UIControlState.Normal)
+
 
         self.personImage.layer.cornerRadius = 100.0
         self.personImage.clipsToBounds = true
@@ -74,7 +76,9 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        var noCameraAlert = UIAlertController(title: "No Cam", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.ActionSheet)
+
+        // create alert view
+        var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.ActionSheet)
         noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
 
         // check if sourcetype is available
@@ -99,7 +103,37 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     
+    // image as a button
+    @IBOutlet weak var buttonImage: UIButton!
 
+    // the button image was pressed
+    @IBAction func chooseImage(sender: AnyObject) {
+        // set button's image (eventually will get image from web)
+        var newimage = UIImage(named: "nopic")
+        buttonImage.setImage(newimage, forState: UIControlState.Normal)
+        
+        // create alert that appears when button is pressed
+        var alert = UIAlertController(title: "", message: "Enter your GitHub username", preferredStyle: UIAlertControllerStyle.Alert)
+        // textfield to enter GitHub username
+        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.placeholder = self.currentDetailPerson.gitHubUserName
+            textField.secureTextEntry = false
+        })
+        // alert button for when done entering
+        alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler:{ (alertAction:UIAlertAction!) in
+            let alertTextField = alert.textFields[0] as UITextField
+            var alertTextFieldText : String!
+            alertTextFieldText = alertTextField.text
+            
+            // save the github username the user entered
+            self.currentDetailPerson.gitHubUserName = alertTextFieldText
+            self.gitHubUsername.text = alertTextFieldText
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+
+        
+    }
     
     
     
