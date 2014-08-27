@@ -45,8 +45,8 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         personFirstName.text = currentDetailPerson.firstName
         personLastName.text = currentDetailPerson.lastName
 
-        // why doesn't this work?
-        self.personImage.layer.cornerRadius = 200.0
+        self.personImage.layer.cornerRadius = 100.0
+        self.personImage.clipsToBounds = true
 
     }
 
@@ -69,15 +69,15 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        var noCameraAlert = UIAlertController(title: "No Cam", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
 
         // check if sourcetype is available
         if UIImagePickerController.isSourceTypeAvailable(imagePickerController.sourceType) {
-            println("test here")
+            println("Camera is available on device")
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
         }
         else {
-            var noCameraAlert = UIAlertController(title: "No Cam", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
-            noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
             self.presentViewController(noCameraAlert, animated: true, completion: nil)
         }
     }
