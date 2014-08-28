@@ -13,11 +13,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //MARK: OUTLETS AND PROPERTIES
     @IBOutlet weak var tableView: UITableView!
-    var sectionTitles = [String]()
+    var sectionTitles = ["Teachers", "Students"]
     var roster = [Person]()
     var teachers = [Person]()
     var currentPerson = Person()
     var masterArray = [[Person]]()
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
     
 
     
@@ -25,76 +26,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // specify path to save the file?
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        
         // tell NSKeyedArchiver to save masterArray
-        NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
-        
-        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
-            println("archiver loaded correctly" )
-        } else {
-            println("the archive did not work properly")
-        }
+//        NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
+//        
+//        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
+//            println("archiver loaded correctly" )
+//            self.masterArray = masterArray
+//        } else {
+//            println("the archive did not work properly - loading sample data")
+//            self.loadSampleData()
+//        }
+//        
 
         
-        
-        
-        // initialize Person objects
-        var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
-        var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
-        var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
-        var person4 = Person(firstName: "Donald", lastName: "Duck", image: UIImage(named:"donald-duck.png"))
-        var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
-        var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
-        var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-
-        var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
-        var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
-
-        //create the arrays of students and teachers
-        self.roster = self.makePersonArray(person1, person2, person3, person4, person5, person6, person7)
-        self.teachers = self.makePersonArray(teacher1, teacher2)
-        
-        self.sectionTitles.append("Teachers")
-        self.sectionTitles.append("Students")
-        makeMasterArray()
-        
-        //        talk to the tableView ---- I hooked these up in the storyboard
-        //        self.tableView.dataSource = self
-        //        self.tableView.delegate = self
+        // this creates the student and teacher array into the masterarray
+        self.loadSampleData()
     }
+    
+    
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        self.tableView.reloadData()
         
         // set masterArray to the one that was previously saved
-        var masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as [[Person]]
-        println("the array has \(masterArray.count) sections in it")
-        self.tableView.reloadData()
+//        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
+//            self.masterArray = masterArray
+//            println("the array has \(masterArray.count) sections in it")
+//            self.tableView.reloadData()
+//        }
+
+        //    NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
+    
     }
-    
-    
-    
-    
-    
-    
-    //MARK: ARCHIVER
-//    required init(coder aDecoder: NSCoder!) {
-//        super.init()
-//        self.masterArray = aDecoder.decodeObjectForKey("masterArray") as [[Person]]
-//    }
-//    
-//    
-//    
-//    override func encodeWithCoder(aCoder: NSCoder!) {
-//        aCoder.encodeObject(masterArray, forKey: "masterArray")
-//    }
-    
-    
-    
+
     
     
     
@@ -156,8 +121,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     //MARK: EXTRAS
+    // create array of sample data
+    func loadSampleData() {
+        // initialize Person objects
+        var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
+        var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
+        var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
+        var person4 = Person(firstName: "Donald", lastName: "Duck", image: UIImage(named:"donald-duck.png"))
+        var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
+        var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
+        var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
+        var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
+        var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
+        
+        //create the arrays of students and teachers
+        self.roster = [person1, person2, person3, person4, person5, person6, person7]
+        self.teachers = [teacher1, teacher2]
+        
+        makeMasterArray()
+    }
+
     
-    // pass data to the other view controller
+    // set up segue to pass data to the other view controller when clicking on a cell in tableview
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         // target the next view controller
         var personViewController = segue.destinationViewController as PersonViewController
@@ -176,6 +161,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    // button for adding a new Person to student array
     @IBAction func addNewPerson(sender: AnyObject) {
         // make new blank person and add to masterArray
         self.currentPerson = Person()
@@ -186,16 +172,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     
-    
-    // new method to create array of Person objects
-    func makePersonArray(people: Person...) -> [Person] {
-        var array = [Person]()
-        for i in people {
-            array.append(i)
-        }
-        return array
-    }
-    
     // refresh masterArray after adding or deleting a Person
     func makeMasterArray() {
         var makeMasterArray = [[Person]]()
@@ -203,15 +179,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         makeMasterArray.append(self.roster)
         self.masterArray = makeMasterArray
     }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    
-    
-    
     
     
     

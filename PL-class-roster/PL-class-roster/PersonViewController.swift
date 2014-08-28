@@ -19,7 +19,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var gitHubUsername: UITextField!
     var currentDetailPerson = Person(firstName: "First: ", lastName: "Last: ")
     
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +48,13 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         personFirstName.text = currentDetailPerson.firstName
         personLastName.text = currentDetailPerson.lastName
         gitHubUsername.text = currentDetailPerson.gitHubUserName
-        buttonImage.setImage(currentDetailPerson.image, forState: UIControlState.Normal)
+        buttonImage.setImage(currentDetailPerson.gitHubAvatar, forState: UIControlState.Normal)
 
 
         self.personImage.layer.cornerRadius = 100.0
         self.personImage.clipsToBounds = true
+//        self.buttonImage.layer.cornerRadius = 30.0
+//        self.buttonImage.clipsToBounds = true
 
     }
 
@@ -70,26 +72,54 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
 
 //MARK: IMAGE PICKER
+    // click the button to change the image
     @IBAction func changePicture(sender: AnyObject) {
+        // create image picker
         var imagePickerController = UIImagePickerController()
-        
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
 
+        
+        
         // create alert view
-        var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        var changePhotoAlert = UIAlertController(title: "", message: "Take a new picture with the Camera or choose one from the Photo Library", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        changePhotoAlert.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler:{
+            (alertAction:UIAlertAction!) in
+//            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+//            self.presentViewController(imagePickerController, animated: true, completion: nil)
+            
+            // second alert
+            var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
+            noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
 
-        // check if sourcetype is available
-        if UIImagePickerController.isSourceTypeAvailable(imagePickerController.sourceType) {
-            println("Camera is available on device")
-            self.presentViewController(imagePickerController, animated: true, completion: nil)
-        }
-        else {
             self.presentViewController(noCameraAlert, animated: true, completion: nil)
-        }
+        }))
+        
+        changePhotoAlert.addAction(UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler:{ (alertAction:UIAlertAction!) in
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
+        }))
+
+        
+        // present the alert which has buttons for the two choices
+        self.presentViewController(changePhotoAlert, animated: true, completion: nil)
+        
+//
+//        // check if sourcetype is available
+//        if UIImagePickerController.isSourceTypeAvailable(imagePickerController.sourceType) {
+//            println("Camera is available on device")
+//            self.presentViewController(imagePickerController, animated: true, completion: nil)
+//        }
+//        else {
+//            self.presentViewController(noCameraAlert, animated: true, completion: nil)
+//        }
+
+//        imagePickerController.sourceType = UIImagePickerController.isSourceTypeAvailable(.Camera) ? .Camera : .PhotoLibrary
+//        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
+    
+    
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
         picker.dismissViewControllerAnimated(true, completion: nil)
@@ -108,9 +138,18 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     // the button image was pressed
     @IBAction func chooseImage(sender: AnyObject) {
+        // get image from web
+        var imageURL = NSURL(string: "https://avatars2.githubusercontent.com/u/8174456?v=2&s=460")
+        var imageData = NSData(contentsOfURL: imageURL)
+        var imageFromWeb = UIImage(data: imageData)
+        buttonImage.setImage(imageFromWeb, forState: UIControlState.Normal)
+        currentDetailPerson.gitHubAvatar = imageFromWeb
+        
         // set button's image (eventually will get image from web)
-        var newimage = UIImage(named: "nopic")
-        buttonImage.setImage(newimage, forState: UIControlState.Normal)
+        //        var newimage = UIImage(named: "nopic")
+        //        buttonImage.setImage(newimage, forState: UIControlState.Normal)
+        
+        
         
         // create alert that appears when button is pressed
         var alert = UIAlertController(title: "", message: "Enter your GitHub username", preferredStyle: UIAlertControllerStyle.Alert)
