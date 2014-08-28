@@ -27,9 +27,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // unarchive from the path and save to temp var masterArray
-        // if it is full (more than 0) then load the master array
-        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive2") as? [[Person]] {
+        // if it has data (> 0) then load the master array
+        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
             if masterArray.count > 0 {
+                //self.teachers = masterArray[0]
+                //self.roster = masterArray[1]
                 self.teachers = masterArray.first!
                 self.roster = masterArray.last!
                 self.makeMasterArray()
@@ -47,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        NSKeyedArchiver.archiveRootObject(self.masterArray, toFile: documentsPath + "/archive2")
+        NSKeyedArchiver.archiveRootObject(self.masterArray, toFile: documentsPath + "/archive")
         if self.currentPerson.image != nil {
             println("image not nil")
         }
@@ -119,6 +121,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // create array of sample data
     func loadSampleData() {
         // initialize Person objects
+        var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
+        var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
         var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
         var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
         var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
@@ -126,12 +130,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
         var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
         var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-        var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
-        var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
         
         //create the arrays of students and teachers
-        self.roster = [person1, person2, person3, person4, person5, person6, person7]
         self.teachers = [teacher1, teacher2]
+        self.roster = [person1, person2, person3, person4, person5, person6, person7]
         
         makeMasterArray()
     }
@@ -153,7 +155,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         // set the target VC Person object
         personViewController.currentDetailPerson = self.currentPerson
-        println(personViewController.currentDetailPerson)
     }
     
     
@@ -162,11 +163,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // make new blank person and add to masterArray
         self.currentPerson = Person()
         // here's where I should decide if it's a teacher or student to add
-        println("Roster Count: \(roster.count)")
         roster.append(currentPerson)
-        println("Roster Count: \(roster.count)")
         makeMasterArray()
-        println("Roster Count: \(roster.count)")
         self.performSegueWithIdentifier("AddPerson", sender: self)
     }
 

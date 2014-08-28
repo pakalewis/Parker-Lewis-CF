@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8dB-ZW-NNX">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
     </dependencies>
     <scenes>
@@ -94,7 +95,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="4lW-Rs-LRs">
                                 <rect key="frame" x="175" y="250" width="250" height="250"/>
-                                <color key="backgroundColor" red="1" green="0.1271434367" blue="0.15422664729999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.31429032776923183" green="0.75853430706521741" blue="0.41668082580847093" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="Az0-Js-vpe">
                                         <variation key="heightClass=compact" constant="250"/>
@@ -267,27 +268,23 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Ket-Hg-LUO"/>
                                 <exclude reference="Xqx-c5-bcU"/>
                                 <exclude reference="6PK-RX-YWd"/>
                                 <exclude reference="CaT-ub-7CN"/>
                                 <exclude reference="ITB-KQ-IZK"/>
                                 <exclude reference="XwS-Ik-C6P"/>
                                 <exclude reference="kha-Le-Qxh"/>
-                                <exclude reference="drG-oE-rSy"/>
-                                <exclude reference="iQb-Zw-Ez0"/>
-                                <exclude reference="eBO-pG-fLz"/>
-                                <exclude reference="sxo-OB-Bcb"/>
+                                <exclude reference="Ket-Hg-LUO"/>
                                 <exclude reference="51E-rM-j4T"/>
                                 <exclude reference="1kT-yc-XEl"/>
+                                <exclude reference="eBO-pG-fLz"/>
+                                <exclude reference="sxo-OB-Bcb"/>
+                                <exclude reference="drG-oE-rSy"/>
+                                <exclude reference="iQb-Zw-Ez0"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <include reference="Ket-Hg-LUO"/>
-                                <exclude reference="Nbs-m5-b7b"/>
-                                <exclude reference="Zx9-fK-mpW"/>
-                                <exclude reference="i66-2I-CQn"/>
                                 <include reference="Xqx-c5-bcU"/>
                                 <exclude reference="ZDo-Co-Nd7"/>
                                 <exclude reference="6PK-RX-YWd"/>
@@ -296,16 +293,20 @@
                                 <include reference="XwS-Ik-C6P"/>
                                 <exclude reference="jJQ-FA-wdl"/>
                                 <exclude reference="kha-Le-Qxh"/>
-                                <exclude reference="InP-uM-m5e"/>
-                                <include reference="drG-oE-rSy"/>
-                                <include reference="iQb-Zw-Ez0"/>
+                                <include reference="Ket-Hg-LUO"/>
+                                <exclude reference="Nbs-m5-b7b"/>
+                                <exclude reference="Zx9-fK-mpW"/>
+                                <exclude reference="i66-2I-CQn"/>
+                                <include reference="51E-rM-j4T"/>
+                                <exclude reference="kp9-NX-Nk3"/>
+                                <include reference="1kT-yc-XEl"/>
                                 <exclude reference="36L-KP-gdB"/>
                                 <exclude reference="49H-ye-I1H"/>
                                 <include reference="eBO-pG-fLz"/>
                                 <include reference="sxo-OB-Bcb"/>
-                                <include reference="51E-rM-j4T"/>
-                                <exclude reference="kp9-NX-Nk3"/>
-                                <include reference="1kT-yc-XEl"/>
+                                <exclude reference="InP-uM-m5e"/>
+                                <include reference="drG-oE-rSy"/>
+                                <include reference="iQb-Zw-Ez0"/>
                             </mask>
                         </variation>
                     </view>
