@@ -39,9 +39,16 @@ class Person : NSObject, NSCoding {
     required init(coder aDecoder: NSCoder) {
         self.firstName = aDecoder.decodeObjectForKey("firstName") as String
         self.lastName = aDecoder.decodeObjectForKey("lastName") as String
-        self.image = aDecoder.decodeObjectForKey("image") as? UIImage
-        self.gitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String
-        self.gitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage
+        // check if there is something for that key and is it castable as the right object
+        if let myImage = aDecoder.decodeObjectForKey("image") as? UIImage {
+            self.image = myImage
+        }
+        if let myGitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String {
+            self.gitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String
+        }
+        if let myGitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage {
+            self.gitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage
+        }
         super.init()
     }
     

@@ -26,38 +26,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // tell NSKeyedArchiver to save masterArray
-//        NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
-//        
-//        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
-//            println("archiver loaded correctly" )
-//            self.masterArray = masterArray
-//        } else {
-//            println("the archive did not work properly - loading sample data")
-//            self.loadSampleData()
-//        }
-//        
-
-        
-        // this creates the student and teacher array into the masterarray
-        self.loadSampleData()
+        // unarchive from the path and save to temp var masterArray
+        // if it is full (more than 0) then load the master array
+        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive2") as? [[Person]] {
+            if masterArray.count > 0 {
+                self.teachers = masterArray.first!
+                self.roster = masterArray.last!
+                self.makeMasterArray()
+            } else {
+                self.loadSampleData()
+            }
+        // else, load the first batch of data
+        } else {
+            // this only happens on the very first opening of the app
+            self.loadSampleData()
+        }
     }
     
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        NSKeyedArchiver.archiveRootObject(self.masterArray, toFile: documentsPath + "/archive2")
+        if self.currentPerson.image != nil {
+            println("image not nil")
+        }
         self.tableView.reloadData()
         
-        // set masterArray to the one that was previously saved
-//        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
-//            self.masterArray = masterArray
-//            println("the array has \(masterArray.count) sections in it")
-//            self.tableView.reloadData()
-//        }
-
-        //    NSKeyedArchiver.archiveRootObject(masterArray, toFile: documentsPath + "/archive")
-    
     }
 
     
@@ -158,6 +153,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         // set the target VC Person object
         personViewController.currentDetailPerson = self.currentPerson
+        println(personViewController.currentDetailPerson)
     }
     
     
@@ -166,8 +162,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // make new blank person and add to masterArray
         self.currentPerson = Person()
         // here's where I should decide if it's a teacher or student to add
+        println("Roster Count: \(roster.count)")
         roster.append(currentPerson)
+        println("Roster Count: \(roster.count)")
         makeMasterArray()
+        println("Roster Count: \(roster.count)")
         self.performSegueWithIdentifier("AddPerson", sender: self)
     }
 

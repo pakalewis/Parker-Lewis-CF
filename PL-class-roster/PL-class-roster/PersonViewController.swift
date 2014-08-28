@@ -30,8 +30,14 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         // set image
         if currentDetailPerson.image == nil {
             self.personImage.image = UIImage(named: "nopic")
+            println("there is no image")
         }
-        else { self.personImage.image = currentDetailPerson.image }
+        else {
+            println("set image")
+            println(currentDetailPerson.image)
+            self.personImage.image = currentDetailPerson.image
+            println(self.personImage.image)
+        }
         
     }
     
@@ -44,12 +50,13 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        println("view will appear")
         // set the textField.text values from the model
-        personFirstName.text = currentDetailPerson.firstName
-        personLastName.text = currentDetailPerson.lastName
-        gitHubUsername.text = currentDetailPerson.gitHubUserName
-        buttonImage.setImage(currentDetailPerson.gitHubAvatar, forState: UIControlState.Normal)
-
+        self.personFirstName.text = currentDetailPerson.firstName
+        self.personLastName.text = currentDetailPerson.lastName
+        //self.personImage.image = currentDetailPerson.image
+        self.gitHubUsername.text = currentDetailPerson.gitHubUserName
+        self.buttonImage.setImage(currentDetailPerson.gitHubAvatar, forState: UIControlState.Normal)
 
         self.personImage.layer.cornerRadius = 100.0
         self.personImage.clipsToBounds = true
@@ -97,7 +104,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }))
         
         changePhotoAlert.addAction(UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler:{ (alertAction:UIAlertAction!) in
-            imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
             self.presentViewController(imagePickerController, animated: true, completion: nil)
         }))
 
@@ -123,7 +130,8 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
         picker.dismissViewControllerAnimated(true, completion: nil)
-        var newPicture = info[UIImagePickerControllerOriginalImage] as UIImage
+        var newPicture = info[UIImagePickerControllerEditedImage] as UIImage
+        
         personImage.image = newPicture
         
     }
@@ -161,8 +169,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         // alert button for when done entering
         alert.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler:{ (alertAction:UIAlertAction!) in
             let alertTextField = alert.textFields[0] as UITextField
-            var alertTextFieldText : String!
-            alertTextFieldText = alertTextField.text
+            var alertTextFieldText = alertTextField.text
             
             // save the github username the user entered
             self.currentDetailPerson.gitHubUserName = alertTextFieldText
@@ -173,9 +180,22 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
         
     }
+
     
-    
-    
+    // DL avatar from github
+//    func getGitHubPic(userName: String) {
+//        let gitHubURL = NSURL(string: "https://api.github.com/users\(userName)")
+//        
+//        let session = NSURLSession.sharedSession()
+//        let task = session.dataTaskWithURL(gitHubURL, completionHandler: { (data, response, error) -> Void in)
+//            
+//            var jsonResult = NSJSONSerialization.JSONObjectWithData(<#data: NSData!#>, options: <#NSJSONReadingOptions#>, error: <#NSErrorPointer#>)
+//            
+//        
+//    }
+//    
+    // use the dictionary from the github api page "https://api.github.com/users/pakalewis" to get the "avatar_url"
+    // save the UIImage data
     
     
 }
