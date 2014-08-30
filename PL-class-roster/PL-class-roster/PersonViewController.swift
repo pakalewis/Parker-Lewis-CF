@@ -128,15 +128,9 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     
     
-    // the button image was pressed
+    // the github button image was pressed
     @IBAction func chooseImage(sender: AnyObject) {
         // get image from web
-        var imageURL = NSURL(string: "https://avatars2.githubusercontent.com/u/8174456?v=2&s=460")
-        var imageData = NSData(contentsOfURL: imageURL)
-        var imageFromWeb = UIImage(data: imageData)
-        buttonImage.setImage(imageFromWeb, forState: UIControlState.Normal)
-        buttonImage.imageView
-        currentDetailPerson.gitHubAvatar = imageFromWeb
         
         // set button's image (eventually will get image from web)
         //        var newimage = UIImage(named: "nopic")
@@ -159,6 +153,10 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             // save the github username the user entered
             self.currentDetailPerson.gitHubUserName = alertTextFieldText
             self.gitHubUsername.text = alertTextFieldText
+            // download avatar from github and set as the button image
+            if self.currentDetailPerson.gitHubUserName != nil {
+                self.getGitHubAvatar(self.currentDetailPerson.gitHubUserName!)
+            }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
@@ -170,19 +168,24 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     
     // DL avatar from github
-//    func getGitHubPic(userName: String) {
-//        let gitHubURL = NSURL(string: "https://api.github.com/users\(userName)")
-//        
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithURL(gitHubURL, completionHandler: { (data, response, error) -> Void in)
-//            
-//            var jsonResult = NSJSONSerialization.JSONObjectWithData(<#data: NSData!#>, options: <#NSJSONReadingOptions#>, error: <#NSErrorPointer#>)
-//            
-//        
-//    }
-//    
-    // use the dictionary from the github api page "https://api.github.com/users/pakalewis" to get the "avatar_url"
-    // save the UIImage data
+    func getGitHubAvatar(userName: String) {
+        let githubURL = NSURL(string: "https://api.github.com/users/\(userName)")
+        var profilePhotoURL = NSURL()
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithURL(githubURL, completionHandler: { (data, response, error) -> Void in
+            var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
+            if let avatarURL = jsonResult["avatar_url"] as? String {
+                profilePhotoURL = NSURL(string: avatarURL)
+            }
+            var profilePhotoData = NSData(contentsOfURL: profilePhotoURL)
+            var profilePhotoImage = UIImage(data: profilePhotoData)
+            self.currentDetailPerson.gitHubAvatar = profilePhotoImage as UIImage
+            self.viewWillAppear(true)
+            self.viewDidLoad()
+        })
+        task.resume()
+    }
     
     
 }
