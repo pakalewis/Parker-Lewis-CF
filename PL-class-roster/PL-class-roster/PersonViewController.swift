@@ -78,54 +78,39 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     
 //MARK: IMAGE PICKER
-    // click the button to change the image
+    // click the button to choose an image from the camera or photo library
     @IBAction func changePicture(sender: AnyObject) {
         // create image picker
         var imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
-
-        
         
         // create alert view
         var changePhotoAlert = UIAlertController(title: "", message: "Take a new picture with the Camera or choose one from the Photo Library", preferredStyle: UIAlertControllerStyle.Alert)
         // button to choose camera
         changePhotoAlert.addAction(UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler:{
             (alertAction:UIAlertAction!) in
-//            imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
-//            self.presentViewController(imagePickerController, animated: true, completion: nil)
-            
-            // second alert to show since no camera available
-            // need to figure out how to do this by actually checking if available
-            var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
-            noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-
-            self.presentViewController(noCameraAlert, animated: true, completion: nil)
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+                imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
+                self.presentViewController(imagePickerController, animated: true, completion: nil)
+            }
+            else {
+                var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
+                noCameraAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler:{ (alertAction:UIAlertAction!) in
+                    self.presentViewController(changePhotoAlert, animated: true, completion: nil)
+                    }))
+                self.presentViewController(noCameraAlert, animated: true, completion: nil)
+            }
         }))
         // button to choose photo library
         changePhotoAlert.addAction(UIAlertAction(title: "Photo Library", style: UIAlertActionStyle.Default, handler:{ (alertAction:UIAlertAction!) in
             imagePickerController.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
             self.presentViewController(imagePickerController, animated: true, completion: nil)
         }))
-
-        
-        
+        // button to cancel
+        changePhotoAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: nil))
         // present the alert which has buttons for the two choices
         self.presentViewController(changePhotoAlert, animated: true, completion: nil)
-
-        
-//
-//        // check if sourcetype is available
-//        if UIImagePickerController.isSourceTypeAvailable(imagePickerController.sourceType) {
-//            println("Camera is available on device")
-//            self.presentViewController(imagePickerController, animated: true, completion: nil)
-//        }
-//        else {
-//            self.presentViewController(noCameraAlert, animated: true, completion: nil)
-//        }
-
-//        imagePickerController.sourceType = UIImagePickerController.isSourceTypeAvailable(.Camera) ? .Camera : .PhotoLibrary
-//        self.presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
     
@@ -181,6 +166,8 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
     }
 
+    
+    
     
     // DL avatar from github
 //    func getGitHubPic(userName: String) {
