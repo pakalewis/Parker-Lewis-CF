@@ -53,6 +53,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if self.currentPerson.image != nil {
             println("image not nil")
         }
+        self.teachers.sort({ $0.firstName < $1.firstName})
+        self.roster.sort({ $0.firstName < $1.firstName})
+        self.makeMasterArray()
         self.tableView.reloadData()
         
     }
@@ -123,6 +126,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // initialize Person objects
         var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
         var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
+        var testPerson = Person(firstName: "aaTest", lastName: "test")
         var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
         var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
         var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
@@ -130,11 +134,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
         var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
         var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
+        var person8 = Person(firstName: "Hobbes", lastName: "", image: UIImage(named: "hobbes"))
+        
         
         //create the arrays of students and teachers
         self.teachers = [teacher1, teacher2]
-        self.roster = [person1, person2, person3, person4, person5, person6, person7]
-        
+        self.roster = [testPerson, person1, person2, person3, person4, person5, person6, person7]
+        self.teachers.sort({ $0.firstName < $1.firstName})
+        self.roster.sort({ $0.firstName < $1.firstName})
         makeMasterArray()
     }
 
@@ -161,7 +168,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // button for adding a new Person to student array
     @IBAction func addNewPerson(sender: AnyObject) {
         // make new blank person and add to the specified array
-        self.currentPerson = Person()
+        self.currentPerson = Person(firstName: "", lastName: "")
 
         var roleAlert = UIAlertController(title: "Add student or teacher?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         roleAlert.addAction(UIAlertAction(title: "Student", style: UIAlertActionStyle.Default, handler: { (alertAction:UIAlertAction!) in
@@ -181,6 +188,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // refresh masterArray after adding or deleting a Person
     func makeMasterArray() {
         var makeMasterArray = [[Person]]()
+        self.teachers.sort({ $0.firstName < $1.firstName})
+        self.roster.sort({ $0.firstName < $1.firstName})
         makeMasterArray.append(self.teachers)
         makeMasterArray.append(self.roster)
         self.masterArray = makeMasterArray

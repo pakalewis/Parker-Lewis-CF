@@ -160,8 +160,6 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
-
-        
     }
 
     
