@@ -160,12 +160,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // button for adding a new Person to student array
     @IBAction func addNewPerson(sender: AnyObject) {
-        // make new blank person and add to masterArray
+        // make new blank person and add to the specified array
         self.currentPerson = Person()
-        // here's where I should decide if it's a teacher or student to add
-        roster.append(currentPerson)
-        makeMasterArray()
-        self.performSegueWithIdentifier("AddPerson", sender: self)
+
+        var roleAlert = UIAlertController(title: "Add student or teacher?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        roleAlert.addAction(UIAlertAction(title: "Student", style: UIAlertActionStyle.Default, handler: { (alertAction:UIAlertAction!) in
+            self.roster.append(self.currentPerson)
+            self.makeMasterArray()
+            self.performSegueWithIdentifier("AddPerson", sender: self)
+        }))
+        roleAlert.addAction(UIAlertAction(title: "Teacher", style: UIAlertActionStyle.Default, handler: { (alertAction:UIAlertAction!) in
+            self.teachers.append(self.currentPerson)
+            self.makeMasterArray()
+            self.performSegueWithIdentifier("AddPerson", sender: self)
+        }))
+        self.presentViewController(roleAlert, animated: true, completion: nil)
     }
 
     

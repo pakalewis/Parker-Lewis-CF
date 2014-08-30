@@ -173,7 +173,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var profilePhotoURL = NSURL()
         
         let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithURL(githubURL, completionHandler: { (data, response, error) -> Void in
+        let task = session.dataTaskWithURL(githubURL, completionHandler: { (data, response, error) in
             var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as NSDictionary
             if let avatarURL = jsonResult["avatar_url"] as? String {
                 profilePhotoURL = NSURL(string: avatarURL)
