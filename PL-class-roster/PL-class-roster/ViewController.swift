@@ -106,6 +106,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // display cell label
         cell.textLabel.text = currentPerson.fullName()
+        cell.imageView.image = currentPerson.image
         return cell
     }
     
