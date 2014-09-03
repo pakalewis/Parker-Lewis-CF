@@ -24,43 +24,57 @@ class Person : NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.firstName, forKey: "firstName")
         aCoder.encodeObject(self.lastName, forKey: "lastName")
-        if self.image != nil {
-            aCoder.encodeObject(self.image!, forKey: "image")
-        }
-        if self.gitHubUserName != nil {
-            aCoder.encodeObject(self.gitHubUserName!, forKey: "gitHubUserName")
-        }
-        if self.gitHubAvatar != nil {
-            aCoder.encodeObject(self.gitHubAvatar!, forKey: "gitHubAvatar")
-        }
+        aCoder.encodeObject(self.image, forKey: "image")
+        aCoder.encodeObject(self.gitHubUserName, forKey: "gitHubUserName")
+        aCoder.encodeObject(self.gitHubAvatar, forKey: "gitHubAvatar")
+
+        
+//        if self.image != nil {
+//            aCoder.encodeObject(self.image!, forKey: "image")
+//        }
+//        if self.gitHubUserName != nil {
+//            aCoder.encodeObject(self.gitHubUserName!, forKey: "gitHubUserName")
+//        }
+//        if self.gitHubAvatar != nil {
+//            aCoder.encodeObject(self.gitHubAvatar!, forKey: "gitHubAvatar")
+//        }
     }
 
     // take out of the archive
     required init(coder aDecoder: NSCoder) {
         self.firstName = aDecoder.decodeObjectForKey("firstName") as String
         self.lastName = aDecoder.decodeObjectForKey("lastName") as String
-        // check if there is something for that key and is it castable as the right object
-        if let myImage = aDecoder.decodeObjectForKey("image") as? UIImage {
-            self.image = myImage
-        }
-        if let myGitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String {
-            self.gitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String
-        }
-        if let myGitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage {
-            self.gitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage
-        }
+        self.image = aDecoder.decodeObjectForKey("image") as? UIImage
+        self.gitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String
+        self.gitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage
+        
+        
+//        if let myImage = aDecoder.decodeObjectForKey("image") as? UIImage {
+//            self.image = myImage
+//        }
+//        if let myGitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String {
+//            self.gitHubUserName = aDecoder.decodeObjectForKey("gitHubUserName") as? String
+//        }
+//        if let myGitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage {
+//            self.gitHubAvatar = aDecoder.decodeObjectForKey("gitHubAvatar") as? UIImage
+//        }
         super.init()
     }
     
 // initializers
     override init() {
-        super.init()
+        self.firstName = ""
+        self.lastName = ""
+        self.image = UIImage(named: "nopic")
+        self.gitHubUserName = ""
+        self.gitHubAvatar = UIImage(named: "nopic")
     }
 
     init (firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
         self.image = UIImage(named: "nopic")
+        self.gitHubUserName = ""
         self.gitHubAvatar = UIImage(named: "nopic")
     }
  
@@ -68,6 +82,7 @@ class Person : NSObject, NSCoding {
         self.firstName = firstName
         self.lastName = lastName
         self.image = image
+        self.gitHubUserName = ""
         self.gitHubAvatar = UIImage(named: "nopic")        
     }
 

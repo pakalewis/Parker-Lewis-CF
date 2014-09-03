@@ -25,41 +25,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: VC LIFECYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // unarchive from the path and save to temp var masterArray
-        // if it has data (> 0) then load the master array
-        if let masterArray = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
-            if masterArray.count > 0 {
-                //self.teachers = masterArray[0]
-                //self.roster = masterArray[1]
-                self.teachers = masterArray.first!
-                self.roster = masterArray.last!
-                self.makeMasterArray()
-            } else {
-                self.loadSampleData()
-            }
-        // else, load the first batch of data
-        } else {
-            // this only happens on the very first opening of the app
-            self.loadSampleData()
-        }
+        println("main viewController view did load")
     }
     
     
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        NSKeyedArchiver.archiveRootObject(self.masterArray, toFile: documentsPath + "/archive")
-        if self.currentPerson.image != nil {
-            println("image not nil")
+        if let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
+            if unarchivedData.count > 0 {
+                println("unarchivedData is NOT EMPTY")
+                self.teachers = unarchivedData[0]
+                self.roster = unarchivedData[1]
+                self.makeMasterArray()
+            }
         }
-        self.teachers.sort({ $0.firstName < $1.firstName})
-        self.roster.sort({ $0.firstName < $1.firstName})
-        self.makeMasterArray()
+        else {
+            println("App is opened for the first time - unarchivedData is EMPTY")
+            self.loadSampleData()
+        }
         self.tableView.reloadData()
-        
+        self.archiveData()        
     }
-
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.archiveData()
+    }
+    
+    
+    func archiveData() {
+        if NSKeyedArchiver.archiveRootObject(self.masterArray, toFile: documentsPath + "/archive") {
+            println("able to archive")
+        }
+        else {
+            println("not able to archive")
+        }
+    }
     
     
     
@@ -82,10 +83,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             makeMasterArray()
             self.tableView.reloadData()
+            self.archiveData()
         }
     }
-    
-    
     
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
@@ -98,7 +98,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // returns count of the array within the master array
         return masterArray[section].count
     }
-    
     
 
     func tableView(tableView: UITableView!, heightForHeaderInSection section: Int) -> CGFloat {
@@ -131,17 +130,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
         var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
         var person4 = Person(firstName: "Donald", lastName: "Duck", image: UIImage(named:"donald-duck.png"))
-        var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
-        var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
-        var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-        var person8 = Person(firstName: "Hobbes", lastName: "", image: UIImage(named: "hobbes"))
+//        var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
+//        var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
+//        var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
+//        var person8 = Person(firstName: "Hobbes", lastName: "", image: UIImage(named: "hobbes"))
         
         
         //create the arrays of students and teachers
         self.teachers = [teacher1, teacher2]
-        self.roster = [testPerson, person1, person2, person3, person4, person5, person6, person7]
-        self.teachers.sort({ $0.firstName < $1.firstName})
-        self.roster.sort({ $0.firstName < $1.firstName})
+        self.roster = [testPerson, person1, person2, person3, person4]
         makeMasterArray()
     }
 
@@ -168,7 +165,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // button for adding a new Person to student array
     @IBAction func addNewPerson(sender: AnyObject) {
         // make new blank person and add to the specified array
-        self.currentPerson = Person(firstName: "", lastName: "")
+        self.currentPerson = Person()
 
         var roleAlert = UIAlertController(title: "Add student or teacher?", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         roleAlert.addAction(UIAlertAction(title: "Student", style: UIAlertActionStyle.Default, handler: { (alertAction:UIAlertAction!) in
@@ -188,8 +185,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // refresh masterArray after adding or deleting a Person
     func makeMasterArray() {
         var makeMasterArray = [[Person]]()
-        self.teachers.sort({ $0.firstName < $1.firstName})
-        self.roster.sort({ $0.firstName < $1.firstName})
         makeMasterArray.append(self.teachers)
         makeMasterArray.append(self.roster)
         self.masterArray = makeMasterArray

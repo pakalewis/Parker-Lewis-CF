@@ -26,17 +26,11 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("view will appear")
+        println("personViewController view will appear")
         // set the five item values from the model (currentDetailPerson)
         self.personFirstName.text = currentDetailPerson.firstName
         self.personLastName.text = currentDetailPerson.lastName
-        if currentDetailPerson.image == nil {
-            self.personImage.image = UIImage(named: "nopic")
-        }
-        else {
-            self.personImage.image = currentDetailPerson.image
-            println("personImage set with currentDetailPerson.image")
-        }
+        self.personImage.image = currentDetailPerson.image
         self.gitHubUsername.text = currentDetailPerson.gitHubUserName
         self.buttonImage.setImage(currentDetailPerson.gitHubAvatar, forState: UIControlState.Normal)
         
@@ -50,17 +44,18 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        println("personViewController view did load")
         //        connected in storyboard
         //        self.personFirstName.delegate = self
         //        self.personLastName.delegate = self
         
-        println("view did load")
     }
     
     
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        println("personViewController view will disappear")
         // update the model (currentDetailPerson) from the five item values
         currentDetailPerson.firstName = personFirstName.text
         currentDetailPerson.lastName = personLastName.text
@@ -119,6 +114,7 @@ class PersonViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         picker.dismissViewControllerAnimated(true, completion: nil)
         var newPicture = info[UIImagePickerControllerEditedImage] as UIImage
         currentDetailPerson.image = newPicture
+        self.viewWillAppear(true)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
