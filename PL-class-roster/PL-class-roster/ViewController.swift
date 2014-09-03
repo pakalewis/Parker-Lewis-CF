@@ -26,12 +26,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         println("main viewController view did load")
-    }
-    
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(true)
         if let unarchivedData = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/archive") as? [[Person]] {
             if unarchivedData.count > 0 {
                 println("unarchivedData is NOT EMPTY")
@@ -44,16 +38,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             println("App is opened for the first time - unarchivedData is EMPTY")
             self.loadSampleData()
         }
+    }
+    
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
         self.tableView.reloadData()
-        self.archiveData()        
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        self.archiveData()
-    }
-    
-    
-    func archiveData() {
         if NSKeyedArchiver.archiveRootObject(self.masterArray, toFile: documentsPath + "/archive") {
             println("able to archive")
         }
@@ -61,6 +52,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             println("not able to archive")
         }
     }
+    
+    
     
     
     
@@ -83,7 +76,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             makeMasterArray()
             self.tableView.reloadData()
-            self.archiveData()
+            self.viewWillAppear(true)
         }
     }
     
