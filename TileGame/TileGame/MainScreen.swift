@@ -18,6 +18,7 @@ class MainScreen: UIViewController {
     let image4 = UIImage(named: "image4")
     let image5 = UIImage(named: "image5")
     var imageArray = [UIImage]()
+    var imageToSolve = UIImage()
     var currentIndex:Int = 0
     
     override func viewDidLoad() {
@@ -27,10 +28,22 @@ class MainScreen: UIViewController {
     }
 
     @IBAction func letsPlayButton(sender: AnyObject) {
+        self.performSegueWithIdentifier("playGame", sender: self)
     }
 
+    
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+        var gameScreen = segue.destinationViewController as GameScreen
+        if (segue.identifier == "playGame") {
+            self.imageToSolve = imageArray[currentIndex]
+        }
+        gameScreen.imageToSolve = self.imageToSolve
+        
+    }
+    
+    
+    
     @IBAction func nextButton(sender: AnyObject) {
-        println("next button pressed - currentIndex = \(currentIndex)")
         currentIndex += 1
         if currentIndex == imageArray.count {
             currentIndex = 0
