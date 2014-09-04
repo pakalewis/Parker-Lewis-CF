@@ -46,6 +46,7 @@
 		2CFD40C019B7FD3500275DB3 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
 		2CFD40C119B7FD3500275DB3 /* image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.png; sourceTree = "<group>"; };
 		2CFD40C219B7FD3500275DB3 /* image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image5.png; sourceTree = "<group>"; };
+		2CFD40C819B82A8100275DB3 /* tilePlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = tilePlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +102,7 @@
 		2C30EF2019B7C17500675799 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CFD40C819B82A8100275DB3 /* tilePlayground.playground */,
 				2C30EF2119B7C17500675799 /* Info.plist */,
 			);
 			name = "Supporting Files";

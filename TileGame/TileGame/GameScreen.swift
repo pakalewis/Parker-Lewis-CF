@@ -15,7 +15,11 @@ class GameScreen: UIViewController {
     var firstTileSelectedBool = true
     var firstTileNumber = 0
     var secondTileNumber = 0
+    var imagePiecesArray = [UIImage]()
+    var correctArray = [UIImage]()
+
     
+    @IBOutlet weak var congratsMessage: UILabel!
     @IBOutlet weak var imageView0: UIImageView!
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
@@ -26,12 +30,12 @@ class GameScreen: UIViewController {
     @IBOutlet weak var imageView7: UIImageView!
     @IBOutlet weak var imageView8: UIImageView!
     
-    var imagePiecesArray = [UIImage]()
     
     override func viewDidLoad() {
         createTiles()
         shuffleTiles()
         loadImagesIntoTiles()
+        congratsMessage.text = "Keep going..."
     }
     
     func swapTiles(firstTileNumber: Int, secondTileNumber: Int) {
@@ -39,6 +43,19 @@ class GameScreen: UIViewController {
         imagePiecesArray[firstTileNumber] = imagePiecesArray[secondTileNumber]
         imagePiecesArray[secondTileNumber] = tempImage
         self.loadImagesIntoTiles()
+        if checkTileOrder() {
+            congratsMessage.backgroundColor = UIColor.cyanColor()
+            congratsMessage.text = "Congratulations!"
+        }
+    }
+    
+    func checkTileOrder() -> Bool {
+        for index in 0...8 {
+            if imagePiecesArray[index] != correctArray[index] {
+                return false
+            }
+        }
+        return true
     }
     
     func createTiles() {
@@ -57,7 +74,7 @@ class GameScreen: UIViewController {
                 imagePiecesArray.append(newImage) // add the small image tile to the array
             }
         }
-        
+        self.correctArray = self.imagePiecesArray
     }
     
     func shuffleTiles() {
