@@ -11,6 +11,8 @@ import UIKit
 
 class GameScreen: UIViewController {
     
+    var imageToSolve = UIImage()
+    let image4 = UIImage(named: "image4") // this is temporary for imageToSolve
     var firstTileSelectedBool = true
     var firstTileNumber = 0
     var secondTileNumber = 0
@@ -19,18 +21,16 @@ class GameScreen: UIViewController {
     @IBOutlet weak var imageView1: UIImageView!
     @IBOutlet weak var imageView2: UIImageView!
     @IBOutlet weak var imageView3: UIImageView!
+    @IBOutlet weak var imageView4: UIImageView!
+    @IBOutlet weak var imageView5: UIImageView!
+    @IBOutlet weak var imageView6: UIImageView!
+    @IBOutlet weak var imageView7: UIImageView!
+    @IBOutlet weak var imageView8: UIImageView!
     
-    let image1 = UIImage(named: "image1")
-    let image2 = UIImage(named: "image2")
-    let image3 = UIImage(named: "image3")
-    let image4 = UIImage(named: "image4")
-    var imageViewArray = [UIImageView]()
-    var imageArray = [UIImage]()
+    var imagePiecesArray = [UIImage]()
     
     override func viewDidLoad() {
-        imageViewArray = [imageView0, imageView1, imageView2, imageView3]
-        imageArray = [image1, image2, image3, image4]
-        self.loadImagesIntoViews()
+        loadImagesIntoViews()
     }
     
     @IBAction func image0Tapped(sender: AnyObject) {
@@ -94,16 +94,38 @@ class GameScreen: UIViewController {
     }
     
     func swapTiles(firstTileNumber: Int, secondTileNumber: Int) {
-        var tempImage = imageArray[firstTileNumber]
-        imageArray[firstTileNumber] = imageArray[secondTileNumber]
-        imageArray[secondTileNumber] = tempImage
+        var tempImage = imagePiecesArray[firstTileNumber]
+        imagePiecesArray[firstTileNumber] = imagePiecesArray[secondTileNumber]
+        imagePiecesArray[secondTileNumber] = tempImage
         self.loadImagesIntoViews()
     }
     
     func loadImagesIntoViews() {
-        imageViewArray[0].image = imageArray[0]
-        imageViewArray[1].image = imageArray[1]
-        imageViewArray[2].image = imageArray[2]
-        imageViewArray[3].image = imageArray[3]
+        var dividedWidth  = image4.size.width / 3.0 // 100.0
+        var dividedHeight = image4.size.height / 3.0 // 100.0
+        for index1 in 0...2 {
+            var posY:CGFloat = CGFloat(index1) * 100
+            for index2 in 0...2 {
+                var posX:CGFloat = CGFloat(index2) * 100
+                // set the boundaries of the square
+                var partialImageSquare = CGRectMake(posX, posY, dividedWidth, dividedHeight)
+                println()
+                // get the partial image data
+                var dataToMakeUIImage = CGImageCreateWithImageInRect(image4.CGImage, partialImageSquare)
+                // make the new small image
+                var newImage = UIImage(CGImage: dataToMakeUIImage, scale: UIScreen.mainScreen().scale, orientation: image4.imageOrientation)
+                imagePiecesArray.append(newImage)
+            }
+        }
+        
+        imageView0.image = imagePiecesArray[0]
+        imageView1.image = imagePiecesArray[1]
+        imageView2.image = imagePiecesArray[2]
+        imageView3.image = imagePiecesArray[3]
+        imageView4.image = imagePiecesArray[4]
+        imageView5.image = imagePiecesArray[5]
+        imageView6.image = imagePiecesArray[6]
+        imageView7.image = imagePiecesArray[7]
+        imageView8.image = imagePiecesArray[8]
     }
 }

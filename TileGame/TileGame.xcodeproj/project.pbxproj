@@ -12,12 +12,12 @@
 		2C30EF2819B7C17500675799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF2619B7C17500675799 /* Main.storyboard */; };
 		2C30EF2A19B7C17500675799 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF2919B7C17500675799 /* Images.xcassets */; };
 		2C30EF3619B7C17500675799 /* TileGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF3519B7C17500675799 /* TileGameTests.swift */; };
-		2C30EF4419B7C1E000675799 /* image5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF3F19B7C1E000675799 /* image5.png */; };
-		2C30EF4519B7C1E000675799 /* image4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF4019B7C1E000675799 /* image4.png */; };
-		2C30EF4619B7C1E000675799 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF4119B7C1E000675799 /* image2.png */; };
-		2C30EF4719B7C1E000675799 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF4219B7C1E000675799 /* image3.png */; };
-		2C30EF4819B7C1E000675799 /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF4319B7C1E000675799 /* image1.png */; };
 		2C30EF4C19B7CD0700675799 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF4B19B7CD0700675799 /* GameScreen.swift */; };
+		2CFD40C319B7FD3500275DB3 /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40BE19B7FD3500275DB3 /* image1.png */; };
+		2CFD40C419B7FD3500275DB3 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40BF19B7FD3500275DB3 /* image2.png */; };
+		2CFD40C519B7FD3500275DB3 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40C019B7FD3500275DB3 /* image3.png */; };
+		2CFD40C619B7FD3500275DB3 /* image4.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40C119B7FD3500275DB3 /* image4.png */; };
+		2CFD40C719B7FD3500275DB3 /* image5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40C219B7FD3500275DB3 /* image5.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,12 +40,12 @@
 		2C30EF2F19B7C17500675799 /* TileGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TileGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C30EF3419B7C17500675799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C30EF3519B7C17500675799 /* TileGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileGameTests.swift; sourceTree = "<group>"; };
-		2C30EF3F19B7C1E000675799 /* image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image5.png; sourceTree = "<group>"; };
-		2C30EF4019B7C1E000675799 /* image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.png; sourceTree = "<group>"; };
-		2C30EF4119B7C1E000675799 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
-		2C30EF4219B7C1E000675799 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
-		2C30EF4319B7C1E000675799 /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image1.png; sourceTree = "<group>"; };
 		2C30EF4B19B7CD0700675799 /* GameScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		2CFD40BE19B7FD3500275DB3 /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image1.png; sourceTree = "<group>"; };
+		2CFD40BF19B7FD3500275DB3 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
+		2CFD40C019B7FD3500275DB3 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
+		2CFD40C119B7FD3500275DB3 /* image4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image4.png; sourceTree = "<group>"; };
+		2CFD40C219B7FD3500275DB3 /* image5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image5.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,11 +126,11 @@
 		2C30EF4A19B7C1F000675799 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				2C30EF3F19B7C1E000675799 /* image5.png */,
-				2C30EF4019B7C1E000675799 /* image4.png */,
-				2C30EF4119B7C1E000675799 /* image2.png */,
-				2C30EF4219B7C1E000675799 /* image3.png */,
-				2C30EF4319B7C1E000675799 /* image1.png */,
+				2CFD40BE19B7FD3500275DB3 /* image1.png */,
+				2CFD40BF19B7FD3500275DB3 /* image2.png */,
+				2CFD40C019B7FD3500275DB3 /* image3.png */,
+				2CFD40C119B7FD3500275DB3 /* image4.png */,
+				2CFD40C219B7FD3500275DB3 /* image5.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -215,13 +215,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C30EF4819B7C1E000675799 /* image1.png in Resources */,
-				2C30EF4519B7C1E000675799 /* image4.png in Resources */,
-				2C30EF4719B7C1E000675799 /* image3.png in Resources */,
-				2C30EF4619B7C1E000675799 /* image2.png in Resources */,
+				2CFD40C619B7FD3500275DB3 /* image4.png in Resources */,
+				2CFD40C319B7FD3500275DB3 /* image1.png in Resources */,
+				2CFD40C519B7FD3500275DB3 /* image3.png in Resources */,
+				2CFD40C719B7FD3500275DB3 /* image5.png in Resources */,
 				2C30EF2819B7C17500675799 /* Main.storyboard in Resources */,
+				2CFD40C419B7FD3500275DB3 /* image2.png in Resources */,
 				2C30EF2A19B7C17500675799 /* Images.xcassets in Resources */,
-				2C30EF4419B7C1E000675799 /* image5.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +429,7 @@
 				2C30EF3B19B7C17500675799 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C30EF3C19B7C17500675799 /* Build configuration list for PBXNativeTarget "TileGameTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +438,7 @@
 				2C30EF3E19B7C17500675799 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
