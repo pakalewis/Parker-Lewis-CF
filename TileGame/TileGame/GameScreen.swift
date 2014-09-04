@@ -30,22 +30,8 @@ class GameScreen: UIViewController {
     
     override func viewDidLoad() {
         createTiles()
+        shuffleTiles()
         loadImagesIntoTiles()
-    }
-    
-    @IBAction func image0Tapped(sender: AnyObject) {
-        println("image 0 tapped")
-        if firstTileSelectedBool {
-            // this is the first tile selected
-            firstTileNumber = 0
-            firstTileSelectedBool = false
-        }
-        else {
-            // this is the second tile selected
-            secondTileNumber = 0
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
     }
     
     func swapTiles(firstTileNumber: Int, secondTileNumber: Int) {
@@ -73,6 +59,18 @@ class GameScreen: UIViewController {
         }
         
     }
+    
+    func shuffleTiles() {
+        for var index = imagePiecesArray.count - 1; index > 0; index-- {
+            // Random int from 0 to index-1
+            var j = Int(arc4random_uniform(UInt32(index-1)))
+            
+            var tempImage = imagePiecesArray[j]
+            imagePiecesArray[j] = imagePiecesArray[index]
+            imagePiecesArray[index] = tempImage
+        }
+    }
+    
     func loadImagesIntoTiles() {
         // set the tiles with the images from the pieces array
         imageView0.image = imagePiecesArray[0]
@@ -86,7 +84,22 @@ class GameScreen: UIViewController {
         imageView8.image = imagePiecesArray[8]
     }
 
-    //MARK: tiles tapped
+    // MARK: tiles tapped -------------------------------------------------
+    @IBAction func image0Tapped(sender: AnyObject) {
+        println("image 0 tapped")
+        if firstTileSelectedBool {
+            // this is the first tile selected
+            firstTileNumber = 0
+            firstTileSelectedBool = false
+        }
+        else {
+            // this is the second tile selected
+            secondTileNumber = 0
+            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
+            firstTileSelectedBool = true
+        }
+    }
+    
     @IBAction func image1Tapped(sender: AnyObject) {
         println("image 1 tapped")
         if firstTileSelectedBool {
@@ -187,6 +200,10 @@ class GameScreen: UIViewController {
             self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
             firstTileSelectedBool = true
         }
+    }
+    
+    @IBAction func backToMainScreen(sender: AnyObject) {
+        self.performSegueWithIdentifier("backToMainScreen", sender: self)
     }
     
 }

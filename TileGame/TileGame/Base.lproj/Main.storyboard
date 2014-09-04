@@ -73,14 +73,12 @@
                                 </state>
                                 <connections>
                                     <action selector="letsPlayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cwy-E7-gku"/>
-                                    <segue destination="EGT-XM-OAO" kind="popoverPresentation" identifier="playGame" popoverAnchorView="7cw-uc-rQN" id="b9m-fU-xoq">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <segue destination="EGT-XM-OAO" kind="show" identifier="playGame" id="b9m-fU-xoq"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shifting Tiles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6p4-o8-wZC">
-                                <rect key="frame" x="176" y="99" width="249" height="51"/>
-                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Shifting Tiles" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6p4-o8-wZC">
+                                <rect key="frame" x="145" y="86" width="312" height="64"/>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="50"/>
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -189,6 +187,17 @@
                                     <outletCollection property="gestureRecognizers" destination="O0M-FZ-Qao" appends="YES" id="Udb-PW-CAX"/>
                                 </connections>
                             </imageView>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kog-KD-Q1b">
+                                <rect key="frame" x="355" y="355" width="100" height="100"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Toc-rU-cXV"/>
+                                    <constraint firstAttribute="width" constant="100" id="U2E-Ld-p4Q"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="7E8-43-EbF" appends="YES" id="xnH-Ad-Cpz"/>
+                                </connections>
+                            </imageView>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g7c-mJ-zMN">
                                 <rect key="frame" x="145" y="355" width="100" height="100"/>
                                 <gestureRecognizers/>
@@ -222,17 +231,17 @@
                                     <outletCollection property="gestureRecognizers" destination="mAL-Fh-EZx" appends="YES" id="Z4r-gC-HN7"/>
                                 </connections>
                             </imageView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kog-KD-Q1b">
-                                <rect key="frame" x="355" y="355" width="100" height="100"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Toc-rU-cXV"/>
-                                    <constraint firstAttribute="width" constant="100" id="U2E-Ld-p4Q"/>
-                                </constraints>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vI2-cd-d5v">
+                                <rect key="frame" x="20" y="541" width="50" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="7E8-43-EbF" appends="YES" id="xnH-Ad-Cpz"/>
+                                    <action selector="backToMainScreen:" destination="EGT-XM-OAO" eventType="touchUpInside" id="oZx-ZW-9F9"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="backToMainScreen" id="KAn-53-Her"/>
                                 </connections>
-                            </imageView>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -240,6 +249,8 @@
                             <constraint firstItem="0uP-wt-8bb" firstAttribute="leading" secondItem="kU2-7Y-EGn" secondAttribute="leading" id="700-ip-Iaj"/>
                             <constraint firstItem="9xI-94-6Vx" firstAttribute="top" secondItem="5V8-fx-ZxH" secondAttribute="bottom" constant="5" id="Bgt-Wd-V0X"/>
                             <constraint firstItem="tGI-jj-7tq" firstAttribute="top" secondItem="Qhz-G0-bft" secondAttribute="bottom" constant="29" id="CBW-rC-4lX"/>
+                            <constraint firstItem="fKk-Ft-N1u" firstAttribute="top" secondItem="vI2-cd-d5v" secondAttribute="bottom" constant="20" id="GCS-qs-z38"/>
+                            <constraint firstItem="vI2-cd-d5v" firstAttribute="leading" secondItem="a6F-6c-ZDX" secondAttribute="leading" constant="20" id="KF9-cT-aTf"/>
                             <constraint firstItem="Kog-KD-Q1b" firstAttribute="leading" secondItem="9xI-94-6Vx" secondAttribute="trailing" constant="5" id="QFc-AB-Dq1"/>
                             <constraint firstItem="5V8-fx-ZxH" firstAttribute="top" secondItem="auM-7W-3nF" secondAttribute="bottom" constant="5" id="SdT-BO-8di"/>
                             <constraint firstAttribute="centerX" secondItem="5V8-fx-ZxH" secondAttribute="centerX" id="Vp7-6x-e5c"/>
@@ -329,7 +340,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="876" y="136"/>
+            <point key="canvasLocation" x="949" y="136"/>
         </scene>
     </scenes>
 </document>
