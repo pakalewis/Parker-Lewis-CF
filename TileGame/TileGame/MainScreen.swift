@@ -33,7 +33,7 @@ class MainScreen: UIViewController {
     }
 
     @IBAction func letsPlayButton(sender: AnyObject) {
-        self.performSegueWithIdentifier("playGame", sender: self)
+        // Let's Play button pressed
     }
 
     
@@ -57,7 +57,6 @@ class MainScreen: UIViewController {
     }
 
     @IBAction func previousButton(sender: AnyObject) {
-        println("previous button pressed - currentIndex = \(currentIndex)")
         currentIndex -= 1
         if currentIndex < 0 {
             currentIndex = imageArray.count - 1

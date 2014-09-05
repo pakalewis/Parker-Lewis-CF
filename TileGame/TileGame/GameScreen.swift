@@ -17,77 +17,99 @@ class GameScreen: UIViewController {
     var secondTileNumber = 0
     var imagePiecesArray = [UIImage]()
     var correctArray = [UIImage]()
+    var tileButtonArray = [UIButton]()
 
     
+    @IBOutlet weak var tileArea: UIView!
     @IBOutlet weak var congratsMessage: UILabel!
-    @IBOutlet weak var imageView0: UIImageView!
-    @IBOutlet weak var imageView1: UIImageView!
-    @IBOutlet weak var imageView2: UIImageView!
-    @IBOutlet weak var imageView3: UIImageView!
-    @IBOutlet weak var imageView4: UIImageView!
-    @IBOutlet weak var imageView5: UIImageView!
-    @IBOutlet weak var imageView6: UIImageView!
-    @IBOutlet weak var imageView7: UIImageView!
-    @IBOutlet weak var imageView8: UIImageView!
     
     
     override func viewDidLoad() {
-        createTiles()
+        createImagePieces(3) // pass the number in from MainScreen
         shuffleTiles()
-        loadImagesIntoTiles()
 
         // testing animation
-        UIView.animateWithDuration(2.5, delay: 0.0, options: nil, animations: {
-            var frame = self.imageView0.frame
+        UIView.animateWithDuration(1.5, delay: 0.0, options: nil, animations: {
+            var frame = self.tileButtonArray[0].frame
             frame.origin.x += 50
             frame.origin.y += 50
-            self.imageView0.frame = frame
+            self.self.tileButtonArray[0].frame = frame
             }, completion: nil)
 
         congratsMessage.text = "Keep going..."
     }
     
+    
+    
+    // cuts up the main image into pieces and stores them in an array
+    // at the same time, create buttons with the same dimensions and also put in an array
+    // load the pictures
+    func createImagePieces(size:Int) {
+        var margin:CGFloat = 5.0
+        println(self.tileArea.frame.width)
+        var tileSideLength:CGFloat  = (self.tileArea.frame.width - (margin * CGFloat(size-1))) / CGFloat(size)
+        println(tileSideLength)
+        for index1 in 0..<size { // go down the rows
+            var posY:CGFloat = CGFloat(index1) * (tileSideLength + margin)
+            for index2 in 0..<size { // get the tiles in each row
+                var posX:CGFloat = CGFloat(index2) * (tileSideLength + margin)
+                // set the boundaries of the tile
+                println("x = \(posX) and y = \(posY)")
+                var tileFrame = CGRectMake(posX, posY, tileSideLength, tileSideLength)
+                var bigTileFrame = CGRectMake(posX, posY, tileSideLength, tileSideLength)
+                // get the partial image data from the main image??
+                var dataToMakeUIImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, tileFrame)
+                // make the new small image
+                var imagePiece = UIImage(CGImage: dataToMakeUIImage, scale: UIScreen.mainScreen().scale, orientation: self.imageToSolve.imageOrientation)
+                self.imagePiecesArray.append(imagePiece) // add the small image tile to the array
+
+                // make button and put in array
+                var button = UIButton(frame: tileFrame)
+                button.addTarget(self, action: "buttonPressed:", forControlEvents: .TouchUpInside)
+                self.tileArea.addSubview(button)
+                self.tileButtonArray.append(button)
+
+            }
+        }
+        // save the initial order to check against later
+        self.correctArray = self.imagePiecesArray
+    }
+    
+    
+    // one of the buttons was pressed
+    // get the index from the array and then set some properties depending if it was the first or second button pressed
+    func buttonPressed(sender: UIButton) {
+        var index = find(self.tileButtonArray, sender)
+        if self.firstTileSelectedBool { // this is the first tile pressed
+            self.firstTileNumber = index!
+            self.firstTileSelectedBool = false
+        }
+        else {
+            self.secondTileNumber = index!
+            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
+            self.firstTileSelectedBool = true
+        }
+    }
+
+    
+    // swaps the images in the array
     func swapTiles(firstTileNumber: Int, secondTileNumber: Int) {
         var tempImage = imagePiecesArray[firstTileNumber]
         imagePiecesArray[firstTileNumber] = imagePiecesArray[secondTileNumber]
         imagePiecesArray[secondTileNumber] = tempImage
-        self.loadImagesIntoTiles()
+        
+        // reload images into buttons
+        self.loadImagesIntoButtons()
+
+        // if the order is now correct, the user wins!
         if checkTileOrder() {
             congratsMessage.backgroundColor = UIColor.cyanColor()
             congratsMessage.text = "Congratulations!"
         }
     }
+
     
-    
-    
-    func checkTileOrder() -> Bool {
-        for index in 0...8 {
-            if imagePiecesArray[index] != correctArray[index] {
-                return false
-            }
-        }
-        return true
-    }
-    
-    func createTiles() {
-        var dividedWidth  = self.imageToSolve.size.width / 3.0 // 100.0 -- could change with more tiles
-        var dividedHeight = self.imageToSolve.size.height / 3.0 // 100.0
-        for index1 in 0...2 { // go down the rows
-            var posY:CGFloat = CGFloat(index1) * 100
-            for index2 in 0...2 { // get the tiles in each row
-                var posX:CGFloat = CGFloat(index2) * 100
-                // set the boundaries of the tile
-                var partialImageSquare = CGRectMake(posX, posY, dividedWidth, dividedHeight)
-                // get the partial image data??
-                var dataToMakeUIImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, partialImageSquare)
-                // make the new small image
-                var newImage = UIImage(CGImage: dataToMakeUIImage, scale: UIScreen.mainScreen().scale, orientation: self.imageToSolve.imageOrientation)
-                imagePiecesArray.append(newImage) // add the small image tile to the array
-            }
-        }
-        self.correctArray = self.imagePiecesArray
-    }
-    
+    // this shuffles the image pieces in the array
     func shuffleTiles() {
         for var index = imagePiecesArray.count - 1; index > 0; index-- {
             // Random int from 0 to index-1
@@ -97,141 +119,33 @@ class GameScreen: UIViewController {
             imagePiecesArray[j] = imagePiecesArray[index]
             imagePiecesArray[index] = tempImage
         }
+        self.loadImagesIntoButtons()
     }
+
     
-    func loadImagesIntoTiles() {
+    // iterates through the images array and sets button images
+    func loadImagesIntoButtons() {
         // set the tiles with the images from the pieces array
-        imageView0.image = imagePiecesArray[0]
-        imageView1.image = imagePiecesArray[1]
-        imageView2.image = imagePiecesArray[2]
-        imageView3.image = imagePiecesArray[3]
-        imageView4.image = imagePiecesArray[4]
-        imageView5.image = imagePiecesArray[5]
-        imageView6.image = imagePiecesArray[6]
-        imageView7.image = imagePiecesArray[7]
-        imageView8.image = imagePiecesArray[8]
-    }
-
-    // MARK: tiles tapped -------------------------------------------------
-    @IBAction func image0Tapped(sender: AnyObject) {
-        println("image 0 tapped")
-        if firstTileSelectedBool {
-            // this is the first tile selected
-            firstTileNumber = 0
-            firstTileSelectedBool = false
-        }
-        else {
-            // this is the second tile selected
-            secondTileNumber = 0
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
-    @IBAction func image1Tapped(sender: AnyObject) {
-        println("image 1 tapped")
-        if firstTileSelectedBool {
-            // this is the first tile selected
-            firstTileNumber = 1
-            firstTileSelectedBool = false
-        }
-        else {
-            // this is the second tile selected
-            secondTileNumber = 1
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
+        for var index = 0; index < imagePiecesArray.count; index++ {
+            var image = imagePiecesArray[index]
+            self.tileButtonArray[index].setImage(image, forState: .Normal)
         }
     }
 
-    @IBAction func image2Tapped(sender: AnyObject) {
-        println("image 2 tapped")
-        if firstTileSelectedBool {
-            // this is the first tile selected
-            firstTileNumber = 2
-            firstTileSelectedBool = false
+    
+    // checks to see if the image pieces are in the correct order
+    func checkTileOrder() -> Bool {
+        for index in 0...8 {
+            if imagePiecesArray[index] != correctArray[index] {
+                return false
+            }
         }
-        else {
-            // this is the second tile selected
-            secondTileNumber = 2
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
+        return true
     }
 
-    @IBAction func image3Tapped(sender: AnyObject) {
-        if firstTileSelectedBool {
-            firstTileNumber = 3
-            firstTileSelectedBool = false
-        }
-        else {
-            secondTileNumber = 3
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
-    @IBAction func image4Tapped(sender: AnyObject) {
-        if firstTileSelectedBool {
-            firstTileNumber = 4
-            firstTileSelectedBool = false
-        }
-        else {
-            secondTileNumber = 4
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
-    @IBAction func image5Tapped(sender: AnyObject) {
-        if firstTileSelectedBool {
-            firstTileNumber = 5
-            firstTileSelectedBool = false
-        }
-        else {
-            secondTileNumber = 5
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
-    @IBAction func image6Tapped(sender: AnyObject) {
-        if firstTileSelectedBool {
-            firstTileNumber = 6
-            firstTileSelectedBool = false
-        }
-        else {
-            secondTileNumber = 6
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
-    @IBAction func image7Tapped(sender: AnyObject) {
-        if firstTileSelectedBool {
-            firstTileNumber = 7
-            firstTileSelectedBool = false
-        }
-        else {
-            secondTileNumber = 7
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
-    @IBAction func image8Tapped(sender: AnyObject) {
-        if firstTileSelectedBool {
-            firstTileNumber = 8
-            firstTileSelectedBool = false
-        }
-        else {
-            secondTileNumber = 8
-            self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
-            firstTileSelectedBool = true
-        }
-    }
-    
+
     @IBAction func backToMainScreen(sender: AnyObject) {
-        self.performSegueWithIdentifier("backToMainScreen", sender: self)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

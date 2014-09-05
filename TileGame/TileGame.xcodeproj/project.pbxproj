@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2C30EF2319B7C17500675799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF2219B7C17500675799 /* AppDelegate.swift */; };
 		2C30EF2519B7C17500675799 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF2419B7C17500675799 /* MainScreen.swift */; };
-		2C30EF2819B7C17500675799 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF2619B7C17500675799 /* Main.storyboard */; };
 		2C30EF2A19B7C17500675799 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF2919B7C17500675799 /* Images.xcassets */; };
 		2C30EF3619B7C17500675799 /* TileGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF3519B7C17500675799 /* TileGameTests.swift */; };
 		2C30EF4C19B7CD0700675799 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF4B19B7CD0700675799 /* GameScreen.swift */; };
@@ -18,6 +17,8 @@
 		2C64853019B92C4D000DECE2 /* image8.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C64852B19B92C4D000DECE2 /* image8.png */; };
 		2C64853119B92C4D000DECE2 /* image9.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C64852C19B92C4D000DECE2 /* image9.png */; };
 		2C64853219B92C4D000DECE2 /* image10.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C64852D19B92C4D000DECE2 /* image10.png */; };
+		2CFA65AB19B97E2100D9F40E /* TileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA65AA19B97E2100D9F40E /* TileButton.swift */; };
+		2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CFA65AC19B9A8F200D9F40E /* Main.storyboard */; };
 		2CFD40C319B7FD3500275DB3 /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40BE19B7FD3500275DB3 /* image1.png */; };
 		2CFD40C419B7FD3500275DB3 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40BF19B7FD3500275DB3 /* image2.png */; };
 		2CFD40C519B7FD3500275DB3 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CFD40C019B7FD3500275DB3 /* image3.png */; };
@@ -40,7 +41,6 @@
 		2C30EF2119B7C17500675799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C30EF2219B7C17500675799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C30EF2419B7C17500675799 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
-		2C30EF2719B7C17500675799 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C30EF2919B7C17500675799 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C30EF2F19B7C17500675799 /* TileGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TileGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C30EF3419B7C17500675799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		2C64852B19B92C4D000DECE2 /* image8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image8.png; sourceTree = "<group>"; };
 		2C64852C19B92C4D000DECE2 /* image9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image9.png; sourceTree = "<group>"; };
 		2C64852D19B92C4D000DECE2 /* image10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image10.png; sourceTree = "<group>"; };
+		2CFA65AA19B97E2100D9F40E /* TileButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileButton.swift; sourceTree = "<group>"; };
+		2CFA65AC19B9A8F200D9F40E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2CFD40BE19B7FD3500275DB3 /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image1.png; sourceTree = "<group>"; };
 		2CFD40BF19B7FD3500275DB3 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
 		2CFD40C019B7FD3500275DB3 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
@@ -102,7 +104,8 @@
 				2C30EF2219B7C17500675799 /* AppDelegate.swift */,
 				2C30EF2419B7C17500675799 /* MainScreen.swift */,
 				2C30EF4B19B7CD0700675799 /* GameScreen.swift */,
-				2C30EF2619B7C17500675799 /* Main.storyboard */,
+				2CFA65AC19B9A8F200D9F40E /* Main.storyboard */,
+				2CFA65AA19B97E2100D9F40E /* TileButton.swift */,
 				2C30EF2919B7C17500675799 /* Images.xcassets */,
 				2C30EF2019B7C17500675799 /* Supporting Files */,
 			);
@@ -235,9 +238,9 @@
 				2CFD40C619B7FD3500275DB3 /* image4.png in Resources */,
 				2CFD40C319B7FD3500275DB3 /* image1.png in Resources */,
 				2C64853219B92C4D000DECE2 /* image10.png in Resources */,
+				2CFA65AD19B9A8F200D9F40E /* Main.storyboard in Resources */,
 				2CFD40C519B7FD3500275DB3 /* image3.png in Resources */,
 				2CFD40C719B7FD3500275DB3 /* image5.png in Resources */,
-				2C30EF2819B7C17500675799 /* Main.storyboard in Resources */,
 				2CFD40C419B7FD3500275DB3 /* image2.png in Resources */,
 				2C64853019B92C4D000DECE2 /* image8.png in Resources */,
 				2C64852F19B92C4D000DECE2 /* image7.png in Resources */,
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C30EF2519B7C17500675799 /* MainScreen.swift in Sources */,
+				2CFA65AB19B97E2100D9F40E /* TileButton.swift in Sources */,
 				2C30EF4C19B7CD0700675799 /* GameScreen.swift in Sources */,
 				2C30EF2319B7C17500675799 /* AppDelegate.swift in Sources */,
 			);
@@ -284,17 +288,6 @@
 			targetProxy = 2C30EF3019B7C17500675799 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2C30EF2619B7C17500675799 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2C30EF2719B7C17500675799 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2C30EF3719B7C17500675799 /* Debug */ = {
