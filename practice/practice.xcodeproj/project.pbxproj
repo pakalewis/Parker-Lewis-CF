@@ -13,6 +13,7 @@
 		2C64854919B939C7000DECE2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C64854819B939C7000DECE2 /* Images.xcassets */; };
 		2C64855519B939C7000DECE2 /* practiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64855419B939C7000DECE2 /* practiceTests.swift */; };
 		2C64855F19B93A95000DECE2 /* hobbes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C64855E19B93A95000DECE2 /* hobbes.png */; };
+		2CFA65A919B969FC00D9F40E /* specialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFA65A819B969FC00D9F40E /* specialButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		2C64855319B939C7000DECE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C64855419B939C7000DECE2 /* practiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = practiceTests.swift; sourceTree = "<group>"; };
 		2C64855E19B93A95000DECE2 /* hobbes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hobbes.png; sourceTree = "<group>"; };
+		2CFA65A819B969FC00D9F40E /* specialButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = specialButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				2C64855E19B93A95000DECE2 /* hobbes.png */,
+				2CFA65A819B969FC00D9F40E /* specialButton.swift */,
 				2C64854119B939C7000DECE2 /* AppDelegate.swift */,
 				2C64854319B939C7000DECE2 /* ViewController.swift */,
 				2C64854519B939C7000DECE2 /* Main.storyboard */,
@@ -214,6 +217,7 @@
 			files = (
 				2C64854419B939C7000DECE2 /* ViewController.swift in Sources */,
 				2C64854219B939C7000DECE2 /* AppDelegate.swift in Sources */,
+				2CFA65A919B969FC00D9F40E /* specialButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +405,7 @@
 				2C64855A19B939C7000DECE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C64855B19B939C7000DECE2 /* Build configuration list for PBXNativeTarget "practiceTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +414,7 @@
 				2C64855D19B939C7000DECE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

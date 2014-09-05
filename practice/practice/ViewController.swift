@@ -23,6 +23,29 @@ class ViewController: UIViewController {
             frame.origin.y += 50
             self.image.frame = frame
         }, completion: nil)
+        
+        
+        var buttonArray:[UIButton]
+        
+        var button1 = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 100))
+        button1.backgroundColor = UIColor.blueColor()
+        var button2 = UIButton(frame: CGRect(x: 140, y: 10, width: 100, height: 100))
+        button2.backgroundColor = UIColor.blueColor()
+        // this calls the function pressed()
+        button1.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        button2.addTarget(self, action: "pressed1:", forControlEvents: .TouchUpInside)
+        self.view.addSubview(button1)
+        self.view.addSubview(button2)
+        
+    }
+    
+    func pressed(sender: UIButton) {
+        println("button1 pressed")
+        self.image.image = hobbes
+    }
+    func pressed1(sender: UIButton) {
+        println("button2 pressed")
+        self.image.image = nil
     }
 
     override func didReceiveMemoryWarning() {

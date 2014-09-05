@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AAF-qr-T3i">
-                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <rect key="frame" x="145" y="280" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="QF3-E7-lkD"/>
                                     <constraint firstAttribute="width" constant="300" id="uOe-dq-5wE"/>
@@ -27,8 +27,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="AAF-qr-T3i" secondAttribute="centerY" id="9yY-Nk-ZCQ"/>
-                            <constraint firstAttribute="centerX" secondItem="AAF-qr-T3i" secondAttribute="centerX" id="XUc-pY-tJ2"/>
+                            <constraint firstAttribute="centerX" secondItem="AAF-qr-T3i" secondAttribute="centerX" constant="5" id="XUc-pY-tJ2"/>
+                            <constraint firstAttribute="bottom" secondItem="AAF-qr-T3i" secondAttribute="bottom" constant="20" symbolic="YES" id="bx3-xD-wPF"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9yY-Nk-ZCQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="image" destination="AAF-qr-T3i" id="Ko7-um-6qY"/>
