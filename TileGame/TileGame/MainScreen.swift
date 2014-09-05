@@ -17,13 +17,18 @@ class MainScreen: UIViewController {
     let image3 = UIImage(named: "image3")
     let image4 = UIImage(named: "image4")
     let image5 = UIImage(named: "image5")
+    let image6 = UIImage(named: "image6")
+    let image7 = UIImage(named: "image7")
+    let image8 = UIImage(named: "image8")
+    let image9 = UIImage(named: "image9")
+    let image10 = UIImage(named: "image10")
     var imageArray = [UIImage]()
     var imageToSolve = UIImage()
     var currentIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageArray =  [image1, image2, image3, image4, image5]
+        imageArray =  [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10]
         self.imageCycler.image = imageArray[currentIndex]
     }
 

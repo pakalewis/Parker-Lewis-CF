@@ -35,6 +35,15 @@ class GameScreen: UIViewController {
         createTiles()
         shuffleTiles()
         loadImagesIntoTiles()
+
+        // testing animation
+        UIView.animateWithDuration(2.5, delay: 0.0, options: nil, animations: {
+            var frame = self.imageView0.frame
+            frame.origin.x += 50
+            frame.origin.y += 50
+            self.imageView0.frame = frame
+            }, completion: nil)
+
         congratsMessage.text = "Keep going..."
     }
     
@@ -48,6 +57,8 @@ class GameScreen: UIViewController {
             congratsMessage.text = "Congratulations!"
         }
     }
+    
+    
     
     func checkTileOrder() -> Bool {
         for index in 0...8 {
