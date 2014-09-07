@@ -68,7 +68,7 @@
                                     <constraint firstAttribute="width" constant="250" id="a9J-o5-fR1"/>
                                     <constraint firstAttribute="height" constant="50" id="p7H-FL-fvj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="GujaratiSangamMN" family="Gujarati Sangam MN" pointSize="40"/>
+                                <fontDescription key="fontDescription" name="Didot-Bold" family="Didot" pointSize="40"/>
                                 <state key="normal" title="Let's Play!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -179,11 +179,11 @@
                                     <action selector="backToMainScreen:" destination="EGT-XM-OAO" eventType="touchUpInside" id="oZx-ZW-9F9"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Try to complete the picture by putting the tiles in the correct order. Tap two tiles to swap their positions. " translatesAutoresizingMaskIntoConstraints="NO" id="C42-AY-08P">
-                                <rect key="frame" x="20" y="40" width="494" height="80"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Tap two tiles to swap their positions. " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="C42-AY-08P">
+                                <rect key="frame" x="20" y="40" width="494" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="1Ug-51-sxy"/>
+                                    <constraint firstAttribute="height" constant="30" id="1Ug-51-sxy"/>
                                     <constraint firstAttribute="height" constant="50" id="IRc-Iv-LQE"/>
                                     <constraint firstAttribute="height" constant="50" id="iqD-Wl-aP0"/>
                                 </constraints>

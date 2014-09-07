@@ -30,7 +30,7 @@ class GameScreen: UIViewController {
     override func viewDidLoad() {
         makeTileArea()
         createImagePieces(tilesPerRow)
-//        shuffleTiles()
+        shuffleTiles()
         loadImagesIntoButtons()
 
         congratsMessage.text = "Keep going..."
