@@ -12,13 +12,14 @@ import UIKit
 class GameScreen: UIViewController {
     
     var imageToSolve = UIImage()
+    var tilesPerRow = 3
     var firstTileSelectedBool = true
     var firstTileNumber = 0
     var secondTileNumber = 0
     var imagePiecesArray = [UIImage]()
     var correctArray = [UIImage]()
     var tileButtonArray = [UIButton]()
-    var margin:CGFloat = 3.0
+    var margin:CGFloat = 5.0
     var tileArea:UIView = UIView()
 
     
@@ -27,16 +28,9 @@ class GameScreen: UIViewController {
     
     override func viewDidLoad() {
         makeTileArea()
-        createImagePieces(3) // pass the number in from MainScreen
-        shuffleTiles()
-
-        // testing animation
-        UIView.animateWithDuration(1.5, delay: 0.0, options: nil, animations: {
-            var frame = self.tileButtonArray[0].frame
-            frame.origin.x += 3
-            frame.origin.y += 3
-            self.self.tileButtonArray[0].frame = frame
-            }, completion: nil)
+        createImagePieces(tilesPerRow) // pass the number in from MainScreen
+//        shuffleTiles()
+        loadImagesIntoButtons()
 
         congratsMessage.text = "Keep going..."
         congratsMessage.layer.cornerRadius = 50
@@ -143,6 +137,7 @@ class GameScreen: UIViewController {
 
         // if the order is now correct, the user wins!
         if checkTileOrder() {
+            moveTilesToFormCompletePicture()
             congratsMessage.backgroundColor = UIColor.greenColor()
             congratsMessage.text = "Congratulations!"
         }
@@ -159,7 +154,6 @@ class GameScreen: UIViewController {
             imagePiecesArray[j] = imagePiecesArray[index]
             imagePiecesArray[index] = tempImage
         }
-        self.loadImagesIntoButtons()
     }
 
     
@@ -183,6 +177,18 @@ class GameScreen: UIViewController {
         return true
     }
 
+    func moveTilesToFormCompletePicture() {
+        // testing animation
+        var numTiles = self.imagePiecesArray.count
+        println(numTiles)
+        
+        UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+            var frame = self.tileButtonArray[0].frame
+            frame.origin.x += 3
+            frame.origin.y += 3
+            self.self.tileButtonArray[0].frame = frame
+            }, completion: nil)
+    }
 
     @IBAction func backToMainScreen(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

@@ -12,6 +12,8 @@ import UIKit
 class MainScreen: UIViewController {
                             
     @IBOutlet weak var imageCycler: UIImageView!
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var tilesPerRowLabel: UILabel!
     let image1 = UIImage(named: "image1")
     let image2 = UIImage(named: "image2")
     let image3 = UIImage(named: "image3")
@@ -24,12 +26,18 @@ class MainScreen: UIViewController {
     let image10 = UIImage(named: "image10")
     var imageArray = [UIImage]()
     var imageToSolve = UIImage()
+    var tilesPerRow = 3
     var currentIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imageArray =  [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10]
         self.imageCycler.image = imageArray[currentIndex]
+        self.tilesPerRowLabel.text = "3"
+        stepper.wraps = true
+        stepper.autorepeat = true
+        stepper.maximumValue = 10
+        stepper.minimumValue = 3
     }
 
     @IBAction func letsPlayButton(sender: AnyObject) {
@@ -37,12 +45,19 @@ class MainScreen: UIViewController {
     }
 
     
+    @IBAction func stepperPressed(sender: UIStepper) {
+        self.tilesPerRowLabel.text = Int(sender.value).description
+        self.tilesPerRow = Int(sender.value)
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         var gameScreen = segue.destinationViewController as GameScreen
         if (segue.identifier == "playGame") {
             self.imageToSolve = imageArray[currentIndex]
         }
         gameScreen.imageToSolve = self.imageToSolve
+        gameScreen.tilesPerRow = self.tilesPerRow
         
     }
     
