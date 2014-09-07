@@ -18,57 +18,82 @@ class GameScreen: UIViewController {
     var imagePiecesArray = [UIImage]()
     var correctArray = [UIImage]()
     var tileButtonArray = [UIButton]()
+    var margin:CGFloat = 3.0
+    var tileArea:UIView = UIView()
 
     
-    @IBOutlet weak var tileArea: UIView!
     @IBOutlet weak var congratsMessage: UILabel!
     
     
     override func viewDidLoad() {
+        makeTileArea()
         createImagePieces(3) // pass the number in from MainScreen
         shuffleTiles()
 
         // testing animation
         UIView.animateWithDuration(1.5, delay: 0.0, options: nil, animations: {
             var frame = self.tileButtonArray[0].frame
-            frame.origin.x += 50
-            frame.origin.y += 50
+            frame.origin.x += 3
+            frame.origin.y += 3
             self.self.tileButtonArray[0].frame = frame
             }, completion: nil)
 
         congratsMessage.text = "Keep going..."
+        congratsMessage.layer.cornerRadius = 50
     }
     
-    
+    func makeTileArea() {
+        var screenSize = UIScreen.mainScreen().applicationFrame
+        println("screen is \(screenSize.size.width) wide and \(screenSize.size.height) high")
+        var tileAreaWidth = screenSize.size.width - 20.0
+        // need to set this with math. without using 40
+        var tileAreaPosY = (screenSize.size.height / 2) - (tileAreaWidth / 2) + 40
+        println("tileAreaWidth is \(tileAreaWidth) and tileAreaPosY is \(tileAreaPosY)")
+        
+        var tileAreaFrame = CGRectMake(10, tileAreaPosY, tileAreaWidth, tileAreaWidth)
+        println(tileAreaFrame)
+        tileArea = UIView(frame: tileAreaFrame)
+        self.view.addSubview(tileArea)
+    }
     
     // cuts up the main image into pieces and stores them in an array
     // at the same time, create buttons with the same dimensions and also put in an array
     // load the pictures
     func createImagePieces(size:Int) {
-        var margin:CGFloat = 5.0
-        println(self.tileArea.frame.width)
-        var tileSideLength:CGFloat  = (self.tileArea.frame.width - (margin * CGFloat(size-1))) / CGFloat(size)
-        println(tileSideLength)
+        self.imageToSolve = resizeImage(self.imageToSolve, size: self.tileArea.frame.width)
+        
+        var totalWidth = self.tileArea.frame.width
+        
+        var tileSideLength:CGFloat  = (totalWidth - (margin * CGFloat(size-1))) / CGFloat(size)
+        
         for index1 in 0..<size { // go down the rows
             var posY:CGFloat = CGFloat(index1) * (tileSideLength + margin)
+
             for index2 in 0..<size { // get the tiles in each row
                 var posX:CGFloat = CGFloat(index2) * (tileSideLength + margin)
+                
                 // set the boundaries of the tile
-                println("x = \(posX) and y = \(posY)")
                 var tileFrame = CGRectMake(posX, posY, tileSideLength, tileSideLength)
-                var bigTileFrame = CGRectMake(posX, posY, tileSideLength, tileSideLength)
+
                 // get the partial image data from the main image??
                 var dataToMakeUIImage = CGImageCreateWithImageInRect(self.imageToSolve.CGImage, tileFrame)
+                
                 // make the new small image
                 var imagePiece = UIImage(CGImage: dataToMakeUIImage, scale: UIScreen.mainScreen().scale, orientation: self.imageToSolve.imageOrientation)
-                self.imagePiecesArray.append(imagePiece) // add the small image tile to the array
+
+                // not sure why but the image pieces come out smaller than they should so I resize them here
+                imagePiece = resizeImage(imagePiece, size: tileSideLength)
+
+                // add the small image tile to the array
+                self.imagePiecesArray.append(imagePiece)
 
                 // make button and put in array
                 var button = UIButton(frame: tileFrame)
                 button.addTarget(self, action: "buttonPressed:", forControlEvents: .TouchUpInside)
-                self.tileArea.addSubview(button)
                 self.tileButtonArray.append(button)
-
+                
+                // add button to tileArea view
+                self.tileArea.addSubview(button)
             }
         }
         // save the initial order to check against later
@@ -76,15 +101,30 @@ class GameScreen: UIViewController {
     }
     
     
+    func resizeImage(image:UIImage, size:CGFloat) -> UIImage {
+        var newSize:CGSize = CGSize(width: size, height: size)
+        let rect = CGRectMake(0,0, newSize.width, newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.drawInRect(rect)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        println("image's new size = \(imageToSolve.size)")
+        return newImage
+    }
+
+    
     // one of the buttons was pressed
-    // get the index from the array and then set some properties depending if it was the first or second button pressed
+    // get the index from the button array and then set some properties depending if it was the first or second button pressed
     func buttonPressed(sender: UIButton) {
         var index = find(self.tileButtonArray, sender)
+        println("button \(index) pressed")
         if self.firstTileSelectedBool { // this is the first tile pressed
             self.firstTileNumber = index!
             self.firstTileSelectedBool = false
         }
-        else {
+        else { // this is the second tile pressed
             self.secondTileNumber = index!
             self.swapTiles(firstTileNumber, secondTileNumber: secondTileNumber)
             self.firstTileSelectedBool = true
@@ -92,7 +132,7 @@ class GameScreen: UIViewController {
     }
 
     
-    // swaps the images in the array
+    // swaps two images in the array when the second button is pressed
     func swapTiles(firstTileNumber: Int, secondTileNumber: Int) {
         var tempImage = imagePiecesArray[firstTileNumber]
         imagePiecesArray[firstTileNumber] = imagePiecesArray[secondTileNumber]
@@ -103,13 +143,13 @@ class GameScreen: UIViewController {
 
         // if the order is now correct, the user wins!
         if checkTileOrder() {
-            congratsMessage.backgroundColor = UIColor.cyanColor()
+            congratsMessage.backgroundColor = UIColor.greenColor()
             congratsMessage.text = "Congratulations!"
         }
     }
 
     
-    // this shuffles the image pieces in the array
+    // shuffles the image pieces in the array
     func shuffleTiles() {
         for var index = imagePiecesArray.count - 1; index > 0; index-- {
             // Random int from 0 to index-1
