@@ -114,29 +114,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     //MARK: EXTRAS
-    // create array of sample data
-    func loadSampleData() {
-        // initialize Person objects
-        var teacher1 = Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png"))
-        var teacher2 = Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
-        var testPerson = Person(firstName: "aaTest", lastName: "test")
-        var person1 = Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews.png"))
-        var person2 = Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny.png"))
-        var person3 = Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch.png"))
-        var person4 = Person(firstName: "Donald", lastName: "Duck", image: UIImage(named:"donald-duck.png"))
-//        var person5 = Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore.png"))
-//        var person6 = Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone.png"))
-//        var person7 = Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy.png"))
-//        var person8 = Person(firstName: "Hobbes", lastName: "", image: UIImage(named: "hobbes"))
-        
-        
-        //create the arrays of students and teachers
-        self.teachers = [teacher1, teacher2]
-        self.roster = [testPerson, person1, person2, person3, person4]
-        makeMasterArray()
-    }
-
-    
     // set up segue to pass data to the other view controller when clicking on a cell in tableview
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
         // target the next view controller
@@ -174,7 +151,47 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }))
         self.presentViewController(roleAlert, animated: true, completion: nil)
     }
+    
+    
 
+    // create array of sample data
+    func loadSampleData() {
+        //create the arrays of students and teachers
+        self.teachers = [
+            Person(firstName: "Brad", lastName: "Johnson", image: UIImage(named:"teacher1.png")),
+            Person(firstName: "John", lastName: "Clem", image: UIImage(named:"teacher2.png"))
+        ]
+        self.roster = [
+            Person(firstName: "Archie", lastName: "Andrews", image: UIImage(named:"archie-andrews")),
+            Person(firstName: "Bugs", lastName: "Bunny", image: UIImage(named:"bugs-bunny")),
+            Person(firstName: "Cap'n", lastName: "Crunch", image: UIImage(named:"capn-crunch")),
+            Person(firstName: "Donald", lastName: "Duck", image: UIImage(named:"donald-duck")),
+            Person(firstName: "Eeyore", lastName: "", image: UIImage(named:"eeyore")),
+            Person(firstName: "Fred", lastName: "Flintstone", image: UIImage(named:"fred-flintstone")),
+            Person(firstName: "Goofy", lastName: "", image: UIImage(named:"goofy")),
+            Person(firstName: "Hobbes", lastName: "", image: UIImage(named: "hobbes")),
+            Person(firstName: "Inky", lastName: "", image: UIImage(named: "inky")),
+            Person(firstName: "Jane", lastName: "Jetson", image: UIImage(named: "jane-jetson")),
+            Person(firstName: "Kirby", lastName: "", image: UIImage(named: "kirby")),
+            Person(firstName: "Luigi", lastName: "", image: UIImage(named: "luigi")),
+            Person(firstName: "Mickey", lastName: "Mouse", image: UIImage(named: "mickey")),
+            Person(firstName: "Nemo", lastName: "", image: UIImage(named: "nemo")),
+            Person(firstName: "Olive", lastName: "Oyl", image: UIImage(named: "olive-oyl")),
+            Person(firstName: "Peter", lastName: "Pan", image: UIImage(named: "peter-pan")),
+            Person(firstName: "Q*bert", lastName: "", image: UIImage(named: "q-bert")),
+            Person(firstName: "Roger", lastName: "Rabbit", image: UIImage(named: "roger-rabbit")),
+            Person(firstName: "SpongeBob", lastName: "SquarePants", image: UIImage(named: "spongebob")),
+            Person(firstName: "Tony", lastName: "Tiger", image: UIImage(named: "tony-tiger")),
+            Person(firstName: "Ursula", lastName: "", image: UIImage(named: "ursula")),
+            Person(firstName: "Venom", lastName: "", image: UIImage(named: "venom")),
+            Person(firstName: "Woody", lastName: "Woodpecker", image: UIImage(named: "woody-woodpecker")),
+            Person(firstName: "X-Men", lastName: "", image: UIImage(named: "xmen")),
+            Person(firstName: "Yoshi", lastName: "", image: UIImage(named: "yoshi")),
+            Person(firstName: "Zelda", lastName: "", image: UIImage(named: "zelda"))
+        ]
+        makeMasterArray()
+    }
+    
     
     // refresh masterArray after adding or deleting a Person
     func makeMasterArray() {
@@ -183,10 +200,4 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         makeMasterArray.append(self.roster)
         self.masterArray = makeMasterArray
     }
-    
-    
-    
-    
-
 }
-

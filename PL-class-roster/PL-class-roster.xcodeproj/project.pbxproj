@@ -21,6 +21,25 @@
 		2C15E0EF1993EA27000DFF58 /* PL_class_rosterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15E0EE1993EA27000DFF58 /* PL_class_rosterTests.swift */; };
 		2C15E0F91993EA6C000DFF58 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C15E0F81993EA6C000DFF58 /* Person.swift */; };
 		2C206BBC19A4681700799C82 /* nopic.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C206BBB19A4681700799C82 /* nopic.png */; };
+		2C3BF05E19BBDE5D0075F63F /* hobbes.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF04D19BBDE5D0075F63F /* hobbes.png */; };
+		2C3BF05F19BBDE5D0075F63F /* inky.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF04E19BBDE5D0075F63F /* inky.png */; };
+		2C3BF06019BBDE5D0075F63F /* kirby.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF04F19BBDE5D0075F63F /* kirby.png */; };
+		2C3BF06119BBDE5D0075F63F /* luigi.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05019BBDE5D0075F63F /* luigi.png */; };
+		2C3BF06219BBDE5D0075F63F /* mickey.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05119BBDE5D0075F63F /* mickey.png */; };
+		2C3BF06319BBDE5D0075F63F /* nemo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05219BBDE5D0075F63F /* nemo.png */; };
+		2C3BF06419BBDE5D0075F63F /* olive-oyl.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05319BBDE5D0075F63F /* olive-oyl.png */; };
+		2C3BF06519BBDE5D0075F63F /* peter-pan.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05419BBDE5D0075F63F /* peter-pan.png */; };
+		2C3BF06619BBDE5D0075F63F /* q-bert.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05519BBDE5D0075F63F /* q-bert.png */; };
+		2C3BF06719BBDE5D0075F63F /* roger-rabbit.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05619BBDE5D0075F63F /* roger-rabbit.png */; };
+		2C3BF06819BBDE5D0075F63F /* spongebob.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05719BBDE5D0075F63F /* spongebob.png */; };
+		2C3BF06919BBDE5D0075F63F /* tony-tiger.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05819BBDE5D0075F63F /* tony-tiger.png */; };
+		2C3BF06A19BBDE5D0075F63F /* ursula.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05919BBDE5D0075F63F /* ursula.png */; };
+		2C3BF06B19BBDE5D0075F63F /* venom.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05A19BBDE5D0075F63F /* venom.png */; };
+		2C3BF06C19BBDE5D0075F63F /* woody-woodpecker.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05B19BBDE5D0075F63F /* woody-woodpecker.png */; };
+		2C3BF06D19BBDE5D0075F63F /* xmen.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05C19BBDE5D0075F63F /* xmen.png */; };
+		2C3BF06E19BBDE5D0075F63F /* zelda.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF05D19BBDE5D0075F63F /* zelda.png */; };
+		2C3BF07019BBDE6D0075F63F /* jane-jetson.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF06F19BBDE6D0075F63F /* jane-jetson.png */; };
+		2C3BF07219BBDF0B0075F63F /* yoshi.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C3BF07119BBDF0B0075F63F /* yoshi.png */; };
 		2C41326A19A15B9C006F681C /* teacher2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C41326819A15B9C006F681C /* teacher2.png */; };
 		2C41326B19A15B9C006F681C /* teacher1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C41326919A15B9C006F681C /* teacher1.png */; };
 		2C561C441999887A004B529D /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C561C431999887A004B529D /* PersonViewController.swift */; };
@@ -55,6 +74,25 @@
 		2C15E0EE1993EA27000DFF58 /* PL_class_rosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PL_class_rosterTests.swift; sourceTree = "<group>"; };
 		2C15E0F81993EA6C000DFF58 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Person.swift; path = ../Person.swift; sourceTree = "<group>"; };
 		2C206BBB19A4681700799C82 /* nopic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nopic.png; sourceTree = "<group>"; };
+		2C3BF04D19BBDE5D0075F63F /* hobbes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hobbes.png; sourceTree = "<group>"; };
+		2C3BF04E19BBDE5D0075F63F /* inky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inky.png; sourceTree = "<group>"; };
+		2C3BF04F19BBDE5D0075F63F /* kirby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kirby.png; sourceTree = "<group>"; };
+		2C3BF05019BBDE5D0075F63F /* luigi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = luigi.png; sourceTree = "<group>"; };
+		2C3BF05119BBDE5D0075F63F /* mickey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mickey.png; sourceTree = "<group>"; };
+		2C3BF05219BBDE5D0075F63F /* nemo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nemo.png; sourceTree = "<group>"; };
+		2C3BF05319BBDE5D0075F63F /* olive-oyl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "olive-oyl.png"; sourceTree = "<group>"; };
+		2C3BF05419BBDE5D0075F63F /* peter-pan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peter-pan.png"; sourceTree = "<group>"; };
+		2C3BF05519BBDE5D0075F63F /* q-bert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "q-bert.png"; sourceTree = "<group>"; };
+		2C3BF05619BBDE5D0075F63F /* roger-rabbit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roger-rabbit.png"; sourceTree = "<group>"; };
+		2C3BF05719BBDE5D0075F63F /* spongebob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spongebob.png; sourceTree = "<group>"; };
+		2C3BF05819BBDE5D0075F63F /* tony-tiger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tony-tiger.png"; sourceTree = "<group>"; };
+		2C3BF05919BBDE5D0075F63F /* ursula.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ursula.png; sourceTree = "<group>"; };
+		2C3BF05A19BBDE5D0075F63F /* venom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = venom.png; sourceTree = "<group>"; };
+		2C3BF05B19BBDE5D0075F63F /* woody-woodpecker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "woody-woodpecker.png"; sourceTree = "<group>"; };
+		2C3BF05C19BBDE5D0075F63F /* xmen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmen.png; sourceTree = "<group>"; };
+		2C3BF05D19BBDE5D0075F63F /* zelda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zelda.png; sourceTree = "<group>"; };
+		2C3BF06F19BBDE6D0075F63F /* jane-jetson.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jane-jetson.png"; sourceTree = "<group>"; };
+		2C3BF07119BBDF0B0075F63F /* yoshi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yoshi.png; sourceTree = "<group>"; };
 		2C41326819A15B9C006F681C /* teacher2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacher2.png; sourceTree = "<group>"; };
 		2C41326919A15B9C006F681C /* teacher1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teacher1.png; sourceTree = "<group>"; };
 		2C561C3819996EB6004B529D /* classRosterPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = classRosterPlayground.playground; path = "../../../Library/Autosave Information/classRosterPlayground.playground"; sourceTree = "<group>"; };
@@ -92,6 +130,25 @@
 				2C0289C2199C54AB0047AC23 /* donald-duck.png */,
 				2C0289C3199C54AB0047AC23 /* fred-flintstone.png */,
 				2C0289C4199C54AB0047AC23 /* goofy.png */,
+				2C3BF04D19BBDE5D0075F63F /* hobbes.png */,
+				2C3BF04E19BBDE5D0075F63F /* inky.png */,
+				2C3BF06F19BBDE6D0075F63F /* jane-jetson.png */,
+				2C3BF04F19BBDE5D0075F63F /* kirby.png */,
+				2C3BF05019BBDE5D0075F63F /* luigi.png */,
+				2C3BF05119BBDE5D0075F63F /* mickey.png */,
+				2C3BF05219BBDE5D0075F63F /* nemo.png */,
+				2C3BF05319BBDE5D0075F63F /* olive-oyl.png */,
+				2C3BF05419BBDE5D0075F63F /* peter-pan.png */,
+				2C3BF05519BBDE5D0075F63F /* q-bert.png */,
+				2C3BF05619BBDE5D0075F63F /* roger-rabbit.png */,
+				2C3BF05719BBDE5D0075F63F /* spongebob.png */,
+				2C3BF05819BBDE5D0075F63F /* tony-tiger.png */,
+				2C3BF05919BBDE5D0075F63F /* ursula.png */,
+				2C3BF05A19BBDE5D0075F63F /* venom.png */,
+				2C3BF05B19BBDE5D0075F63F /* woody-woodpecker.png */,
+				2C3BF05C19BBDE5D0075F63F /* xmen.png */,
+				2C3BF07119BBDF0B0075F63F /* yoshi.png */,
+				2C3BF05D19BBDE5D0075F63F /* zelda.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -237,16 +294,35 @@
 			files = (
 				2C0289CA199C54AB0047AC23 /* goofy.png in Resources */,
 				2C15E0E31993EA27000DFF58 /* Images.xcassets in Resources */,
+				2C3BF06419BBDE5D0075F63F /* olive-oyl.png in Resources */,
+				2C3BF06319BBDE5D0075F63F /* nemo.png in Resources */,
+				2C3BF07019BBDE6D0075F63F /* jane-jetson.png in Resources */,
 				2C0289C9199C54AB0047AC23 /* fred-flintstone.png in Resources */,
+				2C3BF06A19BBDE5D0075F63F /* ursula.png in Resources */,
 				2C41326B19A15B9C006F681C /* teacher1.png in Resources */,
+				2C3BF06819BBDE5D0075F63F /* spongebob.png in Resources */,
 				2C0289CC199C61520047AC23 /* eeyore.png in Resources */,
 				2C0289C7199C54AB0047AC23 /* capn-crunch.png in Resources */,
+				2C3BF06119BBDE5D0075F63F /* luigi.png in Resources */,
 				2C0289C8199C54AB0047AC23 /* donald-duck.png in Resources */,
 				2C0289CF199C698D0047AC23 /* Main.storyboard in Resources */,
+				2C3BF07219BBDF0B0075F63F /* yoshi.png in Resources */,
+				2C3BF05F19BBDE5D0075F63F /* inky.png in Resources */,
+				2C3BF05E19BBDE5D0075F63F /* hobbes.png in Resources */,
 				2C0289C6199C54AB0047AC23 /* bugs-bunny.png in Resources */,
+				2C3BF06219BBDE5D0075F63F /* mickey.png in Resources */,
+				2C3BF06B19BBDE5D0075F63F /* venom.png in Resources */,
+				2C3BF06619BBDE5D0075F63F /* q-bert.png in Resources */,
 				2C206BBC19A4681700799C82 /* nopic.png in Resources */,
+				2C3BF06519BBDE5D0075F63F /* peter-pan.png in Resources */,
+				2C3BF06919BBDE5D0075F63F /* tony-tiger.png in Resources */,
 				2C0289C5199C54AB0047AC23 /* archie-andrews.png in Resources */,
+				2C3BF06019BBDE5D0075F63F /* kirby.png in Resources */,
+				2C3BF06C19BBDE5D0075F63F /* woody-woodpecker.png in Resources */,
+				2C3BF06E19BBDE5D0075F63F /* zelda.png in Resources */,
 				2C41326A19A15B9C006F681C /* teacher2.png in Resources */,
+				2C3BF06719BBDE5D0075F63F /* roger-rabbit.png in Resources */,
+				2C3BF06D19BBDE5D0075F63F /* xmen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
