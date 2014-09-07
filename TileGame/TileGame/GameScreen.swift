@@ -12,6 +12,7 @@ import UIKit
 class GameScreen: UIViewController {
     
     var imageToSolve = UIImage()
+    var solved = false
     var tilesPerRow = 3
     var firstTileSelectedBool = true
     var firstTileNumber = 0
@@ -38,14 +39,10 @@ class GameScreen: UIViewController {
     
     func makeTileArea() {
         var screenSize = UIScreen.mainScreen().applicationFrame
-        println("screen is \(screenSize.size.width) wide and \(screenSize.size.height) high")
         var tileAreaWidth = screenSize.size.width - 20.0
         // need to set this with math. without using 40
         var tileAreaPosY = (screenSize.size.height / 2) - (tileAreaWidth / 2) + 40
-        println("tileAreaWidth is \(tileAreaWidth) and tileAreaPosY is \(tileAreaPosY)")
-        
         var tileAreaFrame = CGRectMake(10, tileAreaPosY, tileAreaWidth, tileAreaWidth)
-        println(tileAreaFrame)
         tileArea = UIView(frame: tileAreaFrame)
         self.view.addSubview(tileArea)
     }
@@ -104,7 +101,6 @@ class GameScreen: UIViewController {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        println("image's new size = \(imageToSolve.size)")
         return newImage
     }
 
@@ -113,7 +109,6 @@ class GameScreen: UIViewController {
     // get the index from the button array and then set some properties depending if it was the first or second button pressed
     func buttonPressed(sender: UIButton) {
         var index = find(self.tileButtonArray, sender)
-        println("button \(index) pressed")
         if self.firstTileSelectedBool { // this is the first tile pressed
             self.firstTileNumber = index!
             self.firstTileSelectedBool = false
@@ -128,18 +123,20 @@ class GameScreen: UIViewController {
     
     // swaps two images in the array when the second button is pressed
     func swapTiles(firstTileNumber: Int, secondTileNumber: Int) {
-        var tempImage = imagePiecesArray[firstTileNumber]
-        imagePiecesArray[firstTileNumber] = imagePiecesArray[secondTileNumber]
-        imagePiecesArray[secondTileNumber] = tempImage
-        
-        // reload images into buttons
-        self.loadImagesIntoButtons()
-
-        // if the order is now correct, the user wins!
-        if checkTileOrder() {
-            moveTilesToFormCompletePicture()
-            congratsMessage.backgroundColor = UIColor.greenColor()
-            congratsMessage.text = "Congratulations!"
+        if !solved {
+            var tempImage = imagePiecesArray[firstTileNumber]
+            imagePiecesArray[firstTileNumber] = imagePiecesArray[secondTileNumber]
+            imagePiecesArray[secondTileNumber] = tempImage
+            
+            // reload images into buttons
+            self.loadImagesIntoButtons()
+            
+            // if the order is now correct, the user wins!
+            if checkTileOrder() {
+                moveTilesToFormCompletePicture()
+                congratsMessage.backgroundColor = UIColor.greenColor()
+                congratsMessage.text = "Congratulations!"
+            }            
         }
     }
 
@@ -170,10 +167,13 @@ class GameScreen: UIViewController {
     // checks to see if the image pieces are in the correct order
     func checkTileOrder() -> Bool {
         for index in 0...8 {
+            println("image in imagePiecesArray \(index) = \(imagePiecesArray[index])")
+            println("image in correctArray \(index) = \(correctArray[index])")
             if imagePiecesArray[index] != correctArray[index] {
                 return false
             }
         }
+        self.solved = true
         return true
     }
 
