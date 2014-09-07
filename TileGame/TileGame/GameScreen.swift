@@ -29,7 +29,7 @@ class GameScreen: UIViewController {
     
     override func viewDidLoad() {
         makeTileArea()
-        createImagePieces(tilesPerRow) // pass the number in from MainScreen
+        createImagePieces(tilesPerRow)
 //        shuffleTiles()
         loadImagesIntoButtons()
 
@@ -167,8 +167,8 @@ class GameScreen: UIViewController {
     // checks to see if the image pieces are in the correct order
     func checkTileOrder() -> Bool {
         for index in 0...8 {
-            println("image in imagePiecesArray \(index) = \(imagePiecesArray[index])")
-            println("image in correctArray \(index) = \(correctArray[index])")
+//            println("image in imagePiecesArray \(index) = \(imagePiecesArray[index])")
+//            println("image in correctArray \(index) = \(correctArray[index])")
             if imagePiecesArray[index] != correctArray[index] {
                 return false
             }
@@ -182,12 +182,37 @@ class GameScreen: UIViewController {
         var numTiles = self.imagePiecesArray.count
         println(numTiles)
         
-        UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-            var frame = self.tileButtonArray[0].frame
-            frame.origin.x += 3
-            frame.origin.y += 3
-            self.self.tileButtonArray[0].frame = frame
-            }, completion: nil)
+        // OMG my logic is so messed up right here!!!
+        // i need a much simpler way of figuring out if a tile moves up vs down and left vs right
+        // I should really have the button in a 2d array so I can just pull the row and column
+        
+        
+        var numColumnsOnLeft = tilesPerRow / 2
+        var numColumnsOnRight = (tilesPerRow / 2) + 2
+        println("numColumnsOnLeft is \(numColumnsOnLeft)")
+        println("numColumnsOnRight is \(numColumnsOnRight)")
+        var whichColumn = 1
+        for tileButton in tileButtonArray {
+            println(whichColumn)
+            if whichColumn <= numColumnsOnLeft {
+                println("move tile to the right")
+                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                    var frame = tileButton.frame
+                    frame.origin.x += self.margin
+                    tileButton.frame = frame
+                    }, completion: nil)
+            }
+            if whichColumn >= numColumnsOnRight {
+                println("move tile to the left")
+                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                    var frame = tileButton.frame
+                    frame.origin.x -= self.margin
+                    tileButton.frame = frame
+                    }, completion: nil)
+            }
+            whichColumn++
+            if whichColumn > tilesPerRow { whichColumn = 1 }
+        }
     }
 
     @IBAction func backToMainScreen(sender: AnyObject) {
