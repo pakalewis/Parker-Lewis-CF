@@ -30,7 +30,7 @@ class GameScreen: UIViewController {
     override func viewDidLoad() {
         makeTileArea()
         createImagePieces(tilesPerRow)
-        shuffleTiles()
+//        shuffleTiles()
         loadImagesIntoButtons()
 
         congratsMessage.text = "Keep going..."
@@ -55,8 +55,11 @@ class GameScreen: UIViewController {
         
         var totalWidth = self.tileArea.frame.width
         
+        self.margin = 0.06 * (totalWidth / CGFloat(size))
+
         var tileSideLength:CGFloat  = (totalWidth - (margin * CGFloat(size-1))) / CGFloat(size)
-        
+
+
         for index1 in 0..<size { // go down the rows
             var posY:CGFloat = CGFloat(index1) * (tileSideLength + margin)
 
@@ -179,40 +182,105 @@ class GameScreen: UIViewController {
 
     func moveTilesToFormCompletePicture() {
         // testing animation
-        var numTiles = self.imagePiecesArray.count
-        println(numTiles)
-        
-        // OMG my logic is so messed up right here!!!
+        // OMG my logic is so convoluted right here!!!
         // i need a much simpler way of figuring out if a tile moves up vs down and left vs right
         // I should really have the button in a 2d array so I can just pull the row and column
         
-        
-        var numColumnsOnLeft = tilesPerRow / 2
-        var numColumnsOnRight = (tilesPerRow / 2) + 2
-        println("numColumnsOnLeft is \(numColumnsOnLeft)")
-        println("numColumnsOnRight is \(numColumnsOnRight)")
+        var numTiles = self.imagePiecesArray.count
+        var centerTile:Int = 0
         var whichColumn = 1
-        for tileButton in tileButtonArray {
-            println(whichColumn)
-            if whichColumn <= numColumnsOnLeft {
-                println("move tile to the right")
-                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                    var frame = tileButton.frame
-                    frame.origin.x += self.margin
-                    tileButton.frame = frame
-                    }, completion: nil)
+        var whichRow = 1
+        
+        if numTiles % 2 != 0 {
+            centerTile = tilesPerRow / 2 + 1
+            println("odd \(centerTile)")
+            for tileButton in tileButtonArray {
+                println("row: \(whichRow) column: \(whichColumn)")
+                if whichColumn < centerTile {
+                    println("move tile right")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.x += self.margin * CGFloat((centerTile - whichColumn))
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                if whichColumn > centerTile {
+                    println("move tile left")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.x += self.margin * CGFloat((centerTile - whichColumn))
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                if whichRow < centerTile {
+                    println("move tile down")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.y += self.margin * CGFloat((centerTile - whichRow))
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                if whichRow > centerTile {
+                    println("move tile up")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.y += self.margin * CGFloat((centerTile - whichRow))
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                whichColumn++
+                if whichColumn > tilesPerRow {
+                    whichColumn = 1
+                    whichRow++
+                }
             }
-            if whichColumn >= numColumnsOnRight {
-                println("move tile to the left")
-                UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
-                    var frame = tileButton.frame
-                    frame.origin.x -= self.margin
-                    tileButton.frame = frame
-                    }, completion: nil)
-            }
-            whichColumn++
-            if whichColumn > tilesPerRow { whichColumn = 1 }
         }
+        else {
+            centerTile = tilesPerRow / 2
+            println("even \(centerTile)")
+            for tileButton in tileButtonArray {
+                println("row: \(whichRow) column: \(whichColumn)")
+                if whichColumn <= centerTile {
+                    println("move tile right")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.x += (self.margin * CGFloat((centerTile - whichColumn))) + self.margin / 2
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                if whichColumn > centerTile {
+                    println("move tile left")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.x += (self.margin * CGFloat((centerTile - whichColumn))) + self.margin / 2
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                if whichRow <= centerTile {
+                    println("move tile down")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.y += (self.margin * CGFloat((centerTile - whichRow))) + self.margin / 2
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                if whichRow > centerTile {
+                    println("move tile up")
+                    UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: {
+                        var frame = tileButton.frame
+                        frame.origin.y += (self.margin * CGFloat((centerTile - whichRow))) + self.margin / 2
+                        tileButton.frame = frame
+                        }, completion: nil)
+                }
+                whichColumn++
+                if whichColumn > tilesPerRow {
+                    whichColumn = 1
+                    whichRow++
+                }
+            }
+            
+        }
+        
     }
 
     @IBAction func backToMainScreen(sender: AnyObject) {
