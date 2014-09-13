@@ -30,7 +30,7 @@ class GameScreen: UIViewController {
     override func viewDidLoad() {
         makeTileArea()
         createImagePieces(tilesPerRow)
-//        shuffleTiles()
+        shuffleTiles()
         loadImagesIntoButtons()
 
         congratsMessage.text = "Keep going..."
@@ -55,7 +55,7 @@ class GameScreen: UIViewController {
         
         var totalWidth = self.tileArea.frame.width
         
-        self.margin = 0.06 * (totalWidth / CGFloat(size))
+        self.margin = 0.04 * (totalWidth / CGFloat(size))
 
         var tileSideLength:CGFloat  = (totalWidth - (margin * CGFloat(size-1))) / CGFloat(size)
 

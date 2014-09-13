@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C1E513A19C415BE009D0D7B /* augs.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1E513919C415BE009D0D7B /* augs.png */; };
 		2C30EF2319B7C17500675799 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF2219B7C17500675799 /* AppDelegate.swift */; };
 		2C30EF2519B7C17500675799 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C30EF2419B7C17500675799 /* MainScreen.swift */; };
 		2C30EF2A19B7C17500675799 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C30EF2919B7C17500675799 /* Images.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C1E513919C415BE009D0D7B /* augs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = augs.png; sourceTree = "<group>"; };
 		2C30EF1D19B7C17500675799 /* TileGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TileGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C30EF2119B7C17500675799 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C30EF2219B7C17500675799 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		2C30EF4A19B7C1F000675799 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				2C1E513919C415BE009D0D7B /* augs.png */,
 				2CFD40C119B7FD3500275DB3 /* image1.png */,
 				2C64852C19B92C4D000DECE2 /* image2.png */,
 				2CFD40C019B7FD3500275DB3 /* image3.png */,
@@ -242,6 +245,7 @@
 				2CFD40C519B7FD3500275DB3 /* image3.png in Resources */,
 				2CFD40C719B7FD3500275DB3 /* image4.png in Resources */,
 				2CFD40C419B7FD3500275DB3 /* image7.png in Resources */,
+				2C1E513A19C415BE009D0D7B /* augs.png in Resources */,
 				2C64853019B92C4D000DECE2 /* image5.png in Resources */,
 				2C64852F19B92C4D000DECE2 /* image9.png in Resources */,
 				2C64852E19B92C4D000DECE2 /* image8.png in Resources */,
