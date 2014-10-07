@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <scenes>
+        <!--Home Time Line View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="HomeTimeLineViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="171" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ht5-g9-Iik">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCell" rowHeight="120" id="61u-w3-NPm" customClass="CustomTableViewCell" customModule="TwitterClone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="61u-w3-NPm" id="rXt-jk-zOH">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAK-cp-g6h">
+                                                    <rect key="frame" x="120" y="0.0" width="480" height="119"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4sc-SR-8oB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="119"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="cpk-oM-14T"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xAK-cp-g6h" secondAttribute="bottom" id="4f3-nd-qTe"/>
+                                                <constraint firstItem="4sc-SR-8oB" firstAttribute="top" secondItem="rXt-jk-zOH" secondAttribute="top" id="5do-hr-MrA"/>
+                                                <constraint firstItem="xAK-cp-g6h" firstAttribute="leading" secondItem="4sc-SR-8oB" secondAttribute="trailing" id="F9y-rL-zFc"/>
+                                                <constraint firstAttribute="bottom" secondItem="4sc-SR-8oB" secondAttribute="bottom" id="ckx-mu-7JB"/>
+                                                <constraint firstItem="xAK-cp-g6h" firstAttribute="top" secondItem="rXt-jk-zOH" secondAttribute="top" id="cyX-0Z-miG"/>
+                                                <constraint firstAttribute="trailing" secondItem="xAK-cp-g6h" secondAttribute="trailing" id="dZ8-5V-icf"/>
+                                                <constraint firstItem="4sc-SR-8oB" firstAttribute="leading" secondItem="rXt-jk-zOH" secondAttribute="leading" id="e8W-58-7Ou"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellImage" destination="4sc-SR-8oB" id="lbf-RL-6tv"/>
+                                            <outlet property="cellText" destination="xAK-cp-g6h" id="KOY-Xw-jnN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="uiY-KO-ppX"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Ez8-8t-4sE"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ht5-g9-Iik" secondAttribute="bottom" id="K9A-4l-uzQ"/>
+                            <constraint firstItem="Ht5-g9-Iik" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KXf-O6-RSE"/>
+                            <constraint firstAttribute="trailing" secondItem="Ht5-g9-Iik" secondAttribute="trailing" id="UFi-R5-ZCo"/>
+                            <constraint firstItem="Ht5-g9-Iik" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Yfl-ry-xGF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Ht5-g9-Iik" id="7Qp-Ay-11R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="131"/>
+        </scene>
+    </scenes>
+</document>
