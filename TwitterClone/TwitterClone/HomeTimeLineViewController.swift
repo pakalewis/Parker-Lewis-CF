@@ -23,6 +23,9 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.estimatedRowHeight = 50.0
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // make AppDelegate a singleton
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.networkController = appDelegate.networkController
@@ -53,7 +56,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         self.imageQueue.addOperationWithBlock { () -> Void in
             let image = self.networkController.downloadImage(tweet!.avatarUrl)
             
-            // does this save the image to the Tweet obj?
+            // save the image to the Tweet obj
             self.tweets?[indexPath.row].profileImage = image
             
             // switch back to main queue to update the data for the custom cell

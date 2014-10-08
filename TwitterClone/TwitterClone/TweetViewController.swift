@@ -24,6 +24,7 @@ class TweetViewController: UIViewController {
         self.tweetText.text = self.tweet?.text
         self.username.text = self.tweet?.username
         self.retweets.text = "Retweets: \(self.tweet!.retweetCount)"
+        self.favorited.text = "Favorited: \(self.tweet!.favoriteCount)"
     }
     
     @IBAction func dismissTweetViewController(sender: AnyObject) {
