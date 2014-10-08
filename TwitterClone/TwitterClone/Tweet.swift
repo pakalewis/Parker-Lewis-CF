@@ -12,15 +12,20 @@ import UIKit
 class Tweet {
     
     var text : String
+    var username : String
     var avatarUrl : NSURL
     var profileImage = UIImage(named: "default")
+    var retweetCount : String
     
     
     
     init (tweetInfo : NSDictionary) {
         self.text = tweetInfo["text"] as String
+        var tempInt = tweetInfo["retweet_count"] as Int
+        self.retweetCount = String(tempInt)
         var userDictionary = tweetInfo["user"] as NSDictionary
         var profile_image_url = userDictionary["profile_image_url"] as String
+        self.username = userDictionary["name"] as String
         self.avatarUrl = NSURL(string: profile_image_url)
     }
  

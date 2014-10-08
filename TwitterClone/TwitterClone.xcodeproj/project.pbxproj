@@ -17,6 +17,8 @@
 		2CA79D2F19E3336A0073B4FB /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA79D2E19E3336A0073B4FB /* Tweet.swift */; };
 		2CC64C2319E48710002CEB72 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CC64C2219E48710002CEB72 /* default.png */; };
 		2CC64C2719E4A60B002CEB72 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC64C2619E4A60B002CEB72 /* CustomTableViewCell.swift */; };
+		2CC64C2919E4B33E002CEB72 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC64C2819E4B33E002CEB72 /* TweetViewController.swift */; };
+		2CD8D25919E5B4BE0062014D /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD8D25819E5B4BE0062014D /* NetworkController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		2CA79D2E19E3336A0073B4FB /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		2CC64C2219E48710002CEB72 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		2CC64C2619E4A60B002CEB72 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		2CC64C2819E4B33E002CEB72 /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		2CD8D25819E5B4BE0062014D /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 		2CA79D3119E33A4D0073B4FB /* VIEW */ = {
 			isa = PBXGroup;
 			children = (
+				2CC64C2619E4A60B002CEB72 /* CustomTableViewCell.swift */,
 				2CA79D0E19E330FF0073B4FB /* Main.storyboard */,
 			);
 			name = VIEW;
@@ -143,7 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				2CA79D2C19E332020073B4FB /* HomeTimeLineViewController.swift */,
-				2CC64C2619E4A60B002CEB72 /* CustomTableViewCell.swift */,
+				2CD8D25819E5B4BE0062014D /* NetworkController.swift */,
+				2CC64C2819E4B33E002CEB72 /* TweetViewController.swift */,
 			);
 			name = CONTROLLER;
 			sourceTree = "<group>";
@@ -252,6 +258,8 @@
 			files = (
 				2CA79D2F19E3336A0073B4FB /* Tweet.swift in Sources */,
 				2CC64C2719E4A60B002CEB72 /* CustomTableViewCell.swift in Sources */,
+				2CD8D25919E5B4BE0062014D /* NetworkController.swift in Sources */,
+				2CC64C2919E4B33E002CEB72 /* TweetViewController.swift in Sources */,
 				2CA79D2D19E332020073B4FB /* HomeTimeLineViewController.swift in Sources */,
 				2CA79D0B19E330FF0073B4FB /* AppDelegate.swift in Sources */,
 			);

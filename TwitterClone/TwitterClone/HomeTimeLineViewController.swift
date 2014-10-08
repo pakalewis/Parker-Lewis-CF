@@ -15,46 +15,28 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet weak var tableView: UITableView!
     var tweets : [Tweet]?
+    var currentTweet : Tweet?
     var twitterAccount : ACAccount?
     let imageQueue = NSOperationQueue()
+    var networkController : NetworkController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let accountStore = ACAccountStore()
-        let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
-        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted, error) -> Void in
-            if granted {
-                let accounts = accountStore.accountsWithAccountType(accountType)
-                self.twitterAccount = accounts.first as ACAccount?
-                let url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
-                let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: nil)
-                twitterRequest.account = self.twitterAccount
-                
-                // this happens on an arbitrary thread
-                twitterRequest.performRequestWithHandler({ (data, httpResponse, error) -> Void in
-                    // first log out the status code
-                    println(httpResponse.description)
-                    
-                    // switch statement to handle the various status code possibilities
-                    switch httpResponse.statusCode {
-                    case 200...299:
-                        // download JSON from twitter and create tweets from the data
-                        self.tweets = Tweet.parseJSONDataIntoTweets(data)
-                        // this shifts back to the main thread
-                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                            self.tableView.reloadData()
-                        })
-                    case 400...499:
-                        println("client's fault")
-                    case 500...599:
-                        println("server's fault")
-                    default:
-                        println("unexpected result")
-                    }
-                })
+        // make AppDelegate a singleton
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.networkController
+        
+        // talk to network controller and call it's method to fetch tweets
+        self.networkController.fetchHomeTimeLine { (errorDescription, tweets) -> (Void) in
+            if errorDescription != nil {
+                // there is a problem
+            } else {
+                self.tweets = tweets
+                self.tableView.reloadData()
             }
         }
+        
     }
 
     
@@ -68,10 +50,11 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         // target the appropriate tweet
         let tweet = self.tweets?[indexPath.row]
         
-        // download the profile image on a new queue
         self.imageQueue.addOperationWithBlock { () -> Void in
-            var imageData = NSData(contentsOfURL: tweet!.avatarUrl)
-            var image = UIImage(data: imageData)
+            let image = self.networkController.downloadImage(tweet!.avatarUrl)
+            
+            // does this save the image to the Tweet obj?
+            self.tweets?[indexPath.row].profileImage = image
             
             // switch back to main queue to update the data for the custom cell
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -82,6 +65,20 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         }
         return cell
     }
+    
+    
+    
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        var newTweetViewController = segue.destinationViewController as TweetViewController
+        if segue.identifier == "ShowTweet" {
+            var indexPath = self.tableView.indexPathForSelectedRow()
+            self.currentTweet = self.tweets?[indexPath!.row]
+        }
+        newTweetViewController.tweet = self.currentTweet
+    }
+
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
