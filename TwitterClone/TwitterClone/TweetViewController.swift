@@ -27,7 +27,4 @@ class TweetViewController: UIViewController {
         self.favorited.text = "Favorited: \(self.tweet!.favoriteCount)"
     }
     
-    @IBAction func dismissTweetViewController(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
 }

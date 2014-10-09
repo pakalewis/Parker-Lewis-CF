@@ -13,5 +13,8 @@ class CustomTableViewCell : UITableViewCell {
     @IBOutlet var cellImage: UIImageView!
     @IBOutlet var cellText: UILabel!
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }
 

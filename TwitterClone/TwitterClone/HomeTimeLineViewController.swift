@@ -23,8 +23,13 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.estimatedRowHeight = 50.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // load custom cell from nib
+        self.tableView.registerNib(UINib(nibName: "CustomTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CustomCell")
+        self.tableView.estimatedRowHeight = 75.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        
         
         // make AppDelegate a singleton
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -53,6 +58,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         // target the appropriate tweet
         let tweet = self.tweets?[indexPath.row]
         
+        // IF TWEET ALEADY HAS IMAGE, DON'T DL AGAIN
+        // MOVE THIS IMAGE QUEUE TO NETWORK CONTROLLER
         self.imageQueue.addOperationWithBlock { () -> Void in
             let image = self.networkController.downloadImage(tweet!.avatarUrl)
             
@@ -71,22 +78,15 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     
     
     
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var newTweetViewController = segue.destinationViewController as TweetViewController
-        if segue.identifier == "ShowTweet" {
-            var indexPath = self.tableView.indexPathForSelectedRow()
-            self.currentTweet = self.tweets?[indexPath!.row]
-        }
+    // cell selected, current tweet set and passed to new TweetViewController which is displayed
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var newTweetViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TweetViewController") as TweetViewController
+        self.currentTweet = self.tweets?[indexPath.row]
         newTweetViewController.tweet = self.currentTweet
+        self.navigationController?.pushViewController(newTweetViewController, animated: true)
     }
-
     
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 120.0
-    }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

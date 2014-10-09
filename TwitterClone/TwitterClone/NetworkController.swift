@@ -64,7 +64,7 @@ class NetworkController {
     }
     
     func downloadImage(url: NSURL) -> UIImage {
-        let imageData = NSData(contentsOfURL: url)
+        let imageData = NSData(contentsOfURL: url) // network call
         let image = UIImage(data: imageData)
         return image
     }

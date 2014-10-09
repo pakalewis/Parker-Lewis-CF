@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C8FD78F19E7160300ACA25E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8FD78E19E7160300ACA25E /* CustomTableViewCell.xib */; };
 		2CA79D0B19E330FF0073B4FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA79D0A19E330FF0073B4FB /* AppDelegate.swift */; };
 		2CA79D1019E330FF0073B4FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA79D0E19E330FF0073B4FB /* Main.storyboard */; };
 		2CA79D1219E330FF0073B4FB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CA79D1119E330FF0073B4FB /* Images.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C8FD78E19E7160300ACA25E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		2CA79D0519E330FF0073B4FB /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA79D0919E330FF0073B4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CA79D0A19E330FF0073B4FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC64C2619E4A60B002CEB72 /* CustomTableViewCell.swift */,
+				2C8FD78E19E7160300ACA25E /* CustomTableViewCell.xib */,
 				2CA79D0E19E330FF0073B4FB /* Main.storyboard */,
 			);
 			name = VIEW;
@@ -236,6 +239,7 @@
 			files = (
 				2CA79D1019E330FF0073B4FB /* Main.storyboard in Resources */,
 				2CA79D1519E330FF0073B4FB /* LaunchScreen.xib in Resources */,
+				2C8FD78F19E7160300ACA25E /* CustomTableViewCell.xib in Resources */,
 				2CC64C2319E48710002CEB72 /* default.png in Resources */,
 				2CA79D1219E330FF0073B4FB /* Images.xcassets in Resources */,
 				2CA79D2B19E331860073B4FB /* tweets.json in Resources */,

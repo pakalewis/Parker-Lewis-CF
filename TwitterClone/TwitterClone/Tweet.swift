@@ -21,14 +21,18 @@ class Tweet {
     
     
     init (tweetInfo : NSDictionary) {
+        let userDictionary = tweetInfo["user"] as NSDictionary
         self.text = tweetInfo["text"] as String
-        var tempInt = tweetInfo["retweet_count"] as Int
-        self.retweetCount = String(tempInt)
-        tempInt = tweetInfo["favorite_count"] as Int
-        self.favoriteCount = String(tempInt)
-        var userDictionary = tweetInfo["user"] as NSDictionary
-        var profile_image_url = userDictionary["profile_image_url"] as String
+        
         self.username = userDictionary["name"] as String
+        
+        let retweet_count = tweetInfo["retweet_count"] as Int
+        self.retweetCount = String(retweet_count)
+        
+        let favorite_count = tweetInfo["favorite_count"] as Int
+        self.favoriteCount = String(favorite_count)
+        
+        let profile_image_url = userDictionary["profile_image_url"] as String
         self.avatarUrl = NSURL(string: profile_image_url)
     }
  
@@ -42,6 +46,7 @@ class Tweet {
             var tweets = [Tweet]()
             
             for JSONDictionary in JSONArray {
+                println(JSONDictionary)
                 if let tweetDictionary = JSONDictionary as? NSDictionary {
                     var newTweet = Tweet(tweetInfo: tweetDictionary)
                     tweets.append(newTweet)
