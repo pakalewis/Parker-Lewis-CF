@@ -21,9 +21,8 @@ class NetworkController {
     }
     
     
-    // add completion handler and tweets array parameters
-    func fetchHomeTimeLine( completionHandler: (errorDescription: String?, tweets: [Tweet]?) -> (Void)) {
-
+    func fetchTimeLine(homeOrUser: String, userScreenName: String, completionHandler: (errorDescription: String?, tweets: [Tweet]?) -> (Void)) {
+        
         let accountStore = ACAccountStore()
         let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
         accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted, error) -> Void in
@@ -31,9 +30,19 @@ class NetworkController {
                 let accounts = accountStore.accountsWithAccountType(accountType)
                 self.twitterAccount = accounts.first as ACAccount?
                 
-                // set up twitter request
-                let url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
-                let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: nil)
+                // set up twitter request for either Home or User
+                var url : NSURL?
+                var parameters: Dictionary<String, String>?
+                if homeOrUser == "home" {
+                    url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
+                    parameters = nil
+                } else if homeOrUser == "user" {
+                    url = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")
+                    parameters = ["screen_name": userScreenName]
+                } else {
+                    // error
+                }
+                let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: parameters)
                 twitterRequest.account = self.twitterAccount
                 
                 // this happens on an arbitrary thread
@@ -62,8 +71,12 @@ class NetworkController {
                 })
             }
         }
-
+        
     }
+    
+
+
+
     
     func downloadImage(tweet : Tweet, completionHandler: (image: UIImage) -> Void) {
         self.imageQueue.addOperationWithBlock { () -> Void in

@@ -56,35 +56,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" lineBreakMode="wordWrap" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QS8-8e-wsF">
-                                <rect key="frame" x="36" y="200" width="528" height="200"/>
+                                <rect key="frame" x="36" y="250" width="528" height="100"/>
                                 <color key="backgroundColor" red="0.63098153589999995" green="0.86670137049999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="zd7-Rx-iMW"/>
+                                    <constraint firstAttribute="height" constant="100" id="zd7-Rx-iMW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5F-f2-atw">
-                                <rect key="frame" x="166" y="100" width="79" height="21"/>
+                                <rect key="frame" x="166" y="170" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorited" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1a-T5-Jgl">
-                                <rect key="frame" x="492" y="430" width="72" height="21"/>
+                                <rect key="frame" x="492" y="380" width="72" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Retweets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E70-GV-CRl">
-                                <rect key="frame" x="36" y="430" width="72" height="21"/>
+                                <rect key="frame" x="36" y="380" width="72" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyC-yR-pqp">
-                                <rect key="frame" x="36" y="60" width="100" height="100"/>
+                                <rect key="frame" x="36" y="130" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="PeX-gq-w3E"/>
                                     <constraint firstAttribute="height" constant="100" id="yRZ-az-cGG"/>
@@ -106,7 +106,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="QS8-8e-wsF" secondAttribute="trailing" constant="20" id="dXT-AA-6XU"/>
                             <constraint firstItem="QS8-8e-wsF" firstAttribute="leading" secondItem="E70-GV-CRl" secondAttribute="leading" id="fxy-TZ-1J0"/>
                             <constraint firstItem="QS8-8e-wsF" firstAttribute="leading" secondItem="NxO-wc-E3a" secondAttribute="leadingMargin" constant="20" id="gpy-hw-vV5"/>
-                            <constraint firstItem="QS8-8e-wsF" firstAttribute="top" secondItem="xyC-yR-pqp" secondAttribute="bottom" constant="40" id="pbu-Ag-7kV"/>
+                            <constraint firstItem="QS8-8e-wsF" firstAttribute="top" secondItem="xyC-yR-pqp" secondAttribute="bottom" constant="20" id="pbu-Ag-7kV"/>
                             <constraint firstItem="t5F-f2-atw" firstAttribute="leading" secondItem="xyC-yR-pqp" secondAttribute="trailing" constant="30" id="qyW-g8-IvB"/>
                             <constraint firstItem="xyC-yR-pqp" firstAttribute="leading" secondItem="QS8-8e-wsF" secondAttribute="leading" id="u4Y-Cu-Nba"/>
                             <constraint firstItem="t5F-f2-atw" firstAttribute="centerY" secondItem="xyC-yR-pqp" secondAttribute="centerY" id="zek-Ji-Hep"/>
@@ -140,6 +140,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ypJ-oe-xsH">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Pzy-RR-FmD" id="aOS-Z4-Q0L"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

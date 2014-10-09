@@ -14,14 +14,42 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableview: UITableView!
     var tweets : [Tweet]?
     var currentTweet : Tweet?
+    var networkController : NetworkController!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // make AppDelegate a singleton
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.networkController
         
-    self.tableview.registerNib(UINib(nibName: "CustomTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CustomCell")
+        
+        self.tableview.registerNib(UINib(nibName: "CustomTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CustomCell")
         self.tableview.estimatedRowHeight = 75.0
         self.tableview.rowHeight = UITableViewAutomaticDimension
+        
+        // download the user's tweets and store in userTweetsArray
+        self.networkController.fetchTimeLine("user", userScreenName: currentTweet!.screen_name) { (errorDescription, tweets) -> (Void) in
+            if errorDescription != nil {
+                // there is a problem
+            } else {
+                self.tweets = tweets
+                self.tableview.reloadData()
+            }
 
+        }
+//        self.networkController.fetchUserTweets(currentTweet!.screen_name, completionHandler: { (errorDescription, tweets) -> (Void) in
+//            if errorDescription != nil {
+//                // there is a problem
+//            } else {
+//                self.tweets = tweets
+//                self.tableview.reloadData()
+//            }
+//        })
+
+
+        
         
     }
     
@@ -31,21 +59,21 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // target the appropriate tweet
         let tweet = self.tweets?[indexPath.row]
         
-        // IF TWEET ALEADY HAS IMAGE, DON'T DL AGAIN
-        // MOVE THIS IMAGE QUEUE TO NETWORK CONTROLLER
-//        self.imageQueue.addOperationWithBlock { () -> Void in
-//            let image = self.networkController.downloadImage(tweet!.avatarUrl)
-//            
-//            // save the image to the Tweet obj
-//            self.tweets?[indexPath.row].profileImage = image
-//            
-//            // switch back to main queue to update the data for the custom cell
-//            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//                cell.cellImage.image = image
-//                cell.cellText.text = tweet?.text
-//                println(tweet?.text)
-//            })
-//        }
+        
+        // set cell text to be the tweet text
+        cell.cellText.text = tweet?.text
+        
+        // set tweet's image (if not yet downloaded, then call method on network controller
+        if tweet?.profileImage != nil {
+            cell.cellImage.image = tweet?.profileImage
+        } else {
+            cell.cellImage.image = tweet?.placeholderProfileImage
+            self.networkController.downloadImage(tweet!, completionHandler: { (image) -> Void in
+                cell.cellImage.image = image
+            })
+        }
+
+        
         return cell
     }
     

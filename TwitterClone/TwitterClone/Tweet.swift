@@ -13,6 +13,7 @@ class Tweet {
     
     var text : String
     var username : String
+    var screen_name : String
     var avatarUrl : NSURL
     var profileImage : UIImage?
     var placeholderProfileImage = UIImage(named: "default")
@@ -26,6 +27,8 @@ class Tweet {
         self.text = tweetInfo["text"] as String
         
         self.username = userDictionary["name"] as String
+
+        self.screen_name = userDictionary["screen_name"] as String
         
         let retweet_count = tweetInfo["retweet_count"] as Int
         self.retweetCount = String(retweet_count)
@@ -47,7 +50,7 @@ class Tweet {
             var tweets = [Tweet]()
             
             for JSONDictionary in JSONArray {
-                println(JSONDictionary)
+//                println(JSONDictionary)
                 if let tweetDictionary = JSONDictionary as? NSDictionary {
                     var newTweet = Tweet(tweetInfo: tweetDictionary)
                     tweets.append(newTweet)

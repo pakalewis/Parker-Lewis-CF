@@ -35,7 +35,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         self.networkController = appDelegate.networkController
         
         // talk to network controller and call it's method to fetch tweets
-        self.networkController.fetchHomeTimeLine { (errorDescription, tweets) -> (Void) in
+        self.networkController.fetchTimeLine("home", userScreenName: "") { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
@@ -44,6 +44,17 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
     }
+
+    
+//        self.networkController.fetchHomeTimeLine { (errorDescription, tweets) -> (Void) in
+//            if errorDescription != nil {
+//                // there is a problem
+//            } else {
+//                self.tweets = tweets
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
 
     
     
