@@ -14,7 +14,8 @@ class Tweet {
     var text : String
     var username : String
     var avatarUrl : NSURL
-    var profileImage = UIImage(named: "default")
+    var profileImage : UIImage?
+    var placeholderProfileImage = UIImage(named: "default")
     var retweetCount : String
     var favoriteCount : String
     

@@ -12,6 +12,8 @@ import Social
 
 class NetworkController {
     var twitterAccount : ACAccount?
+    let imageQueue = NSOperationQueue()
+
     
 
     init() {
@@ -63,9 +65,15 @@ class NetworkController {
 
     }
     
-    func downloadImage(url: NSURL) -> UIImage {
-        let imageData = NSData(contentsOfURL: url) // network call
-        let image = UIImage(data: imageData)
-        return image
+    func downloadImage(tweet : Tweet, completionHandler: (image: UIImage) -> Void) {
+        self.imageQueue.addOperationWithBlock { () -> Void in
+            let url = tweet.avatarUrl
+            let imageData = NSData(contentsOfURL: url) // network call
+            let image = UIImage(data: imageData)
+            tweet.profileImage = image
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completionHandler(image: image)
+            })
+        }
     }
 }

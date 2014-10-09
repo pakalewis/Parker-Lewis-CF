@@ -33,6 +33,7 @@
                     <constraint firstItem="Yt9-Lk-qXR" firstAttribute="leading" secondItem="Gwp-Cj-06x" secondAttribute="trailing" constant="10" id="dYg-O7-hZF"/>
                     <constraint firstItem="Yt9-Lk-qXR" firstAttribute="bottom" secondItem="ncV-jx-NXr" secondAttribute="bottomMargin" id="faV-Oy-A5M"/>
                     <constraint firstItem="Yt9-Lk-qXR" firstAttribute="top" secondItem="ncV-jx-NXr" secondAttribute="topMargin" id="oGw-9c-iFl"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Gwp-Cj-06x" secondAttribute="bottom" constant="8" id="tSb-A2-Nf3"/>
                     <constraint firstItem="Yt9-Lk-qXR" firstAttribute="trailing" secondItem="ncV-jx-NXr" secondAttribute="trailingMargin" id="xhI-Tp-YKc"/>
                 </constraints>
             </tableViewCellContentView>

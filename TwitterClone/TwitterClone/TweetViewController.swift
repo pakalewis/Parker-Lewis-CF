@@ -12,7 +12,7 @@ import UIKit
 class TweetViewController: UIViewController {
     
     var tweet: Tweet?
-    @IBOutlet weak var tweetImage: UIImageView!
+    @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var tweetText: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var retweets: UILabel!
@@ -20,11 +20,17 @@ class TweetViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        self.tweetImage.image = self.tweet?.profileImage
+        self.imageButton.setImage(self.tweet?.profileImage, forState: .Normal)
         self.tweetText.text = self.tweet?.text
         self.username.text = self.tweet?.username
         self.retweets.text = "Retweets: \(self.tweet!.retweetCount)"
         self.favorited.text = "Favorited: \(self.tweet!.favoriteCount)"
+        
+//        self.imageButton.
     }
     
+    @IBAction func imageButtonPressed(sender: AnyObject) {
+        var userTweetsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("UserTweets") as UserTweets
+        self.navigationController?.pushViewController(userTweetsViewController, animated: true)
+    }
 }

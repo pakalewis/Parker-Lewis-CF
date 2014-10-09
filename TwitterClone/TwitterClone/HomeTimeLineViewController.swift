@@ -17,7 +17,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     var tweets : [Tweet]?
     var currentTweet : Tweet?
     var twitterAccount : ACAccount?
-    let imageQueue = NSOperationQueue()
     var networkController : NetworkController!
     
     override func viewDidLoad() {
@@ -44,7 +43,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
                 self.tableView.reloadData()
             }
         }
-        
     }
 
     
@@ -57,20 +55,17 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         
         // target the appropriate tweet
         let tweet = self.tweets?[indexPath.row]
+
+        // set cell text to be the tweet text
+        cell.cellText.text = tweet?.text
         
-        // IF TWEET ALEADY HAS IMAGE, DON'T DL AGAIN
-        // MOVE THIS IMAGE QUEUE TO NETWORK CONTROLLER
-        self.imageQueue.addOperationWithBlock { () -> Void in
-            let image = self.networkController.downloadImage(tweet!.avatarUrl)
-            
-            // save the image to the Tweet obj
-            self.tweets?[indexPath.row].profileImage = image
-            
-            // switch back to main queue to update the data for the custom cell
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+        // set tweet's image (if not yet downloaded, then call method on network controller
+        if tweet?.profileImage != nil {
+            cell.cellImage.image = tweet?.profileImage
+        } else {
+            cell.cellImage.image = tweet?.placeholderProfileImage
+            self.networkController.downloadImage(tweet!, completionHandler: { (image) -> Void in
                 cell.cellImage.image = image
-                cell.cellText.text = tweet?.text
-                println(tweet?.text)
             })
         }
         return cell
