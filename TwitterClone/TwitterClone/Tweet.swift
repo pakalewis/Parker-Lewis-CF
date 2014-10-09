@@ -19,6 +19,7 @@ class Tweet {
     var placeholderProfileImage = UIImage(named: "default")
     var retweetCount : String
     var favoriteCount : String
+    var followersCount : String
     
     
     
@@ -35,6 +36,9 @@ class Tweet {
         
         let favorite_count = tweetInfo["favorite_count"] as Int
         self.favoriteCount = String(favorite_count)
+        
+        let followers_count = userDictionary["followers_count"] as Int
+        self.followersCount = String(followers_count)
         
         let profile_image_url = userDictionary["profile_image_url"] as String
         self.avatarUrl = NSURL(string: profile_image_url)

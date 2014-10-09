@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SjC-jd-HjE">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -128,7 +129,7 @@
         <!--User Tweets-->
         <scene sceneID="rgU-PU-glc">
             <objects>
-                <viewController storyboardIdentifier="UserTweets" id="Pzy-RR-FmD" customClass="UserTweets" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserTweets" automaticallyAdjustsScrollViewInsets="NO" id="Pzy-RR-FmD" customClass="UserTweets" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qyL-xX-nJc"/>
                         <viewControllerLayoutGuide type="bottom" id="cBz-fP-mwF"/>
@@ -140,6 +141,48 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ypJ-oe-xsH">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="Zd9-K2-xab">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GPq-0g-hbF">
+                                            <rect key="frame" x="5" y="5" width="90" height="90"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="GPq-0g-hbF" secondAttribute="height" multiplier="1:1" id="pZg-QK-jWW"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i2P-pi-GpF">
+                                            <rect key="frame" x="115" y="5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJY-De-rnC">
+                                            <rect key="frame" x="115" y="65" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4s1-wn-Maq">
+                                            <rect key="frame" x="115" y="36" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.63098153589999995" green="0.86670137049999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="GPq-0g-hbF" firstAttribute="top" secondItem="Zd9-K2-xab" secondAttribute="top" constant="5" id="9Ta-kz-hCo"/>
+                                        <constraint firstItem="i2P-pi-GpF" firstAttribute="top" secondItem="GPq-0g-hbF" secondAttribute="top" id="DiY-fL-jHC"/>
+                                        <constraint firstItem="4s1-wn-Maq" firstAttribute="top" secondItem="i2P-pi-GpF" secondAttribute="bottom" constant="10" id="K0e-LI-tkJ"/>
+                                        <constraint firstItem="i2P-pi-GpF" firstAttribute="leading" secondItem="4s1-wn-Maq" secondAttribute="leading" id="OKg-P3-zVY"/>
+                                        <constraint firstItem="GPq-0g-hbF" firstAttribute="bottom" secondItem="nJY-De-rnC" secondAttribute="bottom" constant="9" id="OZT-l7-nYA"/>
+                                        <constraint firstItem="GPq-0g-hbF" firstAttribute="leading" secondItem="Zd9-K2-xab" secondAttribute="leading" constant="5" id="QH3-Gj-kPk"/>
+                                        <constraint firstItem="i2P-pi-GpF" firstAttribute="leading" secondItem="GPq-0g-hbF" secondAttribute="trailing" constant="20" id="XRM-ba-tjk"/>
+                                        <constraint firstItem="i2P-pi-GpF" firstAttribute="leading" secondItem="nJY-De-rnC" secondAttribute="leading" id="bhZ-Ol-5il"/>
+                                        <constraint firstAttribute="bottom" secondItem="GPq-0g-hbF" secondAttribute="bottom" constant="5" id="jM6-7y-pgd"/>
+                                    </constraints>
+                                </view>
                                 <connections>
                                     <outlet property="dataSource" destination="Pzy-RR-FmD" id="aOS-Z4-Q0L"/>
                                 </connections>
@@ -164,7 +207,11 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="followersLabel" destination="nJY-De-rnC" id="MEq-59-ZUO"/>
+                        <outlet property="handleLabel" destination="4s1-wn-Maq" id="cB6-bD-0R1"/>
+                        <outlet property="headerImage" destination="GPq-0g-hbF" id="Ve1-dz-YDI"/>
                         <outlet property="tableview" destination="ypJ-oe-xsH" id="VAN-Vs-Ghe"/>
+                        <outlet property="usernameLabel" destination="i2P-pi-GpF" id="aG8-o3-1vt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xTE-xy-wYb" userLabel="First Responder" sceneMemberID="firstResponder"/>

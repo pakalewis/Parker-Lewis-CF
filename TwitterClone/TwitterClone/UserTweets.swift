@@ -11,6 +11,10 @@ import UIKit
 
 class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var headerImage: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var handleLabel: UILabel!
+    @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var tableview: UITableView!
     var tweets : [Tweet]?
     var currentTweet : Tweet?
@@ -29,6 +33,14 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.tableview.estimatedRowHeight = 75.0
         self.tableview.rowHeight = UITableViewAutomaticDimension
         
+        
+        // set up header view stuff
+        self.headerImage.image = self.currentTweet?.profileImage
+        self.usernameLabel.text = self.currentTweet?.username
+        self.handleLabel.text = "@\(self.currentTweet!.screen_name)"
+        self.followersLabel.text = "\(self.currentTweet!.followersCount) followers"
+        
+        
         // download the user's tweets and store in userTweetsArray
         self.networkController.fetchTimeLine("user", userScreenName: currentTweet!.screen_name) { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
@@ -37,21 +49,10 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.tweets = tweets
                 self.tableview.reloadData()
             }
-
         }
-//        self.networkController.fetchUserTweets(currentTweet!.screen_name, completionHandler: { (errorDescription, tweets) -> (Void) in
-//            if errorDescription != nil {
-//                // there is a problem
-//            } else {
-//                self.tweets = tweets
-//                self.tableview.reloadData()
-//            }
-//        })
-
-
-        
-        
     }
+    
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell : CustomTableViewCell = self.tableview.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as CustomTableViewCell
@@ -72,10 +73,10 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 cell.cellImage.image = image
             })
         }
-
-        
         return cell
     }
+
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.tweets != nil {
