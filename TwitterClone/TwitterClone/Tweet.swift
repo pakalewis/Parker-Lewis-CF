@@ -12,6 +12,7 @@ import UIKit
 class Tweet {
     
     var text : String
+    var id : String
     var username : String
     var screen_name : String
     var avatarURLString : String
@@ -24,8 +25,12 @@ class Tweet {
     
     
     init (tweetInfo : NSDictionary) {
+        // store user dictionary part of the JSON
         let userDictionary = tweetInfo["user"] as NSDictionary
+        
         self.text = tweetInfo["text"] as String
+        
+        self.id = tweetInfo["id_str"] as String
         
         self.username = userDictionary["name"] as String
 

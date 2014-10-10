@@ -18,6 +18,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     var twitterAccount : ACAccount?
     var networkController : NetworkController!
     
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // make AppDelegate a singleton
@@ -33,16 +35,38 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         
         
         // talk to network controller and call it's method to fetch tweets
-        self.networkController.fetchTimeLine("home", userScreenName: "") { (errorDescription, tweets) -> (Void) in
+        self.networkController.fetchTimeLine(nil, userScreenName: "", completionHandler: { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
                 self.tweets = tweets
                 self.tableView.reloadData()
             }
-        }
-    }
+        })
 
+        
+        
+        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+    }
+    
+    
+    // make a new network call when the pull down gesture is used
+    func refresh() {
+        // store the id of the top tweet
+        var firstTweet = tweets?[0]
+        
+        // make network call by passing the first tweet as a parameter
+        self.networkController.fetchTimeLine(firstTweet, userScreenName: "", completionHandler: { (errorDescription, refreshedTweets) -> (Void) in
+            if errorDescription != nil {
+                // there is a problem
+            } else {
+                self.tweets = refreshedTweets! + self.tweets!
+                self.tableView.reloadData()
+            }
+        })
+        self.refreshControl.endRefreshing()
+    }
 
     
     

@@ -19,7 +19,11 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tweets : [Tweet]?
     var currentTweet : Tweet?
     var networkController : NetworkController!
+    
+    var refreshControl = UIRefreshControl()
 
+    
+    // add property to ensure that when showing a user's timeline from a specif tweet, that you can show another tweet VC but then not go further down to the user's timeline once again. instead force them to use the back button
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +46,34 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         
         // download the user's tweets and store in userTweetsArray
-        self.networkController.fetchTimeLine("user", userScreenName: currentTweet!.screen_name) { (errorDescription, tweets) -> (Void) in
+        self.networkController.fetchTimeLine(nil, userScreenName: currentTweet!.screen_name, completionHandler: { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
                 self.tweets = tweets
                 self.tableview.reloadData()
             }
-        }
+        })
+
+        // set up the refresh control for the pulling down action
+        self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableview.addSubview(refreshControl)
+    }
+    
+    func refresh() {
+        // store the id of the top tweet
+        var firstTweet = tweets?[0]
+        
+        // make network call by passing the first tweet as a parameter
+        self.networkController.fetchTimeLine(firstTweet, userScreenName: currentTweet!.screen_name, completionHandler: { (errorDescription, refreshedTweets) -> (Void) in
+            if errorDescription != nil {
+                // there is a problem
+            } else {
+                self.tweets = refreshedTweets! + self.tweets!
+                self.tableview.reloadData()
+            }
+        })
+        self.refreshControl.endRefreshing()
     }
     
     

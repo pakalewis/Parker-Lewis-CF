@@ -21,7 +21,7 @@ class NetworkController {
     }
     
     
-    func fetchTimeLine(homeOrUser: String, userScreenName: String, completionHandler: (errorDescription: String?, tweets: [Tweet]?) -> (Void)) {
+    func fetchTimeLine(firstTweet: Tweet?, userScreenName: String, completionHandler: (errorDescription: String?, tweets: [Tweet]?) -> (Void)) {
         
         let accountStore = ACAccountStore()
         let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
@@ -30,31 +30,37 @@ class NetworkController {
                 let accounts = accountStore.accountsWithAccountType(accountType)
                 self.twitterAccount = accounts.first as ACAccount?
                 
-                // set up twitter request for either Home or User
+                // set up parameters for twitter request
                 var url : NSURL?
-                var parameters: Dictionary<String, String>?
-                if homeOrUser == "home" {
+                var parameters = Dictionary<String, String>()
+                if userScreenName == "" {
                     url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
-                    parameters = nil
-                } else if homeOrUser == "user" {
-                    url = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")
-                    parameters = ["screen_name": userScreenName]
+//                    parameters = nil
                 } else {
-                    // error
+                    url = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")
+                    parameters["screen_name"] = userScreenName
                 }
+                // adjust parameters for since_id
+                if firstTweet != nil {
+                    parameters["since_id"] = firstTweet!.id
+                }
+                
+                // finally make the request to Twitter
+                println(parameters)
                 let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: parameters)
                 twitterRequest.account = self.twitterAccount
                 
                 // this happens on an arbitrary thread
                 twitterRequest.performRequestWithHandler({ (data, httpResponse, error) -> Void in
                     // first log out the status code
-                    println(httpResponse.description)
+                    // println(httpResponse.description)
                     
                     // switch statement to handle the various status code possibilities
                     switch httpResponse.statusCode {
                     case 200...299:
                         // download JSON from twitter and create tweets from the data
                         let tweets = Tweet.parseJSONDataIntoTweets(data)
+                        println("number of tweets downloaded = \(tweets!.count)")
                         // this shifts back to the main thread
                         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                             completionHandler(errorDescription: nil, tweets: tweets)
@@ -86,10 +92,13 @@ class NetworkController {
             
             // network call to get the image data
             let imageData = NSData(contentsOfURL: url)
+            
             // create UIImage
             let image = UIImage(data: imageData)
+            
             // store image
             tweet.profileImage = image
+            
             // return to main queue and send back the image
             // HOW DOES THIS RETURN THE IMAGE???
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
