@@ -15,12 +15,14 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
 
     @IBOutlet weak var tableView: UITableView!
     var tweets : [Tweet]?
-    var currentTweet : Tweet?
     var twitterAccount : ACAccount?
     var networkController : NetworkController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // make AppDelegate a singleton
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.networkController
         
         
         // load custom cell from nib
@@ -29,10 +31,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         
-        
-        // make AppDelegate a singleton
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.networkController
         
         // talk to network controller and call it's method to fetch tweets
         self.networkController.fetchTimeLine("home", userScreenName: "") { (errorDescription, tweets) -> (Void) in
@@ -60,7 +58,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         // set cell text to be the tweet text
         cell.cellText.text = tweet?.text
         
-        // set tweet's image (if not yet downloaded, then call method on network controller
+        // set cell's image (if not yet downloaded, then call method in network controller)
         if tweet?.profileImage != nil {
             cell.cellImage.image = tweet?.profileImage
         } else {
@@ -74,11 +72,10 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     
     
     
-    // cell selected, current tweet set and passed to new TweetViewController which is displayed
+    // cell selected, that tweet is passed to new TweetViewController which is then displayed
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var newTweetViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TweetViewController") as TweetViewController
-        self.currentTweet = self.tweets?[indexPath.row]
-        newTweetViewController.tweet = self.currentTweet
+        newTweetViewController.tweet = self.tweets?[indexPath.row]
         self.navigationController?.pushViewController(newTweetViewController, animated: true)
     }
     

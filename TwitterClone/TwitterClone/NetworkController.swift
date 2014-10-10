@@ -79,10 +79,19 @@ class NetworkController {
     
     func downloadImage(tweet : Tweet, completionHandler: (image: UIImage) -> Void) {
         self.imageQueue.addOperationWithBlock { () -> Void in
-            let url = tweet.avatarUrl
-            let imageData = NSData(contentsOfURL: url) // network call
+
+            // this alters the stored avatarURLString in order to download a bigger version of the profile pic
+            var urlString = tweet.avatarURLString.stringByReplacingOccurrencesOfString("_normal", withString: "_bigger", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            let url = NSURL(string: urlString)
+            
+            // network call to get the image data
+            let imageData = NSData(contentsOfURL: url)
+            // create UIImage
             let image = UIImage(data: imageData)
+            // store image
             tweet.profileImage = image
+            // return to main queue and send back the image
+            // HOW DOES THIS RETURN THE IMAGE???
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(image: image)
             })

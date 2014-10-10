@@ -23,12 +23,12 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // make AppDelegate a singleton
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.networkController = appDelegate.networkController
         
         
+        // load custom cell from nib
         self.tableview.registerNib(UINib(nibName: "CustomTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CustomCell")
         self.tableview.estimatedRowHeight = 75.0
         self.tableview.rowHeight = UITableViewAutomaticDimension
@@ -60,7 +60,6 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         // target the appropriate tweet
         let tweet = self.tweets?[indexPath.row]
         
-        
         // set cell text to be the tweet text
         cell.cellText.text = tweet?.text
         
@@ -80,7 +79,6 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // cell selected, current tweet set and passed to new TweetViewController which is displayed
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("pressed")
         var newTweetViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TweetViewController") as TweetViewController
         self.currentTweet = self.tweets?[indexPath.row]
         newTweetViewController.tweet = self.currentTweet
