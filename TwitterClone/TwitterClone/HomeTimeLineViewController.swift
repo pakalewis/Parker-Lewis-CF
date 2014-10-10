@@ -45,16 +45,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
 
-    
-//        self.networkController.fetchHomeTimeLine { (errorDescription, tweets) -> (Void) in
-//            if errorDescription != nil {
-//                // there is a problem
-//            } else {
-//                self.tweets = tweets
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
 
     
     

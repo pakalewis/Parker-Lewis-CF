@@ -78,6 +78,17 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     
     
+    // cell selected, current tweet set and passed to new TweetViewController which is displayed
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("pressed")
+        var newTweetViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TweetViewController") as TweetViewController
+        self.currentTweet = self.tweets?[indexPath.row]
+        newTweetViewController.tweet = self.currentTweet
+        self.navigationController?.pushViewController(newTweetViewController, animated: true)
+    }
+
+    
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.tweets != nil {
             return self.tweets!.count

@@ -185,6 +185,7 @@
                                 </view>
                                 <connections>
                                     <outlet property="dataSource" destination="Pzy-RR-FmD" id="aOS-Z4-Q0L"/>
+                                    <outlet property="delegate" destination="Pzy-RR-FmD" id="7uU-lb-uMu"/>
                                 </connections>
                             </tableView>
                         </subviews>
