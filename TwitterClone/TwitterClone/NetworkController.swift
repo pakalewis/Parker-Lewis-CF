@@ -17,11 +17,13 @@ class NetworkController {
     
 
     init() {
-        
     }
     
     
-    func fetchTimeLine(firstTweet: Tweet?, userScreenName: String, completionHandler: (errorDescription: String?, tweets: [Tweet]?) -> (Void)) {
+    func fetchTimeLine( userScreenName: String?,
+                        firstTweetID: String?,
+                        lastTweetID: String?,
+                        completionHandler: (errorDescription: String?, tweets: [Tweet]?) -> (Void)) {
         
         let accountStore = ACAccountStore()
         let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
@@ -30,19 +32,26 @@ class NetworkController {
                 let accounts = accountStore.accountsWithAccountType(accountType)
                 self.twitterAccount = accounts.first as ACAccount?
                 
-                // set up parameters for twitter request
+                // set up parameters dictionary for twitter request
                 var url : NSURL?
                 var parameters = Dictionary<String, String>()
-                if userScreenName == "" {
+                
+                // determine if timeline is "home" or "user" and add appropriate parameter
+                if userScreenName == nil {
                     url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
-//                    parameters = nil
                 } else {
                     url = NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json")
                     parameters["screen_name"] = userScreenName
                 }
-                // adjust parameters for since_id
-                if firstTweet != nil {
-                    parameters["since_id"] = firstTweet!.id
+
+                // add parameter for since_id
+                if firstTweetID != nil {
+                    parameters["since_id"] = firstTweetID
+                }
+                
+                // add parameter for max_id
+                if lastTweetID != nil {
+                    parameters["max_id"] = lastTweetID
                 }
                 
                 // finally make the request to Twitter

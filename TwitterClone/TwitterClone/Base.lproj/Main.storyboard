@@ -211,7 +211,7 @@
                         <outlet property="followersLabel" destination="nJY-De-rnC" id="MEq-59-ZUO"/>
                         <outlet property="handleLabel" destination="4s1-wn-Maq" id="cB6-bD-0R1"/>
                         <outlet property="headerImage" destination="GPq-0g-hbF" id="Ve1-dz-YDI"/>
-                        <outlet property="tableview" destination="ypJ-oe-xsH" id="VAN-Vs-Ghe"/>
+                        <outlet property="tableView" destination="ypJ-oe-xsH" id="S7c-pY-zwo"/>
                         <outlet property="usernameLabel" destination="i2P-pi-GpF" id="aG8-o3-1vt"/>
                     </connections>
                 </viewController>

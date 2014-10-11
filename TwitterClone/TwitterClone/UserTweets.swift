@@ -15,7 +15,7 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
-    @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     var tweets : [Tweet]?
     var currentTweet : Tweet?
     var networkController : NetworkController!
@@ -33,12 +33,12 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         
         // load custom cell from nib
-        self.tableview.registerNib(UINib(nibName: "CustomTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CustomCell")
-        self.tableview.estimatedRowHeight = 75.0
-        self.tableview.rowHeight = UITableViewAutomaticDimension
+        self.tableView.registerNib(UINib(nibName: "CustomTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "CustomCell")
+        self.tableView.estimatedRowHeight = 75.0
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         
-        // set up header view stuff
+        // set up header view outlets
         self.headerImage.image = self.currentTweet?.profileImage
         self.usernameLabel.text = self.currentTweet?.username
         self.handleLabel.text = "@\(self.currentTweet!.screen_name)"
@@ -46,40 +46,46 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         
         // download the user's tweets and store in userTweetsArray
-        self.networkController.fetchTimeLine(nil, userScreenName: currentTweet!.screen_name, completionHandler: { (errorDescription, tweets) -> (Void) in
+        self.networkController.fetchTimeLine(currentTweet!.screen_name, firstTweetID: nil, lastTweetID: nil) { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
                 self.tweets = tweets
-                self.tableview.reloadData()
+                self.tableView.reloadData()
             }
-        })
+            
+        }
 
+        
         // set up the refresh control for the pulling down action
         self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
-        self.tableview.addSubview(refreshControl)
+        self.tableView.addSubview(refreshControl)
     }
+    
+    
     
     func refresh() {
         // store the id of the top tweet
         var firstTweet = tweets?[0]
+        var firstTweetID = firstTweet?.id
         
         // make network call by passing the first tweet as a parameter
-        self.networkController.fetchTimeLine(firstTweet, userScreenName: currentTweet!.screen_name, completionHandler: { (errorDescription, refreshedTweets) -> (Void) in
+        self.networkController.fetchTimeLine(self.currentTweet?.screen_name, firstTweetID: firstTweetID, lastTweetID: nil) { (errorDescription, newTweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
-                self.tweets = refreshedTweets! + self.tweets!
-                self.tableview.reloadData()
+                self.tweets = newTweets! + self.tweets!
+                self.tableView.reloadData()
             }
-        })
+
+        }
         self.refreshControl.endRefreshing()
     }
     
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell : CustomTableViewCell = self.tableview.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as CustomTableViewCell
+        var cell : CustomTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as CustomTableViewCell
         
         // target the appropriate tweet
         let tweet = self.tweets?[indexPath.row]
@@ -118,4 +124,25 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
             return 0
         }
     }
+    
+    
+    // set up fetch for new tweets when reaching the bottom of the tableview
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        var indexPathToLoadOlderTweets = self.tweets!.count
+        if indexPath.row == indexPathToLoadOlderTweets {
+            // store the id of the last tweet
+            var lastTweet = tweets?.last
+            var lastTweetID = lastTweet?.id
+            
+            self.networkController.fetchTimeLine(currentTweet!.screen_name, firstTweetID: nil, lastTweetID: lastTweetID, completionHandler: { (errorDescription, oldTweets) -> (Void) in
+                if errorDescription != nil {
+                    // there is a problem
+                } else {
+                    self.tweets = self.tweets! + oldTweets!
+                    self.tableView.reloadData()
+                }
+            })
+        }
+    }
+
 }

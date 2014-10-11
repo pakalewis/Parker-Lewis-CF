@@ -17,8 +17,8 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     var tweets : [Tweet]?
     var twitterAccount : ACAccount?
     var networkController : NetworkController!
-    
     var refreshControl = UIRefreshControl()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,37 +34,40 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         
         
         
-        // talk to network controller and call it's method to fetch tweets
-        self.networkController.fetchTimeLine(nil, userScreenName: "", completionHandler: { (errorDescription, tweets) -> (Void) in
+        // talk to network controller and call it's method to fetch initial batch of tweets
+        self.networkController.fetchTimeLine(nil, firstTweetID: nil, lastTweetID: nil) { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
                 self.tweets = tweets
                 self.tableView.reloadData()
             }
-        })
+
+        }
 
         
-        
+        // set up pull to refresh action
         self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
     }
+    
     
     
     // make a new network call when the pull down gesture is used
     func refresh() {
         // store the id of the top tweet
         var firstTweet = tweets?[0]
+        var firstTweetID = firstTweet?.id
         
         // make network call by passing the first tweet as a parameter
-        self.networkController.fetchTimeLine(firstTweet, userScreenName: "", completionHandler: { (errorDescription, refreshedTweets) -> (Void) in
+        self.networkController.fetchTimeLine(nil, firstTweetID: firstTweetID, lastTweetID: nil) { (errorDescription, newTweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
             } else {
-                self.tweets = refreshedTweets! + self.tweets!
+                self.tweets = newTweets! + self.tweets!
                 self.tableView.reloadData()
             }
-        })
+        }
         self.refreshControl.endRefreshing()
     }
 
@@ -86,6 +89,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         if tweet?.profileImage != nil {
             cell.cellImage.image = tweet?.profileImage
         } else {
+            println("about to download cell image")
             cell.cellImage.image = tweet?.placeholderProfileImage
             self.networkController.downloadImage(tweet!, completionHandler: { (image) -> Void in
                 cell.cellImage.image = image
@@ -98,8 +102,11 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     
     // cell selected, that tweet is passed to new TweetViewController which is then displayed
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        // create new Tweet VC
         var newTweetViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TweetViewController") as TweetViewController
+        // pass the appropriate tweet data
         newTweetViewController.tweet = self.tweets?[indexPath.row]
+        // push the new VC onto the nav stack
         self.navigationController?.pushViewController(newTweetViewController, animated: true)
     }
     
@@ -114,6 +121,25 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
+    
+    // set up fetch for new tweets when reaching the bottom of the tableview
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        var indexPathToLoadOlderTweets = self.tweets!.count
+        if indexPath.row == indexPathToLoadOlderTweets {
+            // store the id of the last tweet
+            var lastTweet = tweets?.last
+            var lastTweetID = lastTweet?.id
+            
+            self.networkController.fetchTimeLine(nil, firstTweetID: nil, lastTweetID: lastTweetID, completionHandler: { (errorDescription, oldTweets) -> (Void) in
+                if errorDescription != nil {
+                    // there is a problem
+                } else {
+                    self.tweets = self.tweets! + oldTweets!
+                    self.tableView.reloadData()
+                }
+            })
+        }
+    }
 
 
 }
