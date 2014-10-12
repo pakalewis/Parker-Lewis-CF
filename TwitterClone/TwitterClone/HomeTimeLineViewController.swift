@@ -125,7 +125,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     // set up fetch for new tweets when reaching the bottom of the tableview
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         var indexPathToLoadOlderTweets = self.tweets!.count
-        if indexPath.row == indexPathToLoadOlderTweets {
+        if indexPath.row == (indexPathToLoadOlderTweets - 5) {
             // store the id of the last tweet
             var lastTweet = tweets?.last
             var lastTweetID = lastTweet?.id

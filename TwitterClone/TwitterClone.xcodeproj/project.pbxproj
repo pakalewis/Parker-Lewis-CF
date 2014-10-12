@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C1FC34919E7230A00622E48 /* UserTweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FC34819E7230A00622E48 /* UserTweets.swift */; };
+		2C1FC34919E7230A00622E48 /* UserTimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1FC34819E7230A00622E48 /* UserTimeLine.swift */; };
 		2C8FD78F19E7160300ACA25E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C8FD78E19E7160300ACA25E /* CustomTableViewCell.xib */; };
 		2CA79D0B19E330FF0073B4FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA79D0A19E330FF0073B4FB /* AppDelegate.swift */; };
 		2CA79D1019E330FF0073B4FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CA79D0E19E330FF0073B4FB /* Main.storyboard */; };
@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2C1FC34819E7230A00622E48 /* UserTweets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTweets.swift; sourceTree = "<group>"; };
+		2C1FC34819E7230A00622E48 /* UserTimeLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTimeLine.swift; sourceTree = "<group>"; };
 		2C8FD78E19E7160300ACA25E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		2CA79D0519E330FF0073B4FB /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA79D0919E330FF0073B4FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -154,7 +154,7 @@
 			children = (
 				2CA79D2C19E332020073B4FB /* HomeTimeLineViewController.swift */,
 				2CC64C2819E4B33E002CEB72 /* TweetViewController.swift */,
-				2C1FC34819E7230A00622E48 /* UserTweets.swift */,
+				2C1FC34819E7230A00622E48 /* UserTimeLine.swift */,
 				2CD8D25819E5B4BE0062014D /* NetworkController.swift */,
 			);
 			name = CONTROLLER;
@@ -265,7 +265,7 @@
 			files = (
 				2CA79D2F19E3336A0073B4FB /* Tweet.swift in Sources */,
 				2CC64C2719E4A60B002CEB72 /* CustomTableViewCell.swift in Sources */,
-				2C1FC34919E7230A00622E48 /* UserTweets.swift in Sources */,
+				2C1FC34919E7230A00622E48 /* UserTimeLine.swift in Sources */,
 				2CD8D25919E5B4BE0062014D /* NetworkController.swift in Sources */,
 				2CC64C2919E4B33E002CEB72 /* TweetViewController.swift in Sources */,
 				2CA79D2D19E332020073B4FB /* HomeTimeLineViewController.swift in Sources */,

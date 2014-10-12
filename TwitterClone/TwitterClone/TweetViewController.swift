@@ -18,7 +18,6 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var favorited: UILabel!
 
     var tweet: Tweet?
-    var userTweetsArray : [Tweet]?
     var networkController : NetworkController!
     var singleTweetShownFromUserTimeLine = false
     // when this is set to true, it prevents the adding of unnecessary VCs to the stack when the user taps the profile image. 
@@ -68,11 +67,11 @@ class TweetViewController: UIViewController {
     @IBAction func imageButtonPressed(sender: AnyObject) {
         if self.singleTweetShownFromUserTimeLine == false {
             // create the new viewcontroller
-            var userTweetsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("UserTweets") as UserTweets
+            var userTimeLineVC = self.storyboard?.instantiateViewControllerWithIdentifier("UserTimeLine") as UserTimeLine
             // pass the info from this user's tweet
-            userTweetsViewController.currentTweet = self.tweet
+            userTimeLineVC.currentTweet = self.tweet
             // push the new VC
-            self.navigationController?.pushViewController(userTweetsViewController, animated: true)
+            self.navigationController?.pushViewController(userTimeLineVC, animated: true)
         }
     }
 }

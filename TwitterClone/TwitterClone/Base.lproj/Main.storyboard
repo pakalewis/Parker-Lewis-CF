@@ -126,10 +126,10 @@
             </objects>
             <point key="canvasLocation" x="1692" y="131"/>
         </scene>
-        <!--User Tweets-->
+        <!--User Time Line-->
         <scene sceneID="rgU-PU-glc">
             <objects>
-                <viewController storyboardIdentifier="UserTweets" automaticallyAdjustsScrollViewInsets="NO" id="Pzy-RR-FmD" customClass="UserTweets" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserTimeLine" automaticallyAdjustsScrollViewInsets="NO" id="Pzy-RR-FmD" customClass="UserTimeLine" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qyL-xX-nJc"/>
                         <viewControllerLayoutGuide type="bottom" id="cBz-fP-mwF"/>

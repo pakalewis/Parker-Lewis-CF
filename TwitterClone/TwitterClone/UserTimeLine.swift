@@ -1,5 +1,5 @@
 //
-//  UserTweets.swift
+//  UserTimeLine.swift
 //  TwitterClone
 //
 //  Created by Parker Lewis on 10/9/14.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UserTimeLine: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var headerImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -18,12 +18,9 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     var tweets : [Tweet]?
     var currentTweet : Tweet?
-    var networkController : NetworkController!
-    
+    var networkController : NetworkController!    
     var refreshControl = UIRefreshControl()
 
-    
-    // add property to ensure that when showing a user's timeline from a specif tweet, that you can show another tweet VC but then not go further down to the user's timeline once again. instead force them to use the back button
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +42,7 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         self.followersLabel.text = "\(self.currentTweet!.followersCount) followers"
         
         
-        // download the user's tweets and store in userTweetsArray
+        // download the user's tweets and store in tweets array
         self.networkController.fetchTimeLine(currentTweet!.screen_name, firstTweetID: nil, lastTweetID: nil) { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
@@ -130,7 +127,7 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // set up fetch for new tweets when reaching the bottom of the tableview
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         var indexPathToLoadOlderTweets = self.tweets!.count
-        if indexPath.row == indexPathToLoadOlderTweets {
+        if indexPath.row == (indexPathToLoadOlderTweets - 5) {
             // store the id of the last tweet
             var lastTweet = tweets?.last
             var lastTweetID = lastTweet?.id
