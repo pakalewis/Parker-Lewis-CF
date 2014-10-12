@@ -20,6 +20,10 @@ class TweetViewController: UIViewController {
     var tweet: Tweet?
     var userTweetsArray : [Tweet]?
     var networkController : NetworkController!
+    var singleTweetShownFromUserTimeLine = false
+    // when this is set to true, it prevents the adding of unnecessary VCs to the stack when the user taps the profile image. 
+    // no reason to show the same users timeline again. instead force user to go back to the user timeline
+
 
     
     
@@ -62,11 +66,13 @@ class TweetViewController: UIViewController {
     
     
     @IBAction func imageButtonPressed(sender: AnyObject) {
-        // create the new viewcontroller
-        var userTweetsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("UserTweets") as UserTweets
-        // pass the info from this user's tweet
-        userTweetsViewController.currentTweet = self.tweet
-        // push the new VC
-        self.navigationController?.pushViewController(userTweetsViewController, animated: true)
+        if self.singleTweetShownFromUserTimeLine == false {
+            // create the new viewcontroller
+            var userTweetsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("UserTweets") as UserTweets
+            // pass the info from this user's tweet
+            userTweetsViewController.currentTweet = self.tweet
+            // push the new VC
+            self.navigationController?.pushViewController(userTweetsViewController, animated: true)
+        }
     }
 }

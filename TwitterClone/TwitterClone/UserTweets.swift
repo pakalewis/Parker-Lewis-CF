@@ -112,6 +112,7 @@ class UserTweets: UIViewController, UITableViewDataSource, UITableViewDelegate {
         var newTweetViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TweetViewController") as TweetViewController
         self.currentTweet = self.tweets?[indexPath.row]
         newTweetViewController.tweet = self.currentTweet
+        newTweetViewController.singleTweetShownFromUserTimeLine = true
         self.navigationController?.pushViewController(newTweetViewController, animated: true)
     }
 
