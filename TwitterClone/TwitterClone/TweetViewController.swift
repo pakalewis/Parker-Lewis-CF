@@ -21,7 +21,7 @@ class TweetViewController: UIViewController {
     var networkController : NetworkController!
     var singleTweetShownFromUserTimeLine = false
     // when this is set to true, it prevents the adding of unnecessary VCs to the stack when the user taps the profile image. 
-    // no reason to show the same users timeline again. instead force user to go back to the user timeline
+    // no reason to show the same user's timeline again. instead force user to go back to the user timeline
 
 
     

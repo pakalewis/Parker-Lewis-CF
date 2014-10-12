@@ -42,7 +42,7 @@ class UserTimeLine: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.followersLabel.text = "\(self.currentTweet!.followersCount) followers"
         
         
-        // download the user's tweets and store in tweets array
+        // talk to network controller and call it's method to fetch initial batch of tweets
         self.networkController.fetchTimeLine(currentTweet!.screen_name, firstTweetID: nil, lastTweetID: nil) { (errorDescription, tweets) -> (Void) in
             if errorDescription != nil {
                 // there is a problem
@@ -54,13 +54,13 @@ class UserTimeLine: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
 
         
-        // set up the refresh control for the pulling down action
+        // set up pull to refresh action
         self.refreshControl.addTarget(self, action: "refresh", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
     }
     
     
-    
+    // make another network call to get new tweets when the pull down gesture is used
     func refresh() {
         // store the id of the top tweet
         var firstTweet = tweets?[0]
@@ -124,10 +124,10 @@ class UserTimeLine: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     
-    // set up fetch for new tweets when reaching the bottom of the tableview
+    // set up network request for older tweets when reaching the bottom of the tableview
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        var indexPathToLoadOlderTweets = self.tweets!.count
-        if indexPath.row == (indexPathToLoadOlderTweets - 5) {
+        var indexPathToLoadOlderTweets = self.tweets!.count - 5
+        if indexPath.row == (indexPathToLoadOlderTweets) {
             // store the id of the last tweet
             var lastTweet = tweets?.last
             var lastTweetID = lastTweet?.id

@@ -13,36 +13,32 @@ class Tweet {
     
     var text : String
     var id : String
+    var retweetCount : String
+    var favoriteCount : String
     var username : String
     var screen_name : String
     var avatarURLString : String
     var profileImage : UIImage?
     var placeholderProfileImage = UIImage(named: "default")
-    var retweetCount : String
-    var favoriteCount : String
     var followersCount : String
     
     
     
     init (tweetInfo : NSDictionary) {
-        // store user dictionary part of the JSON
-        let userDictionary = tweetInfo["user"] as NSDictionary
-        
         self.text = tweetInfo["text"] as String
-        
         self.id = tweetInfo["id_str"] as String
-        
-        self.username = userDictionary["name"] as String
 
-        self.screen_name = userDictionary["screen_name"] as String
-        
-        self.avatarURLString = userDictionary["profile_image_url"] as String
-        
         let retweet_count = tweetInfo["retweet_count"] as Int
         self.retweetCount = String(retweet_count)
         
         let favorite_count = tweetInfo["favorite_count"] as Int
         self.favoriteCount = String(favorite_count)
+        
+        // store user dictionary part of the JSON
+        let userDictionary = tweetInfo["user"] as NSDictionary
+        self.username = userDictionary["name"] as String
+        self.screen_name = userDictionary["screen_name"] as String
+        self.avatarURLString = userDictionary["profile_image_url"] as String
         
         let followers_count = userDictionary["followers_count"] as Int
         self.followersCount = String(followers_count)
@@ -64,9 +60,9 @@ class Tweet {
                 }
             }
             
-            // sort array of tweets alphabetically
+            // sort array of tweets alphabetically (not used any more)
             // looks at first item in array ($0) and compares to next item ($1)
-//            tweets.sort({$0.text < $1.text})
+            // tweets.sort({$0.text < $1.text})
             return tweets
         }
         return nil

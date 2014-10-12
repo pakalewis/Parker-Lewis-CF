@@ -53,7 +53,7 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     
     
     
-    // make a new network call when the pull down gesture is used
+    // make another network call to get new tweets when the pull down gesture is used
     func refresh() {
         // store the id of the top tweet
         var firstTweet = tweets?[0]
@@ -121,10 +121,10 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     
-    // set up fetch for new tweets when reaching the bottom of the tableview
+    // set up network request for older tweets when reaching the bottom of the tableview
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        var indexPathToLoadOlderTweets = self.tweets!.count
-        if indexPath.row == (indexPathToLoadOlderTweets - 5) {
+        var indexPathToLoadOlderTweets = self.tweets!.count - 5
+        if indexPath.row == (indexPathToLoadOlderTweets) {
             // store the id of the last tweet
             var lastTweet = tweets?.last
             var lastTweetID = lastTweet?.id
@@ -139,6 +139,4 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
             })
         }
     }
-
-
 }
