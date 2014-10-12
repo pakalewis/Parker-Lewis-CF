@@ -89,7 +89,6 @@ class HomeTimeLineViewController: UIViewController, UITableViewDataSource, UITab
         if tweet?.profileImage != nil {
             cell.cellImage.image = tweet?.profileImage
         } else {
-            println("about to download cell image")
             cell.cellImage.image = tweet?.placeholderProfileImage
             self.networkController.downloadImage(tweet!, completionHandler: { (image) -> Void in
                 cell.cellImage.image = image

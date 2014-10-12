@@ -55,14 +55,14 @@ class NetworkController {
                 }
                 
                 // finally make the request to Twitter
-                println(parameters)
+                println("parameters being passed: \(parameters)")
                 let twitterRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: url, parameters: parameters)
                 twitterRequest.account = self.twitterAccount
                 
                 // this happens on an arbitrary thread
                 twitterRequest.performRequestWithHandler({ (data, httpResponse, error) -> Void in
                     // first log out the status code
-                    // println(httpResponse.description)
+                     println("http status code: \(httpResponse.statusCode)")
                     
                     // switch statement to handle the various status code possibilities
                     switch httpResponse.statusCode {
