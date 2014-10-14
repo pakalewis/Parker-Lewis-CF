@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol GalleryDelegate {
+protocol GalleryDelegate : class {
     func didSelectPicture(image: UIImage)
 }
 
@@ -17,7 +17,7 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     var galleryHeader : GalleryHeader?
     var imageArray = [UIImage]()
-    var delegate : GalleryDelegate?
+    weak var delegate : GalleryDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,20 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         var image1 = UIImage(named: "1.jpg")
         var image2 = UIImage(named: "2.jpg")
         var image3 = UIImage(named: "3.jpeg")
+        var image4 = UIImage(named: "4.jpg")
+        var image5 = UIImage(named: "5.jpg")
+        var image6 = UIImage(named: "6.jpg")
+        var image7 = UIImage(named: "7.jpg")
+        var image8 = UIImage(named: "8.jpg")
         
         self.imageArray.append(image1)
         self.imageArray.append(image2)
         self.imageArray.append(image3)
-        
-        galleryCollectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "GALLERY_HEADER")
-        galleryCollectionView.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "GALLERY_FOOTER")
+        self.imageArray.append(image4)
+        self.imageArray.append(image5)
+        self.imageArray.append(image6)
+        self.imageArray.append(image7)
+        self.imageArray.append(image8)
     }
 
     
@@ -44,7 +51,7 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GALLERY_CELL", forIndexPath: indexPath) as GalleryCell
-        cell.imageView.image = self.imageArray[indexPath.row]
+        cell.imageView!.image = self.imageArray[indexPath.row]
         return cell
     }
     
@@ -55,25 +62,23 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     
     
-//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-//
-//        let makeHeader = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "GALLERY_HEADER", forIndexPath: indexPath) as GalleryHeader
-//            makeHeader.headerLabel.text = "IMAGES"
-//        self.galleryHeader = makeHeader as GalleryHeader
-//        return makeHeader
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+
+        if kind == UICollectionElementKindSectionHeader {
+            println("header")
+            let reusableView : GalleryHeader = galleryCollectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "GALLERY_HEADER", forIndexPath: indexPath) as GalleryHeader
+            reusableView.backgroundColor = UIColor.cyanColor()
+            reusableView.headerLabel.text = "Header"
+            return reusableView
+        }
+        else {
+            println("footer")
+            let reusableView : GalleryFooter = galleryCollectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: "GALLERY_FOOTER", forIndexPath: indexPath) as GalleryFooter
+            reusableView.backgroundColor = UIColor.blueColor()
+            reusableView.footerLabel.text = "Footer"
+            return reusableView
+        }
+
+    }
     
-        
-        
-        
-        //        if kind == UICollectionElementKindSectionHeader {
-//            println("header")
-//            let reusableView = UICollectionReusableView().
-//            reusableView.backgroundColor = UIColor.cyanColor()
-//        }
-//        if kind == UICollectionElementKindSectionFooter {
-//            println("footer")
-//            reusableView.backgroundColor = UIColor.blueColor()
-//        }
-//        return reusableView
-//    }
 }

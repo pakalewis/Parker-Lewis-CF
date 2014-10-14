@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="inb-a3-Sdm">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="inb-a3-Sdm">
                                 <rect key="frame" x="36" y="40" width="528" height="470"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1VA-aL-Mn1">
@@ -29,19 +29,59 @@
                                     <action selector="myButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OLV-e5-LrZ"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zhH-Mv-ULn">
+                                <rect key="frame" x="0.0" y="400" width="600" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="d5v-z1-5J9"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wtm-ls-CGh">
+                                    <size key="itemSize" width="81" height="67"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="filteredImageCell" reuseIdentifier="filteredImageCell" id="lTM-fC-dCA" customClass="FilterCell" customModule="PhotoFilters" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hc3-pk-Rj3">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="100" height="100"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="hc3-pk-Rj3" id="bXi-kT-XLA"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="inb-a3-Sdm" firstAttribute="centerX" secondItem="1VA-aL-Mn1" secondAttribute="centerX" id="7qw-4U-rhe"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="zhH-Mv-ULn" secondAttribute="bottom" constant="100" id="9bs-q4-7Td"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1VA-aL-Mn1" secondAttribute="bottom" constant="20" id="Dlv-Cc-Emg"/>
                             <constraint firstItem="inb-a3-Sdm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="JAi-GI-uLf"/>
                             <constraint firstAttribute="bottomMargin" secondItem="inb-a3-Sdm" secondAttribute="bottom" constant="90" id="LDc-z5-ArR"/>
+                            <constraint firstItem="zhH-Mv-ULn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="Y7R-vQ-Qes"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zhH-Mv-ULn" secondAttribute="trailing" constant="-16" id="cze-LQ-bdn"/>
                             <constraint firstItem="inb-a3-Sdm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="dIs-Iw-Wui"/>
                             <constraint firstAttribute="trailingMargin" secondItem="inb-a3-Sdm" secondAttribute="trailing" constant="20" id="pbJ-2H-OQr"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mainImage" destination="inb-a3-Sdm" id="6my-9H-zWM"/>
+                        <outlet property="filterCollectionBottom" destination="9bs-q4-7Td" id="bc0-Gw-C0C"/>
+                        <outlet property="filteredImagesCollection" destination="zhH-Mv-ULn" id="PzT-xh-1dZ"/>
+                        <outlet property="mainImageView" destination="inb-a3-Sdm" id="8Ml-Lm-MF0"/>
+                        <outlet property="mainImageViewBottom" destination="LDc-z5-ArR" id="ALl-lf-nzt"/>
+                        <outlet property="mainImageViewLeading" destination="JAi-GI-uLf" id="c5d-Cg-MfI"/>
+                        <outlet property="mainImageViewTrailing" destination="pbJ-2H-OQr" id="NF8-6r-1CQ"/>
                         <segue destination="DdT-QA-djY" kind="presentation" identifier="SHOW_GALLERY" id="JMT-OU-mbA"/>
                     </connections>
                 </viewController>
@@ -114,9 +154,24 @@
                                         <outlet property="headerLabel" destination="Mmc-A1-LQj" id="0JY-0s-ZVx"/>
                                     </connections>
                                 </collectionReusableView>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GALLERY_FOOTER" id="dyZ-XW-xIj">
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="GALLERY_FOOTER" reuseIdentifier="GALLERY_FOOTER" id="dyZ-XW-xIj" customClass="GalleryFooter" customModule="PhotoFilters" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wGd-K1-eX5">
+                                            <rect key="frame" x="279" y="14" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="wGd-K1-eX5" secondAttribute="centerY" id="2sL-wX-IWA"/>
+                                        <constraint firstAttribute="centerX" secondItem="wGd-K1-eX5" secondAttribute="centerX" id="Cho-Yn-MGe"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="footerLabel" destination="wGd-K1-eX5" id="IgO-4j-tcO"/>
+                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
@@ -134,7 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0g-ND-bKN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="137"/>
+            <point key="canvasLocation" x="923" y="136"/>
         </scene>
     </scenes>
 </document>
