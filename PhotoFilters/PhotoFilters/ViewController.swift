@@ -14,12 +14,14 @@ import OpenGLES
 class ViewController: UIViewController, GalleryDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var mainImageView: UIImageView!
-    @IBOutlet weak var filteredImagesCollection: UICollectionView!
+    @IBOutlet weak var thumbnailsCollection: UICollectionView!
     var mainImage = UIImage(named: "default_image")
+    var mainImageWithFilters = UIImage(named: "default_image")
     var mainThumbnail : UIImage?
     var filters = [Filter]()
-    var thumbnailsWithFilters : [ThumbnailToFilter]?
+    var thumbnailsArray : [ThumbnailContainer]?
     var context : CIContext?
+    let imageQueue = NSOperationQueue()
     
 
     // constraint outlets
@@ -29,48 +31,59 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     @IBOutlet weak var filterCollectionBottom: NSLayoutConstraint!
     
     
-    // dog and leash???
-//    var galleryVC = GalleryVC()
-    
     
     override func viewWillAppear(animated: Bool) {
+        println("viewWillAppear fired")
         // load default image
         self.mainImageView.image = self.mainImage
         
         // make thumbnail
-        self.makeThumbnail()
+        self.makeThumbnailFromMainImage()
         
         // create array of thumbnails coupled with filters
-        self.setUpThumbnailsWithFiltersArray()
+        self.setUpThumbnailsArray()
 
         // refresh collection view of the filtered thumbnails
-        self.filteredImagesCollection.reloadData()
+        self.thumbnailsCollection.reloadData()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // set up for thumbnailsCollection View
+        self.thumbnailsCollection.delegate = self
+        self.thumbnailsCollection.dataSource = self
         
-        // set up for Collection View
-        self.filteredImagesCollection.delegate = self
-        self.filteredImagesCollection.dataSource = self
+        // set up context for images
+        var options = [kCIContextWorkingColorSpace : NSNull()]
+        var myEAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
+        self.context = CIContext(EAGLContext: myEAGLContext, options: options)
         
         
         // set up core data storage
-        // talk to the appDelegate
+        // get reference to the appDelegate
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
         // grab its MOC (where all the Filter entities are made)
         let managedObjectContext = appDelegate.managedObjectContext!
-        // create a Seeder Object
+        
+        // create a Seeder Object and pass it the MOC (this is where the entities are made and saved)
         let seeder = CoreDataSeeder(context: managedObjectContext)
-        // check if there are Filter objects already in Core Data
+        
+        // fetch Filter objects from Core Data database (create if not already saved)
         var fetchRequest = NSFetchRequest(entityName: "Filter")
+        // this will sort the fetch request in alpha order
+        var sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         var fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
-        if fetchResult?.count == 0 { // there are no "Filter" objects saved in Core Data yet
-            println("creating Filter objects and saving to Core Data")
+        if fetchResult?.count == 0 {
+            println("There are no Filter objects saved in Core Data yet. Now creating Filter objects and saving to Core Data.")
             // call the Seeder's func that creates the Filter Entities and saves the MOC
             seeder.seedCoreData()
+            // populate array with the fetch result
+            fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
+            self.filters = fetchResult as [Filter]
         } else {
             println("Filter objects are already saved to Core Data")
             // populate array with the fetch result
@@ -79,38 +92,22 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     }
     
     
-    
-    
-    
-    
-
-    
-    func setUpThumbnailsWithFiltersArray() {
-        var ThumbnailsToFilter = [ThumbnailToFilter]()
-        for filter in self.filters {
-            ThumbnailsToFilter.append(ThumbnailToFilter(thumb: self.mainThumbnail!, name: filter.name))
-        }
-        self.thumbnailsWithFilters = ThumbnailsToFilter
-    }
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    func makeThumbnail() {
+    func makeThumbnailFromMainImage() {
         let size = CGSize(width: 100, height: 100)
         UIGraphicsBeginImageContext(size)
         self.mainImage.drawInRect(CGRect(x: 0, y: 0, width: 100, height: 100))
         self.mainThumbnail = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+    }
+
+    
+    func setUpThumbnailsArray() {
+        var thumbnailContainers = [ThumbnailContainer]()
+        for filter in self.filters {
+            var newThumbnailContainer = ThumbnailContainer(thumb: self.mainThumbnail!, name: filter.name, queue: self.imageQueue, context: self.context!)
+            thumbnailContainers.append(newThumbnailContainer)
+        }
+        self.thumbnailsArray = thumbnailContainers
     }
     
     
@@ -152,49 +149,93 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         var imagePicked = info[UIImagePickerControllerEditedImage] as? UIImage
         self.mainImage = imagePicked!
+        self.mainImageWithFilters = imagePicked!
         self.mainImageView.image = self.mainImage
+        println("image selected from imagePicker")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     func didSelectPicture(image : UIImage) {
         self.mainImage = image
+        self.mainImageWithFilters = image
         self.mainImageView.image = self.mainImage
+        println("didSelectPicture fired")
     }
 
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = self.filteredImagesCollection.dequeueReusableCellWithReuseIdentifier("filteredImageCell", forIndexPath: indexPath) as FilterCell
-
-        // WHAT IS WRONG WITH THIS???
-        let thumbnailToFilter = self.thumbnailsWithFilters![indexPath.row]
-        if thumbnailToFilter.filteredThumbnail != nil {
-            cell.imageView.image = thumbnailToFilter.filteredThumbnail
+        let cell = self.thumbnailsCollection.dequeueReusableCellWithReuseIdentifier("filteredImageCell", forIndexPath: indexPath) as ThumbnailCell
+        let currentCellTag = cell.tag
+        // why +1???
+        
+        // get the appropriate thumbnailContainer
+        let thumbnailContainer = self.thumbnailsArray![indexPath.row]
+        // if the thumb has already been filtered, show it in the cell's image
+        if thumbnailContainer.filteredThumbnail != nil {
+            println("thumb at indexPath \(indexPath.row) already filtered")
+            cell.imageView.image = thumbnailContainer.filteredThumbnail
         } else {
-            // apply filter to thumb
-            cell.imageView.image = thumbnailToFilter.originalThumbnail
-            thumbnailToFilter.applyFilter({ (image) -> Void in
-                cell.imageView.image = image
-            })
+            // filtered thumb is not available yet
+            // first show original thumb
+            println("display original thumb first, then apply filter")
+            cell.imageView.image = thumbnailContainer.originalThumbnail
             
+            // apply filter to thumb, provided the cell is still visible
+            thumbnailContainer.applyFilter({ (filteredThumb) -> Void in
+                if currentCellTag == cell.tag {
+                    println("filter was applied to thumb, and now is displayed")
+                    cell.imageView.image = filteredThumb
+                }
+            })
         }
-//        cell.imageView.image = self.thumbnails![indexPath.row]
         return cell
     }
+    
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.filters.count
     }
     
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // the order of the filters is not the same as in CoreDataSeeder
+        // add button to nav bar to allow user to revert changes
+        var revertChangesButton = UIBarButtonItem(title: "Revert Changes", style: UIBarButtonItemStyle.Bordered, target: self, action: "revertChanges")
+        self.navigationItem.leftBarButtonItem = revertChangesButton
+        
         // get the name of the filter and apply to the main image
         var filterName = filters[indexPath.row].name
         println("applying this filter to main image: \(filterName)")
         self.applyFilterToMainImage(filterName)
     }
     
+
+    func applyFilterToMainImage(filterName : String) {
+        
+        // FEATURE
+        // add an activity indicator to display while the filter is being applied
+        
+        imageQueue.addOperationWithBlock { () -> Void in
+            var options = [kCIContextWorkingColorSpace : NSNull()]
+            var myEAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
+            var gpuContext = CIContext(EAGLContext: myEAGLContext, options: options)
+            var ciImage = CIImage(image: self.mainImageWithFilters)
+            var imageFilter = CIFilter(name: filterName)
+            imageFilter.setDefaults()
+            imageFilter.setValue(ciImage, forKey: kCIInputImageKey)
+            var result = imageFilter.valueForKey(kCIOutputImageKey) as CIImage
+            var extent = result.extent()
+            var imageRef = gpuContext.createCGImage(result, fromRect: extent)
+            self.mainImageWithFilters = UIImage(CGImage: imageRef)
+
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.mainImageView.image = self.mainImageWithFilters
+            })
+        }
+    }
+
     
+    // these two funcs do the animation for showing/hiding the thumbnailsCollection
     func morphToFilterMode() {
         self.mainImageViewBottom.constant = self.mainImageViewBottom.constant * 2.5
         self.filterCollectionBottom.constant = 100
@@ -207,6 +248,7 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
         self.navigationItem.rightBarButtonItem = doneButton
     }
     
+    
     func exitFilterMode() {
         self.mainImageViewBottom.constant = self.mainImageViewBottom.constant / 2.5
         self.filterCollectionBottom.constant = -100
@@ -215,33 +257,13 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
             self.view.layoutIfNeeded()
         })
         self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = nil
     }
     
     
-    
-
-    func applyFilterToMainImage(filterName : String) {
-        var filteredImage : UIImage?
-        var newQueue = NSOperationQueue()
-        newQueue.addOperationWithBlock { () -> Void in
-            var options = [kCIContextWorkingColorSpace : NSNull()]
-            var myEAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
-            var gpuContext = CIContext(EAGLContext: myEAGLContext, options: options)
-            var ciImage = CIImage(image: self.mainImage)
-            var imageFilter = CIFilter(name: filterName)
-            imageFilter.setDefaults()
-            imageFilter.setValue(ciImage, forKey: kCIInputImageKey)
-            var result = imageFilter.valueForKey(kCIOutputImageKey) as CIImage
-            var extent = result.extent()
-            var imageRef = gpuContext.createCGImage(result, fromRect: extent)
-            filteredImage = UIImage(CGImage: imageRef)
-            self.mainImage = filteredImage!
-
-            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                self.mainImageView.image = self.mainImage
-            })
-        }
+    func revertChanges() {
+        self.mainImageView.image = self.mainImage
+        self.navigationItem.leftBarButtonItem = nil
     }
-    
 }
 

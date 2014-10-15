@@ -69,6 +69,10 @@ class CoreDataSeeder {
         
         var error : NSError?
         self.managedObjectContext?.save(&error)
+        
+        if error != nil {
+            println("There was an error saving to core data. The error says \(error!.localizedDescription)")
+        }
 
         
     }

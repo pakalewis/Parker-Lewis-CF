@@ -26,12 +26,15 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         
         var image1 = UIImage(named: "1.jpg")
         var image2 = UIImage(named: "2.jpg")
-        var image3 = UIImage(named: "3.jpeg")
+        var image3 = UIImage(named: "3.jpg")
         var image4 = UIImage(named: "4.jpg")
         var image5 = UIImage(named: "5.jpg")
         var image6 = UIImage(named: "6.jpg")
         var image7 = UIImage(named: "7.jpg")
         var image8 = UIImage(named: "8.jpg")
+        var image9 = UIImage(named: "9.jpg")
+        var image10 = UIImage(named: "10.jpg")
+        var image11 = UIImage(named: "11.jpg")
         
         self.imageArray.append(image1)
         self.imageArray.append(image2)
@@ -41,6 +44,9 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         self.imageArray.append(image6)
         self.imageArray.append(image7)
         self.imageArray.append(image8)
+        self.imageArray.append(image9)
+        self.imageArray.append(image10)
+        self.imageArray.append(image11)
     }
 
     
@@ -55,27 +61,27 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         return cell
     }
     
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // pass the selected image back to the main VC
         self.delegate?.didSelectPicture(self.imageArray[indexPath.row])
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
-    
+    // set up header and footer views
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
         if kind == UICollectionElementKindSectionHeader {
             println("header")
             let reusableView : GalleryHeader = galleryCollectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "GALLERY_HEADER", forIndexPath: indexPath) as GalleryHeader
-            reusableView.backgroundColor = UIColor.cyanColor()
-            reusableView.headerLabel.text = "Header"
+            reusableView.headerLabel.text = "Images from unsplash.com"
             return reusableView
         }
         else {
             println("footer")
             let reusableView : GalleryFooter = galleryCollectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: "GALLERY_FOOTER", forIndexPath: indexPath) as GalleryFooter
-            reusableView.backgroundColor = UIColor.blueColor()
-            reusableView.footerLabel.text = "Footer"
+            reusableView.footerLabel.text = "\(self.imageArray.count) images available"
             return reusableView
         }
 
