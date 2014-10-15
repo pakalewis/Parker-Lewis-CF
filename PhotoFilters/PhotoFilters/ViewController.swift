@@ -17,9 +17,8 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     @IBOutlet weak var filteredImagesCollection: UICollectionView!
     var mainImage = UIImage(named: "default_image")
     var mainThumbnail : UIImage?
-//    var filteredThumbnail : UIImage?
     var filters = [Filter]()
-    var thumbnails : [UIImage]?
+    var thumbnailsWithFilters : [ThumbnailToFilter]?
     var context : CIContext?
     
 
@@ -41,8 +40,8 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
         // make thumbnail
         self.makeThumbnail()
         
-        // apply filters to the thumbnail array
-        self.applyFiltersAndMakeThumbnails()
+        // create array of thumbnails coupled with filters
+        self.setUpThumbnailsWithFiltersArray()
 
         // refresh collection view of the filtered thumbnails
         self.filteredImagesCollection.reloadData()
@@ -78,7 +77,32 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
             self.filters = fetchResult as [Filter]
         }
     }
+    
+    
+    
+    
+    
+    
 
+    
+    func setUpThumbnailsWithFiltersArray() {
+        var ThumbnailsToFilter = [ThumbnailToFilter]()
+        for filter in self.filters {
+            ThumbnailsToFilter.append(ThumbnailToFilter(thumb: self.mainThumbnail!, name: filter.name))
+        }
+        self.thumbnailsWithFilters = ThumbnailsToFilter
+    }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     func makeThumbnail() {
@@ -141,13 +165,35 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.filteredImagesCollection.dequeueReusableCellWithReuseIdentifier("filteredImageCell", forIndexPath: indexPath) as FilterCell
-        cell.imageView.image = self.mainThumbnail
+
+        // WHAT IS WRONG WITH THIS???
+        let thumbnailToFilter = self.thumbnailsWithFilters![indexPath.row]
+        if thumbnailToFilter.filteredThumbnail != nil {
+            cell.imageView.image = thumbnailToFilter.filteredThumbnail
+        } else {
+            // apply filter to thumb
+            cell.imageView.image = thumbnailToFilter.originalThumbnail
+            thumbnailToFilter.applyFilter({ (image) -> Void in
+                cell.imageView.image = image
+            })
+            
+        }
+//        cell.imageView.image = self.thumbnails![indexPath.row]
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filters.count
+        return self.filters.count
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // the order of the filters is not the same as in CoreDataSeeder
+        // get the name of the filter and apply to the main image
+        var filterName = filters[indexPath.row].name
+        println("applying this filter to main image: \(filterName)")
+        self.applyFilterToMainImage(filterName)
+    }
+    
     
     func morphToFilterMode() {
         self.mainImageViewBottom.constant = self.mainImageViewBottom.constant * 2.5
@@ -173,33 +219,29 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     
     
     
-    func applyFiltersAndMakeThumbnails() {
-        var thumbnailToFilter = self.mainThumbnail
-        var imageQueue = NSOperationQueue()
-        var gpuContext = CIContext()
-        var newThumbnails = [UIImage]()
-        
-        for filter in filters {
-            println(filter.name)
-//            imageQueue.addOperationWithBlock({ () -> Void in
-//                var filterName = filter.name
-//                var imageFilter = CIFilter(name: filterName)
-//                imageFilter.setDefaults()
-//                imageFilter.setValue(thumbnailToFilter, forKey: kCIInputImageKey)
-//                var result = imageFilter.valueForKey(kCIOutputImageKey) as CIImage
-//                var extent = result.extent()
-//                var imageRef = gpuContext.createCGImage(result, fromRect: extent)
-//                var filteredThumbnail = UIImage(CGImage: imageRef)
-//                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-//                    newThumbnails.append(filteredThumbnail)
-//                })
-//            })
+
+    func applyFilterToMainImage(filterName : String) {
+        var filteredImage : UIImage?
+        var newQueue = NSOperationQueue()
+        newQueue.addOperationWithBlock { () -> Void in
+            var options = [kCIContextWorkingColorSpace : NSNull()]
+            var myEAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
+            var gpuContext = CIContext(EAGLContext: myEAGLContext, options: options)
+            var ciImage = CIImage(image: self.mainImage)
+            var imageFilter = CIFilter(name: filterName)
+            imageFilter.setDefaults()
+            imageFilter.setValue(ciImage, forKey: kCIInputImageKey)
+            var result = imageFilter.valueForKey(kCIOutputImageKey) as CIImage
+            var extent = result.extent()
+            var imageRef = gpuContext.createCGImage(result, fromRect: extent)
+            filteredImage = UIImage(CGImage: imageRef)
+            self.mainImage = filteredImage!
+
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.mainImageView.image = self.mainImage
+            })
         }
-//        self.thumbnails = newThumbnails
     }
-    
-    
-    
     
 }
 
