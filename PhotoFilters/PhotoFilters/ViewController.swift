@@ -11,7 +11,7 @@ import CoreData
 import CoreImage
 import OpenGLES
 
-class ViewController: UIViewController, GalleryDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, GalleryDelegate, FrameworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var thumbnailsCollection: UICollectionView!
@@ -22,7 +22,7 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
     var thumbnailsArray : [ThumbnailContainer]?
     var context : CIContext?
     let imageQueue = NSOperationQueue()
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // constraint outlets
     @IBOutlet weak var mainImageViewLeading: NSLayoutConstraint!
@@ -59,6 +59,13 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
         var options = [kCIContextWorkingColorSpace : NSNull()]
         var myEAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
         self.context = CIContext(EAGLContext: myEAGLContext, options: options)
+        
+        // set up activity indicator
+        self.activityIndicator.layer.cornerRadius = self.activityIndicator.frame.size.width / 2
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.backgroundColor = UIColor.grayColor()
+        self.activityIndicator.opaque = false
+        self.activityIndicator.alpha = 0.75
         
         
         // set up core data storage
@@ -116,6 +123,10 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
             let destinationVC = segue.destinationViewController as GalleryVC
             destinationVC.delegate = self
         }
+        if segue.identifier == "SHOW_FRAMEWORK_VC" {
+            let destinationVC = segue.destinationViewController as PhotoFrameworkVC
+            destinationVC.delegate = self
+        }
     }
 
     @IBAction func myButton(sender: AnyObject) {
@@ -125,6 +136,9 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
         // create buttons for the various alert actions
         let galleryAction = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default) { (action) -> Void in
             self.performSegueWithIdentifier("SHOW_GALLERY", sender: self)
+        }
+        let frameworkAction = UIAlertAction(title: "Photos Framework", style: UIAlertActionStyle.Default) { (action) -> Void in
+            self.performSegueWithIdentifier("SHOW_FRAMEWORK_VC", sender: self)
         }
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (action) -> Void in
             let imagePicker = UIImagePickerController()
@@ -140,6 +154,7 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
         }
         alertController.addAction(galleryAction)
         alertController.addAction(cameraAction)
+        alertController.addAction(frameworkAction)
         alertController.addAction(filterAction)
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -212,24 +227,21 @@ class ViewController: UIViewController, GalleryDelegate, UIImagePickerController
 
     func applyFilterToMainImage(filterName : String) {
         
-        // FEATURE
-        // add an activity indicator to display while the filter is being applied
+        self.activityIndicator.startAnimating()
         
         imageQueue.addOperationWithBlock { () -> Void in
-            var options = [kCIContextWorkingColorSpace : NSNull()]
-            var myEAGLContext = EAGLContext(API: EAGLRenderingAPI.OpenGLES2)
-            var gpuContext = CIContext(EAGLContext: myEAGLContext, options: options)
             var ciImage = CIImage(image: self.mainImageWithFilters)
             var imageFilter = CIFilter(name: filterName)
             imageFilter.setDefaults()
             imageFilter.setValue(ciImage, forKey: kCIInputImageKey)
             var result = imageFilter.valueForKey(kCIOutputImageKey) as CIImage
             var extent = result.extent()
-            var imageRef = gpuContext.createCGImage(result, fromRect: extent)
+            var imageRef = self.context?.createCGImage(result, fromRect: extent)
             self.mainImageWithFilters = UIImage(CGImage: imageRef)
 
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.mainImageView.image = self.mainImageWithFilters
+                self.activityIndicator.stopAnimating()
             })
         }
     }
