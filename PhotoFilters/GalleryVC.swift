@@ -11,9 +11,13 @@ import UIKit
 class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var galleryCollectionView: UICollectionView!
+    var flowLayout : UICollectionViewFlowLayout!
+
     var galleryHeader : GalleryHeader?
     var imageArray = [UIImage]()
     var delegate : ImageSelectedProtocol?
+    
+    var pinchAction = ReactToPinch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +47,17 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         self.imageArray.append(image9)
         self.imageArray.append(image10)
         self.imageArray.append(image11)
+        
+        
+        self.flowLayout = self.galleryCollectionView.collectionViewLayout as UICollectionViewFlowLayout
+        // create pinch gesture
+        var pinchGesture = UIPinchGestureRecognizer(target: pinchAction, action: "pinchAction:")
+        // set properties on my ReactToPinch object (this has the method that resizes the flowlayout
+        pinchAction.collectionView = self.galleryCollectionView
+        pinchAction.flowLayout = self.flowLayout
+        
+        // add pinch gesture to collectionView
+        self.galleryCollectionView.addGestureRecognizer(pinchGesture)
     }
 
     
