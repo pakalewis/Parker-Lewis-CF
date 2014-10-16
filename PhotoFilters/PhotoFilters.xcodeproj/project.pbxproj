@@ -13,6 +13,9 @@
 		2C04835D19EEEC5B00113B7E /* 11.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C04835919EEEC5B00113B7E /* 11.jpg */; };
 		2C04835F19EF1A8400113B7E /* PhotoFrameworkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04835E19EF1A8400113B7E /* PhotoFrameworkVC.swift */; };
 		2C04836119EF1D9B00113B7E /* FrameworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C04836019EF1D9B00113B7E /* FrameworkCell.swift */; };
+		2C81694C19F0307500C4D15F /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2C81694A19F0307500C4D15F /* Todo */; };
+		2C81694D19F0307500C4D15F /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C81694B19F0307500C4D15F /* TemplateIcon2x.png */; };
+		2C81694F19F05C3600C4D15F /* ImageSelectedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */; };
 		2C861BA119EDB3A500069C14 /* GalleryFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C861BA019EDB3A500069C14 /* GalleryFooter.swift */; };
 		2C861BA719EDBE7000069C14 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C861BA219EDBE7000069C14 /* 4.jpg */; };
 		2C861BA819EDBE7000069C14 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C861BA319EDBE7000069C14 /* 5.jpg */; };
@@ -55,6 +58,9 @@
 		2C04835919EEEC5B00113B7E /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
 		2C04835E19EF1A8400113B7E /* PhotoFrameworkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFrameworkVC.swift; sourceTree = "<group>"; };
 		2C04836019EF1D9B00113B7E /* FrameworkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkCell.swift; sourceTree = "<group>"; };
+		2C81694A19F0307500C4D15F /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
+		2C81694B19F0307500C4D15F /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = ../TemplateIcon2x.png; sourceTree = "<group>"; };
+		2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectedProtocol.swift; sourceTree = "<group>"; };
 		2C861BA019EDB3A500069C14 /* GalleryFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryFooter.swift; sourceTree = "<group>"; };
 		2C861BA219EDBE7000069C14 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
 		2C861BA319EDBE7000069C14 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 		2CF8EEF019EC349A003C77DC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C81694B19F0307500C4D15F /* TemplateIcon2x.png */,
 				2CC6DE4419EC696300958F0A /* default_image.png */,
 				2CF8EF2819EC4507003C77DC /* 1.jpg */,
 				2CF8EF2919EC4507003C77DC /* 2.jpg */,
@@ -176,11 +183,13 @@
 			isa = PBXGroup;
 			children = (
 				2CF8EEF719EC349A003C77DC /* ViewController.swift */,
+				2C81694A19F0307500C4D15F /* Todo */,
 				2C861BAC19EDC2BF00069C14 /* ThumbnailCell.swift */,
 				2C861BB419EDEF5200069C14 /* ThumbnailContainer.swift */,
 				2C04835E19EF1A8400113B7E /* PhotoFrameworkVC.swift */,
 				2C04836019EF1D9B00113B7E /* FrameworkCell.swift */,
 				2CF8EF1A19EC3CDE003C77DC /* GalleryVC.swift */,
+				2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */,
 				2CF8EF1E19EC4362003C77DC /* GalleryCell.swift */,
 				2CBB3BCD19ECC269002E05AC /* GalleryHeader.swift */,
 				2C861BA019EDB3A500069C14 /* GalleryFooter.swift */,
@@ -295,8 +304,10 @@
 				2CF8EF2B19EC4507003C77DC /* 1.jpg in Resources */,
 				2C861BA819EDBE7000069C14 /* 5.jpg in Resources */,
 				2C04835C19EEEC5B00113B7E /* 10.jpg in Resources */,
+				2C81694C19F0307500C4D15F /* Todo in Resources */,
 				2C861BA919EDBE7000069C14 /* 6.jpg in Resources */,
 				2CF8EF2C19EC4507003C77DC /* 2.jpg in Resources */,
+				2C81694D19F0307500C4D15F /* TemplateIcon2x.png in Resources */,
 				2CC6DE4519EC696300958F0A /* default_image.png in Resources */,
 				2CF8EF0019EC349A003C77DC /* LaunchScreen.xib in Resources */,
 				2CF8EEFD19EC349A003C77DC /* Images.xcassets in Resources */,
@@ -326,6 +337,7 @@
 				2CF8EF1F19EC4362003C77DC /* GalleryCell.swift in Sources */,
 				2C04835F19EF1A8400113B7E /* PhotoFrameworkVC.swift in Sources */,
 				2CF8EEF619EC349A003C77DC /* PhotoFilters.xcdatamodeld in Sources */,
+				2C81694F19F05C3600C4D15F /* ImageSelectedProtocol.swift in Sources */,
 				2CF8EEF319EC349A003C77DC /* AppDelegate.swift in Sources */,
 				2CF8EF1B19EC3CDE003C77DC /* GalleryVC.swift in Sources */,
 				2C861BB119EDC8DF00069C14 /* Filter.swift in Sources */,

@@ -8,16 +8,12 @@
 
 import UIKit
 
-protocol GalleryDelegate : class {
-    func didSelectPicture(image: UIImage)
-}
-
 class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     var galleryHeader : GalleryHeader?
     var imageArray = [UIImage]()
-    weak var delegate : GalleryDelegate?
+    var delegate : ImageSelectedProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

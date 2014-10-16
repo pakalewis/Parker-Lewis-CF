@@ -11,7 +11,7 @@ import CoreData
 import CoreImage
 import OpenGLES
 
-class ViewController: UIViewController, GalleryDelegate, FrameworkDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var thumbnailsCollection: UICollectionView!
@@ -230,7 +230,7 @@ class ViewController: UIViewController, GalleryDelegate, FrameworkDelegate, UIIm
         self.activityIndicator.startAnimating()
         
         imageQueue.addOperationWithBlock { () -> Void in
-            var ciImage = CIImage(image: self.mainImageWithFilters)
+            var ciImage = CIImage(image: self.mainImage)
             var imageFilter = CIFilter(name: filterName)
             imageFilter.setDefaults()
             imageFilter.setValue(ciImage, forKey: kCIInputImageKey)

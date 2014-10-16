@@ -9,14 +9,10 @@
 import UIKit
 import Photos
 
-protocol FrameworkDelegate : class {
-    func didSelectPicture(image: UIImage)
-}
-
 class PhotoFrameworkVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var photoFrameworkCollection : UICollectionView!
-    weak var delegate : GalleryDelegate?
+    var delegate : ImageSelectedProtocol?
     
     var frameworkImageArray = [UIImage]()
     
@@ -57,6 +53,11 @@ class PhotoFrameworkVC: UIViewController, UICollectionViewDelegate, UICollection
 
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        // download bigger image
+        // some passed in the imageView frame size from the main VC but instead...
+        // request the nsdata for full photo/asset from fetchrequest and use that to make a new scale/cellSize
+        
         self.delegate?.didSelectPicture(self.frameworkImageArray[indexPath.row])
         self.dismissViewControllerAnimated(true, completion: nil)
     }
