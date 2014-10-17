@@ -17,6 +17,10 @@ class CoreDataSeeder {
     }
     
     func seedCoreData() {
+        let bloom = NSEntityDescription.insertNewObjectForEntityForName("Filter", inManagedObjectContext: self.managedObjectContext!) as Filter
+        bloom.name = "CIBloom"
+        bloom.favorited = false
+        
         let effectNoir = NSEntityDescription.insertNewObjectForEntityForName("Filter", inManagedObjectContext: self.managedObjectContext!) as Filter
         effectNoir.name = "CIPhotoEffectNoir"
         effectNoir.favorited = false

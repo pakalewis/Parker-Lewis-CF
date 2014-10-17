@@ -21,7 +21,7 @@ class PhotoFrameworkVC: UIViewController, UICollectionViewDelegate, UICollection
     
     var imageManager: PHCachingImageManager!
     var assetFetchResults: PHFetchResult!
-    var assetCollection: PHAssetCollection!
+//    var assetCollection: PHAssetCollection!
     var asset : PHAsset?
     var assetCellSize: CGSize!
 

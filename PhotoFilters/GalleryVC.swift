@@ -36,17 +36,22 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         var image10 = UIImage(named: "10.jpg")
         var image11 = UIImage(named: "11.jpg")
         
-        self.imageArray.append(image1)
-        self.imageArray.append(image2)
-        self.imageArray.append(image3)
-        self.imageArray.append(image4)
-        self.imageArray.append(image5)
-        self.imageArray.append(image6)
-        self.imageArray.append(image7)
-        self.imageArray.append(image8)
-        self.imageArray.append(image9)
-        self.imageArray.append(image10)
-        self.imageArray.append(image11)
+        self.imageArray = [ image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
+            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11 ]
         
         
         self.flowLayout = self.galleryCollectionView.collectionViewLayout as UICollectionViewFlowLayout

@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import CoreImage
 import OpenGLES
+import Photos
+import Social
 
 class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -45,11 +47,19 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
 
         // refresh collection view of the filtered thumbnails
         self.thumbnailsCollection.reloadData()
+        
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var saveButton = UIBarButtonItem(title: "Save to Photos", style: UIBarButtonItemStyle.Plain, target: self, action: "saveToPhotoCollections")
+        self.navigationItem.leftBarButtonItem = saveButton
+        
+        var tweetButton = UIBarButtonItem(title: "Tweet", style: UIBarButtonItemStyle.Plain, target: self, action: "postaTweet")
+        self.navigationItem.rightBarButtonItem = tweetButton
         
         // set up for thumbnailsCollection View
         self.thumbnailsCollection.delegate = self
@@ -95,6 +105,33 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
             println("Filter objects are already saved to Core Data")
             // populate array with the fetch result
             self.filters = fetchResult as [Filter]
+        }
+    }
+    
+    
+    func saveToPhotoCollections() {
+        println("save button pressed")
+        
+        PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
+            
+            println()
+            PHAssetChangeRequest.creationRequestForAssetFromImage(self.mainImageWithFilters)
+            
+            
+        }, completionHandler: nil)
+    }
+    
+    
+    func postaTweet() {
+        
+        if  SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
+            println("is available")
+            
+            var tweetSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            tweetSheet.setInitialText("I posted this photo from an app I built using Swift!")
+            tweetSheet.addImage(self.mainImageWithFilters)
+            
+            self.presentViewController(tweetSheet, animated: true, completion: nil)
         }
     }
     
@@ -222,9 +259,9 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // add button to nav bar to allow user to revert changes
-        var revertChangesButton = UIBarButtonItem(title: "Revert Changes", style: UIBarButtonItemStyle.Bordered, target: self, action: "revertChanges")
-        self.navigationItem.leftBarButtonItem = revertChangesButton
+        // add button to nav bar to allow user to show original image
+        var showOriginal = UIBarButtonItem(title: "Show Original", style: UIBarButtonItemStyle.Bordered, target: self, action: "showOriginal")
+        self.navigationItem.leftBarButtonItem = showOriginal
         
         // get the name of the filter and apply to the main image
         var filterName = filters[indexPath.row].name
@@ -238,10 +275,20 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         self.activityIndicator.startAnimating()
         
         imageQueue.addOperationWithBlock { () -> Void in
+            
+            
+            
             var ciImage = CIImage(image: self.mainImage)
             var imageFilter = CIFilter(name: filterName)
             imageFilter.setDefaults()
             imageFilter.setValue(ciImage, forKey: kCIInputImageKey)
+            
+
+            if imageFilter.name() == "CIBloom" {
+                imageFilter.setValue(150.0, forKey: kCIInputRadiusKey)
+                imageFilter.setValue(50.0, forKey: kCIInputIntensityKey)
+            }
+            
             var result = imageFilter.valueForKey(kCIOutputImageKey) as CIImage
             var extent = result.extent()
             var imageRef = self.context?.createCGImage(result, fromRect: extent)
@@ -277,11 +324,13 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
             self.view.layoutIfNeeded()
         })
         self.navigationItem.rightBarButtonItem = nil
-        self.navigationItem.leftBarButtonItem = nil
+        
+        var saveButton = UIBarButtonItem(title: "Save to Photos", style: UIBarButtonItemStyle.Plain, target: self, action: "saveToPhotoCollections")
+        self.navigationItem.leftBarButtonItem = saveButton
     }
     
     
-    func revertChanges() {
+    func showOriginal() {
         self.mainImageView.image = self.mainImage
         self.navigationItem.leftBarButtonItem = nil
     }
