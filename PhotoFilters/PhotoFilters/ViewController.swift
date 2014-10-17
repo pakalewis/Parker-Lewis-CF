@@ -127,6 +127,10 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
             let destinationVC = segue.destinationViewController as PhotoFrameworkVC
             destinationVC.delegate = self
         }
+        if segue.identifier == "SHOW_AVFOUNDATION_VC" {
+            let destinationVC = segue.destinationViewController as AVFoundationCameraVC
+            destinationVC.delegate = self
+        }
     }
 
     @IBAction func myButton(sender: AnyObject) {
@@ -139,6 +143,9 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         }
         let frameworkAction = UIAlertAction(title: "Photos Framework", style: UIAlertActionStyle.Default) { (action) -> Void in
             self.performSegueWithIdentifier("SHOW_FRAMEWORK_VC", sender: self)
+        }
+        let avFoundationAction = UIAlertAction(title: "AV Foundation", style: UIAlertActionStyle.Default) { (action) -> Void in
+            self.performSegueWithIdentifier("SHOW_AVFOUNDATION_VC", sender: self)
         }
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (action) -> Void in
             let imagePicker = UIImagePickerController()
@@ -155,6 +162,7 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         alertController.addAction(galleryAction)
         alertController.addAction(cameraAction)
         alertController.addAction(frameworkAction)
+        alertController.addAction(avFoundationAction)
         alertController.addAction(filterAction)
         alertController.addAction(cancelAction)
         self.presentViewController(alertController, animated: true, completion: nil)

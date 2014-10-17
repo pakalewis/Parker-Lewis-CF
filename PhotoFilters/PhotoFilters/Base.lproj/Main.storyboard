@@ -101,6 +101,7 @@
                         <outlet property="thumbnailsCollection" destination="zhH-Mv-ULn" id="19q-fR-46V"/>
                         <segue destination="DdT-QA-djY" kind="presentation" identifier="SHOW_GALLERY" id="JMT-OU-mbA"/>
                         <segue destination="24x-ha-ojP" kind="presentation" identifier="SHOW_FRAMEWORK_VC" id="SB8-75-SUL"/>
+                        <segue destination="8H8-jc-hLL" kind="presentation" identifier="SHOW_AVFOUNDATION_VC" id="bpe-tW-3fQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -276,6 +277,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0g-ND-bKN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1735" y="460"/>
+        </scene>
+        <!--Foundation CameraVC-->
+        <scene sceneID="GH7-19-ok2">
+            <objects>
+                <viewController id="8H8-jc-hLL" customClass="AVFoundationCameraVC" customModule="PhotoFilters" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="x4E-c7-rLc"/>
+                        <viewControllerLayoutGuide type="bottom" id="ebi-eZ-yDo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X8n-B7-qjj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xGa-JJ-yIE">
+                                <rect key="frame" x="20" y="56" width="560" height="444"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZx-kU-0ey">
+                                <rect key="frame" x="186" y="532" width="229" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Take Photo from Camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="captureButtonPressed:" destination="8H8-jc-hLL" eventType="touchUpInside" id="dSm-Oi-uJy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xGa-JJ-yIE" firstAttribute="leading" secondItem="X8n-B7-qjj" secondAttribute="leading" constant="20" id="EGe-gD-5in"/>
+                            <constraint firstAttribute="trailing" secondItem="xGa-JJ-yIE" secondAttribute="trailing" constant="20" id="I9Y-wA-Lu5"/>
+                            <constraint firstItem="xGa-JJ-yIE" firstAttribute="top" secondItem="x4E-c7-rLc" secondAttribute="bottom" constant="36" id="L8p-Xh-CzO"/>
+                            <constraint firstAttribute="centerX" secondItem="JZx-kU-0ey" secondAttribute="centerX" id="TMP-by-kIU"/>
+                            <constraint firstItem="ebi-eZ-yDo" firstAttribute="top" secondItem="JZx-kU-0ey" secondAttribute="bottom" constant="30" id="ZeO-qv-JLF"/>
+                            <constraint firstItem="ebi-eZ-yDo" firstAttribute="top" secondItem="xGa-JJ-yIE" secondAttribute="bottom" constant="100" id="uuO-MO-1Os"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="capturePreviewImageView" destination="xGa-JJ-yIE" id="HVf-oc-0RL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qvj-hV-bkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="952" y="1101"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NVs-dp-OHB">

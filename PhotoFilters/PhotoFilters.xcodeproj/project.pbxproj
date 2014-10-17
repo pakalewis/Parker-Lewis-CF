@@ -17,6 +17,7 @@
 		2C81694D19F0307500C4D15F /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C81694B19F0307500C4D15F /* TemplateIcon2x.png */; };
 		2C81694F19F05C3600C4D15F /* ImageSelectedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */; };
 		2C81695119F0620C00C4D15F /* ReactToPinch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81695019F0620C00C4D15F /* ReactToPinch.swift */; };
+		2C81695319F084FB00C4D15F /* AVFoundationCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81695219F084FB00C4D15F /* AVFoundationCameraVC.swift */; };
 		2C861BA119EDB3A500069C14 /* GalleryFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C861BA019EDB3A500069C14 /* GalleryFooter.swift */; };
 		2C861BA719EDBE7000069C14 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C861BA219EDBE7000069C14 /* 4.jpg */; };
 		2C861BA819EDBE7000069C14 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2C861BA319EDBE7000069C14 /* 5.jpg */; };
@@ -63,6 +64,7 @@
 		2C81694B19F0307500C4D15F /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = ../TemplateIcon2x.png; sourceTree = "<group>"; };
 		2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectedProtocol.swift; sourceTree = "<group>"; };
 		2C81695019F0620C00C4D15F /* ReactToPinch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactToPinch.swift; sourceTree = "<group>"; };
+		2C81695219F084FB00C4D15F /* AVFoundationCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVFoundationCameraVC.swift; sourceTree = "<group>"; };
 		2C861BA019EDB3A500069C14 /* GalleryFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryFooter.swift; sourceTree = "<group>"; };
 		2C861BA219EDBE7000069C14 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
 		2C861BA319EDBE7000069C14 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				2CF8EF1E19EC4362003C77DC /* GalleryCell.swift */,
 				2CBB3BCD19ECC269002E05AC /* GalleryHeader.swift */,
 				2C861BA019EDB3A500069C14 /* GalleryFooter.swift */,
+				2C81695219F084FB00C4D15F /* AVFoundationCameraVC.swift */,
 				2C861BB219EDCC3F00069C14 /* CoreDataSeeder.swift */,
 				2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */,
 				2C81695019F0620C00C4D15F /* ReactToPinch.swift */,
@@ -338,6 +341,7 @@
 				2C861BAD19EDC2BF00069C14 /* ThumbnailCell.swift in Sources */,
 				2CF8EEF819EC349A003C77DC /* ViewController.swift in Sources */,
 				2CF8EF1F19EC4362003C77DC /* GalleryCell.swift in Sources */,
+				2C81695319F084FB00C4D15F /* AVFoundationCameraVC.swift in Sources */,
 				2C04835F19EF1A8400113B7E /* PhotoFrameworkVC.swift in Sources */,
 				2CF8EEF619EC349A003C77DC /* PhotoFilters.xcdatamodeld in Sources */,
 				2C81694F19F05C3600C4D15F /* ImageSelectedProtocol.swift in Sources */,
