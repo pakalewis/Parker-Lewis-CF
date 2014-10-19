@@ -60,6 +60,7 @@
 		2C04835919EEEC5B00113B7E /* 11.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 11.jpg; sourceTree = "<group>"; };
 		2C04835E19EF1A8400113B7E /* PhotoFrameworkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFrameworkVC.swift; sourceTree = "<group>"; };
 		2C04836019EF1D9B00113B7E /* FrameworkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkCell.swift; sourceTree = "<group>"; };
+		2C5148FF19F3CD9200D4D99E /* LinkedListPractice.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = LinkedListPractice.playground; sourceTree = "<group>"; };
 		2C81694A19F0307500C4D15F /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Todo; sourceTree = "<group>"; };
 		2C81694B19F0307500C4D15F /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = ../TemplateIcon2x.png; sourceTree = "<group>"; };
 		2C81694E19F05C3600C4D15F /* ImageSelectedProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectedProtocol.swift; sourceTree = "<group>"; };
@@ -116,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				2C81694A19F0307500C4D15F /* Todo */,
+				2C5148FF19F3CD9200D4D99E /* LinkedListPractice.playground */,
 				2C861BB019EDC8DF00069C14 /* Filter.swift */,
 				2CF8EF1719EC34B7003C77DC /* MODEL */,
 				2CF8EF1619EC34B4003C77DC /* VIEW */,
