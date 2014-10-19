@@ -11,47 +11,56 @@ import UIKit
 class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var galleryCollectionView: UICollectionView!
-    var flowLayout : UICollectionViewFlowLayout!
 
-    var galleryHeader : GalleryHeader?
     var imageArray = [UIImage]()
+    var image1 = UIImage(named: "1.jpg")
+    var image2 = UIImage(named: "2.jpg")
+    var image3 = UIImage(named: "3.jpg")
+    var image4 = UIImage(named: "4.jpg")
+    var image5 = UIImage(named: "5.jpg")
+    var image6 = UIImage(named: "6.jpg")
+    var image7 = UIImage(named: "7.jpg")
+    var image8 = UIImage(named: "8.jpg")
+    var image9 = UIImage(named: "9.jpg")
+    var image10 = UIImage(named: "10.jpg")
+    var image11 = UIImage(named: "11.jpg")
+
+    
+    var flowLayout : UICollectionViewFlowLayout!
+    var pinchAction = ReactToPinch()
+
     var delegate : ImageSelectedProtocol?
     
-    var pinchAction = ReactToPinch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
         
-        var image1 = UIImage(named: "1.jpg")
-        var image2 = UIImage(named: "2.jpg")
-        var image3 = UIImage(named: "3.jpg")
-        var image4 = UIImage(named: "4.jpg")
-        var image5 = UIImage(named: "5.jpg")
-        var image6 = UIImage(named: "6.jpg")
-        var image7 = UIImage(named: "7.jpg")
-        var image8 = UIImage(named: "8.jpg")
-        var image9 = UIImage(named: "9.jpg")
-        var image10 = UIImage(named: "10.jpg")
-        var image11 = UIImage(named: "11.jpg")
-        
-        self.imageArray = [ image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11,
-            image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11 ]
+        var image1thumb = self.makeThumbnail(UIImage(named: "1.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image2thumb = self.makeThumbnail(UIImage(named: "2.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image3thumb = self.makeThumbnail(UIImage(named: "3.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image4thumb = self.makeThumbnail(UIImage(named: "4.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image5thumb = self.makeThumbnail(UIImage(named: "5.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image6thumb = self.makeThumbnail(UIImage(named: "6.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image7thumb = self.makeThumbnail(UIImage(named: "7.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image8thumb = self.makeThumbnail(UIImage(named: "8.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image9thumb = self.makeThumbnail(UIImage(named: "9.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image10thumb = self.makeThumbnail(UIImage(named: "10.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+        var image11thumb = self.makeThumbnail(UIImage(named: "11.jpeg"), size: CGSize(width: 300.0, height: 300.0))
+
+        self.imageArray = [
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb,
+            image1thumb, image2thumb, image3thumb, image4thumb, image5thumb, image6thumb, image7thumb, image8thumb, image9thumb, image10thumb, image11thumb
+        ]
         
         
         self.flowLayout = self.galleryCollectionView.collectionViewLayout as UICollectionViewFlowLayout
@@ -66,6 +75,17 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
 
     
+    func makeThumbnail(image : UIImage, size : CGSize) -> UIImage {
+        let size = size
+        UIGraphicsBeginImageContext(size)
+        image.drawInRect(CGRect(x: 0, y: 0, width: 300, height: 300))
+        var imageThumb = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return imageThumb
+    }
+
+    
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.imageArray.count
     }
@@ -74,6 +94,8 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("GALLERY_CELL", forIndexPath: indexPath) as GalleryCell
         cell.imageView!.image = self.imageArray[indexPath.row]
+        
+        
         return cell
     }
     
@@ -89,18 +111,14 @@ class GalleryVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
         if kind == UICollectionElementKindSectionHeader {
-            println("header")
             let reusableView : GalleryHeader = galleryCollectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "GALLERY_HEADER", forIndexPath: indexPath) as GalleryHeader
             reusableView.headerLabel.text = "Images from unsplash.com"
             return reusableView
         }
         else {
-            println("footer")
             let reusableView : GalleryFooter = galleryCollectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: "GALLERY_FOOTER", forIndexPath: indexPath) as GalleryFooter
             reusableView.footerLabel.text = "\(self.imageArray.count) images available"
             return reusableView
         }
-
     }
-    
 }

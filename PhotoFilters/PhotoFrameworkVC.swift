@@ -72,6 +72,7 @@ class PhotoFrameworkVC: UIViewController, UICollectionViewDelegate, UICollection
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         // download image data and make full size UIImage. pass back to main VC
+        self.asset = self.assetFetchResults[indexPath.row] as? PHAsset
         self.imageManager.requestImageDataForAsset(self.asset, options: nil) { (data, string, orientation, info) -> Void in
             let largeImage = UIImage(data: data)
             self.delegate?.didSelectPicture(largeImage)

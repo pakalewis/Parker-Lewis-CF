@@ -17,13 +17,6 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
 
     @IBOutlet weak var mainImageView: UIImageView!
     @IBOutlet weak var thumbnailsCollection: UICollectionView!
-    var mainImage = UIImage(named: "default_image")
-    var mainImageWithFilters = UIImage(named: "default_image")
-    var mainThumbnail : UIImage?
-    var filters = [Filter]()
-    var thumbnailsArray : [ThumbnailContainer]?
-    var context : CIContext?
-    let imageQueue = NSOperationQueue()
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // constraint outlets
@@ -32,7 +25,15 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     @IBOutlet weak var mainImageViewTrailing: NSLayoutConstraint!
     @IBOutlet weak var filterCollectionBottom: NSLayoutConstraint!
     
-    
+    var mainImage = UIImage(named: "default_image")
+    var mainImageWithFilters = UIImage(named: "default_image")
+    var mainThumbnail : UIImage?
+    var filters = [Filter]()
+    var thumbnailsArray : [ThumbnailContainer]?
+    var context : CIContext?
+    let imageQueue = NSOperationQueue()
+    var tweetButton = UIBarButtonItem()
+    var saveButton = UIBarButtonItem()
     
     override func viewWillAppear(animated: Bool) {
         println("viewWillAppear fired")
@@ -48,18 +49,12 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         // refresh collection view of the filtered thumbnails
         self.thumbnailsCollection.reloadData()
         
-        
+        self.resetNavBarButtons()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var saveButton = UIBarButtonItem(title: "Save to Photos", style: UIBarButtonItemStyle.Plain, target: self, action: "saveToPhotoCollections")
-        self.navigationItem.leftBarButtonItem = saveButton
-        
-        var tweetButton = UIBarButtonItem(title: "Tweet", style: UIBarButtonItemStyle.Plain, target: self, action: "postaTweet")
-        self.navigationItem.rightBarButtonItem = tweetButton
         
         // set up for thumbnailsCollection View
         self.thumbnailsCollection.delegate = self
@@ -109,29 +104,34 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     }
     
     
-    func saveToPhotoCollections() {
-        println("save button pressed")
+    func resetNavBarButtons() {
+        saveButton = UIBarButtonItem(title: "Save to Photos", style: UIBarButtonItemStyle.Plain, target: self, action: "saveToPhotoCollections")
+        self.navigationItem.leftBarButtonItem = saveButton
         
+        self.tweetButton = UIBarButtonItem(title: "Tweet", style: UIBarButtonItemStyle.Plain, target: self, action: "postaTweet")
+        self.navigationItem.rightBarButtonItem = tweetButton
+    }
+    
+    
+    func saveToPhotoCollections() {
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
-            
             println()
             PHAssetChangeRequest.creationRequestForAssetFromImage(self.mainImageWithFilters)
-            
-            
         }, completionHandler: nil)
     }
     
     
     func postaTweet() {
-        
         if  SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
             println("is available")
             
-            var tweetSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            var tweetSheet : SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
             tweetSheet.setInitialText("I posted this photo from an app I built using Swift!")
             tweetSheet.addImage(self.mainImageWithFilters)
             
             self.presentViewController(tweetSheet, animated: true, completion: nil)
+        } else {
+            // present alert controller to say that twitter is unavailable
         }
     }
     
@@ -170,7 +170,8 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         }
     }
 
-    @IBAction func myButton(sender: AnyObject) {
+    
+    @IBAction func myButton(sender: UIButton) {
         // create alert view
         let alertController = UIAlertController(title: nil, message: "Choose photo from:", preferredStyle: UIAlertControllerStyle.ActionSheet)
 
@@ -185,11 +186,18 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
             self.performSegueWithIdentifier("SHOW_AVFOUNDATION_VC", sender: self)
         }
         let cameraAction = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default) { (action) -> Void in
-            let imagePicker = UIImagePickerController()
-            imagePicker.allowsEditing = true
-            imagePicker.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
-            imagePicker.delegate = self
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
+                imagePicker.allowsEditing = true
+                imagePicker.delegate = self
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+            } else {
+                var noCameraAlert = UIAlertController(title: "", message: "No camera is available on this device", preferredStyle: UIAlertControllerStyle.Alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+                noCameraAlert.addAction(okAction)
+                self.presentViewController(noCameraAlert, animated: true, completion: nil)
+            }
         }
         let filterAction = UIAlertAction(title: "Filter", style: UIAlertActionStyle.Default) { (action) -> Void in
             self.morphToFilterMode()
@@ -202,6 +210,14 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         alertController.addAction(avFoundationAction)
         alertController.addAction(filterAction)
         alertController.addAction(cancelAction)
+        alertController.modalPresentationStyle = UIModalPresentationStyle.PageSheet
+        
+        // alert controllers need extra info on where to display when on ipad
+        // this if only gets entered if device is ipad
+        if let pageSheet = alertController.popoverPresentationController {
+            pageSheet.sourceView = sender
+            pageSheet.sourceRect = sender.bounds
+        }
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
@@ -216,6 +232,7 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     }
     
     
+    // this gets called from the various other VCs according to the ImageSelectedProtocol
     func didSelectPicture(image : UIImage) {
         self.mainImage = image
         self.mainImageWithFilters = image
@@ -227,17 +244,16 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = self.thumbnailsCollection.dequeueReusableCellWithReuseIdentifier("filteredImageCell", forIndexPath: indexPath) as ThumbnailCell
         let currentCellTag = cell.tag
-        // why +1???
         
         // get the appropriate thumbnailContainer
         let thumbnailContainer = self.thumbnailsArray![indexPath.row]
+        
         // if the thumb has already been filtered, show it in the cell's image
         if thumbnailContainer.filteredThumbnail != nil {
             println("thumb at indexPath \(indexPath.row) already filtered")
             cell.imageView.image = thumbnailContainer.filteredThumbnail
         } else {
             // filtered thumb is not available yet
-            // first show original thumb
             println("display original thumb first, then apply filter")
             cell.imageView.image = thumbnailContainer.originalThumbnail
             
@@ -260,7 +276,7 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // add button to nav bar to allow user to show original image
-        var showOriginal = UIBarButtonItem(title: "Show Original", style: UIBarButtonItemStyle.Bordered, target: self, action: "showOriginal")
+        var showOriginal = UIBarButtonItem(title: "Show Original", style: UIBarButtonItemStyle.Bordered, target: self, action: "showOriginalImage")
         self.navigationItem.leftBarButtonItem = showOriginal
         
         // get the name of the filter and apply to the main image
@@ -269,21 +285,23 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         self.applyFilterToMainImage(filterName)
     }
     
+    
+    func showOriginalImage() {
+        self.mainImageView.image = self.mainImage
+        self.navigationItem.leftBarButtonItem = nil
+    }
+
 
     func applyFilterToMainImage(filterName : String) {
-        
         self.activityIndicator.startAnimating()
         
         imageQueue.addOperationWithBlock { () -> Void in
-            
-            
-            
             var ciImage = CIImage(image: self.mainImage)
             var imageFilter = CIFilter(name: filterName)
             imageFilter.setDefaults()
             imageFilter.setValue(ciImage, forKey: kCIInputImageKey)
             
-
+            // additional settings for the added filter
             if imageFilter.name() == "CIBloom" {
                 imageFilter.setValue(150.0, forKey: kCIInputRadiusKey)
                 imageFilter.setValue(50.0, forKey: kCIInputIntensityKey)
@@ -323,16 +341,8 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
-        self.navigationItem.rightBarButtonItem = nil
         
-        var saveButton = UIBarButtonItem(title: "Save to Photos", style: UIBarButtonItemStyle.Plain, target: self, action: "saveToPhotoCollections")
-        self.navigationItem.leftBarButtonItem = saveButton
-    }
-    
-    
-    func showOriginal() {
-        self.mainImageView.image = self.mainImage
-        self.navigationItem.leftBarButtonItem = nil
+        self.resetNavBarButtons()
     }
 }
 
