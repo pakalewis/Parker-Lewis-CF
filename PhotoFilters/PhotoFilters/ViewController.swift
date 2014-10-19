@@ -19,6 +19,7 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     @IBOutlet weak var thumbnailsCollection: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var filterNameLabel: UILabel!
     // constraint outlets
     @IBOutlet weak var mainImageViewLeading: NSLayoutConstraint!
     @IBOutlet weak var mainImageViewBottom: NSLayoutConstraint!
@@ -50,6 +51,8 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         self.thumbnailsCollection.reloadData()
         
         self.resetNavBarButtons()
+        
+        self.filterNameLabel.text = "No filter applied"
     }
     
     
@@ -205,9 +208,13 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (action) -> Void in
         }
         alertController.addAction(galleryAction)
-        alertController.addAction(cameraAction)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            alertController.addAction(cameraAction)
+        }
         alertController.addAction(frameworkAction)
-        alertController.addAction(avFoundationAction)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            alertController.addAction(avFoundationAction)
+        }
         alertController.addAction(filterAction)
         alertController.addAction(cancelAction)
         alertController.modalPresentationStyle = UIModalPresentationStyle.PageSheet
@@ -288,6 +295,7 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
     
     func showOriginalImage() {
         self.mainImageView.image = self.mainImage
+        self.filterNameLabel.text = "No filter applied"
         self.navigationItem.leftBarButtonItem = nil
     }
 
@@ -314,6 +322,7 @@ class ViewController: UIViewController, ImageSelectedProtocol, UIImagePickerCont
 
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.mainImageView.image = self.mainImageWithFilters
+                self.filterNameLabel.text = "\(filterName) filter applied"
                 self.activityIndicator.stopAnimating()
             })
         }

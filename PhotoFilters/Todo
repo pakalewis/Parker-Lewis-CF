@@ -1,12 +1,9 @@
 4. add new entity to core data to save whatever image was filtered
 
 
-filters names below each filter
-or just a label below main image to show the filter name
 
-animate the imageview on the av page
 
 
 fix cell sizes in pinch gesture
 
-copy the linked list stuff
+do the linked list stuff
