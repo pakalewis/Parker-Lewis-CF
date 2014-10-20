@@ -8,28 +8,46 @@
 
 import UIKit
 
-class RepoVC: UIViewController {
+class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    var repoArray = [Repo]()
+    
+    let networkController = NetworkController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        
+        let url = NSURL(string: "http://localhost:3000")
+        
+        self.networkController.getDataAndReturnJSON(url, completionHandler: { (errorDescription, repos) -> (Void) in
+            if errorDescription != nil {
+                println("there was an error getting the JSON")
+            } else {
+                self.repoArray = repos!
+                println("on repo VC, repo array count = \(self.repoArray.count)")
+                self.tableView.reloadData()
+            }
+        })
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("REPO_CELL", forIndexPath: indexPath) as RepoCell
+        let repo = self.repoArray[indexPath.row]
+        cell.nameLabel.text = repo.name
+        cell.urlLabel.text = repo.url
+        return cell
     }
-    */
-
+    
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.repoArray.count
+    }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplitContainerVC: UISplitViewController, UISplitViewControllerDelegate {
+class SplitContainerVC: UIViewController, UISplitViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
