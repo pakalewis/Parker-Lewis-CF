@@ -13,13 +13,42 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let globalNetworkController = NetworkController()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        
+        // detect if app is launched for the first time and store bool in userDefaults
+        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        let firstTimeLaunchingApp: Bool? = userDefaults.objectForKey("firstTimeLaunchingApp") as Bool?
+        if (firstTimeLaunchingApp == nil) {
+            userDefaults.setBool(true, forKey: "firstTimeLaunchingApp")
+        } else {
+            userDefaults.setBool(false, forKey: "firstTimeLaunchingApp")
+        }
+
+        // this grabs the stored bool and prints it. just a check to see if I'm storing it correctly
+        let firstLaunchBool = NSUserDefaults.standardUserDefaults().boolForKey("firstTimeLaunchingApp")
+            println("firstTimeLaunchingApp bool: \(firstLaunchBool)")
+        
+        
         return true
     }
 
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+
+        println("openURL in appDelegate fired")
+        println("this is the callback url: \(url)")
+        // this will take the url that github passed back to us and send it to the handleOAuthURL func in the network controller file. This url contains the request token in step 4 of the oauth workflow
+        self.globalNetworkController.handleOAuthURL(url)
+        return true
+    }
+
+    
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -55,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
         let modelURL = NSBundle.mainBundle().URLForResource("GithubbaHubba", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)
+        return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
@@ -72,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError.errorWithDomain("YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")

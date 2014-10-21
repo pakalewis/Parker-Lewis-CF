@@ -18,6 +18,8 @@ class SplitContainerVC: UIViewController, UISplitViewControllerDelegate {
 
     }
     
+    
+    // this shows the master VC first rather than the detail VC
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
         return true
     }

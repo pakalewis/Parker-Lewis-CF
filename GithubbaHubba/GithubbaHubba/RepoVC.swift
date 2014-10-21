@@ -16,6 +16,15 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let networkController = NetworkController()
     
+    override func viewWillAppear(animated: Bool) {
+        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        // this grabs the stored bool and prints it. just a check to see if I'm storing it correctly
+        let firstLaunchBool = NSUserDefaults.standardUserDefaults().boolForKey("firstTimeLaunchingApp")
+        println("firstTimeLaunchingApp bool: \(firstLaunchBool)")
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,8 +33,9 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         
         let url = NSURL(string: "http://localhost:3000")
-        
-        self.networkController.getDataAndReturnJSON(url, completionHandler: { (errorDescription, repos) -> (Void) in
+        // replace this with a url from github
+        // modify it to add the string captured from the search bar
+        self.networkController.getDataAndReturnJSON(url!, completionHandler: { (errorDescription, repos) -> (Void) in
             if errorDescription != nil {
                 println("there was an error getting the JSON")
             } else {
