@@ -11,8 +11,8 @@ import Foundation
 
 class NetworkController {
     
-//    var urlSession : NSURLSession!
-    var authenticatedConfig : NSURLSessionConfiguration?
+    var authenticatedSession : NSURLSession?
+    var OAuthToken : String?
     
     //MARK: NetworkController properties
     // these two were created after 'registering' this app with my github account
@@ -97,6 +97,7 @@ class NetworkController {
                         let firstHalfOfTokenString = tokenResponseDissected?.first as NSString
                         let furtherDissection = firstHalfOfTokenString.componentsSeparatedByString("=")
                         let actualToken = furtherDissection.last as String
+                        self.OAuthToken = actualToken
                         println("actualToken: \(actualToken)")
 
                         // now save the token in NSUserDefaults
@@ -108,12 +109,8 @@ class NetworkController {
                             var tempToken = userDefaults.objectForKey("OauthToken") as String
                             println("token already saved: \(tempToken)")
                         }
+                        self.setupAuthenticatedSession()
                         
-                        
-                        // set up configuration with the token. this config will be passed to the NSURLSession
-                        var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-                        configuration.HTTPAdditionalHeaders = ["authorization" : "token \(actualToken)"]
-                        self.authenticatedConfig = configuration
                         
                     default:
                         println("default case on status code: \(httpResponse.statusCode)")
@@ -126,17 +123,30 @@ class NetworkController {
     }
     
     
+    func setupAuthenticatedSession() {
+        println("setupAuthenticatedSession() fired")
+        // grab the token and save it in the self.OAuthToken property
+        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        self.OAuthToken = userDefaults.objectForKey("OauthToken") as? String
+        
+        // set up configuration with the token. this config will be passed to the NSURLSession
+        var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = ["Authorization" : "token \(self.OAuthToken!)"]
+        self.authenticatedSession = NSURLSession(configuration: configuration)
+        println(self.authenticatedSession?.configuration.HTTPAdditionalHeaders)
+    }
+    
     
     
     //MARK: JSON stuff
     func getDataAndReturnJSON(url : NSURL, completionHandler: (errorDescription : String?, repos : [Repo]?) -> (Void)) {
         
+        println("getDataAndReturnJSON fired")
         // setup data task for resource at URL
         // makes a GET requests, by default
-        // add the config I set up so that the nsurlsession request is authorized with my OAuth
-        let session = NSURLSession(configuration: self.authenticatedConfig!)
+        println(self.authenticatedSession?.configuration.HTTPAdditionalHeaders)
 
-        let dataTask = session.dataTaskWithURL(url, completionHandler: { (JSONdata, response, error) -> Void in
+        let dataTask = self.authenticatedSession!.dataTaskWithURL(url, completionHandler: { (JSONdata, response, error) -> Void in
             
             if error != nil {
                 println(error.localizedDescription)
@@ -146,14 +156,16 @@ class NetworkController {
             
             
             if let httpResponse = response as? NSHTTPURLResponse {
-                println("http response code: \(httpResponse.statusCode)")
+//                println("http response code: \(httpResponse.statusCode)")
+//                for header in httpResponse.allHeaderFields {
+//                    println("header: \(header)")
+//                }
+//                let responseString = NSString(data: JSONdata, encoding: NSUTF8StringEncoding)
+//                println("responseString: \(responseString)")
+
+                
                 switch httpResponse.statusCode {
                 case 200...204:
-//                    for header in httpResponse.allHeaderFields {
-//                        println("header: \(header)")
-//                    }
-//                    let responseString = NSString(data: JSONdata, encoding: NSUTF8StringEncoding)
-//                    println("responseString: \(responseString)")
                     
                     let repos = self.parseJSONDataIntoArrayOfRepos(JSONdata)
                     println("resulting array of repos: \(repos?.count)")

@@ -14,15 +14,9 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var repoArray = [Repo]()
     
-    let networkController = NetworkController()
+    var networkController : NetworkController!
     
     override func viewWillAppear(animated: Bool) {
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        
-        // this grabs the stored bool and prints it. just a check to see if I'm storing it correctly
-        let firstLaunchBool = NSUserDefaults.standardUserDefaults().boolForKey("firstTimeLaunchingApp")
-        println("firstTimeLaunchingApp bool: \(firstLaunchBool)")
-
     }
     
     override func viewDidLoad() {
@@ -31,10 +25,19 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        // grab reference to singular NetworkController from AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.globalNetworkController
+
+        // this is the base github url for searching repositories
+        var urlSearchString = "https://api.github.com/search/repositories?"
+        // modify it with the search term(s) from the search bar
+        urlSearchString = urlSearchString + "q=tetris"
+        println("urlSearchString: \(urlSearchString)")
+        let url = NSURL(string: urlSearchString)
         
-        let url = NSURL(string: "http://localhost:3000")
-        // replace this with a url from github
-        // modify it to add the string captured from the search bar
+        
+        // move this to the func that fires when user hits enter on search bar
         self.networkController.getDataAndReturnJSON(url!, completionHandler: { (errorDescription, repos) -> (Void) in
             if errorDescription != nil {
                 println("there was an error getting the JSON")

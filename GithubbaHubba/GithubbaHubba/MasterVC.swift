@@ -24,20 +24,17 @@ class MasterVC: UITableViewController {
         
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
-        // this will be in the if else that is commented out below
-        self.networkController.requestOAuthAccess()
-
         
-        // this grabs the stored firstLaunchBool and determines wether to call requestOAuthAccess()
-        // also check to see if a token was stored or not
-//        let firstLaunchBool = NSUserDefaults.standardUserDefaults().boolForKey("firstTimeLaunchingApp")
-//        if firstLaunchBool {
-//            println("calling requestOAuthAccess() from MasterVC")
-//            self.networkController.requestOAuthAccess()
-//        } else {
-//            // app already launched and OAuthAccess should be set up already
-//        }
-
+        // check to see if OAuth token is saved in NSUserDefaults
+        if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
+            // token already stored
+            println("Authorized token already saved: \(tokenCheck)")
+            self.networkController.setupAuthenticatedSession()
+        } else {
+            // no token so fire the NetworkController that requests authorization
+            self.networkController.requestOAuthAccess()
+        }
+        
         
     }
 
