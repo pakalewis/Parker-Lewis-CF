@@ -155,7 +155,6 @@ class NetworkController {
         // grab the token and save it in the self.OAuthToken property
         let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         self.OAuthToken = userDefaults.objectForKey("OauthToken") as? String
-        
         // set up configuration with the token. this config will be passed to the NSURLSession
         var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = ["Authorization" : "token \(self.OAuthToken!)"]
@@ -169,14 +168,13 @@ class NetworkController {
     
     
     //MARK: JSON stuff
-    func getDataAndReturnJSON(url : NSURL, completionHandler: (errorDescription : String?, repos : [Repo]?) -> (Void)) {
-        
+    // this fetches JSON data which will be derived via the url parameter
+    func fetchJSONData(url : NSURL, completionHandler: (errorDescription : String?, rawJSONData : NSData?) -> (Void)) {
         println("getDataAndReturnJSON fired")
+        
         // setup data task for resource at URL
         // makes a GET requests, by default
-        println(self.authenticatedSession?.configuration.HTTPAdditionalHeaders)
-
-        let dataTask = self.authenticatedSession!.dataTaskWithURL(url, completionHandler: { (JSONdata, response, error) -> Void in
+        let dataTask = self.authenticatedSession!.dataTaskWithURL(url, completionHandler: { (JSONData, response, error) -> Void in
             
             if error != nil {
                 println(error.localizedDescription)
@@ -184,23 +182,19 @@ class NetworkController {
                 println("no error")
             }
             
-            
             if let httpResponse = response as? NSHTTPURLResponse {
 //                println("http response code: \(httpResponse.statusCode)")
 //                for header in httpResponse.allHeaderFields {
 //                    println("header: \(header)")
 //                }
-//                let responseString = NSString(data: JSONdata, encoding: NSUTF8StringEncoding)
+//                let responseString = NSString(data: JSONData, encoding: NSUTF8StringEncoding)
 //                println("responseString: \(responseString)")
 
                 
                 switch httpResponse.statusCode {
                 case 200...204:
-                    
-                    let repos = self.parseJSONDataIntoArrayOfRepos(JSONdata)
-                    println("resulting array of repos: \(repos?.count)")
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                        completionHandler(errorDescription: nil, repos: repos)
+                        completionHandler(errorDescription: nil, rawJSONData: JSONData)
                     })
                 default:
                     println("bad response? \(httpResponse.statusCode)")
@@ -232,5 +226,32 @@ class NetworkController {
         return nil
     }
 
+    
+    
+    func parseJSONDataForUsers(rawJSONData : NSData ) -> [User]? {
+        var error : NSError?
+        
+        if let completeJSONDict = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
+            println("json serialized")
+            println(completeJSONDict)
+            var userArrayToReturn = [User]()
+            
+            if let itemsInJSONArray = completeJSONDict["items"] as? NSArray {
+                println("count of items \(itemsInJSONArray.count)")
+                for itemDict in itemsInJSONArray {
+                    var userName = itemDict["login"] as String
+                    var userURL = itemDict["html_url"] as String
+                    var avatarURL = itemDict["avatar_url"] as String
+                    var newUser = User(name: userName, url: userURL, avatarURL: avatarURL)
+                    userArrayToReturn.append(newUser)
+                }
+            }
+            println(userArrayToReturn.first?.userName)
+            println(userArrayToReturn.first?.userURL)
+            println(userArrayToReturn.first?.avatarURL)
+            return userArrayToReturn
+        }
+        return nil
+    }
     
 }

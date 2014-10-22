@@ -20,11 +20,23 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        // grab reference to singular NetworkController from AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = appDelegate.globalNetworkController
+        
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        
-        
+        super.viewDidAppear(animated)
         // check to see if OAuth token is saved in NSUserDefaults
+        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
             // token already stored
             println("Authorized token already saved: \(tokenCheck)")
@@ -36,21 +48,10 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
             // make alert controller
             var alert = self.networkController.makeAlertBeforeSafariOpens()
             self.presentViewController(alert, animated: true, completion: nil)
-            
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
-        // grab reference to singular NetworkController from AppDelegate
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.globalNetworkController
-
-    }
     
     
     
@@ -92,24 +93,25 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
             urlSearchString = urlSearchString + "q=\(searchText)"
             println("urlSearchString: \(urlSearchString)")
             let url = NSURL(string: urlSearchString)
-            
-            
-            // move this to the func that fires when user hits enter on search bar
-            self.networkController.getDataAndReturnJSON(url!, completionHandler: { (errorDescription, repos) -> (Void) in
+                        
+            self.networkController.fetchJSONData(url!, completionHandler: { (errorDescription, rawJSONData) -> (Void) in
+                
                 if errorDescription != nil {
                     println("there was an error getting the JSON")
                 } else {
-                    self.repoArray = repos!
+                    // use the JSONData to fetch the array of repos
+                    self.repoArray = self.networkController.parseJSONDataIntoArrayOfRepos(rawJSONData!)!
                     println("on repo VC, repo array count = \(self.repoArray.count)")
                     self.tableView.reloadData()
                 }
             })
+            
         } else {
             println("not authenticated. present alert")
             var alert = UIAlertController(title: "Alert", message: "Session is not yet authenticated", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
 //                self.requestOAuthAccess()
-                // figure out whether to do this self.requestOAuthAccess or setupAuthenticatedSession()
+                // figure out whether to do self.requestOAuthAccess or setupAuthenticatedSession()
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
             alert.addAction(OKAction)

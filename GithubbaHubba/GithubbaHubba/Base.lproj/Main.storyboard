@@ -159,8 +159,49 @@
                     <view key="view" contentMode="scaleToFill" id="bhK-HW-4eP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.1271434367" blue="0.15422664729999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="22A-XN-PfU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="gO7-L5-BFq" id="5bx-Tf-XPe"/>
+                                </connections>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JMa-CC-D63">
+                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="W1T-IO-wSe">
+                                    <size key="itemSize" width="115" height="136"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="USER_CELL" id="Eyh-RJ-YaU" customClass="UserCell" customModule="GithubbaHubba" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="115" height="136"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="0.9929069318" blue="0.17882314599999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="JMa-CC-D63" firstAttribute="leading" secondItem="bhK-HW-4eP" secondAttribute="leading" id="15i-K6-qlh"/>
+                            <constraint firstItem="22A-XN-PfU" firstAttribute="top" secondItem="nvg-6L-f0t" secondAttribute="bottom" id="2Ks-jP-Cx9"/>
+                            <constraint firstAttribute="bottom" secondItem="JMa-CC-D63" secondAttribute="bottom" id="59A-dQ-bT7"/>
+                            <constraint firstItem="22A-XN-PfU" firstAttribute="leading" secondItem="bhK-HW-4eP" secondAttribute="leading" id="NcD-2h-PVr"/>
+                            <constraint firstAttribute="trailing" secondItem="JMa-CC-D63" secondAttribute="trailing" id="PaW-UC-jnI"/>
+                            <constraint firstAttribute="trailing" secondItem="22A-XN-PfU" secondAttribute="trailing" id="XLf-7o-NKf"/>
+                            <constraint firstItem="JMa-CC-D63" firstAttribute="top" secondItem="22A-XN-PfU" secondAttribute="bottom" id="oKg-Y8-77g"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="JMa-CC-D63" id="6X0-oO-h7Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5S-zV-QD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
