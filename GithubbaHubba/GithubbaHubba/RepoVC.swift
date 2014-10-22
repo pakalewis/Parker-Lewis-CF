@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,10 +29,42 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         self.networkController = appDelegate.globalNetworkController
 
+    }
+    
+    
+    
+    
+    // MARK: Table View methods
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("REPO_CELL", forIndexPath: indexPath) as RepoCell
+        let repo = self.repoArray[indexPath.row]
+        cell.nameLabel.text = repo.name
+        cell.urlLabel.text = repo.url
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.repoArray.count
+    }
+
+    
+    
+    
+    
+    //MARK: Search Bar methods
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println(searchText)
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        let searchText = searchBar.text
+        println("user wants to search for: \(searchText)")
+        
         // this is the base github url for searching repositories
         var urlSearchString = "https://api.github.com/search/repositories?"
         // modify it with the search term(s) from the search bar
-        urlSearchString = urlSearchString + "q=tetris"
+        urlSearchString = urlSearchString + "q=\(searchText)"
         println("urlSearchString: \(urlSearchString)")
         let url = NSURL(string: urlSearchString)
         
@@ -47,20 +79,7 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.tableView.reloadData()
             }
         })
+
     }
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("REPO_CELL", forIndexPath: indexPath) as RepoCell
-        let repo = self.repoArray[indexPath.row]
-        cell.nameLabel.text = repo.name
-        cell.urlLabel.text = repo.url
-        return cell
-    }
-    
-    
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.repoArray.count
-    }
+
 }
