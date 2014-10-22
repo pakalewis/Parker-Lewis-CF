@@ -1,0 +1,31 @@
+for each VC for repos, users, profile, - move the Oauth check to the viewwillappear (maybe better viewdidappear) rather than in the master VC. this allows them to first view the master VC and then only do the oauth check when they go to the 3 vcs that require authentication
+- consolidate my alert controller setup
+make alert view before app sends user to safari so they know they are going to login to github
+
+
+
+
+get the struct for a singleton networkcontroller. this is added to the NetworkController Class
+//        class var sharedInstance: NetworkController {
+//        struct Static {
+//            static var instance: NetworkController?
+//            static var token: dispatch_once_t = 0
+//            }
+//            dispatch_once(&Static.token) {
+//                Static.instance = NetworkController()
+//            }
+//            return Static.instance!
+//        }
+
+
+
+
+make searchbar hide when user hits 'enter'
+in searchbar clicked
+resign first responder
+
+
+
+
+read for animation stufff
+Motion Design for iOS by Mike Rundle

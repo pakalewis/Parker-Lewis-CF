@@ -19,6 +19,7 @@
 		2C31888D19F5A50300DD8693 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888C19F5A50300DD8693 /* UserVC.swift */; };
 		2C31888F19F5A51600DD8693 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888E19F5A51600DD8693 /* ProfileVC.swift */; };
 		2C31889119F5A6CE00DD8693 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31889019F5A6CE00DD8693 /* NetworkController.swift */; };
+		2C6B20C419F8103200B8B608 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B20C319F8103200B8B608 /* Todo */; };
 		2CE5D7D319F5B834006A1B85 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5D7D219F5B834006A1B85 /* Repo.swift */; };
 		2CE5D7D519F5C71D006A1B85 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		2C31888C19F5A50300DD8693 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		2C31888E19F5A51600DD8693 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		2C31889019F5A6CE00DD8693 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		2C6B20C319F8103200B8B608 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Todo; path = GithubbaHubba/Todo; sourceTree = "<group>"; };
 		2CE5D7D219F5B834006A1B85 /* Repo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +77,7 @@
 		2C31885519F59CE700DD8693 = {
 			isa = PBXGroup;
 			children = (
+				2C6B20C319F8103200B8B608 /* Todo */,
 				2C31886019F59CE700DD8693 /* GithubbaHubba */,
 				2C31887919F59CE700DD8693 /* GithubbaHubbaTests */,
 				2C31885F19F59CE700DD8693 /* Products */,
@@ -218,6 +221,7 @@
 			files = (
 				2C31886C19F59CE700DD8693 /* Main.storyboard in Resources */,
 				2C31887119F59CE700DD8693 /* LaunchScreen.xib in Resources */,
+				2C6B20C419F8103200B8B608 /* Todo in Resources */,
 				2C31886E19F59CE700DD8693 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

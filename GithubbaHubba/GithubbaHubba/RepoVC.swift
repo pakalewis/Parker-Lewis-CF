@@ -19,6 +19,27 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     override func viewWillAppear(animated: Bool) {
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        
+        
+        // check to see if OAuth token is saved in NSUserDefaults
+        if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
+            // token already stored
+            println("Authorized token already saved: \(tokenCheck)")
+            
+            self.networkController.setupAuthenticatedSession()
+        } else {
+            // no token so fire the NetworkController that requests authorization
+
+            // make alert controller
+            var alert = self.networkController.makeAlertBeforeSafariOpens()
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,25 +82,41 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         let searchText = searchBar.text
         println("user wants to search for: \(searchText)")
         
-        // this is the base github url for searching repositories
-        var urlSearchString = "https://api.github.com/search/repositories?"
-        // modify it with the search term(s) from the search bar
-        urlSearchString = urlSearchString + "q=\(searchText)"
-        println("urlSearchString: \(urlSearchString)")
-        let url = NSURL(string: urlSearchString)
+        searchBar.resignFirstResponder()
         
-        
-        // move this to the func that fires when user hits enter on search bar
-        self.networkController.getDataAndReturnJSON(url!, completionHandler: { (errorDescription, repos) -> (Void) in
-            if errorDescription != nil {
-                println("there was an error getting the JSON")
-            } else {
-                self.repoArray = repos!
-                println("on repo VC, repo array count = \(self.repoArray.count)")
-                self.tableView.reloadData()
+        if self.networkController.authenticated {
+            // returns true if authenticated so do the network call
+            // this is the base github url for searching repositories
+            var urlSearchString = "https://api.github.com/search/repositories?"
+            // modify it with the search term(s) from the search bar
+            urlSearchString = urlSearchString + "q=\(searchText)"
+            println("urlSearchString: \(urlSearchString)")
+            let url = NSURL(string: urlSearchString)
+            
+            
+            // move this to the func that fires when user hits enter on search bar
+            self.networkController.getDataAndReturnJSON(url!, completionHandler: { (errorDescription, repos) -> (Void) in
+                if errorDescription != nil {
+                    println("there was an error getting the JSON")
+                } else {
+                    self.repoArray = repos!
+                    println("on repo VC, repo array count = \(self.repoArray.count)")
+                    self.tableView.reloadData()
+                }
+            })
+        } else {
+            println("not authenticated. present alert")
+            var alert = UIAlertController(title: "Alert", message: "Session is not yet authenticated", preferredStyle: UIAlertControllerStyle.Alert)
+            let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
+//                self.requestOAuthAccess()
+                // figure out whether to do this self.requestOAuthAccess or setupAuthenticatedSession()
             }
-        })
-
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            alert.addAction(OKAction)
+            alert.addAction(cancelAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
     }
 
 }

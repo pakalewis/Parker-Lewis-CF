@@ -18,22 +18,22 @@ class MasterVC: UITableViewController {
         println("MasterVC viewDidLoad")
         // check if app loads for first time
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.globalNetworkController
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        self.networkController = appDelegate.globalNetworkController
         
         
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        
-        
-        // check to see if OAuth token is saved in NSUserDefaults
-        if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
-            // token already stored
-            println("Authorized token already saved: \(tokenCheck)")
-            self.networkController.setupAuthenticatedSession()
-        } else {
-            // no token so fire the NetworkController that requests authorization
-            self.networkController.requestOAuthAccess()
-        }
+//        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        
+//        
+//        // check to see if OAuth token is saved in NSUserDefaults
+//        if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
+//            // token already stored
+//            println("Authorized token already saved: \(tokenCheck)")
+//            self.networkController.setupAuthenticatedSession()
+//        } else {
+//            // no token so fire the NetworkController that requests authorization
+//            self.networkController.requestOAuthAccess()
+//        }
         
         
     }

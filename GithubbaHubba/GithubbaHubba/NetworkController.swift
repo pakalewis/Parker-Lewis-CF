@@ -11,7 +11,21 @@ import Foundation
 
 class NetworkController {
     
+    
+//    class var sharedInstance: NetworkController {
+//    struct Static {
+//        static var instance: NetworkController?
+//        static var token: dispatch_once_t = 0
+//        }
+//        dispatch_once(&Static.token) {
+//            Static.instance = NetworkController()
+//        }
+//        return Static.instance!
+//    }
+    
+    
     var authenticatedSession : NSURLSession?
+    var authenticated : Bool = false
     var OAuthToken : String?
     
     //MARK: NetworkController properties
@@ -34,6 +48,19 @@ class NetworkController {
 
     init() {
         
+    }
+    
+    // this gets called from any of RepoVC, UserVC, or ProfileVC if there is no Oauth token yet
+    func makeAlertBeforeSafariOpens() -> UIAlertController {
+        var alert = UIAlertController(title: "Alert", message: "Safari will now open so that you can log in to GitHub.com", preferredStyle: UIAlertControllerStyle.Alert)
+        let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
+            self.requestOAuthAccess()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        alert.addAction(OKAction)
+        alert.addAction(cancelAction)
+        
+        return alert
     }
     
     //MARK: OAuth stuff
@@ -133,7 +160,10 @@ class NetworkController {
         var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = ["Authorization" : "token \(self.OAuthToken!)"]
         self.authenticatedSession = NSURLSession(configuration: configuration)
-        println(self.authenticatedSession?.configuration.HTTPAdditionalHeaders)
+//        println(self.authenticatedSession?.configuration.HTTPAdditionalHeaders)
+
+        self.authenticated = true
+        println("authenticated?: \(self.authenticated)")
     }
     
     
