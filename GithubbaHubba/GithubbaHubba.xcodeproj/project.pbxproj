@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2C06EED319F8660600B76992 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EED219F8660600B76992 /* User.swift */; };
+		2C06EED819F86EE500B76992 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C06EED719F86EE500B76992 /* default.png */; };
+		2C06EEDA19F878A100B76992 /* SingleUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EED919F878A100B76992 /* SingleUserVC.swift */; };
+		2C06EEDD19F883DC00B76992 /* ShowImageAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EEDB19F883DC00B76992 /* ShowImageAnimator.swift */; };
+		2C06EEDE19F883DC00B76992 /* HideImageAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EEDC19F883DC00B76992 /* HideImageAnimator.swift */; };
 		2C31886419F59CE700DD8693 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31886319F59CE700DD8693 /* AppDelegate.swift */; };
 		2C31886719F59CE700DD8693 /* GithubbaHubba.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C31886519F59CE700DD8693 /* GithubbaHubba.xcdatamodeld */; };
 		2C31886C19F59CE700DD8693 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C31886A19F59CE700DD8693 /* Main.storyboard */; };
@@ -17,7 +21,7 @@
 		2C31888719F5A09B00DD8693 /* SplitContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888619F5A09B00DD8693 /* SplitContainerVC.swift */; };
 		2C31888919F5A4D400DD8693 /* MasterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888819F5A4D400DD8693 /* MasterVC.swift */; };
 		2C31888B19F5A4F400DD8693 /* RepoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888A19F5A4F400DD8693 /* RepoVC.swift */; };
-		2C31888D19F5A50300DD8693 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888C19F5A50300DD8693 /* UserVC.swift */; };
+		2C31888D19F5A50300DD8693 /* UserCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888C19F5A50300DD8693 /* UserCollectionVC.swift */; };
 		2C31888F19F5A51600DD8693 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31888E19F5A51600DD8693 /* ProfileVC.swift */; };
 		2C31889119F5A6CE00DD8693 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31889019F5A6CE00DD8693 /* NetworkController.swift */; };
 		2C6B20C419F8103200B8B608 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B20C319F8103200B8B608 /* Todo */; };
@@ -38,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		2C06EED219F8660600B76992 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2C06EED719F86EE500B76992 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		2C06EED919F878A100B76992 /* SingleUserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleUserVC.swift; sourceTree = "<group>"; };
+		2C06EEDB19F883DC00B76992 /* ShowImageAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowImageAnimator.swift; sourceTree = "<group>"; };
+		2C06EEDC19F883DC00B76992 /* HideImageAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideImageAnimator.swift; sourceTree = "<group>"; };
 		2C31885E19F59CE700DD8693 /* GithubbaHubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubbaHubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C31886219F59CE700DD8693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C31886319F59CE700DD8693 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -51,7 +59,7 @@
 		2C31888619F5A09B00DD8693 /* SplitContainerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplitContainerVC.swift; path = ../SplitContainerVC.swift; sourceTree = "<group>"; };
 		2C31888819F5A4D400DD8693 /* MasterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterVC.swift; sourceTree = "<group>"; };
 		2C31888A19F5A4F400DD8693 /* RepoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoVC.swift; sourceTree = "<group>"; };
-		2C31888C19F5A50300DD8693 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
+		2C31888C19F5A50300DD8693 /* UserCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionVC.swift; sourceTree = "<group>"; };
 		2C31888E19F5A51600DD8693 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		2C31889019F5A6CE00DD8693 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		2C6B20C319F8103200B8B608 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Todo; path = GithubbaHubba/Todo; sourceTree = "<group>"; };
@@ -78,6 +86,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C06EED419F86B4800B76992 /* USER */ = {
+			isa = PBXGroup;
+			children = (
+				2C31888C19F5A50300DD8693 /* UserCollectionVC.swift */,
+				2C06EED219F8660600B76992 /* User.swift */,
+				2C6B20C519F8537300B8B608 /* UserCell.swift */,
+				2C06EED919F878A100B76992 /* SingleUserVC.swift */,
+			);
+			name = USER;
+			sourceTree = "<group>";
+		};
+		2C06EED519F86B5000B76992 /* REPO */ = {
+			isa = PBXGroup;
+			children = (
+				2C31888A19F5A4F400DD8693 /* RepoVC.swift */,
+				2CE5D7D219F5B834006A1B85 /* Repo.swift */,
+				2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */,
+			);
+			name = REPO;
+			sourceTree = "<group>";
+		};
+		2C06EED619F86B5900B76992 /* PROFILE */ = {
+			isa = PBXGroup;
+			children = (
+				2C31888E19F5A51600DD8693 /* ProfileVC.swift */,
+			);
+			name = PROFILE;
+			sourceTree = "<group>";
+		};
 		2C31885519F59CE700DD8693 = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +140,11 @@
 				2C31886A19F59CE700DD8693 /* Main.storyboard */,
 				2C31888619F5A09B00DD8693 /* SplitContainerVC.swift */,
 				2C31888819F5A4D400DD8693 /* MasterVC.swift */,
-				2C31888A19F5A4F400DD8693 /* RepoVC.swift */,
-				2CE5D7D219F5B834006A1B85 /* Repo.swift */,
-				2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */,
-				2C31888C19F5A50300DD8693 /* UserVC.swift */,
-				2C06EED219F8660600B76992 /* User.swift */,
-				2C6B20C519F8537300B8B608 /* UserCell.swift */,
-				2C31888E19F5A51600DD8693 /* ProfileVC.swift */,
+				2C06EEDB19F883DC00B76992 /* ShowImageAnimator.swift */,
+				2C06EEDC19F883DC00B76992 /* HideImageAnimator.swift */,
+				2C06EED519F86B5000B76992 /* REPO */,
+				2C06EED419F86B4800B76992 /* USER */,
+				2C06EED619F86B5900B76992 /* PROFILE */,
 				2C31889019F5A6CE00DD8693 /* NetworkController.swift */,
 				2C31886319F59CE700DD8693 /* AppDelegate.swift */,
 				2C31886D19F59CE700DD8693 /* Images.xcassets */,
@@ -123,6 +158,7 @@
 		2C31886119F59CE700DD8693 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C06EED719F86EE500B76992 /* default.png */,
 				2C31886219F59CE700DD8693 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -229,6 +265,7 @@
 				2C31887119F59CE700DD8693 /* LaunchScreen.xib in Resources */,
 				2C6B20C419F8103200B8B608 /* Todo in Resources */,
 				2C31886E19F59CE700DD8693 /* Images.xcassets in Resources */,
+				2C06EED819F86EE500B76992 /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C31888D19F5A50300DD8693 /* UserVC.swift in Sources */,
+				2C31888D19F5A50300DD8693 /* UserCollectionVC.swift in Sources */,
 				2C31888B19F5A4F400DD8693 /* RepoVC.swift in Sources */,
 				2C31888919F5A4D400DD8693 /* MasterVC.swift in Sources */,
 				2CE5D7D319F5B834006A1B85 /* Repo.swift in Sources */,
@@ -256,8 +293,11 @@
 				2C31886719F59CE700DD8693 /* GithubbaHubba.xcdatamodeld in Sources */,
 				2C06EED319F8660600B76992 /* User.swift in Sources */,
 				2C31886419F59CE700DD8693 /* AppDelegate.swift in Sources */,
+				2C06EEDA19F878A100B76992 /* SingleUserVC.swift in Sources */,
+				2C06EEDE19F883DC00B76992 /* HideImageAnimator.swift in Sources */,
 				2C6B20C619F8537300B8B608 /* UserCell.swift in Sources */,
 				2C31889119F5A6CE00DD8693 /* NetworkController.swift in Sources */,
+				2C06EEDD19F883DC00B76992 /* ShowImageAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

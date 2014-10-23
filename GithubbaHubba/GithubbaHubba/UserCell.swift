@@ -9,5 +9,12 @@
 import UIKit
 
 class UserCell: UICollectionViewCell {
+  
+    
+    
+    @IBOutlet weak var userAvatarImageView: UIImageView!
+    
+    @IBOutlet weak var userName: UILabel!
+    
     
 }

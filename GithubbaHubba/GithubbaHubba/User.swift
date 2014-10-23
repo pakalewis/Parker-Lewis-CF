@@ -7,11 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
 class User {
     var userName : String?
     var userURL : String?
     var avatarURL : String?
+    var avatarImage : UIImage?
+    
+    init() {
+        self.userName = ""
+        self.avatarImage = UIImage(named: "default")
+    }
     
     init (name: String, url: String, avatarURL: String) {
         self.userName = name

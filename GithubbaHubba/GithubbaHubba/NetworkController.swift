@@ -27,6 +27,7 @@ class NetworkController {
     var authenticatedSession : NSURLSession?
     var authenticated : Bool = false
     var OAuthToken : String?
+    let imageQueue = NSOperationQueue()
     
     //MARK: NetworkController properties
     // these two were created after 'registering' this app with my github account
@@ -50,7 +51,7 @@ class NetworkController {
         
     }
     
-    // this gets called from any of RepoVC, UserVC, or ProfileVC if there is no Oauth token yet
+    // this gets called from any of RepoVC, UserCollectionVC, or ProfileVC if there is no Oauth token yet
     func makeAlertBeforeSafariOpens() -> UIAlertController {
         var alert = UIAlertController(title: "Alert", message: "Safari will now open so that you can log in to GitHub.com", preferredStyle: UIAlertControllerStyle.Alert)
         let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
@@ -254,4 +255,28 @@ class NetworkController {
         return nil
     }
     
+    
+    func downloadImage(user : User, completionHandler: (image: UIImage) -> Void) {
+        self.imageQueue.addOperationWithBlock { () -> Void in
+            
+            let urlString = user.avatarURL!
+            let url = NSURL(string: urlString)
+            
+            // network call to get the image data
+            let imageData = NSData(contentsOfURL: url!)
+            
+            // create UIImage
+            let image = UIImage(data: imageData!)
+            
+            // store image
+            user.avatarImage = image
+            
+            // return to main queue and send back the image
+            // HOW DOES THIS RETURN THE IMAGE???
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                completionHandler(image: image!)
+            })
+        }
+    }
+
 }

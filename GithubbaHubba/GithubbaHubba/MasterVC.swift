@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MasterVC: UITableViewController {
+class MasterVC: UITableViewController, UINavigationControllerDelegate {
 
     var networkController : NetworkController!
     
@@ -18,25 +18,33 @@ class MasterVC: UITableViewController {
         println("MasterVC viewDidLoad")
         // check if app loads for first time
         
-//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        self.networkController = appDelegate.globalNetworkController
-        
-        
-//        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        
-//        
-//        // check to see if OAuth token is saved in NSUserDefaults
-//        if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
-//            // token already stored
-//            println("Authorized token already saved: \(tokenCheck)")
-//            self.networkController.setupAuthenticatedSession()
-//        } else {
-//            // no token so fire the NetworkController that requests authorization
-//            self.networkController.requestOAuthAccess()
-//        }
-        
+        self.navigationController?.delegate = self
         
     }
 
+    
+    
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        // This is called whenever during all navigation operations
+        
+        // Only return a custom animator for two view controller types
+        if let mainViewController = fromVC as? UserCollectionVC {
+            let animator = ShowImageAnimator()
+            animator.origin = mainViewController.origin
+            
+            return animator
+        }
+        else if let imageViewController = fromVC as? SingleUserVC {
+            let animator = HideImageAnimator()
+            animator.origin = imageViewController.reverseOrigin
+            
+            return animator
+        }
+        
+        println("navController func fired")
+        
+        // All other types use default transition
+        return nil
+    }
 
 }

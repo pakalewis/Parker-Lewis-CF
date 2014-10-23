@@ -1,5 +1,5 @@
 //
-//  UserVC.swift
+//  UserCollectionVC.swift
 //  GithubbaHubba
 //
 //  Created by Parker Lewis on 10/20/14.
@@ -8,13 +8,29 @@
 
 import UIKit
 
-class UserVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var instructionsLabel: UILabel!
     
     var networkController : NetworkController!
     var userArray = [User]()
+    var currentUser = User()
+    var defaultImage = UIImage(named: "default")
 
+    var origin: CGRect?
+    
+    var returnedFromSingleUserView = false
+    
+    override func viewWillAppear(animated: Bool) {
+        if self.returnedFromSingleUserView {
+            self.collectionView.hidden = false
+        } else {
+            self.collectionView.hidden = true
+        }
+        self.instructionsLabel.text = "Use the search bar to search GitHub Users"
+        self.view.addSubview(self.instructionsLabel)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,21 +58,75 @@ class UserVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
             // make alert controller
             var alert = self.networkController.makeAlertBeforeSafariOpens()
             self.presentViewController(alert, animated: true, completion: nil)
-            
         }
+        
     }
 
 
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return self.userArray.count
     }
     
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
+
+        let currentUser = self.userArray[indexPath.row]
+        let currentCellTag = cell.tag
+        cell.userName.text = currentUser.userName
+        
+        
+        
+        // if the avatar has already been downloaded, show it in the cell's image
+        if currentUser.avatarImage != nil {
+            println("avatar at indexPath \(indexPath.row) already downloaded")
+            cell.userAvatarImageView.image = currentUser.avatarImage
+        } else {
+            // avatar image is not available yet
+            println("display default image first, then download actual avatar")
+            cell.userAvatarImageView.image = self.defaultImage
+            
+            // download avatar, provided the cell is still visible
+            self.networkController.downloadImage(currentUser, completionHandler: { (image) -> Void in
+                if currentCellTag == cell.tag {
+                    println("avatar downloaded, and now is displayed")
+                    cell.userAvatarImageView.image = image
+                }
+
+            })
+        }
         return cell
     }
+    
+    
+    
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // Grab the attributes of the tapped upon cell
+        let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
+        
+        // Grab the onscreen rectangle of the tapped upon cell, relative to the collection view
+        let origin = self.view.convertRect(attributes!.frame, fromView: collectionView)
+        
+        // Save our starting location as the tapped upon cells frame
+        self.origin = origin
+        
+        
+        
+        // initialize next view controller
+        var destinationVC = storyboard?.instantiateViewControllerWithIdentifier("SingleUserVC") as SingleUserVC
+
+        // Set currentUser and reverseOrigin properties on next view controller
+        self.currentUser = self.userArray[indexPath.row]
+        destinationVC.currentUser = self.currentUser
+        destinationVC.reverseOrigin = self.origin!
+        
+        self.returnedFromSingleUserView = true
+        
+        self.navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
     
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -81,10 +151,9 @@ class UserVC: UIViewController, UICollectionViewDataSource, UICollectionViewDele
                 } else {
                     println("getting json for User")
                     self.userArray = self.networkController.parseJSONDataForUsers(rawJSONData!)!
-                    // use the JSONData to fetch the array of repos
-//                    self.repoArray = self.networkController.parseJSONDataIntoArrayOfRepos(rawJSONData!)!
-//                    println("on repo VC, repo array count = \(self.repoArray.count)")
-//                    self.tableView.reloadData()
+                    self.collectionView.reloadData()
+                    self.collectionView.hidden = false
+                    self.instructionsLabel.hidden = true
                 }
             })
             
