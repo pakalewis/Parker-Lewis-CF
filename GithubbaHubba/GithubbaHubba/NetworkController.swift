@@ -51,6 +51,8 @@ class NetworkController {
         
     }
     
+    
+    
     // this gets called from any of RepoVC, UserCollectionVC, or ProfileVC if there is no Oauth token yet
     func makeAlertBeforeSafariOpens() -> UIAlertController {
         var alert = UIAlertController(title: "Alert", message: "Safari will now open so that you can log in to GitHub.com", preferredStyle: UIAlertControllerStyle.Alert)
@@ -63,6 +65,8 @@ class NetworkController {
         
         return alert
     }
+    
+    
     
     //MARK: OAuth stuff
     func requestOAuthAccess() {
@@ -160,10 +164,7 @@ class NetworkController {
         var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
         configuration.HTTPAdditionalHeaders = ["Authorization" : "token \(self.OAuthToken!)"]
         self.authenticatedSession = NSURLSession(configuration: configuration)
-//        println(self.authenticatedSession?.configuration.HTTPAdditionalHeaders)
-
         self.authenticated = true
-        println("authenticated?: \(self.authenticated)")
     }
     
     
@@ -184,14 +185,6 @@ class NetworkController {
             }
             
             if let httpResponse = response as? NSHTTPURLResponse {
-//                println("http response code: \(httpResponse.statusCode)")
-//                for header in httpResponse.allHeaderFields {
-//                    println("header: \(header)")
-//                }
-//                let responseString = NSString(data: JSONData, encoding: NSUTF8StringEncoding)
-//                println("responseString: \(responseString)")
-
-                
                 switch httpResponse.statusCode {
                 case 200...204:
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -206,19 +199,20 @@ class NetworkController {
     }
     
     
-    func parseJSONDataIntoArrayOfRepos(rawJSONData : NSData ) -> [Repo]? {
+    func parseJSONDataForRepos(rawJSONData : NSData ) -> [Repo]? {
         var error : NSError?
        
         if let completeJSONDict = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
-            println("json serialized")
             var repoArrayToReturn = [Repo]()
 
             if let itemsInJSONArray = completeJSONDict["items"] as? NSArray {
-                println("count of items \(itemsInJSONArray.count)")
                 for itemDict in itemsInJSONArray {
                     var repoName = itemDict["name"] as String
                     var repoURL = itemDict["html_url"] as String
-                    var newRepo = Repo(name: repoName, url: repoURL)
+                    let ownerDict = itemDict["owner"] as NSDictionary
+                    let repoAvatarURL = ownerDict["avatar_url"] as String
+
+                    var newRepo = Repo(name: repoName, url: repoURL, repoAvatarURL: repoAvatarURL)
                     repoArrayToReturn.append(newRepo)
                 }
             }
@@ -233,12 +227,9 @@ class NetworkController {
         var error : NSError?
         
         if let completeJSONDict = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
-            println("json serialized")
-            println(completeJSONDict)
             var userArrayToReturn = [User]()
             
             if let itemsInJSONArray = completeJSONDict["items"] as? NSArray {
-                println("count of items \(itemsInJSONArray.count)")
                 for itemDict in itemsInJSONArray {
                     var userName = itemDict["login"] as String
                     var userURL = itemDict["html_url"] as String
@@ -247,32 +238,25 @@ class NetworkController {
                     userArrayToReturn.append(newUser)
                 }
             }
-            println(userArrayToReturn.first?.userName)
-            println(userArrayToReturn.first?.userURL)
-            println(userArrayToReturn.first?.avatarURL)
             return userArrayToReturn
         }
         return nil
     }
     
     
-    func downloadImage(user : User, completionHandler: (image: UIImage) -> Void) {
+    
+    func downloadImage(imageURLString : String, completionHandler: (image: UIImage) -> Void) {
         self.imageQueue.addOperationWithBlock { () -> Void in
             
-            let urlString = user.avatarURL!
-            let url = NSURL(string: urlString)
+            let imageURL = NSURL(string: imageURLString)
             
             // network call to get the image data
-            let imageData = NSData(contentsOfURL: url!)
+            let imageData = NSData(contentsOfURL: imageURL!)
             
             // create UIImage
             let image = UIImage(data: imageData!)
             
-            // store image
-            user.avatarImage = image
-            
             // return to main queue and send back the image
-            // HOW DOES THIS RETURN THE IMAGE???
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 completionHandler(image: image!)
             })

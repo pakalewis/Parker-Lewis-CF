@@ -10,6 +10,7 @@ import UIKit
 
 class RepoCell: UITableViewCell {
 
+    @IBOutlet weak var repoAvatarImageView: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
     

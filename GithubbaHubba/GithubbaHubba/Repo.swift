@@ -7,13 +7,23 @@
 //
 
 import Foundation
+import UIKit
 
 class Repo {
     var name : String
     var url : String
+    var avatarURL : String
+    var avatarImage : UIImage?
     
-    init (name: String, url: String) {
+    init() {
+        self.name = ""
+        self.url = ""
+        self.avatarURL = ""
+    }
+    
+    init (name: String, url: String, repoAvatarURL: String) {
         self.name = name
         self.url = url
+        self.avatarURL = repoAvatarURL
     }
 }

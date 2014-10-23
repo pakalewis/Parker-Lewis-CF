@@ -29,10 +29,12 @@ class MasterVC: UITableViewController, UINavigationControllerDelegate {
         
         // Only return a custom animator for two view controller types
         if let mainViewController = fromVC as? UserCollectionVC {
-            let animator = ShowImageAnimator()
-            animator.origin = mainViewController.origin
-            
-            return animator
+            if let toViewController = toVC as? SingleUserVC {
+                let animator = ShowImageAnimator()
+                animator.origin = mainViewController.origin
+                
+                return animator                
+            }
         }
         else if let imageViewController = fromVC as? SingleUserVC {
             let animator = HideImageAnimator()

@@ -44,20 +44,25 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        // check to see if OAuth token is saved in NSUserDefaults
-        let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
-            // token already stored
-            println("Authorized token already saved: \(tokenCheck)")
-            
-            self.networkController.setupAuthenticatedSession()
+        if !self.networkController.authenticated {
+            // check to see if OAuth token is saved in NSUserDefaults
+            let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+            if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
+                // token already stored
+                println("Authorized token already saved: \(tokenCheck)")
+                
+                self.networkController.setupAuthenticatedSession()
+            } else {
+                // no token so fire the NetworkController that requests authorization
+                
+                // make alert controller
+                var alert = self.networkController.makeAlertBeforeSafariOpens()
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         } else {
-            // no token so fire the NetworkController that requests authorization
-            
-            // make alert controller
-            var alert = self.networkController.makeAlertBeforeSafariOpens()
-            self.presentViewController(alert, animated: true, completion: nil)
+            println("ALREADY AUTHENTICATED")
         }
         
     }
@@ -72,25 +77,30 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
 
-        let currentUser = self.userArray[indexPath.row]
-        let currentCellTag = cell.tag
-        cell.userName.text = currentUser.userName
+        self.currentUser = self.userArray[indexPath.row]
+        let currentCellTag = cell.tag + 1
+        cell.tag = currentCellTag
         
         
         
         // if the avatar has already been downloaded, show it in the cell's image
         if currentUser.avatarImage != nil {
             println("avatar at indexPath \(indexPath.row) already downloaded")
-            cell.userAvatarImageView.image = currentUser.avatarImage
+            cell.userAvatarImageView.image = self.currentUser.avatarImage
         } else {
             // avatar image is not available yet
             println("display default image first, then download actual avatar")
             cell.userAvatarImageView.image = self.defaultImage
             
             // download avatar, provided the cell is still visible
-            self.networkController.downloadImage(currentUser, completionHandler: { (image) -> Void in
+            
+            self.networkController.downloadImage(self.currentUser.avatarURL!, completionHandler: { (image) -> Void in
+                // store image in User object
+                self.currentUser.avatarImage = image
+
                 if currentCellTag == cell.tag {
                     println("avatar downloaded, and now is displayed")
+                    cell.userName.text = self.currentUser.userName
                     cell.userAvatarImageView.image = image
                 }
 
@@ -115,7 +125,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         
         
         // initialize next view controller
-        var destinationVC = storyboard?.instantiateViewControllerWithIdentifier("SingleUserVC") as SingleUserVC
+        var destinationVC = storyboard?.instantiateViewControllerWithIdentifier("SINGLE_USER_VC") as SingleUserVC
 
         // Set currentUser and reverseOrigin properties on next view controller
         self.currentUser = self.userArray[indexPath.row]
@@ -138,7 +148,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         if self.networkController.authenticated {
             // returns true if authenticated so do the network call
             // this is the base github url for searching users
-            var urlSearchString = "https://api.github.com/search/users?"
+            var urlSearchString = "https://api.github.com/search/users?per_page=90&"
             // modify it with the search term(s) from the search bar
             urlSearchString = urlSearchString + "q=\(searchText)"
             println("urlSearchString: \(urlSearchString)")
@@ -159,10 +169,10 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
             
         } else {
             println("not authenticated. present alert")
-            var alert = UIAlertController(title: "Alert", message: "Session is not yet authenticated", preferredStyle: UIAlertControllerStyle.Alert)
+            var alert = UIAlertController(title: "Session is not authenticated", message: "Tap OK to authenticate", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
-                //                self.requestOAuthAccess()
-                // figure out whether to do self.requestOAuthAccess or setupAuthenticatedSession()
+                var alert = self.networkController.makeAlertBeforeSafariOpens()
+                self.presentViewController(alert, animated: true, completion: nil)
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
             alert.addAction(OKAction)
@@ -170,6 +180,10 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
             self.presentViewController(alert, animated: true, completion: nil)
         }
         
+    }
+    
+    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        return text.validateStringWithoutSpecialCharacters()
     }
     
     
