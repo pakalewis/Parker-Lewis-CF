@@ -18,7 +18,8 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     var currentUser = User()
     var defaultImage = UIImage(named: "default")
 
-    var origin: CGRect?
+    var initialCellFrame: CGRect?
+    var initialImageFrame: CGRect?
     
     var returnedFromSingleUserView = false
     
@@ -77,35 +78,35 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
 
-        self.currentUser = self.userArray[indexPath.row]
-        let currentCellTag = cell.tag + 1
+        
+        self.currentUser = self.userArray[indexPath.row] as User
+        self.currentUser.avatarImage = self.defaultImage
+        
+        cell.userName.text = self.currentUser.userName
+        cell.userAvatarImageView.image = self.defaultImage
+        
+        
+        var currentCellTag = cell.tag + 1
         cell.tag = currentCellTag
         
         
         
         // if the avatar has already been downloaded, show it in the cell's image
-        if currentUser.avatarImage != nil {
-            println("avatar at indexPath \(indexPath.row) already downloaded")
-            cell.userAvatarImageView.image = self.currentUser.avatarImage
-        } else {
-            // avatar image is not available yet
-            println("display default image first, then download actual avatar")
-            cell.userAvatarImageView.image = self.defaultImage
-            
-            // download avatar, provided the cell is still visible
-            
-            self.networkController.downloadImage(self.currentUser.avatarURL!, completionHandler: { (image) -> Void in
-                // store image in User object
-                self.currentUser.avatarImage = image
-
-                if currentCellTag == cell.tag {
-                    println("avatar downloaded, and now is displayed")
-                    cell.userName.text = self.currentUser.userName
-                    cell.userAvatarImageView.image = image
-                }
-
-            })
-        }
+//        if currentUser.avatarImage != nil {
+//            if currentCellTag == cell.tag {
+//                cell.userAvatarImageView.image = self.currentUser.avatarImage
+//            }
+//        } else {
+//            // avatar image is not available yet
+//            // download avatar, provided the cell is still visible
+//            self.networkController.downloadImage(self.currentUser.avatarURL!, completionHandler: { (image) -> Void in
+//                if currentCellTag == cell.tag {
+//                    // store image in User object
+//                    self.currentUser.avatarImage = image
+//                    cell.userAvatarImageView.image = image
+//                }
+//            })
+//        }
         return cell
     }
     
@@ -117,12 +118,14 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
         
         // Grab the onscreen rectangle of the tapped upon cell, relative to the collection view
-        let origin = self.view.convertRect(attributes!.frame, fromView: collectionView)
+        self.initialCellFrame = self.view.convertRect(attributes!.frame, fromView: collectionView)
+
         
-        // Save our starting location as the tapped upon cells frame
-        self.origin = origin
-        
-        
+        // HOW DO I GRAB THE FRAME OF THE IMAGE ON THE CELL I SELECTED???
+        // I WANT TO SET THE initialCellFrame to be that frame rather than the whole cell's frame
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as UserCell
+        self.initialImageFrame = cell.userAvatarImageView.frame
+
         
         // initialize next view controller
         var destinationVC = storyboard?.instantiateViewControllerWithIdentifier("SINGLE_USER_VC") as SingleUserVC
@@ -130,8 +133,9 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         // Set currentUser and reverseOrigin properties on next view controller
         self.currentUser = self.userArray[indexPath.row]
         destinationVC.currentUser = self.currentUser
-        destinationVC.reverseOrigin = self.origin!
+        destinationVC.frameToReturnImageTo = self.initialImageFrame
         
+        // ensure that the collectionview is not hidden
         self.returnedFromSingleUserView = true
         
         self.navigationController?.pushViewController(destinationVC, animated: true)

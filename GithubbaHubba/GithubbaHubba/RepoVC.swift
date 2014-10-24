@@ -72,36 +72,29 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         self.selectedRepo = self.repoArray[indexPath.row]
         cell.nameLabel.text = self.selectedRepo.name
         cell.urlLabel.text = self.selectedRepo.url
-        println(self.selectedRepo.name)
-        println(self.selectedRepo.url)
+        cell.repoAvatarImageView.image = self.defaultImage
         
         
-        println("initial cell tag \(cell.tag)")
         let currentCellTag = cell.tag + 1
-        println("current cell tag + 1 \(currentCellTag)")
         cell.tag = currentCellTag
-        println("now the cell tag is \(cell.tag)")
         
         
         // if the avatar has already been downloaded, show it in the cell's image
         if self.selectedRepo.avatarImage != nil {
             println("ALREADY DOWNLOADED repo avatar at indexPath \(indexPath.row)")
-            cell.repoAvatarImageView.image = self.selectedRepo.avatarImage
+            if currentCellTag == cell.tag {
+                cell.repoAvatarImageView.image = self.selectedRepo.avatarImage
+            }
         } else {
             // repo image is not available yet
             println("NOT DOWNLOADED display default image first, then download actual avatar")
-            cell.repoAvatarImageView.image = self.defaultImage
             
             // download avatar, provided the cell is still visible
             self.networkController.downloadImage(self.selectedRepo.avatarURL, completionHandler: { (image) -> Void in
-
                 if currentCellTag == cell.tag {
-                    println("avatar downloaded, and now is displayed")
-                    // store image in User object
                     self.selectedRepo.avatarImage = image
                     cell.repoAvatarImageView.image = self.selectedRepo.avatarImage
                 }
-                
             })
         }
 

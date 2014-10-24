@@ -15,15 +15,22 @@ class SingleUserVC: UIViewController {
 
     var currentUser : User?
     
-    var reverseOrigin: CGRect?
-
+    
+    var frameToReturnImageTo: CGRect?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.singleUserNameLabel.text = self.currentUser?.userName
-        self.singleUserImageView.image = self.currentUser?.avatarImage
+//        self.singleUserImageView.image = self.currentUser?.avatarImage
+        self.singleUserImageView.image = UIImage(named: "default")
 
+        
+        println(UIScreen.mainScreen().bounds)
+        println("on singleVC the singleUserImageView.frame is \(self.singleUserImageView.frame)")
+        println("on singleVC the singleUserImageView.bounds is \(self.singleUserImageView.bounds)")
+        println("the frame for the singleVC view is \(self.view.frame)")
     
     }
 }

@@ -22,30 +22,31 @@ class MasterVC: UITableViewController, UINavigationControllerDelegate {
         
     }
 
-    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("TESTING")
+        
+        // is this where I can dismiss this VC so it doesn't stay on screen on iPAD?
+    }
+
     
     func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        // This is called whenever during all navigation operations
         
-        // Only return a custom animator for two view controller types
-        if let mainViewController = fromVC as? UserCollectionVC {
-            if let toViewController = toVC as? SingleUserVC {
-                let animator = ShowImageAnimator()
-                animator.origin = mainViewController.origin
-                
+        // Check to make sure what the fromVC and toVCs are. If correct, implement animator files
+        if let userCollectionVC = fromVC as? UserCollectionVC {
+            if let singleUserVC = toVC as? SingleUserVC {
+                let animator = AnimatorToSingleUser()
+                animator.initialCellFrame = userCollectionVC.initialCellFrame
+                animator.selectedImage = userCollectionVC.currentUser.avatarImage
                 return animator                
             }
         }
-        else if let imageViewController = fromVC as? SingleUserVC {
-            let animator = HideImageAnimator()
-            animator.origin = imageViewController.reverseOrigin
-            
+        
+        else if let singleUserVC = fromVC as? SingleUserVC {
+            let animator = AnimatorBackToUserCollection()
             return animator
         }
         
-        println("navController func fired")
-        
-        // All other types use default transition
+        // All other transitions don't use any animations
         return nil
     }
 

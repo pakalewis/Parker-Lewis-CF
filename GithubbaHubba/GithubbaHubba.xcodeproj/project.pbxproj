@@ -10,8 +10,8 @@
 		2C06EED319F8660600B76992 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EED219F8660600B76992 /* User.swift */; };
 		2C06EED819F86EE500B76992 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C06EED719F86EE500B76992 /* default.png */; };
 		2C06EEDA19F878A100B76992 /* SingleUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EED919F878A100B76992 /* SingleUserVC.swift */; };
-		2C06EEDD19F883DC00B76992 /* ShowImageAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EEDB19F883DC00B76992 /* ShowImageAnimator.swift */; };
-		2C06EEDE19F883DC00B76992 /* HideImageAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EEDC19F883DC00B76992 /* HideImageAnimator.swift */; };
+		2C06EEDD19F883DC00B76992 /* AnimatorToSingleUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */; };
+		2C06EEDE19F883DC00B76992 /* AnimatorBackToUserCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */; };
 		2C2F80DA19F99140003BF772 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F80D919F99140003BF772 /* Extensions.swift */; };
 		2C31886419F59CE700DD8693 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31886319F59CE700DD8693 /* AppDelegate.swift */; };
 		2C31886719F59CE700DD8693 /* GithubbaHubba.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C31886519F59CE700DD8693 /* GithubbaHubba.xcdatamodeld */; };
@@ -46,8 +46,8 @@
 		2C06EED219F8660600B76992 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2C06EED719F86EE500B76992 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		2C06EED919F878A100B76992 /* SingleUserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleUserVC.swift; sourceTree = "<group>"; };
-		2C06EEDB19F883DC00B76992 /* ShowImageAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowImageAnimator.swift; sourceTree = "<group>"; };
-		2C06EEDC19F883DC00B76992 /* HideImageAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideImageAnimator.swift; sourceTree = "<group>"; };
+		2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatorToSingleUser.swift; sourceTree = "<group>"; };
+		2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatorBackToUserCollection.swift; sourceTree = "<group>"; };
 		2C2F80D919F99140003BF772 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2C31885E19F59CE700DD8693 /* GithubbaHubba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubbaHubba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C31886219F59CE700DD8693 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 				2C31889019F5A6CE00DD8693 /* NetworkController.swift */,
 				2C31886319F59CE700DD8693 /* AppDelegate.swift */,
 				2C2F80D919F99140003BF772 /* Extensions.swift */,
-				2C06EEDB19F883DC00B76992 /* ShowImageAnimator.swift */,
-				2C06EEDC19F883DC00B76992 /* HideImageAnimator.swift */,
+				2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */,
+				2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */,
 			);
 			name = "Extra files";
 			sourceTree = "<group>";
@@ -310,10 +310,10 @@
 				2C06EED319F8660600B76992 /* User.swift in Sources */,
 				2C31886419F59CE700DD8693 /* AppDelegate.swift in Sources */,
 				2C06EEDA19F878A100B76992 /* SingleUserVC.swift in Sources */,
-				2C06EEDE19F883DC00B76992 /* HideImageAnimator.swift in Sources */,
+				2C06EEDE19F883DC00B76992 /* AnimatorBackToUserCollection.swift in Sources */,
 				2C6B20C619F8537300B8B608 /* UserCell.swift in Sources */,
 				2C31889119F5A6CE00DD8693 /* NetworkController.swift in Sources */,
-				2C06EEDD19F883DC00B76992 /* ShowImageAnimator.swift in Sources */,
+				2C06EEDD19F883DC00B76992 /* AnimatorToSingleUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
