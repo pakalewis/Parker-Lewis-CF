@@ -119,7 +119,8 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         
         // Set currentUser and reverseOrigin properties on next view controller
         self.selectedRepo = self.repoArray[indexPath.row]
-        destinationVC.currentRepo = self.selectedRepo
+        var repoURLString = selectedRepo.url
+        destinationVC.initialURLString = repoURLString
         
         self.navigationController?.pushViewController(destinationVC, animated: true)
 

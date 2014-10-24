@@ -17,4 +17,13 @@ class UserCell: UICollectionViewCell {
     @IBOutlet weak var userName: UILabel!
     
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.userAvatarImageView.image = nil
+        self.userName.text = nil
+        
+    }
+    
+    
 }

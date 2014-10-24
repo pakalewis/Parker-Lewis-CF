@@ -23,16 +23,6 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     var returnedFromSingleUserView = false
     
-    override func viewWillAppear(animated: Bool) {
-        if self.returnedFromSingleUserView {
-            self.collectionView.hidden = false
-        } else {
-            self.collectionView.hidden = true
-        }
-        self.instructionsLabel.text = "Use the search bar to search GitHub Users"
-        self.view.addSubview(self.instructionsLabel)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +34,19 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         self.networkController = appDelegate.globalNetworkController
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //        if self.returnedFromSingleUserView {
+        //            self.collectionView.hidden = false
+        //        } else {
+        //            self.collectionView.hidden = true
+        //        }
+        self.instructionsLabel.text = "Use the search bar to search GitHub Users"
+        self.instructionsLabel.backgroundColor = UIColor.lightGrayColor()
+        self.view.addSubview(self.instructionsLabel)
+    }
+    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -75,38 +78,40 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     
+    
+    // CELL FOR ITEM AT INDEXPATH
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
 
         
-        self.currentUser = self.userArray[indexPath.row] as User
-        self.currentUser.avatarImage = self.defaultImage
+        let currentUser = self.userArray[indexPath.row] as User
         
+        // set cell image and text. load default image first before downloading
         cell.userName.text = self.currentUser.userName
         cell.userAvatarImageView.image = self.defaultImage
         
+        // tags to check if the cell is still on screen
+        var currentTag = cell.tag + 1
+        cell.tag = currentTag
         
-        var currentCellTag = cell.tag + 1
-        cell.tag = currentCellTag
-        
-        
-        
+
         // if the avatar has already been downloaded, show it in the cell's image
-//        if currentUser.avatarImage != nil {
-//            if currentCellTag == cell.tag {
-//                cell.userAvatarImageView.image = self.currentUser.avatarImage
-//            }
-//        } else {
-//            // avatar image is not available yet
-//            // download avatar, provided the cell is still visible
-//            self.networkController.downloadImage(self.currentUser.avatarURL!, completionHandler: { (image) -> Void in
-//                if currentCellTag == cell.tag {
-//                    // store image in User object
-//                    self.currentUser.avatarImage = image
-//                    cell.userAvatarImageView.image = image
-//                }
-//            })
-//        }
+        // MAKE A CACHE AND CHECK IF THE AVATAR IMAGE WAS ALREADY DOWNLOADED. DO THIS INSTEAD OF CHECKING IF THE USER OBJECT HAS AN IMAGE. REMOVE THE AVATARIMAGE PROPERTY FROM THE USER OBJECT
+        if currentUser.avatarImage != nil {
+            // THIS WILL CHECK THE CACHE INSTEAD OF THE CURRENT USER OBJECT
+            cell.userAvatarImageView.image = self.currentUser.avatarImage
+        } else {
+            // avatar image is not available yet
+            // download avatar, provided the cell is still visible
+            self.networkController.downloadImage(currentUser.avatarURL!, completionHandler: { (image) -> Void in
+                // STORE IMAGE IN CACHE
+
+                if cell.tag == currentTag {
+                    cell.userAvatarImageView.image = image
+                }
+            })
+        }
+
         return cell
     }
     
@@ -114,6 +119,13 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        println("cell was selected at \(indexPath)")
+        
+        // MOVE SOME OF THIS TO THE ANIMATOR FILE
+        // FROM THE ANIMATOR FILE, GRAB A REFERENCE TO THE COLLECTION VIEW AND THEN THE CELL
+        // MAKE A SNAPSHOT OF THE CELL WITH CELL.IMAGEVIEW RESIZABLESNAPSHOWVIEWFROMRECT
+        
         // Grab the attributes of the tapped upon cell
         let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
         
@@ -146,7 +158,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         let searchText = searchBar.text
         println("user wants to search for: \(searchText)")
-        
+                
         searchBar.resignFirstResponder()
         
         if self.networkController.authenticated {
@@ -165,9 +177,12 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
                 } else {
                     println("getting json for User")
                     self.userArray = self.networkController.parseJSONDataForUsers(rawJSONData!)!
+                    
+                    if self.userArray.count > 0 {
+                        self.instructionsLabel.hidden = true
+                    }
+                    
                     self.collectionView.reloadData()
-                    self.collectionView.hidden = false
-                    self.instructionsLabel.hidden = true
                 }
             })
             

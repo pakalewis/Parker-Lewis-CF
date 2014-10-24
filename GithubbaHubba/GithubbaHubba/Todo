@@ -22,11 +22,27 @@ in searchbar clicked
 resign first responder
 
 
-figure out why there is some weird overlay when I show the user collection presearch
+hide collection view when search bar is empty
+//        if searchText == "" {
+//            self.instructionsLabel.hidden = false
+//            self.collectionView.hidden = true
+//        }
+
+
+
+add activity indicator when downloading images
+
 
 
 WHY does my animatorToSingleUser enlarge the moving image way to the right
 the frame is wrong somehow
+
+
+
+
+dont store the user.avatarimage on the collection view
+maybe make a cache because they are downloading everytime the cell appears (image is always nil because all the user objects in the array have the image property not set)
+
 
 
 

@@ -298,23 +298,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4T-vX-uO6">
-                                <rect key="frame" x="279" y="549" width="42" height="21"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZF-JR-KsL">
+                                <rect key="frame" x="45" y="30" width="510" height="480"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4T-vX-uO6">
+                                <rect key="frame" x="45" y="549" width="255" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QZF-JR-KsL">
-                                <rect key="frame" x="45" y="30" width="510" height="480"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOQ-xZ-hBB">
+                                <rect key="frame" x="300" y="543" width="255" height="33"/>
+                                <color key="backgroundColor" red="0.18692025942421819" green="0.57115138815709843" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Check them out on GitHub">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goToUserOnGitHub:" destination="jsc-FM-pBA" eventType="touchUpInside" id="Vfd-Yo-EeV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.49828497979299113" green="0.75474870989295417" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="L4T-vX-uO6" secondAttribute="centerX" id="H9x-Bl-eFX"/>
+                            <constraint firstItem="L4T-vX-uO6" firstAttribute="centerY" secondItem="rOQ-xZ-hBB" secondAttribute="centerY" id="I82-f7-k6c"/>
                             <constraint firstItem="QZF-JR-KsL" firstAttribute="height" secondItem="eRC-x4-Uwo" secondAttribute="height" multiplier="0.8" id="O4i-Zd-UQf"/>
+                            <constraint firstItem="QZF-JR-KsL" firstAttribute="trailing" secondItem="rOQ-xZ-hBB" secondAttribute="trailing" id="R6F-eB-Nt5"/>
+                            <constraint firstItem="QZF-JR-KsL" firstAttribute="width" secondItem="L4T-vX-uO6" secondAttribute="width" multiplier="2" id="SGd-N4-ohr"/>
                             <constraint firstAttribute="centerX" secondItem="QZF-JR-KsL" secondAttribute="centerX" id="WYr-5B-Twq"/>
                             <constraint firstItem="QZF-JR-KsL" firstAttribute="width" secondItem="eRC-x4-Uwo" secondAttribute="width" multiplier="0.85" id="X6J-qk-Wuo"/>
                             <constraint firstItem="QZF-JR-KsL" firstAttribute="top" secondItem="JNf-Dc-ihF" secondAttribute="bottom" constant="10" id="d6x-fs-GQH"/>
+                            <constraint firstItem="QZF-JR-KsL" firstAttribute="width" secondItem="rOQ-xZ-hBB" secondAttribute="width" multiplier="2" id="fZh-sQ-lAG"/>
+                            <constraint firstItem="QZF-JR-KsL" firstAttribute="leading" secondItem="L4T-vX-uO6" secondAttribute="leading" id="lJT-jl-X3e"/>
                             <constraint firstItem="9af-qR-3HL" firstAttribute="top" secondItem="L4T-vX-uO6" secondAttribute="bottom" constant="30" id="tCr-HI-och"/>
                         </constraints>
                     </view>

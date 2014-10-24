@@ -13,7 +13,7 @@ class WebVC: UIViewController {
 
     let webView = WKWebView()
     
-    var currentRepo : Repo?
+    var initialURLString : String?
     
     override func loadView() {
         
@@ -27,10 +27,10 @@ class WebVC: UIViewController {
         super.viewDidLoad()
         
         //make the correct URL
-        let repoURLString = self.currentRepo?.url
-        let repoURL = NSURL(string: repoURLString!)
+        println("go to this url \(self.initialURLString!)")
+        let goToURL = NSURL(string: self.initialURLString!)
         
-        self.webView.loadRequest(NSURLRequest(URL: repoURL!))
+        self.webView.loadRequest(NSURLRequest(URL: goToURL!))
 
     }
 
