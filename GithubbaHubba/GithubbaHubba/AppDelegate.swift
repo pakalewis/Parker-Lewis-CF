@@ -13,7 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let globalNetworkController = NetworkController()
+//    let globalNetworkController = NetworkController()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("openURL in appDelegate fired")
         println("this is the callback url: \(url)")
         // this will take the url that github passed back to us and send it to the handleOAuthURL func in the network controller file. This url contains the request token in step 4 of the oauth workflow
-        self.globalNetworkController.handleOAuthURL(url)
+        NetworkController.controller.handleOAuthURL(url)
         return true
     }
 

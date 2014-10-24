@@ -13,7 +13,6 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var instructionsLabel: UILabel!
     
-    var networkController : NetworkController!
     var userArray = [User]()
     var currentUser = User()
     var defaultImage = UIImage(named: "default")
@@ -29,9 +28,6 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
-        // grab reference to singular NetworkController from AppDelegate
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.globalNetworkController
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,19 +46,19 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !self.networkController.authenticated {
+        if !NetworkController.controller.authenticated {
             // check to see if OAuth token is saved in NSUserDefaults
             let userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
             if let tokenCheck = userDefaults.objectForKey("OauthToken") as? String {
                 // token already stored
                 println("Authorized token already saved: \(tokenCheck)")
                 
-                self.networkController.setupAuthenticatedSession()
+                NetworkController.controller.setupAuthenticatedSession()
             } else {
                 // no token so fire the NetworkController that requests authorization
                 
                 // make alert controller
-                var alert = self.networkController.makeAlertBeforeSafariOpens()
+                var alert = NetworkController.controller.makeAlertBeforeSafariOpens()
                 self.presentViewController(alert, animated: true, completion: nil)
             }
         } else {
@@ -103,7 +99,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         } else {
             // avatar image is not available yet
             // download avatar, provided the cell is still visible
-            self.networkController.downloadImage(currentUser.avatarURL!, completionHandler: { (image) -> Void in
+            NetworkController.controller.downloadImage(currentUser.avatarURL!, completionHandler: { (image) -> Void in
                 // STORE IMAGE IN CACHE
 
                 if cell.tag == currentTag {
@@ -161,7 +157,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
                 
         searchBar.resignFirstResponder()
         
-        if self.networkController.authenticated {
+        if NetworkController.controller.authenticated {
             // returns true if authenticated so do the network call
             // this is the base github url for searching users
             var urlSearchString = "https://api.github.com/search/users?per_page=90&"
@@ -170,13 +166,13 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
             println("urlSearchString: \(urlSearchString)")
             let url = NSURL(string: urlSearchString)
             
-            self.networkController.fetchJSONData(url!, completionHandler: { (errorDescription, rawJSONData) -> (Void) in
+            NetworkController.controller.fetchJSONData(url!, completionHandler: { (errorDescription, rawJSONData) -> (Void) in
                 
                 if errorDescription != nil {
                     println("there was an error getting the JSON")
                 } else {
                     println("getting json for User")
-                    self.userArray = self.networkController.parseJSONDataForUsers(rawJSONData!)!
+                    self.userArray = NetworkController.controller.parseJSONDataForUsers(rawJSONData!)!
                     
                     if self.userArray.count > 0 {
                         self.instructionsLabel.hidden = true
@@ -190,7 +186,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
             println("not authenticated. present alert")
             var alert = UIAlertController(title: "Session is not authenticated", message: "Tap OK to authenticate", preferredStyle: UIAlertControllerStyle.Alert)
             let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) -> Void in
-                var alert = self.networkController.makeAlertBeforeSafariOpens()
+                var alert = NetworkController.controller.makeAlertBeforeSafariOpens()
                 self.presentViewController(alert, animated: true, completion: nil)
             }
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)

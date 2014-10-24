@@ -30,8 +30,8 @@ class RepoVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         self.tableView.dataSource = self
         
         // grab reference to singular NetworkController from AppDelegate
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.globalNetworkController
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = NetworkController.controller
         
     }
     

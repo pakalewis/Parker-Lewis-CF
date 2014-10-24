@@ -1,4 +1,6 @@
 
+IMPLEMENTED THIS ON USERCOLLECTIONVC AND NEED TO NOW UPDATE THE OTHER FILES THAT ACCESS NETWORKCONTROLLER
+
 get the struct for a singleton networkcontroller. this is added to the NetworkController Class
 //        class var sharedInstance: NetworkController {
 //        struct Static {
@@ -10,6 +12,8 @@ get the struct for a singleton networkcontroller. this is added to the NetworkCo
 //            }
 //            return Static.instance!
 //        }
+
+
 
 
 

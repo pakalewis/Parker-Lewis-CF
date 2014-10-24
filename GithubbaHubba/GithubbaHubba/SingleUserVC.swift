@@ -24,8 +24,8 @@ class SingleUserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = appDelegate.globalNetworkController
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        self.networkController = NetworkController.controller
 
         
         self.singleUserNameLabel.text = self.currentUser?.userName

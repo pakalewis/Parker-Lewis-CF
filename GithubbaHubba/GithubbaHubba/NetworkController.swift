@@ -46,10 +46,22 @@ class NetworkController {
     // defines URL to actually ask for the OAuth token
     let githubPOSTURL = "https://github.com/login/oauth/access_token"
 
-
-    init() {
-        
+    
+    
+    class var controller: NetworkController {
+        struct Static {
+            static var onceToken : dispatch_once_t = 0
+            static var instance : NetworkController? = nil
+        }
+        dispatch_once(&Static.onceToken) {
+            Static.instance = NetworkController()
+        }
+        return Static.instance!
     }
+
+//    init() {
+//        
+//    }
     
     
     
