@@ -288,6 +288,27 @@ class NetworkController {
     }
     
     
+    func parseJSONDataForAuthenticatedUser(rawJSONData : NSData ) -> Profile? {
+        var error : NSError?
+        
+        if let authenticatedUserDict = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
+            var authenticatedUser = Profile()
+            
+            // set properties
+            authenticatedUser.name = authenticatedUserDict["name"] as? String
+            authenticatedUser.login = authenticatedUserDict["login"] as? String
+            authenticatedUser.email = authenticatedUserDict["email"] as? String
+            authenticatedUser.avatar_url = authenticatedUserDict["avatar_url"] as? String
+            authenticatedUser.followers = authenticatedUserDict["followers"] as? String
+            authenticatedUser.location = authenticatedUserDict["location"] as? String
+            authenticatedUser.url = authenticatedUserDict["url"] as? String
+            authenticatedUser.hirable = authenticatedUserDict["hirable"] as? String
+            
+            return authenticatedUser
+        }
+        return nil
+    }
+    
     
     func downloadImage(imageURLString : String, completionHandler: (image: UIImage) -> Void) {
         self.imageQueue.addOperationWithBlock { () -> Void in

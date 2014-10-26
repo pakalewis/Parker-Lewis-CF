@@ -27,6 +27,7 @@
 		2C31889119F5A6CE00DD8693 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C31889019F5A6CE00DD8693 /* NetworkController.swift */; };
 		2C6B20C419F8103200B8B608 /* Todo in Resources */ = {isa = PBXBuildFile; fileRef = 2C6B20C319F8103200B8B608 /* Todo */; };
 		2C6B20C619F8537300B8B608 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6B20C519F8537300B8B608 /* UserCell.swift */; };
+		2CA1A74819FCE6A1009B660E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1A74719FCE6A1009B660E /* Profile.swift */; };
 		2CB8628519F9997A00C8D192 /* WebVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8628419F9997A00C8D192 /* WebVC.swift */; };
 		2CE5D7D319F5B834006A1B85 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5D7D219F5B834006A1B85 /* Repo.swift */; };
 		2CE5D7D519F5C71D006A1B85 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */; };
@@ -67,6 +68,7 @@
 		2C31889019F5A6CE00DD8693 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		2C6B20C319F8103200B8B608 /* Todo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Todo; path = GithubbaHubba/Todo; sourceTree = "<group>"; };
 		2C6B20C519F8537300B8B608 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		2CA1A74719FCE6A1009B660E /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		2CB8628419F9997A00C8D192 /* WebVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebVC.swift; sourceTree = "<group>"; };
 		2CE5D7D219F5B834006A1B85 /* Repo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 		2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
@@ -94,8 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				2C31888C19F5A50300DD8693 /* UserCollectionVC.swift */,
-				2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */,
-				2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */,
 				2C06EED919F878A100B76992 /* SingleUserVC.swift */,
 				2C06EED219F8660600B76992 /* User.swift */,
 				2C6B20C519F8537300B8B608 /* UserCell.swift */,
@@ -117,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				2C31888E19F5A51600DD8693 /* ProfileVC.swift */,
+				2CA1A74719FCE6A1009B660E /* Profile.swift */,
 			);
 			name = PROFILE;
 			sourceTree = "<group>";
@@ -187,10 +188,12 @@
 		2CB4D3B719F9940C001A720E /* Extra files */ = {
 			isa = PBXGroup;
 			children = (
-				2CB8628419F9997A00C8D192 /* WebVC.swift */,
 				2C31889019F5A6CE00DD8693 /* NetworkController.swift */,
-				2C31886319F59CE700DD8693 /* AppDelegate.swift */,
+				2CB8628419F9997A00C8D192 /* WebVC.swift */,
+				2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */,
+				2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */,
 				2C2F80D919F99140003BF772 /* Extensions.swift */,
+				2C31886319F59CE700DD8693 /* AppDelegate.swift */,
 			);
 			name = "Extra files";
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				2CE5D7D319F5B834006A1B85 /* Repo.swift in Sources */,
 				2C31888F19F5A51600DD8693 /* ProfileVC.swift in Sources */,
 				2C2F80DA19F99140003BF772 /* Extensions.swift in Sources */,
+				2CA1A74819FCE6A1009B660E /* Profile.swift in Sources */,
 				2CE5D7D519F5C71D006A1B85 /* RepoCell.swift in Sources */,
 				2C31888719F5A09B00DD8693 /* SplitContainerVC.swift in Sources */,
 				2C31886719F59CE700DD8693 /* GithubbaHubba.xcdatamodeld in Sources */,

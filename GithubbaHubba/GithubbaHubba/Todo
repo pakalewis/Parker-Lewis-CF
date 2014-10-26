@@ -1,9 +1,9 @@
+1. Webview will not open when selecting a repo from the RepoVC on iPad
+2. Animation frames are not quite right.
+3. The regex does not recognize the delete key. Not as easy a fix as the \r for enter
 
 
-check joshua and matt for friendship friday task 2 (post request to github to make a new repo)
-
-
-
+Things to implement
 in MasterVC
 didSelectRowAtIndexPath - dismiss VC when selecting 1 of 3 cells
 
@@ -19,7 +19,6 @@ refresh table/collection view when search bar is empty
 in the three tableview didselect. modify the split contrtoller view display mode so that on ipad it slides to the left and just shows whatever detail view was selected.
 
 
-why my web view not triggering from repo vc on ipad?
 
 
 
@@ -30,19 +29,6 @@ hide collection view when search bar is empty
 //            self.collectionView.hidden = true
 //        }
 
-
-
-
-
-
-WHY does my animatorToSingleUser enlarge the moving image way to the right
-the frame is wrong somehow
-
-
-
-
-dont store the user.avatarimage on the collection view
-maybe make a cache because they are downloading everytime the cell appears (image is always nil because all the user objects in the array have the image property not set)
 
 
 
