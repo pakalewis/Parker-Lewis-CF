@@ -94,6 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				2C31888C19F5A50300DD8693 /* UserCollectionVC.swift */,
+				2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */,
+				2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */,
 				2C06EED919F878A100B76992 /* SingleUserVC.swift */,
 				2C06EED219F8660600B76992 /* User.swift */,
 				2C6B20C519F8537300B8B608 /* UserCell.swift */,
@@ -189,8 +191,6 @@
 				2C31889019F5A6CE00DD8693 /* NetworkController.swift */,
 				2C31886319F59CE700DD8693 /* AppDelegate.swift */,
 				2C2F80D919F99140003BF772 /* Extensions.swift */,
-				2C06EEDB19F883DC00B76992 /* AnimatorToSingleUser.swift */,
-				2C06EEDC19F883DC00B76992 /* AnimatorBackToUserCollection.swift */,
 			);
 			name = "Extra files";
 			sourceTree = "<group>";

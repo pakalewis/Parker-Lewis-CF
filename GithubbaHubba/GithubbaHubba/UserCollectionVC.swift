@@ -8,37 +8,27 @@
 
 import UIKit
 
-class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
+class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var instructionsLabel: UILabel!
     
-    
-    
     var userArray = [User]()
-    var currentUser = User()
     var defaultImage = UIImage(named: "default")
-
-    var initialCellFrame: CGRect?
-    var initialImageFrame: CGRect?
+    var initialImageFrame : CGRect?
     
-    var returnedFromSingleUserView = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.navigationController?.delegate = self
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        //        if self.returnedFromSingleUserView {
-        //            self.collectionView.hidden = false
-        //        } else {
-        //            self.collectionView.hidden = true
-        //        }
         self.instructionsLabel.text = "Use the search bar to search GitHub Users"
         self.instructionsLabel.backgroundColor = UIColor.lightGrayColor()
         self.view.addSubview(self.instructionsLabel)
@@ -80,15 +70,15 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     // CELL FOR ITEM AT INDEXPATH
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
+        let thisUser = self.userArray[indexPath.row]
         
         cell.activityIndicator.startAnimating()
         cell.activityIndicator.hidesWhenStopped = true
         cell.activityIndicator.color = UIColor.blackColor()
         
-        let currentUser = self.userArray[indexPath.row] as User
         
         // set cell image and text. load default image first before downloading
-        cell.userName.text = self.currentUser.userName
+        cell.userName.text = thisUser.userName
         cell.userAvatarImageView.image = self.defaultImage
         
         
@@ -99,13 +89,13 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
 
         // if the avatar has already been downloaded, show it in the cell's image
         // MAKE A CACHE AND CHECK IF THE AVATAR IMAGE WAS ALREADY DOWNLOADED. DO THIS INSTEAD OF CHECKING IF THE USER OBJECT HAS AN IMAGE. REMOVE THE AVATARIMAGE PROPERTY FROM THE USER OBJECT
-        if currentUser.avatarImage != nil {
+        if thisUser.avatarImage != nil {
             // THIS WILL CHECK THE CACHE INSTEAD OF THE CURRENT USER OBJECT
-            cell.userAvatarImageView.image = self.currentUser.avatarImage
+            cell.userAvatarImageView.image = thisUser.avatarImage
         } else {
             // avatar image is not available yet
             // download avatar, provided the cell is still visible
-            NetworkController.controller.downloadImage(currentUser.avatarURL!, completionHandler: { (image) -> Void in
+            NetworkController.controller.downloadImage(thisUser.avatarURL!, completionHandler: { (image) -> Void in
                 // STORE IMAGE IN CACHE
 
                 if cell.tag == currentTag {
@@ -124,37 +114,13 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
         println("cell was selected at \(indexPath)")
-        
-        // MOVE SOME OF THIS TO THE ANIMATOR FILE
-        // FROM THE ANIMATOR FILE, GRAB A REFERENCE TO THE COLLECTION VIEW AND THEN THE CELL
-        // MAKE A SNAPSHOT OF THE CELL WITH CELL.IMAGEVIEW RESIZABLESNAPSHOWVIEWFROMRECT
-        
-        // Grab the attributes of the tapped upon cell
-        let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
-        
-        // Grab the onscreen rectangle of the tapped upon cell, relative to the collection view
-        self.initialCellFrame = self.view.convertRect(attributes!.frame, fromView: collectionView)
-
-        
-        // HOW DO I GRAB THE FRAME OF THE IMAGE ON THE CELL I SELECTED???
-        // I WANT TO SET THE initialCellFrame to be that frame rather than the whole cell's frame
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as UserCell
-        self.initialImageFrame = cell.userAvatarImageView.frame
-
-        
         // initialize next view controller
         var destinationVC = storyboard?.instantiateViewControllerWithIdentifier("SINGLE_USER_VC") as SingleUserVC
 
-        // Set currentUser and reverseOrigin properties on next view controller
-        self.currentUser = self.userArray[indexPath.row]
-        destinationVC.currentUser = self.currentUser
-        destinationVC.frameToReturnImageTo = self.initialImageFrame
-        
-        // ensure that the collectionview is not hidden
-        self.returnedFromSingleUserView = true
+        // Set currentUser on next view controller
+        destinationVC.selectedUser = self.userArray[indexPath.row]
         
         self.navigationController?.pushViewController(destinationVC, animated: true)
-//        self.splitViewController?.showDetailViewController(destinationVC, sender: self)
     }
     
     
@@ -211,5 +177,34 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         
     }
     
+
+    
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        // Check to make sure what the fromVC and toVCs are. If correct, implement animator files
+        if let userCollectionVC = fromVC as? UserCollectionVC {
+            if let singleUserVC = toVC as? SingleUserVC {
+                
+                println("show animation")
+                
+                let animator = AnimatorToSingleUser()
+                return animator
+            }
+        }
+            
+        else if let singleUserVC = fromVC as? SingleUserVC {
+            if let userCollectionVC = toVC as? UserCollectionVC {
+                
+                println("hide animation")
+                
+                let animator = AnimatorBackToUserCollection()
+                return animator
+            }
+        }
+        
+        // All other transitions don't use any animations
+        return nil
+    }
+
     
 }

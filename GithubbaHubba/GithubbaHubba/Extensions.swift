@@ -17,7 +17,6 @@ extension String {
         let matches = regex?.numberOfMatchesInString(self, options: nil, range: range)
         
         if matches > 0 {
-            println("matches = \(matches)")
             return true
         }
         println("character not valid")

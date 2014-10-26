@@ -29,6 +29,11 @@ class WebVC: UIViewController, WKNavigationDelegate {
             newWebView.navigationDelegate = self
             self.view.addSubview(newWebView)
         }
+        
+        self.view.bringSubviewToFront(self.activityIndicator)
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.color = UIColor.blackColor()
     }
     
     
@@ -36,11 +41,6 @@ class WebVC: UIViewController, WKNavigationDelegate {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         println("loading")
         
-        self.view.bringSubviewToFront(self.activityIndicator)
-        self.activityIndicator.startAnimating()
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.color = UIColor.blackColor()
-
     }
 
     

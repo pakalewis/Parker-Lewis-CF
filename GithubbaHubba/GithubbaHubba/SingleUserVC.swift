@@ -16,7 +16,7 @@ class SingleUserVC: UIViewController {
 
     
     var networkController : NetworkController!
-    var currentUser : User?
+    var selectedUser : User?
     
     
     var frameToReturnImageTo: CGRect?
@@ -27,7 +27,7 @@ class SingleUserVC: UIViewController {
         
 
         
-        self.singleUserNameLabel.text = self.currentUser?.userName
+        self.singleUserNameLabel.text = self.selectedUser?.userName
         self.singleUserImageView.image = UIImage(named: "default")
         self.activityIndicator.startAnimating()
         self.activityIndicator.hidesWhenStopped = true
@@ -35,7 +35,7 @@ class SingleUserVC: UIViewController {
 
 
         
-        NetworkController.controller.downloadImage(self.currentUser!.avatarURL!, completionHandler: { (image) -> Void in
+        NetworkController.controller.downloadImage(self.selectedUser!.avatarURL!, completionHandler: { (image) -> Void in
             self.activityIndicator.stopAnimating()
             self.singleUserImageView.image = image
         })
@@ -58,7 +58,7 @@ class SingleUserVC: UIViewController {
         var destinationVC = storyboard?.instantiateViewControllerWithIdentifier("WEB_VC") as WebVC
         
         // pass the user's github url
-        destinationVC.initialURLString = self.currentUser!.userURL!
+        destinationVC.initialURLString = self.selectedUser!.userURL!
         
         self.navigationController?.pushViewController(destinationVC, animated: true)
 
