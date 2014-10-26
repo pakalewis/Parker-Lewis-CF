@@ -12,6 +12,7 @@ class SingleUserVC: UIViewController {
 
     @IBOutlet var singleUserImageView: UIImageView!
     @IBOutlet var singleUserNameLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     
     var networkController : NetworkController!
@@ -24,15 +25,18 @@ class SingleUserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        self.networkController = NetworkController.controller
 
         
         self.singleUserNameLabel.text = self.currentUser?.userName
         self.singleUserImageView.image = UIImage(named: "default")
+        self.activityIndicator.startAnimating()
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.color = UIColor.blackColor()
+
 
         
-        self.networkController.downloadImage(self.currentUser!.avatarURL!, completionHandler: { (image) -> Void in
+        NetworkController.controller.downloadImage(self.currentUser!.avatarURL!, completionHandler: { (image) -> Void in
+            self.activityIndicator.stopAnimating()
             self.singleUserImageView.image = image
         })
 

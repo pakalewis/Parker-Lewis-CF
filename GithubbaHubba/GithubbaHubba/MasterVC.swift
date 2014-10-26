@@ -10,7 +10,6 @@ import UIKit
 
 class MasterVC: UITableViewController, UINavigationControllerDelegate {
 
-    var networkController : NetworkController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +19,7 @@ class MasterVC: UITableViewController, UINavigationControllerDelegate {
         
         self.navigationController?.delegate = self
         
+        
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -28,7 +28,9 @@ class MasterVC: UITableViewController, UINavigationControllerDelegate {
         // is this where I can dismiss this VC so it doesn't stay on screen on iPAD?
     }
 
+
     
+    // move to USer collection VC
     func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         // Check to make sure what the fromVC and toVCs are. If correct, implement animator files
@@ -42,8 +44,10 @@ class MasterVC: UITableViewController, UINavigationControllerDelegate {
         }
         
         else if let singleUserVC = fromVC as? SingleUserVC {
-            let animator = AnimatorBackToUserCollection()
-            return animator
+            if let userCollectionVC = toVC as? UserCollectionVC {
+                let animator = AnimatorBackToUserCollection()
+                return animator                
+            }
         }
         
         // All other transitions don't use any animations

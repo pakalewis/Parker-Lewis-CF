@@ -11,17 +11,7 @@ import Foundation
 
 class NetworkController {
     
-    
-//    class var sharedInstance: NetworkController {
-//    struct Static {
-//        static var instance: NetworkController?
-//        static var token: dispatch_once_t = 0
-//        }
-//        dispatch_once(&Static.token) {
-//            Static.instance = NetworkController()
-//        }
-//        return Static.instance!
-//    }
+
     
     
     var authenticatedSession : NSURLSession?
@@ -59,9 +49,51 @@ class NetworkController {
         return Static.instance!
     }
 
-//    init() {
-//        
-//    }
+
+    
+    
+    
+    
+    
+    func createNewGitHubRepo() {
+        // create request and perform setup
+        
+        let postURLString = "https://api.github.com/user/repos"
+        let POSTURL = NSURL(string: postURLString)
+        var request = NSMutableURLRequest(URL: POSTURL!)
+        request.HTTPMethod = "POST"
+//        let urlQuery = clientID + "&" + clientSecret + "&" + "code=\(code!)"
+
+        
+//        var postData = urlQuery.dataUsingEncoding(NSASCIIStringEncoding, allowLossyConversion: true)
+//        let length = postData!.length
+//        request.setValue("\(length)", forHTTPHeaderField: "Content-Length")
+//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        request.HTTPBody = postData
+        
+        let dataRequest = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            
+            if error != nil {
+                // there is an error
+                println(error.localizedDescription)
+            } else {
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    switch httpResponse.statusCode {
+                    case 200...204:
+                        println()
+                        
+                    default:
+                        println("default case on status code: \(httpResponse.statusCode)")
+                    }
+                }
+                
+            }
+        })
+        dataRequest.resume()
+
+    }
+    
+    
     
     
     

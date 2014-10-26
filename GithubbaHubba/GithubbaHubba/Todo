@@ -1,19 +1,6 @@
 
-IMPLEMENTED THIS ON USERCOLLECTIONVC AND NEED TO NOW UPDATE THE OTHER FILES THAT ACCESS NETWORKCONTROLLER
 
-get the struct for a singleton networkcontroller. this is added to the NetworkController Class
-//        class var sharedInstance: NetworkController {
-//        struct Static {
-//            static var instance: NetworkController?
-//            static var token: dispatch_once_t = 0
-//            }
-//            dispatch_once(&Static.token) {
-//                Static.instance = NetworkController()
-//            }
-//            return Static.instance!
-//        }
-
-
+check joshua and matt for friendship friday task 2 (post request to github to make a new repo)
 
 
 
@@ -26,6 +13,17 @@ in searchbar clicked
 resign first responder
 
 
+refresh table/collection view when search bar is empty
+
+
+in the three tableview didselect. modify the split contrtoller view display mode so that on ipad it slides to the left and just shows whatever detail view was selected.
+
+
+why my web view not triggering from repo vc on ipad?
+
+
+
+
 hide collection view when search bar is empty
 //        if searchText == "" {
 //            self.instructionsLabel.hidden = false
@@ -34,7 +32,6 @@ hide collection view when search bar is empty
 
 
 
-add activity indicator when downloading images
 
 
 

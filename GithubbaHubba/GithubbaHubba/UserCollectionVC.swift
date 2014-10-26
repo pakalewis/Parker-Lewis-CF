@@ -13,6 +13,8 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var instructionsLabel: UILabel!
     
+    
+    
     var userArray = [User]()
     var currentUser = User()
     var defaultImage = UIImage(named: "default")
@@ -78,13 +80,17 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     // CELL FOR ITEM AT INDEXPATH
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("USER_CELL", forIndexPath: indexPath) as UserCell
-
+        
+        cell.activityIndicator.startAnimating()
+        cell.activityIndicator.hidesWhenStopped = true
+        cell.activityIndicator.color = UIColor.blackColor()
         
         let currentUser = self.userArray[indexPath.row] as User
         
         // set cell image and text. load default image first before downloading
         cell.userName.text = self.currentUser.userName
         cell.userAvatarImageView.image = self.defaultImage
+        
         
         // tags to check if the cell is still on screen
         var currentTag = cell.tag + 1
@@ -104,10 +110,11 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
 
                 if cell.tag == currentTag {
                     cell.userAvatarImageView.image = image
+                    cell.activityIndicator.stopAnimating()
                 }
             })
         }
-
+        
         return cell
     }
     
@@ -147,6 +154,7 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
         self.returnedFromSingleUserView = true
         
         self.navigationController?.pushViewController(destinationVC, animated: true)
+//        self.splitViewController?.showDetailViewController(destinationVC, sender: self)
     }
     
     
@@ -199,6 +207,8 @@ class UserCollectionVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         return text.validateStringWithoutSpecialCharacters()
+        
+        
     }
     
     

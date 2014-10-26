@@ -16,6 +16,8 @@ class UserCell: UICollectionViewCell {
     
     @IBOutlet weak var userName: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     
     override func prepareForReuse() {
         super.prepareForReuse()

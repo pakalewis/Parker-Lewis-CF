@@ -105,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				2C31888A19F5A4F400DD8693 /* RepoVC.swift */,
-				2CB8628419F9997A00C8D192 /* WebVC.swift */,
 				2CE5D7D219F5B834006A1B85 /* Repo.swift */,
 				2CE5D7D419F5C71D006A1B85 /* RepoCell.swift */,
 			);
@@ -186,6 +185,7 @@
 		2CB4D3B719F9940C001A720E /* Extra files */ = {
 			isa = PBXGroup;
 			children = (
+				2CB8628419F9997A00C8D192 /* WebVC.swift */,
 				2C31889019F5A6CE00DD8693 /* NetworkController.swift */,
 				2C31886319F59CE700DD8693 /* AppDelegate.swift */,
 				2C2F80D919F99140003BF772 /* Extensions.swift */,

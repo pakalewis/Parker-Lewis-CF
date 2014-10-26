@@ -12,14 +12,15 @@ extension String {
     
     func validateStringWithoutSpecialCharacters() -> Bool {
         
-        let regex = NSRegularExpression(pattern: "[^0-9a-zA-Z\n]", options: nil, error: nil)
+        let regex = NSRegularExpression(pattern: "[0-9a-zA-Z\n]", options: nil, error: nil)
         let range = NSRange(location: 0, length: countElements(self))
         let matches = regex?.numberOfMatchesInString(self, options: nil, range: range)
         
         if matches > 0 {
-            println("character not valid")
-            return false
+            println("matches = \(matches)")
+            return true
         }
-        return true
+        println("character not valid")
+        return false
     }
 }
