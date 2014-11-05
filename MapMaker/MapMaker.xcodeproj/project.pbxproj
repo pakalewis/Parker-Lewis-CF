@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C07AC021A0830D2005473F1 /* MonitoredRegionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */; };
 		2C1E51E01A09816A00F5758F /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E51DF1A09816A00F5758F /* Reminder.swift */; };
+		2C97BF3B1A0AA38D00261381 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C97BF3A1A0AA38C00261381 /* CloudKit.framework */; };
 		2CC809E91A081DAA002266F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC809E81A081DAA002266F1 /* AppDelegate.swift */; };
 		2CC809EC1A081DAA002266F1 /* MapMaker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CC809EA1A081DAA002266F1 /* MapMaker.xcdatamodeld */; };
 		2CC809F11A081DAA002266F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC809EF1A081DAA002266F1 /* Main.storyboard */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoredRegionsVC.swift; sourceTree = "<group>"; };
 		2C1E51DF1A09816A00F5758F /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
+		2C97BF391A0AA37D00261381 /* MapMaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MapMaker.entitlements; sourceTree = "<group>"; };
+		2C97BF3A1A0AA38C00261381 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		2CC809E31A081DAA002266F1 /* MapMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CC809E71A081DAA002266F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CC809E81A081DAA002266F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC80A0E1A081EF9002266F1 /* MapKit.framework in Frameworks */,
+				2C97BF3B1A0AA38D00261381 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +76,7 @@
 		2CC809DA1A081DAA002266F1 = {
 			isa = PBXGroup;
 			children = (
+				2C97BF3A1A0AA38C00261381 /* CloudKit.framework */,
 				2CC80A0D1A081EF9002266F1 /* MapKit.framework */,
 				2CC809E51A081DAA002266F1 /* MapMaker */,
 				2CC809FE1A081DAA002266F1 /* MapMakerTests */,
@@ -91,6 +96,7 @@
 		2CC809E51A081DAA002266F1 /* MapMaker */ = {
 			isa = PBXGroup;
 			children = (
+				2C97BF391A0AA37D00261381 /* MapMaker.entitlements */,
 				2CC80A141A082004002266F1 /* VIEWS */,
 				2CC80A131A081FEF002266F1 /* CONTROLLERS */,
 				2CC80A151A082012002266F1 /* OTHER FILES */,
@@ -145,12 +151,12 @@
 		2CC80A151A082012002266F1 /* OTHER FILES */ = {
 			isa = PBXGroup;
 			children = (
+				2CC809E81A081DAA002266F1 /* AppDelegate.swift */,
 				2C1E51DF1A09816A00F5758F /* Reminder.swift */,
 				2CC809F21A081DAA002266F1 /* Images.xcassets */,
 				2CC809F41A081DAA002266F1 /* LaunchScreen.xib */,
 				2CC809EA1A081DAA002266F1 /* MapMaker.xcdatamodeld */,
 				2CC809E61A081DAA002266F1 /* Supporting Files */,
-				2CC809E81A081DAA002266F1 /* AppDelegate.swift */,
 			);
 			name = "OTHER FILES";
 			sourceTree = "<group>";
@@ -204,8 +210,12 @@
 				TargetAttributes = {
 					2CC809E21A081DAA002266F1 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = J42Q5AV837;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -391,9 +401,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MapMaker/MapMaker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MapMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -401,9 +415,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MapMaker/MapMaker.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = MapMaker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
