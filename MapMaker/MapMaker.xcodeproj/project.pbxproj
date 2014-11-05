@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C07AC021A0830D2005473F1 /* MonitoredRegionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */; };
+		2C1E51E01A09816A00F5758F /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E51DF1A09816A00F5758F /* Reminder.swift */; };
 		2CC809E91A081DAA002266F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC809E81A081DAA002266F1 /* AppDelegate.swift */; };
 		2CC809EC1A081DAA002266F1 /* MapMaker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CC809EA1A081DAA002266F1 /* MapMaker.xcdatamodeld */; };
 		2CC809F11A081DAA002266F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CC809EF1A081DAA002266F1 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoredRegionsVC.swift; sourceTree = "<group>"; };
+		2C1E51DF1A09816A00F5758F /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		2CC809E31A081DAA002266F1 /* MapMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CC809E71A081DAA002266F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CC809E81A081DAA002266F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		2CC80A151A082012002266F1 /* OTHER FILES */ = {
 			isa = PBXGroup;
 			children = (
+				2C1E51DF1A09816A00F5758F /* Reminder.swift */,
 				2CC809F21A081DAA002266F1 /* Images.xcassets */,
 				2CC809F41A081DAA002266F1 /* LaunchScreen.xib */,
 				2CC809EA1A081DAA002266F1 /* MapMaker.xcdatamodeld */,
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CC80A171A082AAB002266F1 /* AddRegionVC.swift in Sources */,
+				2C1E51E01A09816A00F5758F /* Reminder.swift in Sources */,
 				2CC80A101A081F79002266F1 /* TabBarController.swift in Sources */,
 				2CC80A121A081FE8002266F1 /* MapVC.swift in Sources */,
 				2CC809E91A081DAA002266F1 /* AppDelegate.swift in Sources */,
