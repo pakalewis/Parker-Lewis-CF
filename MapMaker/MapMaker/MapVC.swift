@@ -116,6 +116,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         if sender.state == UIGestureRecognizerState.Began {
             let pointTouched = sender.locationInView(self.mapView)
             let coordinate = self.mapView.convertPoint(pointTouched, toCoordinateFromView: self.mapView)
+            self.mapView.setCenterCoordinate(coordinate, animated: true)
             println("\(coordinate.latitude) \(coordinate.longitude)")
             var newAnnotation = MKPointAnnotation()
             newAnnotation.coordinate = coordinate
@@ -152,6 +153,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         let newRegionVC = self.storyboard?.instantiateViewControllerWithIdentifier("NEW_REGION") as NewRegionVC
         newRegionVC.selectedAnnotation = view.annotation
+        newRegionVC.mapRect = self.mapView.visibleMapRect
         self.presentViewController(newRegionVC, animated: true, completion: nil)
     }
  

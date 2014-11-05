@@ -10,26 +10,58 @@ import UIKit
 import MapKit
 import CoreData
 
-class NewRegionVC: UIViewController, UITextFieldDelegate {
+class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
 
     var selectedAnnotation : MKAnnotation!
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
 
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var slider: UISlider!
     
+    var targetedRegion : MKCoordinateRegion?
+    var mapRect : MKMapRect?
+    var mapWidthInMeters: Double = 500.0
+    var overlay: MKCircle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Delegates
         self.textField.delegate = self
+        self.mapView.delegate = self
+
         
         self.myLabel.text = "Latitude: \(self.selectedAnnotation.coordinate.latitude)\nLongitude: \(self.selectedAnnotation.coordinate.longitude)"
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.mapView.setVisibleMapRect(self.mapRect!, animated: true)
+        
+        // determine width in meters of the visible map region
+        var leftMap = MKMapPointMake(MKMapRectGetMinX(self.mapRect!), MKMapRectGetMidY(self.mapRect!))
+        var rightMap = MKMapPointMake(MKMapRectGetMaxX(self.mapRect!), MKMapRectGetMidY(self.mapRect!))
+        self.mapWidthInMeters = MKMetersBetweenMapPoints(leftMap, rightMap)
+
+        // make the initial overlay with the radius determined from above
+        var initialRadius = self.mapWidthInMeters / 2
+        self.overlay = MKCircle(centerCoordinate: self.selectedAnnotation.coordinate, radius: initialRadius)
+        self.mapView.addOverlay(overlay)
+        self.mapView.userInteractionEnabled = false
+    }
     
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        // Make renderer which draws the overlays on the map
+        let renderer = MKCircleRenderer(overlay: overlay)
+        // Adjust settings on the renderer
+        renderer.fillColor = UIColor.greenColor().colorWithAlphaComponent(0.3)
+        // Return it
+        return renderer
+    }
+
     
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -37,6 +69,14 @@ class NewRegionVC: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @IBAction func sliderSlid(sender: AnyObject) {
+        println(self.slider.value)
+        self.mapView.removeOverlay(self.overlay)
+        var newRadius = self.mapWidthInMeters * Double(self.slider.value)
+        self.overlay = MKCircle(centerCoordinate: self.selectedAnnotation.coordinate, radius: newRadius)
+        self.mapView.addOverlay(overlay)
+
+    }
     
     @IBAction func addRegionButton(sender: AnyObject) {
         // Core Data
