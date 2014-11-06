@@ -19,8 +19,12 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        var regions = appDelegate.locationManager.monitoredRegions
-        
+//        var regions = appDelegate.locationManager.monitoredRegions
+//        for region in regions {
+//            appDelegate.locationManager.stopMonitoringForRegion(region as CLRegion)
+//        }
+//        println(regions.count)
+    
         
         // Core Data stuff
         let managedObjectContext = appDelegate.managedObjectContext!
@@ -34,7 +38,21 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
             println("there are \(fetchResult?.count) results stored in core data")
             for result in fetchResult! {
                 let reminder = result as Reminder
-                println("Reminder named \(reminder.identifier) at \(reminder.makeCoordinate().latitude) and \(reminder.makeCoordinate().longitude)")
+                
+                var newAnnotation = MKPointAnnotation()
+                newAnnotation.title = reminder.identifier
+                newAnnotation.coordinate = reminder.makeCoordinate()
+                self.mapView.addAnnotation(newAnnotation)
+
+                let overlay = MKCircle(centerCoordinate: reminder.makeCoordinate(), radius: reminder.radius)
+                self.mapView.addOverlay(overlay)
+
+                
+                // TODO: uncomment this to clear out any Reminders stored in core data
+//                 managedObjectContext.deleteObject(reminder)
+//                var error : NSError?
+//                managedObjectContext.save(&error)
+//                println("Reminder named \(reminder.identifier) at \(reminder.makeCoordinate().latitude) and \(reminder.makeCoordinate().longitude) with radius \(reminder.radius)")
             }
         } else {
             println("No Reminders stored yet")
@@ -74,14 +92,15 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         
         // set up to observe when a region is created
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newRegionAdded:", name: "NEW_REGION_ADDED", object: nil)
-        
-        
     }
+
     
+    
+    // TODO: this is not accurate. Some regions are not being monitored
     override func viewDidAppear(animated: Bool) {
-//        var totalRegions = appDelegate.locationManager.monitoredRegions.count
+        var totalRegions = appDelegate.locationManager.monitoredRegions.count
 //        var lastRegionAdded = appDelegate.locationManager.monitoredRegions.allObjects
-//        println("Now monitoring \(totalRegions) total regions")
+        println("Now monitoring \(totalRegions) total regions")
 //        println("The latest region added was \(lastRegionAdded.last)")
     }
     
@@ -138,7 +157,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         return renderer
     }
     
-    
+    // TODO: How to make two types of annotations. New ones have the callout button and previously set ones don't
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         let regionAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "REGION_ANNOTATION")
         regionAnnotation.animatesDrop = true

@@ -70,12 +70,12 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     }
     
     @IBAction func sliderSlid(sender: AnyObject) {
-        println(self.slider.value)
+        // remove old overlay
         self.mapView.removeOverlay(self.overlay)
+        // calculate new radius and add new overlay
         var newRadius = self.mapWidthInMeters * Double(self.slider.value)
         self.overlay = MKCircle(centerCoordinate: self.selectedAnnotation.coordinate, radius: newRadius)
-        self.mapView.addOverlay(overlay)
-
+        self.mapView.addOverlay(self.overlay)
     }
     
     @IBAction func addRegionButton(sender: AnyObject) {
@@ -94,7 +94,7 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
         }
         else {
             // Make new region to monitor
-            var newRegionToMonitor = CLCircularRegion(center: self.selectedAnnotation.coordinate, radius: 20000.0, identifier: self.textField.text)
+            var newRegionToMonitor = CLCircularRegion(center: self.selectedAnnotation.coordinate, radius: self.mapWidthInMeters * Double(self.slider.value), identifier: self.textField.text)
             println("new region called \(self.textField.text) added at \(newRegionToMonitor.center.latitude) and \(newRegionToMonitor.center.longitude)")
             appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
 
