@@ -10,7 +10,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    // Look in HIG for icon size for tabs
+    // TODO: Look in HIG for icon size for tabs
     
     override func viewDidLoad() {
         super.viewDidLoad()

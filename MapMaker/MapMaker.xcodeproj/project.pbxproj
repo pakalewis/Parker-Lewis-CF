@@ -96,7 +96,6 @@
 		2CC809E51A081DAA002266F1 /* MapMaker */ = {
 			isa = PBXGroup;
 			children = (
-				2C97BF391A0AA37D00261381 /* MapMaker.entitlements */,
 				2CC80A141A082004002266F1 /* VIEWS */,
 				2CC80A131A081FEF002266F1 /* CONTROLLERS */,
 				2CC80A151A082012002266F1 /* OTHER FILES */,
@@ -155,6 +154,7 @@
 				2C1E51DF1A09816A00F5758F /* Reminder.swift */,
 				2CC809F21A081DAA002266F1 /* Images.xcassets */,
 				2CC809F41A081DAA002266F1 /* LaunchScreen.xib */,
+				2C97BF391A0AA37D00261381 /* MapMaker.entitlements */,
 				2CC809EA1A081DAA002266F1 /* MapMaker.xcdatamodeld */,
 				2CC809E61A081DAA002266F1 /* Supporting Files */,
 			);

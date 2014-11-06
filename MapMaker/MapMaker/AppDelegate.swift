@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
+
+        
         return true
     }
 
@@ -68,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         
+        // added these options for icloud setup
         let options =
             [ NSPersistentStoreUbiquitousContentNameKey: "CloudNotes",
             NSMigratePersistentStoresAutomaticallyOption: true,

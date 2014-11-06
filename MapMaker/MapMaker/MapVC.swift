@@ -14,56 +14,19 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        var regions = appDelegate.locationManager.monitoredRegions
-//        for region in regions {
-//            appDelegate.locationManager.stopMonitoringForRegion(region as CLRegion)
-//        }
-//        println(regions.count)
-    
-        
-        // Core Data stuff
-        let managedObjectContext = appDelegate.managedObjectContext!
-        
-        var fetchRequest = NSFetchRequest(entityName: "Reminder")
-        var sortDescriptor = NSSortDescriptor(key: "identifier", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        var fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
-        
-        if fetchResult?.count > 0 {
-            println("there are \(fetchResult?.count) results stored in core data")
-            for result in fetchResult! {
-                let reminder = result as Reminder
-                
-                var newAnnotation = MKPointAnnotation()
-                newAnnotation.title = reminder.identifier
-                newAnnotation.coordinate = reminder.makeCoordinate()
-                self.mapView.addAnnotation(newAnnotation)
+    var managedObjectContext : NSManagedObjectContext!
 
-                let overlay = MKCircle(centerCoordinate: reminder.makeCoordinate(), radius: reminder.radius)
-                self.mapView.addOverlay(overlay)
-
-                
-                // TODO: uncomment this to clear out any Reminders stored in core data
-//                 managedObjectContext.deleteObject(reminder)
-//                var error : NSError?
-//                managedObjectContext.save(&error)
-//                println("Reminder named \(reminder.identifier) at \(reminder.makeCoordinate().latitude) and \(reminder.makeCoordinate().longitude) with radius \(reminder.radius)")
-            }
-        } else {
-            println("No Reminders stored yet")
-        }
-    }
+    var currentNumberOfRegions = 0
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        println("View did load")
+        
         // Delegates
-        appDelegate.locationManager.delegate = self
+        self.appDelegate.locationManager.delegate = self
+        self.managedObjectContext = self.appDelegate.managedObjectContext!
         self.mapView.delegate = self
         
         
@@ -83,7 +46,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         default:
             println("default")
         }
-
+        
         
         // Set up gesture recognizer
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: "longPressOnMap:")
@@ -93,18 +56,85 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         // set up to observe when a region is created
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "newRegionAdded:", name: "NEW_REGION_ADDED", object: nil)
     }
+    
 
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        println("View will appear")
+
+        var fetchRequest = NSFetchRequest(entityName: "Reminder")
+        var fetchResult = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
+        
+        if fetchResult?.count != self.currentNumberOfRegions {
+            println("REFRESHING MAP BECAUSE NUMBER OF REGIONS CHANGED")
+            self.clearMap()
+            self.showReminders()
+            self.currentNumberOfRegions = fetchResult!.count
+        }
+
+    }
     
     
     // TODO: this is not accurate. Some regions are not being monitored
     override func viewDidAppear(animated: Bool) {
-        var totalRegions = appDelegate.locationManager.monitoredRegions.count
-//        var lastRegionAdded = appDelegate.locationManager.monitoredRegions.allObjects
+        super.viewDidAppear(animated)
+        println("View did appear")
+
+        var totalRegions = appDelegate.locationManager.monitoredRegions
+        for x in totalRegions {
+            let region = x as CLRegion
+        }
         println("Now monitoring \(totalRegions) total regions")
-//        println("The latest region added was \(lastRegionAdded.last)")
+    }
+
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        println("view will disappear")
     }
     
     
+    func clearMap() {
+        println("removing all")
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapView.reloadInputViews()
+    }
+    
+    func showReminders() {
+        var fetchRequest = NSFetchRequest(entityName: "Reminder")
+//        var sortDescriptor = NSSortDescriptor(key: "identifier", ascending: true)
+//        fetchRequest.sortDescriptors = [sortDescriptor]
+        var fetchResult = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
+        
+        if fetchResult?.count > 0 {
+            println("there are \(fetchResult!.count) results stored in core data")
+            for result in fetchResult! {
+                let reminder = result as Reminder
+                
+                var newAnnotation = MKPointAnnotation()
+                newAnnotation.title = reminder.identifier
+                newAnnotation.coordinate = reminder.makeCoordinate()
+                self.mapView.addAnnotation(newAnnotation)
+
+                let overlay = MKCircle(centerCoordinate: reminder.makeCoordinate(), radius: reminder.radius)
+                self.mapView.addOverlay(overlay)
+                
+                
+                // TODO: uncomment this to clear out any Reminders stored in core data
+                //                 managedObjectContext.deleteObject(reminder)
+                //                var error : NSError?
+                //                managedObjectContext.save(&error)
+                //                println("Reminder named \(reminder.identifier) at \(reminder.makeCoordinate().latitude) and \(reminder.makeCoordinate().longitude) with radius \(reminder.radius)")
+            }
+        } else {
+            println("No Reminders stored yet")
+        }
+    }
+    
+    
+    // this gets fired under the hood
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -112,6 +142,12 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
         println("YOU ARE ENTERING THE REGION \(region.identifier)")
+        let enterNotification = UILocalNotification()
+        enterNotification.fireDate = NSDate()
+        enterNotification.alertBody = "You entered a special region"
+        enterNotification.alertAction = "Title"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(enterNotification)
     }
     
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
@@ -142,7 +178,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
             newAnnotation.title = "Add this region?"
             self.mapView.addAnnotation(newAnnotation)
         }
-
     }
 
     
@@ -158,7 +193,17 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     }
     
     // TODO: How to make two types of annotations. New ones have the callout button and previously set ones don't
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(aMapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let dequeuedAnnotation = aMapView.dequeueReusableAnnotationViewWithIdentifier("REGION_ANNOTATION")
+        if dequeuedAnnotation != nil {
+            println("annotation was reused")
+            return dequeuedAnnotation
+        }
+        
         let regionAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "REGION_ANNOTATION")
         regionAnnotation.animatesDrop = true
         regionAnnotation.canShowCallout = true
