@@ -28,6 +28,16 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        // Setup Nav bar
+        self.title = "Add Region to Monitor"
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "cancelButtonPressed:")
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "doneButtonPressed:")
+        
+        self.navigationItem.leftBarButtonItem = cancelButton
+        self.navigationItem.rightBarButtonItem = doneButton
+        
+        
         // Delegates
         self.textField.delegate = self
         self.mapView.delegate = self
@@ -35,6 +45,55 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
         
         self.myLabel.text = "Latitude: \(self.selectedAnnotation.coordinate.latitude)\nLongitude: \(self.selectedAnnotation.coordinate.longitude)"
         
+    }
+    
+    func cancelButtonPressed(sender : AnyObject?) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func doneButtonPressed(sender : AnyObject?) {
+        // Core Data
+        let managedObjectContext = appDelegate.managedObjectContext!
+        
+        // First check to see if a Reminder with that identifier is already stored
+        var fetchRequest = NSFetchRequest(entityName: "Reminder")
+        fetchRequest.predicate = NSPredicate(format:"identifier = %@", self.textField.text)
+        var fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
+        if fetchResult?.count > 0 {
+            var duplicateAlert = UIAlertController(title: "", message: "There is already a reminder with this name", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+            duplicateAlert.addAction(okAction)
+            self.presentViewController(duplicateAlert, animated: true, completion: nil)
+        }
+        else {
+            // Make new region to monitor
+            var newRegionToMonitor = CLCircularRegion(center: self.selectedAnnotation.coordinate, radius: self.mapWidthInMeters * Double(self.slider.value), identifier: self.textField.text)
+            println("new region called \(self.textField.text) added at \(newRegionToMonitor.center.latitude) and \(newRegionToMonitor.center.longitude)")
+            appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
+            
+            // make new entity to store in core data
+            let newReminderToStore = NSEntityDescription.insertNewObjectForEntityForName("Reminder", inManagedObjectContext: managedObjectContext) as Reminder
+            newReminderToStore.identifier = self.textField.text
+            newReminderToStore.date = NSDate()
+            newReminderToStore.latitude = selectedAnnotation.coordinate.latitude
+            newReminderToStore.longitude = selectedAnnotation.coordinate.longitude
+            newReminderToStore.radius = newRegionToMonitor.radius
+            
+            var error : NSError?
+            managedObjectContext.save(&error)
+            if error != nil {
+                println("There was an error saving to core data. The error says \(error!.localizedDescription)")
+            }
+            
+            
+            // Post a notification
+            let newRegionNotification = NSNotification(name: "NEW_REGION_ADDED", object: nil, userInfo: ["region" : newRegionToMonitor])
+            NSNotificationCenter.defaultCenter().postNotification(newRegionNotification)
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,46 +138,5 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     }
     
     @IBAction func addRegionButton(sender: AnyObject) {
-        // Core Data
-        let managedObjectContext = appDelegate.managedObjectContext!
-        
-        // First check to see if a Reminder with that identifier is already stored
-        var fetchRequest = NSFetchRequest(entityName: "Reminder")
-        fetchRequest.predicate = NSPredicate(format:"identifier = %@", self.textField.text)
-        var fetchResult = managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
-        if fetchResult?.count > 0 {
-            var duplicateAlert = UIAlertController(title: "", message: "There is already a reminder with this name", preferredStyle: UIAlertControllerStyle.Alert)
-            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
-            duplicateAlert.addAction(okAction)
-            self.presentViewController(duplicateAlert, animated: true, completion: nil)
-        }
-        else {
-            // Make new region to monitor
-            var newRegionToMonitor = CLCircularRegion(center: self.selectedAnnotation.coordinate, radius: self.mapWidthInMeters * Double(self.slider.value), identifier: self.textField.text)
-            println("new region called \(self.textField.text) added at \(newRegionToMonitor.center.latitude) and \(newRegionToMonitor.center.longitude)")
-            appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
-
-            // make new entity to store in core data
-            let newReminderToStore = NSEntityDescription.insertNewObjectForEntityForName("Reminder", inManagedObjectContext: managedObjectContext) as Reminder
-            newReminderToStore.identifier = self.textField.text
-            newReminderToStore.date = NSDate()
-            newReminderToStore.latitude = selectedAnnotation.coordinate.latitude
-            newReminderToStore.longitude = selectedAnnotation.coordinate.longitude
-            newReminderToStore.radius = newRegionToMonitor.radius
-            
-            var error : NSError?
-            managedObjectContext.save(&error)
-            if error != nil {
-                println("There was an error saving to core data. The error says \(error!.localizedDescription)")
-            }
-            
-            
-            // Post a notification
-            let newRegionNotification = NSNotification(name: "NEW_REGION_ADDED", object: nil, userInfo: ["region" : newRegionToMonitor])
-            NSNotificationCenter.defaultCenter().postNotification(newRegionNotification)
-
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
     }
 }

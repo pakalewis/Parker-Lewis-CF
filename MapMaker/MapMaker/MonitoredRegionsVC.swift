@@ -22,12 +22,13 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Monitored Regions"
+
         self.tableView.dataSource = self
-//        self.tableView.delegate = self
         
         self.managedObjectContext = self.appDelegate.managedObjectContext!
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetCloudChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: appDelegate.persistentStoreCoordinator)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetCloudChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: appDelegate.persistentStoreCoordinator)
 
         
         // make a fetch request to core data to get all Reminders

@@ -24,6 +24,8 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         super.viewDidLoad()
         println("View did load")
         
+        self.title = "Map"
+        
         // Delegates
         self.appDelegate.locationManager.delegate = self
         self.managedObjectContext = self.appDelegate.managedObjectContext!
@@ -215,10 +217,25 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
  
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+//        let remindersViewController = AddReminderViewController()
+//        remindersViewController.delegate = self
+//        remindersViewController.coordinate = view.annotation.coordinate
+//        
+//        let navController = UINavigationController(rootViewController: remindersViewController)
+//        
+//        navController.modalPresentationStyle = UIModalPresentationStyle.FormSheet
+//        navController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+//        navController.modalInPopover = true
+//        
+//        self.presentViewController(navController, animated: true, completion: nil)
+
+        
         let newRegionVC = self.storyboard?.instantiateViewControllerWithIdentifier("NEW_REGION") as NewRegionVC
         newRegionVC.selectedAnnotation = view.annotation
         newRegionVC.mapRect = self.mapView.visibleMapRect
-        self.presentViewController(newRegionVC, animated: true, completion: nil)
+        
+        let nav = UINavigationController(rootViewController: newRegionVC)
+        self.presentViewController(nav, animated: true, completion: nil)
     }
  
     
