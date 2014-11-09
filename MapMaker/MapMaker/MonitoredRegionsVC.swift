@@ -22,6 +22,7 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         self.title = "Monitored Regions"
+        
         let monitoredRegions = self.appDelegate.locationManager.monitoredRegions
         for region in monitoredRegions {
             println("REGIONS:\n\(region.identifier)")
@@ -50,6 +51,8 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
         if !self.fetchedResultsController.performFetch(&error) {
             println("error!!")
         }
+        self.refreshMonitoredRegions()
+
     }
 
     
@@ -57,7 +60,12 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     {
         println("DID GET CLOUD CHANGES")
         self.managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
-        
+        self.refreshMonitoredRegions()
+        self.tableView.reloadData()
+    }
+
+    
+    func refreshMonitoredRegions() {
         let monitoredRegions = self.appDelegate.locationManager.monitoredRegions
         let reminders = self.fetchedResultsController.fetchedObjects as [Reminder]
         for reminder in reminders {
@@ -69,10 +77,13 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
                 println("the reminder \(reminder.identifier) was not being monitored. But now it is!")
                 var newRegionToMonitor = CLCircularRegion(center: reminder.makeCoordinate(), radius: reminder.radius, identifier: reminder.identifier)
                 self.appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
+                
+                let newRegionNotification = NSNotification(name: "NEW_REGION_ADDED", object: nil, userInfo: ["region" : newRegionToMonitor])
+                NSNotificationCenter.defaultCenter().postNotification(newRegionNotification)
+
             }
         }
     }
-
     
     // MARK: - NSFetchedResultsControllerDelegate
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
@@ -120,7 +131,9 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
 
             
             // delete from CoreData
-            self.managedObjectContext.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject)
+            if let objectToDelete = fetchedResultsController.objectAtIndexPath(indexPath) as? NSManagedObject {
+                self.managedObjectContext.deleteObject(objectToDelete)
+            }
             var error: NSError? = nil
             if !self.managedObjectContext.save(&error) {
                 println("Error saving context: \(error)")

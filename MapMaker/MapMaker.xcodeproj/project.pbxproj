@@ -20,7 +20,7 @@
 		2CC80A0E1A081EF9002266F1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CC80A0D1A081EF9002266F1 /* MapKit.framework */; };
 		2CC80A101A081F79002266F1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC80A0F1A081F79002266F1 /* TabBarController.swift */; };
 		2CC80A121A081FE8002266F1 /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC80A111A081FE8002266F1 /* MapVC.swift */; };
-		2CC80A171A082AAB002266F1 /* AddRegionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC80A161A082AAB002266F1 /* AddRegionVC.swift */; };
+		2CC80A171A082AAB002266F1 /* NewRegionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC80A161A082AAB002266F1 /* NewRegionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +52,7 @@
 		2CC80A0D1A081EF9002266F1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2CC80A0F1A081F79002266F1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2CC80A111A081FE8002266F1 /* MapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
-		2CC80A161A082AAB002266F1 /* AddRegionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRegionVC.swift; sourceTree = "<group>"; };
+		2CC80A161A082AAB002266F1 /* NewRegionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRegionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +136,7 @@
 				2CC80A0F1A081F79002266F1 /* TabBarController.swift */,
 				2CC80A111A081FE8002266F1 /* MapVC.swift */,
 				2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */,
-				2CC80A161A082AAB002266F1 /* AddRegionVC.swift */,
+				2CC80A161A082AAB002266F1 /* NewRegionVC.swift */,
 				2C1932F41A0EE3D600AE22CC /* SelectedRegionVC.swift */,
 			);
 			name = CONTROLLERS;
@@ -273,7 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CC80A171A082AAB002266F1 /* AddRegionVC.swift in Sources */,
+				2CC80A171A082AAB002266F1 /* NewRegionVC.swift in Sources */,
 				2C1E51E01A09816A00F5758F /* Reminder.swift in Sources */,
 				2CC80A101A081F79002266F1 /* TabBarController.swift in Sources */,
 				2CC80A121A081FE8002266F1 /* MapVC.swift in Sources */,

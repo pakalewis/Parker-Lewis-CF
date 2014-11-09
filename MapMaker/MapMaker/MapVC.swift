@@ -71,7 +71,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         if fetchResult?.count != self.currentNumberOfRegions {
             println("REFRESHING MAP BECAUSE NUMBER OF REGIONS CHANGED")
             self.clearMap()
-            self.showReminders()
+            self.showRemindersAndOverlays()
             self.currentNumberOfRegions = fetchResult!.count
         }
 
@@ -97,13 +97,10 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         println("removing all")
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapView.reloadInputViews()
     }
     
-    func showReminders() {
+    func showRemindersAndOverlays() {
         var fetchRequest = NSFetchRequest(entityName: "Reminder")
-//        var sortDescriptor = NSSortDescriptor(key: "identifier", ascending: true)
-//        fetchRequest.sortDescriptors = [sortDescriptor]
         var fetchResult = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil)
         
         if fetchResult?.count > 0 {
@@ -191,6 +188,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         return renderer
     }
     
+    
     // TODO: How to make two types of annotations. New ones have the callout button and previously set ones don't
     func mapView(aMapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
         if annotation is MKUserLocation {
@@ -214,19 +212,6 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
  
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-//        let remindersViewController = AddReminderViewController()
-//        remindersViewController.delegate = self
-//        remindersViewController.coordinate = view.annotation.coordinate
-//        
-//        let navController = UINavigationController(rootViewController: remindersViewController)
-//        
-//        navController.modalPresentationStyle = UIModalPresentationStyle.FormSheet
-//        navController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
-//        navController.modalInPopover = true
-//        
-//        self.presentViewController(navController, animated: true, completion: nil)
-
-        
         let newRegionVC = self.storyboard?.instantiateViewControllerWithIdentifier("NEW_REGION") as NewRegionVC
         newRegionVC.selectedAnnotation = view.annotation
         newRegionVC.mapRect = self.mapView.visibleMapRect
@@ -238,11 +223,9 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     func newRegionAdded(notification : NSNotification) {
         println("new region added and notification fired")
-        let userInfo = notification.userInfo!
-        let newRegion = userInfo["region"] as CLCircularRegion
-        
-        let overlay = MKCircle(centerCoordinate: newRegion.center, radius: newRegion.radius)
-        self.mapView.addOverlay(overlay)
+
+        self.clearMap()
+        self.showRemindersAndOverlays()
     }
     
 }
