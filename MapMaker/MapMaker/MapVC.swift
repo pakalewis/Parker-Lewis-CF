@@ -84,10 +84,10 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
         println("View did appear")
 
         var totalRegions = appDelegate.locationManager.monitoredRegions
-        for x in totalRegions {
-            let region = x as CLRegion
-        }
-        println("Now monitoring \(totalRegions) total regions")
+//        for x in totalRegions {
+//            let region = x as CLRegion
+//        }
+        println("Now monitoring \(totalRegions.count) total regions:\n\(totalRegions) ")
     }
 
     
@@ -114,6 +114,7 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
             println("there are \(fetchResult!.count) results stored in core data")
             for result in fetchResult! {
                 let reminder = result as Reminder
+                println("Reminder named \(reminder.identifier) at \(reminder.makeCoordinate().latitude) and \(reminder.makeCoordinate().longitude) with radius \(reminder.radius)")
                 
                 var newAnnotation = MKPointAnnotation()
                 newAnnotation.title = reminder.identifier
@@ -122,13 +123,11 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
                 let overlay = MKCircle(centerCoordinate: reminder.makeCoordinate(), radius: reminder.radius)
                 self.mapView.addOverlay(overlay)
-                
-                
+
                 // TODO: uncomment this to clear out any Reminders stored in core data
-                //                 managedObjectContext.deleteObject(reminder)
-                //                var error : NSError?
-                //                managedObjectContext.save(&error)
-                //                println("Reminder named \(reminder.identifier) at \(reminder.makeCoordinate().latitude) and \(reminder.makeCoordinate().longitude) with radius \(reminder.radius)")
+//                managedObjectContext.deleteObject(reminder)
+//                var error : NSError?
+//                managedObjectContext.save(&error)
             }
         } else {
             println("No Reminders stored yet")

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        // This line registers the App to receive local notifications
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
 
         
@@ -49,7 +50,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
+    
 
+    // Shows an alert via local notification when the app is open
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        var inAppAlert = UIAlertView()
+        inAppAlert.title = "You entered a SPECIAL region"
+        inAppAlert.message = notification.alertBody
+        inAppAlert.addButtonWithTitle("OK")
+        inAppAlert.show()
+
+        println("still here")
+//        var rootViewController = self.window!.rootViewController
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("CurrentShows") as ViewController_CurrentShows
+//        
+//        rootViewController.navigationController.popToViewController(setViewController, animated: false)
+//        setViewController.reloadData()
+    }
+    
+    
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: NSURL = {

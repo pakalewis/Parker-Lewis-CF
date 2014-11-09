@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C07AC021A0830D2005473F1 /* MonitoredRegionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */; };
+		2C1932F51A0EE3D600AE22CC /* SelectedRegionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1932F41A0EE3D600AE22CC /* SelectedRegionVC.swift */; };
 		2C1E51E01A09816A00F5758F /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E51DF1A09816A00F5758F /* Reminder.swift */; };
 		2C97BF3B1A0AA38D00261381 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C97BF3A1A0AA38C00261381 /* CloudKit.framework */; };
 		2CC809E91A081DAA002266F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC809E81A081DAA002266F1 /* AppDelegate.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitoredRegionsVC.swift; sourceTree = "<group>"; };
+		2C1932F41A0EE3D600AE22CC /* SelectedRegionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedRegionVC.swift; sourceTree = "<group>"; };
 		2C1E51DF1A09816A00F5758F /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 		2C97BF391A0AA37D00261381 /* MapMaker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MapMaker.entitlements; sourceTree = "<group>"; };
 		2C97BF3A1A0AA38C00261381 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -135,6 +137,7 @@
 				2CC80A111A081FE8002266F1 /* MapVC.swift */,
 				2C07AC011A0830D2005473F1 /* MonitoredRegionsVC.swift */,
 				2CC80A161A082AAB002266F1 /* AddRegionVC.swift */,
+				2C1932F41A0EE3D600AE22CC /* SelectedRegionVC.swift */,
 			);
 			name = CONTROLLERS;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				2CC809E91A081DAA002266F1 /* AppDelegate.swift in Sources */,
 				2C07AC021A0830D2005473F1 /* MonitoredRegionsVC.swift in Sources */,
 				2CC809EC1A081DAA002266F1 /* MapMaker.xcdatamodeld in Sources */,
+				2C1932F51A0EE3D600AE22CC /* SelectedRegionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

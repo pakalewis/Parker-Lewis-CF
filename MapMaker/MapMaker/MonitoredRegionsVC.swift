@@ -16,7 +16,6 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var managedObjectContext : NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController!
-//    var monitoredRegions = [Reminder]()
     
     
     override func viewDidLoad() {
@@ -25,10 +24,11 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
         self.title = "Monitored Regions"
 
         self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         self.managedObjectContext = self.appDelegate.managedObjectContext!
         
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetCloudChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: appDelegate.persistentStoreCoordinator)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didGetCloudChanges:", name: NSPersistentStoreDidImportUbiquitousContentChangesNotification, object: appDelegate.persistentStoreCoordinator)
 
         
         // make a fetch request to core data to get all Reminders
@@ -49,9 +49,7 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     func didGetCloudChanges(notification : NSNotification)
     {
         println("Did get cloud changes")
-        //self.managedObjectContext.performBlock { () -> Void in
         self.managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
-        //}
     }
 
     
@@ -62,12 +60,9 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
-    // TODO: enable deletion from tableview. this should delete the reminder from Monitored Regions and from core data and the actual tableview cell
     // MARK: Tableview funcs
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var retval = self.fetchedResultsController.fetchedObjects?.count ?? 0
-        println("number of rows in section = \(retval)")
-        return retval
+        return self.fetchedResultsController.fetchedObjects?.count ?? 0
     }
  
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -88,6 +83,7 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // User deleted region from tableview.
         if editingStyle == .Delete {
             
             // delete monitored region
@@ -97,7 +93,6 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
             println("identifier of region to stop monitoring: \(identifier)")
             let filteredSet = allRegions.filteredSetUsingPredicate(targetPredicate!)
             let regionToStopMonitoring = filteredSet.allObjects.first as CLRegion
-
             self.appDelegate.locationManager.stopMonitoringForRegion(regionToStopMonitoring)
             
 
@@ -109,9 +104,21 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
                 println("Error saving context: \(error)")
                 abort()
             }
-            
-            
-
         }
     }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println(indexPath.row)
+        let currentReminder = self.fetchedResultsController.fetchedObjects?[indexPath.row] as Reminder
+
+        var selectedRegionVC = self.storyboard?.instantiateViewControllerWithIdentifier("SPECIAL") as SelectedRegionVC
+        selectedRegionVC.selectedRegion = currentReminder
+        self.navigationController?.pushViewController(selectedRegionVC, animated: true)
+        
+        
+        
+    }
+    
+    
 }

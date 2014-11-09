@@ -47,12 +47,38 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
         
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.mapView.setVisibleMapRect(self.mapRect!, animated: true)
+        
+        // determine width in meters of the visible map region
+        var leftMap = MKMapPointMake(MKMapRectGetMinX(self.mapRect!), MKMapRectGetMidY(self.mapRect!))
+        var rightMap = MKMapPointMake(MKMapRectGetMaxX(self.mapRect!), MKMapRectGetMidY(self.mapRect!))
+        self.mapWidthInMeters = MKMetersBetweenMapPoints(leftMap, rightMap)
+        
+        // make the initial overlay with the radius determined from above
+        var initialRadius = self.mapWidthInMeters / 2
+        self.overlay = MKCircle(centerCoordinate: self.selectedAnnotation.coordinate, radius: initialRadius)
+        self.mapView.addOverlay(overlay)
+        self.mapView.userInteractionEnabled = false
+    }
+    
+
     func cancelButtonPressed(sender : AnyObject?) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     func doneButtonPressed(sender : AnyObject?) {
+        if self.textField.text == "" {
+            println("cannot store empty string")
+            var noNameAlert = UIAlertController(title: "", message: "You must enter a title for this region", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
+            noNameAlert.addAction(okAction)
+            self.presentViewController(noNameAlert, animated: true, completion: nil)
+        }
+        
         // Core Data
         let managedObjectContext = appDelegate.managedObjectContext!
         
@@ -71,6 +97,9 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
             var newRegionToMonitor = CLCircularRegion(center: self.selectedAnnotation.coordinate, radius: self.mapWidthInMeters * Double(self.slider.value), identifier: self.textField.text)
             println("new region called \(self.textField.text) added at \(newRegionToMonitor.center.latitude) and \(newRegionToMonitor.center.longitude)")
             appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
+            
+            // take snapshot of region
+            let regionImage = self.makeImageFromRegion(newRegionToMonitor)
             
             // make new entity to store in core data
             let newReminderToStore = NSEntityDescription.insertNewObjectForEntityForName("Reminder", inManagedObjectContext: managedObjectContext) as Reminder
@@ -96,21 +125,23 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
 
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.mapView.setVisibleMapRect(self.mapRect!, animated: true)
+    func makeImageFromRegion(region: CLRegion) -> UIImage! {
+        var imageToReturn = UIImage()
         
-        // determine width in meters of the visible map region
-        var leftMap = MKMapPointMake(MKMapRectGetMinX(self.mapRect!), MKMapRectGetMidY(self.mapRect!))
-        var rightMap = MKMapPointMake(MKMapRectGetMaxX(self.mapRect!), MKMapRectGetMidY(self.mapRect!))
-        self.mapWidthInMeters = MKMetersBetweenMapPoints(leftMap, rightMap)
+        let options = MKMapSnapshotOptions()
+        options.region = self.mapView.region
+        options.size = self.mapView.frame.size
+        options.scale = UIScreen.mainScreen().scale
+        let snapshotter = MKMapSnapshotter(options: options)
 
-        // make the initial overlay with the radius determined from above
-        var initialRadius = self.mapWidthInMeters / 2
-        self.overlay = MKCircle(centerCoordinate: self.selectedAnnotation.coordinate, radius: initialRadius)
-        self.mapView.addOverlay(overlay)
-        self.mapView.userInteractionEnabled = false
+        
+        snapshotter.startWithCompletionHandler { (snapshot, error) -> Void in
+            imageToReturn = snapshot.image
+        }
+        return imageToReturn
     }
+
+    
     
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         // Make renderer which draws the overlays on the map
