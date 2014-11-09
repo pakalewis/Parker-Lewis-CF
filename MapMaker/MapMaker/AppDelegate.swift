@@ -55,18 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Shows an alert via local notification when the app is open
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         var inAppAlert = UIAlertView()
-        inAppAlert.title = "You entered a SPECIAL region"
+        inAppAlert.title = "WARNING!!!"
         inAppAlert.message = notification.alertBody
         inAppAlert.addButtonWithTitle("OK")
         inAppAlert.show()
-
-        println("still here")
-//        var rootViewController = self.window!.rootViewController
-//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        var setViewController = mainStoryboard.instantiateViewControllerWithIdentifier("CurrentShows") as ViewController_CurrentShows
-//        
-//        rootViewController.navigationController.popToViewController(setViewController, animated: false)
-//        setViewController.reloadData()
     }
     
     

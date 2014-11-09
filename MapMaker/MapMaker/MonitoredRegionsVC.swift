@@ -22,7 +22,14 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         self.title = "Monitored Regions"
+        let monitoredRegions = self.appDelegate.locationManager.monitoredRegions
+        for region in monitoredRegions {
+            println("REGIONS:\n\(region.identifier)")
+        }
 
+        
+        
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -48,8 +55,22 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
     
     func didGetCloudChanges(notification : NSNotification)
     {
-        println("Did get cloud changes")
+        println("DID GET CLOUD CHANGES")
         self.managedObjectContext.mergeChangesFromContextDidSaveNotification(notification)
+        
+        let monitoredRegions = self.appDelegate.locationManager.monitoredRegions
+        let reminders = self.fetchedResultsController.fetchedObjects as [Reminder]
+        for reminder in reminders {
+            let identifier = reminder.identifier
+            let targetPredicate = NSPredicate(format:"identifier = %@", identifier)
+            let filteredSet = monitoredRegions.filteredSetUsingPredicate(targetPredicate!)
+            
+            if filteredSet.count == 0 {
+                println("the reminder \(reminder.identifier) was not being monitored. But now it is!")
+                var newRegionToMonitor = CLCircularRegion(center: reminder.makeCoordinate(), radius: reminder.radius, identifier: reminder.identifier)
+                self.appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
+            }
+        }
     }
 
     
@@ -92,8 +113,9 @@ class MonitoredRegionsVC: UIViewController, UITableViewDelegate, UITableViewData
             let targetPredicate = NSPredicate(format:"identifier = %@", identifier)
             println("identifier of region to stop monitoring: \(identifier)")
             let filteredSet = allRegions.filteredSetUsingPredicate(targetPredicate!)
-            let regionToStopMonitoring = filteredSet.allObjects.first as CLRegion
-            self.appDelegate.locationManager.stopMonitoringForRegion(regionToStopMonitoring)
+            if let regionToStopMonitoring = filteredSet.allObjects.first as? CLRegion {
+                self.appDelegate.locationManager.stopMonitoringForRegion(regionToStopMonitoring)
+            }
             
 
             

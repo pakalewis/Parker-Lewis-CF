@@ -78,15 +78,11 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     }
     
     
-    // TODO: this is not accurate. Some regions are not being monitored
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         println("View did appear")
 
         var totalRegions = appDelegate.locationManager.monitoredRegions
-//        for x in totalRegions {
-//            let region = x as CLRegion
-//        }
         println("Now monitoring \(totalRegions.count) total regions:\n\(totalRegions) ")
     }
 
@@ -142,17 +138,19 @@ class MapVC: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     
     func locationManager(manager: CLLocationManager!, didEnterRegion region: CLRegion!) {
-        println("YOU ARE ENTERING THE REGION \(region.identifier)")
         let enterNotification = UILocalNotification()
         enterNotification.fireDate = NSDate()
-        enterNotification.alertBody = "You entered a special region"
-        enterNotification.alertAction = "Title"
+        enterNotification.alertBody = "You are entering the region: \(region.identifier)"
         
         UIApplication.sharedApplication().scheduleLocalNotification(enterNotification)
     }
     
     func locationManager(manager: CLLocationManager!, didExitRegion region: CLRegion!) {
-        println("YOU ARE EXITING THE REGION \(region.identifier)")
+        let exitNotification = UILocalNotification()
+        exitNotification.fireDate = NSDate()
+        exitNotification.alertBody = "You are leaving the region: \(region.identifier)"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(exitNotification)
     }
     
     

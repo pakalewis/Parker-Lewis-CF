@@ -218,11 +218,11 @@
             </objects>
             <point key="canvasLocation" x="-59" y="395"/>
         </scene>
-        <!--Item 1-->
+        <!--Navigation Controller-->
         <scene sceneID="rT1-PS-wMo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oFY-lf-CSA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="feO-HZ-smy"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="feO-HZ-smy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="HNl-SH-vm2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -237,11 +237,11 @@
             </objects>
             <point key="canvasLocation" x="761" y="64"/>
         </scene>
-        <!--Item 2-->
+        <!--Navigation Controller-->
         <scene sceneID="Xr8-Y7-Xc0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZtW-dM-LUq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 2" id="bBv-2F-3eG"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="bBv-2F-3eG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bbv-zh-j0o">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

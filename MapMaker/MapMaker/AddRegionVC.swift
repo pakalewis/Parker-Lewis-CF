@@ -72,7 +72,6 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     
     func doneButtonPressed(sender : AnyObject?) {
         if self.textField.text == "" {
-            println("cannot store empty string")
             var noNameAlert = UIAlertController(title: "", message: "You must enter a title for this region", preferredStyle: UIAlertControllerStyle.Alert)
             let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil)
             noNameAlert.addAction(okAction)
@@ -98,9 +97,6 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
             println("new region called \(self.textField.text) added at \(newRegionToMonitor.center.latitude) and \(newRegionToMonitor.center.longitude)")
             appDelegate.locationManager.startMonitoringForRegion(newRegionToMonitor)
             
-            // take snapshot of region
-            let regionImage = self.makeImageFromRegion(newRegionToMonitor)
-            
             // make new entity to store in core data
             let newReminderToStore = NSEntityDescription.insertNewObjectForEntityForName("Reminder", inManagedObjectContext: managedObjectContext) as Reminder
             newReminderToStore.identifier = self.textField.text
@@ -124,23 +120,6 @@ class NewRegionVC: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
         }
 
     }
-    
-    func makeImageFromRegion(region: CLRegion) -> UIImage! {
-        var imageToReturn = UIImage()
-        
-        let options = MKMapSnapshotOptions()
-        options.region = self.mapView.region
-        options.size = self.mapView.frame.size
-        options.scale = UIScreen.mainScreen().scale
-        let snapshotter = MKMapSnapshotter(options: options)
-
-        
-        snapshotter.startWithCompletionHandler { (snapshot, error) -> Void in
-            imageToReturn = snapshot.image
-        }
-        return imageToReturn
-    }
-
     
     
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
