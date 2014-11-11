@@ -11,7 +11,7 @@
 		2C70BB7F1A116CF70075593F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB7E1A116CF70075593F /* main.m */; };
 		2C70BB821A116CF70075593F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB811A116CF70075593F /* AppDelegate.m */; };
 		2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB831A116CF70075593F /* StackOverFlowed.xcdatamodeld */; };
-		2C70BB881A116CF70075593F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB871A116CF70075593F /* ViewController.m */; };
+		2C70BB881A116CF70075593F /* QuestionSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB871A116CF70075593F /* QuestionSearch.m */; };
 		2C70BB8B1A116CF70075593F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C70BB891A116CF70075593F /* Main.storyboard */; };
 		2C70BB8D1A116CF70075593F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C70BB8C1A116CF70075593F /* Images.xcassets */; };
 		2C70BB901A116CF70075593F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C70BB8E1A116CF70075593F /* LaunchScreen.xib */; };
@@ -40,8 +40,8 @@
 		2C70BB801A116CF70075593F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2C70BB811A116CF70075593F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2C70BB841A116CF70075593F /* StackOverFlowed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StackOverFlowed.xcdatamodel; sourceTree = "<group>"; };
-		2C70BB861A116CF70075593F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2C70BB871A116CF70075593F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2C70BB861A116CF70075593F /* QuestionSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuestionSearch.h; sourceTree = "<group>"; };
+		2C70BB871A116CF70075593F /* QuestionSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuestionSearch.m; sourceTree = "<group>"; };
 		2C70BB8A1A116CF70075593F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C70BB8C1A116CF70075593F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C70BB8F1A116CF70075593F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -94,9 +94,8 @@
 			children = (
 				2C70BB801A116CF70075593F /* AppDelegate.h */,
 				2C70BB811A116CF70075593F /* AppDelegate.m */,
-				2C70BB861A116CF70075593F /* ViewController.h */,
-				2C70BB871A116CF70075593F /* ViewController.m */,
-				2C70BB891A116CF70075593F /* Main.storyboard */,
+				2C70BB861A116CF70075593F /* QuestionSearch.h */,
+				2C70BB871A116CF70075593F /* QuestionSearch.m */,
 				2C70BBA51A116F030075593F /* RootVC.h */,
 				2C70BBA61A116F030075593F /* RootVC.m */,
 				2C3492811A1279F300AC6875 /* Question.h */,
@@ -104,6 +103,7 @@
 				2C3492821A127E3200AC6875 /* NetworkController.h */,
 				2C3492831A127E3200AC6875 /* NetworkController.m */,
 				2C70BB8C1A116CF70075593F /* Images.xcassets */,
+				2C70BB891A116CF70075593F /* Main.storyboard */,
 				2C70BB8E1A116CF70075593F /* LaunchScreen.xib */,
 				2C70BB831A116CF70075593F /* StackOverFlowed.xcdatamodeld */,
 				2C70BB7C1A116CF70075593F /* Supporting Files */,
@@ -239,7 +239,7 @@
 			files = (
 				2C70BB821A116CF70075593F /* AppDelegate.m in Sources */,
 				2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */,
-				2C70BB881A116CF70075593F /* ViewController.m in Sources */,
+				2C70BB881A116CF70075593F /* QuestionSearch.m in Sources */,
 				2C70BBA91A1173C30075593F /* Question.m in Sources */,
 				2C3492841A127E3200AC6875 /* NetworkController.m in Sources */,
 				2C70BBA71A116F030075593F /* RootVC.m in Sources */,

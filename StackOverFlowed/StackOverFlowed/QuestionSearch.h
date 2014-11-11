@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  QuestionSearch.h
 //  StackOverFlowed
 //
 //  Created by Parker Lewis on 11/10/14.
@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController  <UITableViewDataSource, UITableViewDelegate>
+@interface QuestionSearch : UIViewController  <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+
 
 @property (nonatomic, strong) NSMutableArray *questionsArray;
 
