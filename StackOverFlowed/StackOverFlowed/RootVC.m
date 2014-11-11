@@ -7,6 +7,8 @@
 //
 
 #import "RootVC.h"
+#import "Question.h"
+#import "NetworkController.h"
 
 @interface RootVC ()
 
@@ -24,15 +26,16 @@
 
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
-    [self newFunc];
+//    [self newFunc];
     
 }
 
-- (void)newFunc {
-    NSLog(@"new func fired");
-    
-}
+//- (void)newFunc {
+//    NSLog(@"new func fired");
+//    
+//}
 
 
 

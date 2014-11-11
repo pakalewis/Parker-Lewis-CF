@@ -6,22 +6,29 @@
 //  Copyright (c) 2014 CodeFellows. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "Question.h"
 
 
-//@property (nonatomic) NSString *title;
-//@property (nonatomic) NSString *body;
-//@property (nonatomic) NSString *link;
-//@property (nonatomic) NSInteger *score;
-//@property (nonatomic) NSInteger *answer_count;
-//@property (nonatomic) NSInteger *up_vote_count;
-//@property (nonatomic) NSInteger *down_vote_count;
-//@property (nonatomic) NSInteger *favorite_count;
-//@property (nonatomic) NSInteger *view_count;
-//@property (nonatomic) BOOL *is_answered;
+@implementation Question
 
 
 
+- (instancetype) initWith: (NSDictionary *) questionItemDict {
+    self = [super init];
+    if (self) {
+        self.title = (NSString*) questionItemDict[@"title"];
+        self.link = (NSString*) questionItemDict[@"link"];
+        self.question_id = questionItemDict[@"question_id"];
+        self.score = [questionItemDict[@"score"] integerValue];
+        self.answer_count = [questionItemDict[@"answer_count"] integerValue];
+        self.view_count = [questionItemDict[@"view_count"] integerValue];
+//        if ([questionItemDict[@"is_answered"]  isEqual: @"false"]) {
+//            self.is_answered = false;
+//        } else {
+//            self.is_answered = true;
+//        }
+    }
+    return self;
+}
 
-//@end
-
+@end

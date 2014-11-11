@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C3492841A127E3200AC6875 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3492831A127E3200AC6875 /* NetworkController.m */; };
 		2C70BB7F1A116CF70075593F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB7E1A116CF70075593F /* main.m */; };
 		2C70BB821A116CF70075593F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB811A116CF70075593F /* AppDelegate.m */; };
 		2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB831A116CF70075593F /* StackOverFlowed.xcdatamodeld */; };
@@ -30,6 +31,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C3492811A1279F300AC6875 /* Question.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
+		2C3492821A127E3200AC6875 /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
+		2C3492831A127E3200AC6875 /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
 		2C70BB791A116CF70075593F /* StackOverFlowed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackOverFlowed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C70BB7D1A116CF70075593F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C70BB7E1A116CF70075593F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,13 +97,16 @@
 				2C70BB861A116CF70075593F /* ViewController.h */,
 				2C70BB871A116CF70075593F /* ViewController.m */,
 				2C70BB891A116CF70075593F /* Main.storyboard */,
+				2C70BBA51A116F030075593F /* RootVC.h */,
+				2C70BBA61A116F030075593F /* RootVC.m */,
+				2C3492811A1279F300AC6875 /* Question.h */,
 				2C70BBA81A1173C30075593F /* Question.m */,
+				2C3492821A127E3200AC6875 /* NetworkController.h */,
+				2C3492831A127E3200AC6875 /* NetworkController.m */,
 				2C70BB8C1A116CF70075593F /* Images.xcassets */,
 				2C70BB8E1A116CF70075593F /* LaunchScreen.xib */,
 				2C70BB831A116CF70075593F /* StackOverFlowed.xcdatamodeld */,
 				2C70BB7C1A116CF70075593F /* Supporting Files */,
-				2C70BBA51A116F030075593F /* RootVC.h */,
-				2C70BBA61A116F030075593F /* RootVC.m */,
 			);
 			path = StackOverFlowed;
 			sourceTree = "<group>";
@@ -234,6 +241,7 @@
 				2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */,
 				2C70BB881A116CF70075593F /* ViewController.m in Sources */,
 				2C70BBA91A1173C30075593F /* Question.m in Sources */,
+				2C3492841A127E3200AC6875 /* NetworkController.m in Sources */,
 				2C70BBA71A116F030075593F /* RootVC.m in Sources */,
 				2C70BB7F1A116CF70075593F /* main.m in Sources */,
 			);
@@ -428,6 +436,7 @@
 				2C70BBA11A116CF70075593F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C70BBA21A116CF70075593F /* Build configuration list for PBXNativeTarget "StackOverFlowedTests" */ = {
 			isa = XCConfigurationList;
@@ -436,6 +445,7 @@
 				2C70BBA41A116CF70075593F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
