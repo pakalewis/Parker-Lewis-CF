@@ -16,8 +16,9 @@
 @property (nonatomic, strong) NSString *clientID;
 @property (nonatomic, strong) NSString *oAuthURL;
 
-
 @end
+
+
 
 @implementation WebVC
 
@@ -40,33 +41,54 @@
     NSString *loginURLString = [NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&scope=read_inbox", self.oAuthURL, self.clientID, self.oAuthDomain];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:loginURLString]];
     [self.webView loadRequest:urlRequest];
-    
-    
-
-    // necessary???
-    
-    
-    // this is for requesting a specific url
-    
-//    NSString *urlString = self.selectedQuestion.link;
-//    NSURL *goToURL = [[NSURL alloc] initWithString:urlString];
-//    NSURL *goToURL = [NSURL URLWithString:@"http://www.google.com"];
-//    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL: goToURL];
-//    [self.webView loadRequest:urlRequest];
 }
 
 
-
-
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
+    
+}
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    
+    NSLog(@"Decide Policy for Navigation");
+
     NSURLRequest *request = navigationAction.request;
     NSURL *url = request.URL;
     NSString *urlString = [url absoluteString];
-    NSLog(@"%@", urlString);
+    NSLog(@"The url after requesting OAuth is: %@", urlString);
 
+    if ([urlString containsString:@"access_token"]) {
+        NSArray *urlComponents = [url.description componentsSeparatedByString:@"="];
+        NSLog(@"%@", [urlComponents description]);
+        NSString *tokenToStore = urlComponents[1];
+        
+        urlComponents = [tokenToStore componentsSeparatedByString:@"&"];
+        NSLog(@"%@", [urlComponents description]);
+        tokenToStore = urlComponents[0];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:tokenToStore forKey:@"token"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Congrats!" message:@"You are authorized!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+             [self.navigationController popViewControllerAnimated:true];
+        }];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:true completion:nil];
+    }
     decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+

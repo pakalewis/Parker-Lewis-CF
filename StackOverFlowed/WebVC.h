@@ -13,7 +13,6 @@
 @interface WebVC : UIViewController <WKNavigationDelegate>
 
 @property (nonatomic, strong) WKWebView *webView;
-@property (nonatomic, strong) Question *selectedQuestion;
 
 
 
