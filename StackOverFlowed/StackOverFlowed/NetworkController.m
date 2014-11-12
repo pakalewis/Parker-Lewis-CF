@@ -29,6 +29,7 @@
 }
 
 
+// TODO: add token to the url request once I have it stored
 
 - (void) fetchQuestionsForTag:(NSString *)tag withCompletion:(void (^)(NSString *, NSMutableArray *))success {
     NSString *requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow", tag];
@@ -55,6 +56,10 @@
                 }
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     success(nil, questions);
+                }];
+            } else {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    success(error.localizedDescription, nil);
                 }];
             }
         }

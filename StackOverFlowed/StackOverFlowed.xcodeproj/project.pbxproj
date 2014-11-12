@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C3492841A127E3200AC6875 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3492831A127E3200AC6875 /* NetworkController.m */; };
 		2C34928A1A12D33A00AC6875 /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3492891A12D33A00AC6875 /* WebVC.m */; };
+		2C34928F1A13FDD500AC6875 /* ContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34928E1A13FDD500AC6875 /* ContainerVC.m */; };
 		2C70BB7F1A116CF70075593F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB7E1A116CF70075593F /* main.m */; };
 		2C70BB821A116CF70075593F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB811A116CF70075593F /* AppDelegate.m */; };
 		2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB831A116CF70075593F /* StackOverFlowed.xcdatamodeld */; };
@@ -37,6 +38,8 @@
 		2C3492831A127E3200AC6875 /* NetworkController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkController.m; sourceTree = "<group>"; };
 		2C3492881A12D33A00AC6875 /* WebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebVC.h; path = ../WebVC.h; sourceTree = "<group>"; };
 		2C3492891A12D33A00AC6875 /* WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebVC.m; path = ../WebVC.m; sourceTree = "<group>"; };
+		2C34928D1A13FDD500AC6875 /* ContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerVC.h; sourceTree = "<group>"; };
+		2C34928E1A13FDD500AC6875 /* ContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerVC.m; sourceTree = "<group>"; };
 		2C70BB791A116CF70075593F /* StackOverFlowed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackOverFlowed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C70BB7D1A116CF70075593F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C70BB7E1A116CF70075593F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 		2C70BB7B1A116CF70075593F /* StackOverFlowed */ = {
 			isa = PBXGroup;
 			children = (
+				2C34928D1A13FDD500AC6875 /* ContainerVC.h */,
+				2C34928E1A13FDD500AC6875 /* ContainerVC.m */,
 				2C70BBA51A116F030075593F /* RootVC.h */,
 				2C70BBA61A116F030075593F /* RootVC.m */,
 				2C70BB861A116CF70075593F /* QuestionSearch.h */,
@@ -242,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C34928F1A13FDD500AC6875 /* ContainerVC.m in Sources */,
 				2C70BB821A116CF70075593F /* AppDelegate.m in Sources */,
 				2C34928A1A12D33A00AC6875 /* WebVC.m in Sources */,
 				2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */,

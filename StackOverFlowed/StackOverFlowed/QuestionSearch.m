@@ -53,7 +53,7 @@
     NSLog(@"Searching for %@", searchBar.text);
     [[NetworkController networkController] fetchQuestionsForTag:searchBar.text withCompletion:^(NSString * errorString, NSMutableArray * fetchedQuestions) {
         if (errorString != nil) {
-            NSLog(@"There was an error!");
+            NSLog(@"There was an error: %@", errorString);
         } else {
             self.questionsArray = fetchedQuestions;
             NSLog(@"%lu", self.questionsArray.count);

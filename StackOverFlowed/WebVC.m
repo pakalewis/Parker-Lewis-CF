@@ -26,6 +26,7 @@
 
     self.webView = [[WKWebView alloc] init];
     self.webView.frame = self.view.frame;
+    self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
 
     
@@ -43,7 +44,6 @@
     
 
     // necessary???
-//    self.webView.navigationDelegate = self;
     
     
     // this is for requesting a specific url
@@ -55,12 +55,18 @@
 //    [self.webView loadRequest:urlRequest];
 }
 
+
+
+
+
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
     
     NSURLRequest *request = navigationAction.request;
     NSURL *url = request.URL;
     NSString *urlString = [url absoluteString];
     NSLog(@"%@", urlString);
+
+    decisionHandler(WKNavigationActionPolicyAllow);
 }
 
 @end
