@@ -9,6 +9,7 @@
 #import "RootVC.h"
 #import "Question.h"
 #import "NetworkController.h"
+#import "WebVC.h"
 
 @interface RootVC ()
 
@@ -23,20 +24,28 @@
 
     self.navigationController.delegate = self;
     
+    self.title = @"HOME";
+    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"LOGIN" style: UIBarButtonItemStylePlain target: self action: @selector(requestOAuthAccess:)];
+    
+    self.navigationItem.rightBarButtonItem = loginButton;
+
 
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-//    [self newFunc];
     
 }
 
-//- (void)newFunc {
-//    NSLog(@"new func fired");
-//    
-//}
 
+- (void)requestOAuthAccess:(id)sender {
+    NSLog(@"FIRED");
+
+    // initialize next view controller
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WebVC *newWebVC = [storyboard instantiateViewControllerWithIdentifier:@"WEB_VC"];
+    [self.navigationController pushViewController:newWebVC animated:true];
+}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

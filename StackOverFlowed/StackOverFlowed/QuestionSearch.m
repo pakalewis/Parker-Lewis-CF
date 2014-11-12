@@ -9,6 +9,7 @@
 #import "QuestionSearch.h"
 #import "Question.h"
 #import "NetworkController.h"
+#import "WebVC.h"
 
 @interface QuestionSearch ()
 
@@ -29,24 +30,28 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.questionsArray.count;
+//    return self.questionsArray.count;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
     
-    Question *currentQuestion = self.questionsArray[indexPath.row];
-    cell.textLabel.text = currentQuestion.title;
+//    Question *currentQuestion = self.questionsArray[indexPath.row];
+//    cell.textLabel.text = currentQuestion.title;
     
     return cell;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"Search bar clicked");
-    
-    NSString *searchText = searchBar.text;
-    [[NetworkController networkController] fetchQuestionsForTag:searchText withCompletion:^(NSString * errorString, NSMutableArray * fetchedQuestions) {
+    [searchBar resignFirstResponder];
+    NSLog(@"Searching for %@", searchBar.text);
+    [[NetworkController networkController] fetchQuestionsForTag:searchBar.text withCompletion:^(NSString * errorString, NSMutableArray * fetchedQuestions) {
         if (errorString != nil) {
             NSLog(@"There was an error!");
         } else {
