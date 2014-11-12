@@ -16,6 +16,7 @@
 @property (nonatomic) NSInteger score;
 @property (nonatomic) NSInteger answer_count;
 @property (nonatomic) NSInteger view_count;
+@property (nonatomic) NSTimeInterval creation_date;
 //@property (nonatomic) BOOL *is_answered;
 
 - (instancetype) initWith: (NSDictionary *) rawJSONDATA;

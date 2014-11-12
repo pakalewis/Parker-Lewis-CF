@@ -51,6 +51,11 @@
                BlueprintName = "StackOverFlowedTests"
                ReferencedContainer = "container:StackOverFlowed.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "StackOverFlowedTests/testJSONParsing">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

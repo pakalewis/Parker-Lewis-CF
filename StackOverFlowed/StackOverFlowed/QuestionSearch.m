@@ -10,6 +10,7 @@
 #import "Question.h"
 #import "NetworkController.h"
 #import "WebVC.h"
+#import "QuestionCell.h"
 
 @interface QuestionSearch ()
 
@@ -26,6 +27,11 @@
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     
+    UINib *nib = [UINib nibWithNibName:@"QuestionCell" bundle:[NSBundle mainBundle]];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"QUESTION_CELL"];
+    
+//    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
 }
 
 
@@ -33,11 +39,20 @@
     return self.questionsArray.count > 0 ? self.questionsArray.count : 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 91;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
+    QuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QUESTION_CELL" forIndexPath:indexPath];
     
     Question *currentQuestion = self.questionsArray[indexPath.row];
-    cell.textLabel.text = currentQuestion.title;
+    
+    cell.questionLabel.text = currentQuestion.title;
+    cell.profileImage.backgroundColor = [UIColor blueColor];
+//    cell.dateLabel.text = currentQuestion.creation_date;
+    cell.viewsLabel.text = [NSString stringWithFormat:@"Views: %ld",(long)currentQuestion.view_count];
+    cell.answersLabel.text = [NSString stringWithFormat:@"Answers: %ld",(long)currentQuestion.answer_count];
     
     return cell;
 }

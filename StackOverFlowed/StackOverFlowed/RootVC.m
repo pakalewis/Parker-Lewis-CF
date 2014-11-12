@@ -25,6 +25,10 @@
     self.navigationController.delegate = self;
     
     self.title = @"HOME";
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
     UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"LOGIN" style: UIBarButtonItemStylePlain target: self action: @selector(requestOAuthAccess:)];
     
     if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
@@ -32,12 +36,7 @@
         self.navigationItem.rightBarButtonItem = loginButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
-    }
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    
+    }    
 }
 
 
@@ -51,22 +50,6 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"Hello"];
-    
-    return cell;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"TEST");

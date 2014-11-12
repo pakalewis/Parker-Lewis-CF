@@ -22,6 +22,8 @@
         self.score = [questionItemDict[@"score"] integerValue];
         self.answer_count = [questionItemDict[@"answer_count"] integerValue];
         self.view_count = [questionItemDict[@"view_count"] integerValue];
+        self.creation_date = [questionItemDict[@"creation_date"] integerValue];
+        
 //        if ([questionItemDict[@"is_answered"]  isEqual: @"false"]) {
 //            self.is_answered = false;
 //        } else {
