@@ -12,6 +12,7 @@
 
 @interface NetworkController()
 
+
 @end
 
 
@@ -25,14 +26,24 @@
     dispatch_once(&onceToken, ^{
         networkController = [[self alloc] init];
     });
+    
     return networkController;
 }
 
 
-// TODO: add token to the url request once I have it stored
 
 - (void) fetchQuestionsForTag:(NSString *)tag withCompletion:(void (^)(NSString *, NSMutableArray *))success {
-    NSString *requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow", tag];
+    NSString *requestURLString;
+
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
+        // authenticated
+        NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", tag, token];
+    } else {
+        // not authenticated = no token
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow", tag];
+    }
+
 
     NSLog(@"Request URL: %@", requestURLString);
     NSURL *requestURL = [NSURL URLWithString:requestURLString];

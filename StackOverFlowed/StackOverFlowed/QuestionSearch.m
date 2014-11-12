@@ -30,15 +30,14 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.questionsArray.count;
-    return 5;
+    return self.questionsArray.count > 0 ? self.questionsArray.count : 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL" forIndexPath:indexPath];
     
-//    Question *currentQuestion = self.questionsArray[indexPath.row];
-//    cell.textLabel.text = currentQuestion.title;
+    Question *currentQuestion = self.questionsArray[indexPath.row];
+    cell.textLabel.text = currentQuestion.title;
     
     return cell;
 }

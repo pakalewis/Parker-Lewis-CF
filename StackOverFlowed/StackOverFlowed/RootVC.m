@@ -27,9 +27,12 @@
     self.title = @"HOME";
     UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"LOGIN" style: UIBarButtonItemStylePlain target: self action: @selector(requestOAuthAccess:)];
     
-    self.navigationItem.rightBarButtonItem = loginButton;
-
-
+    if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
+        NSLog(@"Token available");
+        self.navigationItem.rightBarButtonItem = loginButton;
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 
