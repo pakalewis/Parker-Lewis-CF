@@ -1,25 +1,25 @@
 //
-//  QuestionSearch.m
+//  QuestionSearchVC.m
 //  StackOverFlowed
 //
 //  Created by Parker Lewis on 11/10/14.
 //  Copyright (c) 2014 CodeFellows. All rights reserved.
 //
 
-#import "QuestionSearch.h"
+#import "QuestionSearchVC.h"
 #import "Question.h"
 #import "NetworkController.h"
 #import "WebVC.h"
 #import "QuestionCell.h"
 #import "math.h"
 
-@interface QuestionSearch ()
+@interface QuestionSearchVC ()
 
 
 
 @end
 
-@implementation QuestionSearch 
+@implementation QuestionSearchVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

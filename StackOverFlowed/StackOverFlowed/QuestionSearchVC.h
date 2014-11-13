@@ -1,5 +1,5 @@
 //
-//  QuestionSearch.h
+//  QuestionSearchVC.h
 //  StackOverFlowed
 //
 //  Created by Parker Lewis on 11/10/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QuestionSearch : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface QuestionSearchVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;

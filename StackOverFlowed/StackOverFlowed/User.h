@@ -20,6 +20,6 @@
 @property (nonatomic, assign) NSInteger downvoteCount;
 @property (nonatomic, assign) NSInteger viewCount;
 
-- (instancetype) initWith: (NSDictionary *) rawJSONDATA;
+- (instancetype) initWith: (NSData *) rawJSONDATA;
 
 @end

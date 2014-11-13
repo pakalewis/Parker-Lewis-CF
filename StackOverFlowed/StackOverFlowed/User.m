@@ -11,22 +11,29 @@
 @implementation User
 
 
-- (instancetype) initWith: (NSDictionary *) rawJSONDATA {
+- (instancetype) initWith: (NSData *) rawJSONDATA {
     self = [super init];
     if (self) {
 
+        NSError * error = nil;
+        NSDictionary *userDict = [NSJSONSerialization JSONObjectWithData:rawJSONDATA options:0 error:&error];
+
+        NSLog(@"%@",userDict);
         
+        // pull out items Array from the JSON
+        NSArray *items = userDict[@"items"];
         
+        NSDictionary *itemArray = items.firstObject;
         
-        self.displayName = rawJSONDATA[@"display_name"];
-        self.profileImageURL = rawJSONDATA[@"profile_image"];
-        self.link = rawJSONDATA[@"link"];
-        self.aboutMe = rawJSONDATA[@"about_me"];
-        self.questionCount = [rawJSONDATA[@"question_count"] integerValue];
-        self.answerCount = [rawJSONDATA[@"answer_count"] integerValue];
-        self.upvoteCount = [rawJSONDATA[@"upvote_count"] integerValue];
-        self.downvoteCount = [rawJSONDATA[@"downvote_count"] integerValue];
-        self.viewCount = [rawJSONDATA[@"view_count"] integerValue];
+        self.displayName = itemArray[@"display_name"];
+        self.profileImageURL = itemArray[@"profile_image"];
+        self.link = itemArray[@"link"];
+        self.aboutMe = itemArray[@"about_me"];
+        self.questionCount = [itemArray[@"question_count"] integerValue];
+        self.answerCount = [itemArray[@"answer_count"] integerValue];
+        self.upvoteCount = [itemArray[@"upvote_count"] integerValue];
+        self.downvoteCount = [itemArray[@"downvote_count"] integerValue];
+        self.viewCount = [itemArray[@"view_count"] integerValue];
     }
     return self;
 }

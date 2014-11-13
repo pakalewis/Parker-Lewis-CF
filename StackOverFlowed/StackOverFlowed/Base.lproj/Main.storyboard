@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="P76-aN-lu7">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -33,7 +35,7 @@
                         <sections>
                             <tableViewSection id="ZTd-Jq-sHR">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" rowHeight="150" id="UAj-tB-OyU">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CELL" rowHeight="150" id="UAj-tB-OyU">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UAj-tB-OyU" id="x3h-u3-Evs">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -55,7 +57,7 @@
                                             <segue destination="4iQ-RF-8Yt" kind="showDetail" id="Mmf-Mn-Eg5"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CELL" rowHeight="150" id="cEq-55-H9o">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CELL" rowHeight="150" id="cEq-55-H9o">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cEq-55-H9o" id="0kZ-p0-iCo">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -73,6 +75,9 @@
                                                 <constraint firstAttribute="centerX" secondItem="Qox-kY-hkj" secondAttribute="centerX" id="63m-Vp-Pjh"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ydt-OP-AW3" kind="showDetail" id="o8I-V4-IPB"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -88,10 +93,10 @@
             </objects>
             <point key="canvasLocation" x="1356" y="-668"/>
         </scene>
-        <!--Question Search-->
+        <!--Question SearchVC-->
         <scene sceneID="D9o-Oq-aaA">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="4iQ-RF-8Yt" customClass="QuestionSearch" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="4iQ-RF-8Yt" customClass="QuestionSearchVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q9q-FD-Lld"/>
                         <viewControllerLayoutGuide type="bottom" id="9Bc-ca-vPl"/>
@@ -103,7 +108,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fIs-Wn-hlZ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="oGh-fD-sHJ">
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for questions by tag" id="oGh-fD-sHJ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -134,7 +139,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XpI-wq-aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2064" y="-668"/>
+            <point key="canvasLocation" x="2124" y="-780"/>
+        </scene>
+        <!--ProfileVC-->
+        <scene sceneID="BrM-IR-FJq">
+            <objects>
+                <viewController id="Ydt-OP-AW3" customClass="ProfileVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KNe-G8-BiT"/>
+                        <viewControllerLayoutGuide type="bottom" id="dYs-gI-hRw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wfW-1a-AxC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5dO-Ma-HPd">
+                                <rect key="frame" x="150" y="15" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="5dO-Ma-HPd" secondAttribute="height" multiplier="1:1" id="5nb-wt-A3E"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exz-Iw-j15">
+                                <rect key="frame" x="262" y="325" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="counts" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-7A-4ew">
+                                <rect key="frame" x="274" y="366" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="5dO-Ma-HPd" firstAttribute="width" secondItem="wfW-1a-AxC" secondAttribute="width" multiplier="0.5" id="2ES-kC-9e3"/>
+                            <constraint firstAttribute="centerX" secondItem="5dO-Ma-HPd" secondAttribute="centerX" id="OXb-dZ-ROf"/>
+                            <constraint firstItem="5dO-Ma-HPd" firstAttribute="top" secondItem="KNe-G8-BiT" secondAttribute="bottom" constant="15" id="SX8-jQ-c5k"/>
+                            <constraint firstItem="q5c-7A-4ew" firstAttribute="centerX" secondItem="exz-Iw-j15" secondAttribute="centerX" id="TtU-2G-Ojg"/>
+                            <constraint firstItem="q5c-7A-4ew" firstAttribute="top" secondItem="exz-Iw-j15" secondAttribute="bottom" constant="20" id="Yz8-kO-ceV"/>
+                            <constraint firstItem="exz-Iw-j15" firstAttribute="centerX" secondItem="5dO-Ma-HPd" secondAttribute="centerX" id="s2x-Is-4VN"/>
+                            <constraint firstItem="exz-Iw-j15" firstAttribute="top" secondItem="5dO-Ma-HPd" secondAttribute="bottom" constant="10" id="xFa-XK-X79"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="countsLabel" destination="q5c-7A-4ew" id="gzZ-kK-LcD"/>
+                        <outlet property="profileImageView" destination="5dO-Ma-HPd" id="HP1-10-UeW"/>
+                        <outlet property="usernameLabel" destination="exz-Iw-j15" id="TSf-8y-P31"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mb5-u5-YND" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2124" y="-93"/>
         </scene>
         <!--WebVC-->
         <scene sceneID="ORh-Gp-McM">
