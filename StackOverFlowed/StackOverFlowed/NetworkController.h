@@ -7,11 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface NetworkController : NSObject
 
 + (id)networkController;
 
 - (void)fetchQuestionsForTag: (NSString *) tag withCompletion: (void (^)(NSString *, NSMutableArray *))success;
+
+- (void) fetchProfileImageForUser: (NSString *)profileImageURL withCompletion:(void (^)(UIImage *)) completionHandler;
+
+
 
 @end

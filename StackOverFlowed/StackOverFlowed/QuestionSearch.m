@@ -46,10 +46,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"QUESTION_CELL" forIndexPath:indexPath];
-    
     Question *currentQuestion = self.questionsArray[indexPath.row];
     
     
+    // Show time elapsed and the username of the question asker
     NSDate *currentDate = [NSDate date];
     NSTimeInterval timeElapsedInSeconds = [currentDate timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:currentQuestion.creation_date]];
     if (timeElapsedInSeconds > 60 && timeElapsedInSeconds < 60 * 60) {
@@ -83,9 +83,18 @@
     } else {
         cell.dateLabel.text = [NSString stringWithFormat:@"%.0f seconds ago, \n%@ asked:",timeElapsedInSeconds, currentQuestion.username];
     }
-    
 
-    cell.profileImage.backgroundColor = [UIColor blueColor];
+    // Get the profile images
+    NSInteger currentTag = cell.tag + 1;
+    cell.tag = currentTag;
+    cell.profileImage.image = nil;
+    [[NetworkController networkController] fetchProfileImageForUser:currentQuestion.profileImageURL withCompletion:^(UIImage *image) {
+        if (cell.tag == currentTag) {
+            cell.profileImage.image = image;
+        }
+    }];
+
+    // Populate the rest of the labels
     cell.questionLabel.text = currentQuestion.title;
     cell.viewsLabel.text = [NSString stringWithFormat:@"Views: %ld",(long)currentQuestion.view_count];
     cell.answersLabel.text = [NSString stringWithFormat:@"Answers: %ld",(long)currentQuestion.answer_count];

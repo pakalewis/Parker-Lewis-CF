@@ -12,6 +12,7 @@
 
 @interface NetworkController()
 
+@property NSOperationQueue *imageQueue;
 
 @end
 
@@ -69,5 +70,18 @@
     [dataTask resume];
 }
 
+
+- (void) fetchProfileImageForUser: (NSString *)profileImageURL withCompletion:(void (^)(UIImage *)) completionHandler; {
+    
+    self.imageQueue = [[NSOperationQueue alloc] init];
+    [self.imageQueue addOperationWithBlock:^{
+        NSURL *url = [NSURL URLWithString: profileImageURL];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        UIImage *profileImageToReturn = [UIImage imageWithData:data];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            completionHandler(profileImageToReturn);
+        }];
+    }];    
+}
 
 @end
