@@ -11,6 +11,7 @@
 #import "NetworkController.h"
 #import "WebVC.h"
 #import "QuestionCell.h"
+#import "math.h"
 
 @interface QuestionSearch ()
 
@@ -51,18 +52,36 @@
     
     NSDate *currentDate = [NSDate date];
     NSTimeInterval timeElapsedInSeconds = [currentDate timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:currentQuestion.creation_date]];
-    NSLog(@"%f", timeElapsedInSeconds);
     if (timeElapsedInSeconds > 60 && timeElapsedInSeconds < 60 * 60) {
         NSTimeInterval timeInMinutes = timeElapsedInSeconds / 60;
-        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f minutes ago", timeInMinutes];
+        if (timeInMinutes < 1.5) {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f minute ago, \n%@ asked:", timeInMinutes, currentQuestion.username];
+        } else {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f minutes ago, \n%@ asked:", timeInMinutes, currentQuestion.username];
+        }
     } else if (timeElapsedInSeconds > 60 * 60 && timeElapsedInSeconds < 60 * 60 * 24){
         NSTimeInterval timeInHours = timeElapsedInSeconds / 60 / 60;
-        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f hours ago", timeInHours];
-    } else if (timeElapsedInSeconds > 60 * 60 * 24) {
+        if (timeInHours < 1.5) {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f hour ago, \n%@ asked:", timeInHours, currentQuestion.username];
+        } else {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f hours ago, \n%@ asked:", timeInHours, currentQuestion.username];
+        }
+    } else if (timeElapsedInSeconds > 60 * 60 * 24 && timeElapsedInSeconds < 60 * 60 * 24 * 365) {
         NSTimeInterval timeInDays = timeElapsedInSeconds / 60 / 60 / 24;
-        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f days ago", timeInDays];
+        if (timeInDays < 1.5) {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f day ago, \n%@ asked:", timeInDays, currentQuestion.username];
+        } else {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f days ago, \n%@ asked:", timeInDays, currentQuestion.username];
+        }
+    } else if (timeElapsedInSeconds > 60 * 60 * 24 * 365) {
+        NSTimeInterval timeInYears = timeElapsedInSeconds / 60 / 60 / 24 / 365;
+        if (timeInYears < 1.5) {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f year ago, \n%@ asked:", timeInYears, currentQuestion.username];
+        } else {
+            cell.dateLabel.text = [NSString stringWithFormat:@"%.0f years ago, \n%@ asked:", timeInYears, currentQuestion.username];
+        }
     } else {
-        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f seconds ago",timeElapsedInSeconds];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f seconds ago, \n%@ asked:",timeElapsedInSeconds, currentQuestion.username];
     }
     
 

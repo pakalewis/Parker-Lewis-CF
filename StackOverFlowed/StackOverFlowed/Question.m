@@ -16,19 +16,18 @@
 - (instancetype) initWith: (NSDictionary *) questionItemDict {
     self = [super init];
     if (self) {
-        self.title = (NSString*) questionItemDict[@"title"];
-        self.link = (NSString*) questionItemDict[@"link"];
+        self.title = questionItemDict[@"title"];
+        self.link = questionItemDict[@"link"];
         self.question_id = questionItemDict[@"question_id"];
         self.score = [questionItemDict[@"score"] integerValue];
         self.answer_count = [questionItemDict[@"answer_count"] integerValue];
         self.view_count = [questionItemDict[@"view_count"] integerValue];
         self.creation_date = [questionItemDict[@"creation_date"] integerValue];
+        // putting the 'intergerValue' keywords turns the wrapped NSNumber object into a primitive type
         
-//        if ([questionItemDict[@"is_answered"]  isEqual: @"false"]) {
-//            self.is_answered = false;
-//        } else {
-//            self.is_answered = true;
-//        }
+        self.ownerDict = (NSDictionary *) questionItemDict[@"owner"];
+        self.profileImageURL = (NSString *) self.ownerDict[@"profile_image"];
+        self.username = (NSString *) self.ownerDict[@"display_name"];
     }
     return self;
 }

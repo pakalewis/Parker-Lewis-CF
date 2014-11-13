@@ -11,13 +11,16 @@
 @interface Question : NSObject
 
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic) NSString *link;
-@property (nonatomic) NSString *question_id;
-@property (nonatomic) NSInteger score;
-@property (nonatomic) NSInteger answer_count;
-@property (nonatomic) NSInteger view_count;
-@property (nonatomic) NSTimeInterval creation_date;
-//@property (nonatomic) BOOL *is_answered;
+@property (nonatomic, strong) NSString *link;
+@property (nonatomic, assign) NSString *question_id;
+@property (nonatomic, assign) NSInteger score;
+@property (nonatomic, assign) NSInteger answer_count;
+@property (nonatomic, assign) NSInteger view_count;
+@property (nonatomic, assign) NSTimeInterval creation_date;
+
+@property (nonatomic, strong) NSDictionary *ownerDict;
+@property (nonatomic, strong) NSString *profileImageURL;
+@property (nonatomic, strong) NSString *username;
 
 - (instancetype) initWith: (NSDictionary *) rawJSONDATA;
 - (NSMutableArray *) parseJSONIntoQuestionArrayFrom:(NSData *) data;
