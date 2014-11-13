@@ -53,18 +53,9 @@
             NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
             if ([httpResponse statusCode] >= 200 && [httpResponse statusCode] <= 204 ) {
                 NSLog(@"fetching questions");
-                NSError * error = nil;
-                NSDictionary *rawData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-
-                // pull out items Array from the JSON
-                NSArray *items = rawData[@"items"];
 
                 // Make array to store the fetched questions
-                NSMutableArray *questions = [[NSMutableArray alloc] init];
-                for (NSDictionary *item in items) {
-                    Question *newQuestion = [[Question alloc] initWith: item];
-                    [questions addObject: newQuestion];
-                }
+                NSMutableArray *questions = [[Question alloc] parseJSONIntoQuestionArrayFrom:data];
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     success(nil, questions);
                 }];

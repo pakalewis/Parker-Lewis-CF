@@ -15,6 +15,7 @@
 
 
 @property (nonatomic, strong) NSMutableArray *questionsArray;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @end
 

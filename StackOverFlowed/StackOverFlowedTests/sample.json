@@ -1,0 +1,257 @@
+{
+  "items": [
+    {
+      "tags": [
+        "ios",
+        "swift",
+        "value-type"
+      ],
+      "owner": {
+        "reputation": 33,
+        "user_id": 3128464,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/2c56512dd6e61cbf8f4cbdf6e2239bd8?s=128&d=identicon&r=PG&f=1",
+        "display_name": "user3128464",
+        "link": "http://stackoverflow.com/users/3128464/user3128464"
+      },
+      "is_answered": false,
+      "view_count": 4,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1415836959,
+      "creation_date": 1415836798,
+      "last_edit_date": 1415836959,
+      "question_id": 26898992,
+      "link": "http://stackoverflow.com/questions/26898992/swift-recursive-value-type",
+      "title": "Swift: Recursive Value Type"
+    },
+    {
+      "tags": [
+        "ios",
+        "animation",
+        "swift",
+        "uiimage",
+        "transition"
+      ],
+      "owner": {
+        "reputation": 2,
+        "user_id": 3318660,
+        "user_type": "registered",
+        "profile_image": "http://graph.facebook.com/1321543773/picture?type=large",
+        "display_name": "user3318660",
+        "link": "http://stackoverflow.com/users/3318660/user3318660"
+      },
+      "is_answered": false,
+      "view_count": 3,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1415836631,
+      "creation_date": 1415836631,
+      "question_id": 26898955,
+      "link": "http://stackoverflow.com/questions/26898955/adding-image-transition-animation-in-swift",
+      "title": "Adding Image Transition Animation in Swift"
+    },
+    {
+      "tags": [
+        "swift",
+        "indexing",
+        "osx-yosemite",
+        "aws-sdk",
+        "xcode6.1"
+      ],
+      "owner": {
+        "reputation": 299,
+        "user_id": 2561905,
+        "user_type": "registered",
+        "accept_rate": 57,
+        "profile_image": "http://i.stack.imgur.com/rUzAM.jpg?s=128&g=1",
+        "display_name": "ileonard",
+        "link": "http://stackoverflow.com/users/2561905/ileonard"
+      },
+      "is_answered": true,
+      "view_count": 711,
+      "answer_count": 5,
+      "score": 5,
+      "last_activity_date": 1415836543,
+      "creation_date": 1413917377,
+      "question_id": 26494082,
+      "link": "http://stackoverflow.com/questions/26494082/xcode-6-1-indexing-cannot-be-slower-and-stuck-at-the-end",
+      "title": "Xcode 6.1 indexing cannot be slower and stuck at the end"
+    },
+    {
+      "tags": [
+        "swift",
+        "xcode6"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 4139327,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/aee461495faf4dcff6d5d9898fa3260e?s=128&d=identicon&r=PG&f=1",
+        "display_name": "gskril",
+        "link": "http://stackoverflow.com/users/4139327/gskril"
+      },
+      "is_answered": false,
+      "view_count": 34,
+      "answer_count": 2,
+      "score": 0,
+      "last_activity_date": 1415835473,
+      "creation_date": 1415739112,
+      "question_id": 26874330,
+      "link": "http://stackoverflow.com/questions/26874330/collection-view-and-string-type-help-in-swift",
+      "title": "Collection View and String type help in Swift"
+    },
+    {
+      "tags": [
+        "ios",
+        "swift",
+        "nsmutablearray",
+        "nsuserdefaults",
+        "nsmutabledictionary"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 4238025,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/72add2d8a30832e2a65ee014dd5f557f?s=128&d=identicon&r=PG&f=1",
+        "display_name": "Jerry",
+        "link": "http://stackoverflow.com/users/4238025/jerry"
+      },
+      "is_answered": false,
+      "view_count": 33,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1415835423,
+      "creation_date": 1415676834,
+      "last_edit_date": 1415835423,
+      "question_id": 26857039,
+      "link": "http://stackoverflow.com/questions/26857039/how-do-i-store-an-nsmutabledictionary-in-nsuserdefaults-if-the-object-is-an-nsmu",
+      "title": "How do I store an NSMutableDictionary in NSUserDefaults if the object is an NSMutableArray in Swift?"
+    },
+    {
+      "tags": [
+        "swift",
+        "alamofire"
+      ],
+      "owner": {
+        "reputation": 314,
+        "user_id": 920405,
+        "user_type": "registered",
+        "accept_rate": 38,
+        "profile_image": "https://www.gravatar.com/avatar/452ec2e31f81925dff6b9ce106ffc347?s=128&d=identicon&r=PG",
+        "display_name": "stopshinal",
+        "link": "http://stackoverflow.com/users/920405/stopshinal"
+      },
+      "is_answered": false,
+      "view_count": 43,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1415834400,
+      "creation_date": 1415573757,
+      "question_id": 26834293,
+      "link": "http://stackoverflow.com/questions/26834293/swift-could-not-build-objective-c-module-alamofire",
+      "title": "Swift. Could not build objective-c module &#39;Alamofire&#39;"
+    },
+    {
+      "tags": [
+        "swift"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 4221865,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/05abb61b8ae16c38d0ce855dd55ff2f9?s=128&d=identicon&r=PG&f=1",
+        "display_name": "Pjc1992",
+        "link": "http://stackoverflow.com/users/4221865/pjc1992"
+      },
+      "is_answered": false,
+      "view_count": 30,
+      "answer_count": 1,
+      "score": -2,
+      "last_activity_date": 1415834213,
+      "creation_date": 1415822741,
+      "last_edit_date": 1415834213,
+      "question_id": 26895606,
+      "link": "http://stackoverflow.com/questions/26895606/its-a-tie-error-in-tic-tac-toe",
+      "title": "It&#39;s a tie error in Tic Tac Toe"
+    },
+    {
+      "tags": [
+        "swift",
+        "ios8",
+        "uialertcontroller"
+      ],
+      "owner": {
+        "reputation": 56,
+        "user_id": 3353890,
+        "user_type": "registered",
+        "accept_rate": 81,
+        "profile_image": "https://www.gravatar.com/avatar/846a106b1a18f4f43255747a2d690792?s=128&d=identicon&r=PG&f=1",
+        "display_name": "user3353890",
+        "link": "http://stackoverflow.com/users/3353890/user3353890"
+      },
+      "is_answered": false,
+      "view_count": 40,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1415833958,
+      "creation_date": 1413278502,
+      "question_id": 26357066,
+      "link": "http://stackoverflow.com/questions/26357066/is-it-possible-to-customize-the-font-and-appearance-of-a-uialertcontroller-in-th",
+      "title": "Is it possible to customize the font and appearance of a UIAlertController in the new XCode w/ iOS8?"
+    },
+    {
+      "tags": [
+        "ios7",
+        "swift",
+        "ios8",
+        "nsurlrequest",
+        "nsurlsession"
+      ],
+      "owner": {
+        "reputation": 15,
+        "user_id": 2397894,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/1865b19081e0104c72509cc4b503cd75?s=128&d=identicon&r=PG",
+        "display_name": "Karmie",
+        "link": "http://stackoverflow.com/users/2397894/karmie"
+      },
+      "is_answered": false,
+      "view_count": 5,
+      "answer_count": 0,
+      "score": 0,
+      "last_activity_date": 1415832525,
+      "creation_date": 1415832525,
+      "question_id": 26898180,
+      "link": "http://stackoverflow.com/questions/26898180/nsurlsession-downloadtaskwithrequestrequest-fails-when-request-is-a-subclass-o",
+      "title": "NSURLSession.downloadTaskWithRequest(request) fails when request is a subclass of NSMutableURLRequest"
+    },
+    {
+      "tags": [
+        "xcode",
+        "swift"
+      ],
+      "owner": {
+        "reputation": 1,
+        "user_id": 4228212,
+        "user_type": "registered",
+        "profile_image": "https://www.gravatar.com/avatar/4b1b7df2acb71836aecabcd9f593f1aa?s=128&d=identicon&r=PG&f=1",
+        "display_name": "appswiftgb",
+        "link": "http://stackoverflow.com/users/4228212/appswiftgb"
+      },
+      "is_answered": false,
+      "view_count": 19,
+      "answer_count": 1,
+      "score": 0,
+      "last_activity_date": 1415832008,
+      "creation_date": 1415825474,
+      "last_edit_date": 1415830006,
+      "question_id": 26896299,
+      "link": "http://stackoverflow.com/questions/26896299/appdelegate-error",
+      "title": "AppDelegate Error"
+    }
+  ],
+  "has_more": true,
+  "quota_max": 10000,
+  "quota_remaining": 9758
+}

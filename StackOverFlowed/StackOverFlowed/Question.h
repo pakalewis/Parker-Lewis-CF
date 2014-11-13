@@ -20,6 +20,7 @@
 //@property (nonatomic) BOOL *is_answered;
 
 - (instancetype) initWith: (NSDictionary *) rawJSONDATA;
+- (NSMutableArray *) parseJSONIntoQuestionArrayFrom:(NSData *) data;
 
 
 @end

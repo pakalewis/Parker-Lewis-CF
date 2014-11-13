@@ -33,4 +33,20 @@
     return self;
 }
 
+- (NSMutableArray *) parseJSONIntoQuestionArrayFrom:(NSData *) data {
+    NSError * error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    
+    // pull out items Array from the JSON
+    NSMutableArray *items = jsonDict[@"items"];
+
+    NSMutableArray *questions = [[NSMutableArray alloc] init];
+    for (NSDictionary *item in items) {
+        Question *newQuestion = [[Question alloc] initWith: item];
+        [questions addObject: newQuestion];
+    }
+    return questions;
+}
+
+
 @end

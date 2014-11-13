@@ -30,8 +30,8 @@
     UINib *nib = [UINib nibWithNibName:@"QuestionCell" bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"QUESTION_CELL"];
     
-//    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
 }
 
 
@@ -48,9 +48,14 @@
     
     Question *currentQuestion = self.questionsArray[indexPath.row];
     
-    cell.questionLabel.text = currentQuestion.title;
+    
+    // Convert to new Date Format
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:currentQuestion.creation_date];
+    
+    cell.dateLabel.text = [self.dateFormatter stringFromDate:date];
+
     cell.profileImage.backgroundColor = [UIColor blueColor];
-//    cell.dateLabel.text = currentQuestion.creation_date;
+    cell.questionLabel.text = currentQuestion.title;
     cell.viewsLabel.text = [NSString stringWithFormat:@"Views: %ld",(long)currentQuestion.view_count];
     cell.answersLabel.text = [NSString stringWithFormat:@"Answers: %ld",(long)currentQuestion.answer_count];
     
@@ -59,6 +64,7 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"%@",[self.questionsArray[indexPath.row] title]);
 }
 
 

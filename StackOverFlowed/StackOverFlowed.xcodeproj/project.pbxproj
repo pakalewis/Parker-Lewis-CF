@@ -12,6 +12,7 @@
 		2C34928F1A13FDD500AC6875 /* ContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34928E1A13FDD500AC6875 /* ContainerVC.m */; };
 		2C69DB581A14225400CCBE83 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69DB561A14225400CCBE83 /* QuestionCell.m */; };
 		2C69DB591A14225400CCBE83 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C69DB571A14225400CCBE83 /* QuestionCell.xib */; };
+		2C69DB5B1A14303500CCBE83 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C69DB5A1A14303500CCBE83 /* sample.json */; };
 		2C70BB7F1A116CF70075593F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB7E1A116CF70075593F /* main.m */; };
 		2C70BB821A116CF70075593F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB811A116CF70075593F /* AppDelegate.m */; };
 		2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB831A116CF70075593F /* StackOverFlowed.xcdatamodeld */; };
@@ -45,6 +46,7 @@
 		2C69DB551A14225400CCBE83 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		2C69DB561A14225400CCBE83 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		2C69DB571A14225400CCBE83 /* QuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
+		2C69DB5A1A14303500CCBE83 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		2C70BB791A116CF70075593F /* StackOverFlowed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StackOverFlowed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C70BB7D1A116CF70075593F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C70BB7E1A116CF70075593F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				2C70BB9B1A116CF70075593F /* StackOverFlowedTests.m */,
+				2C69DB5A1A14303500CCBE83 /* sample.json */,
 				2C70BB991A116CF70075593F /* Supporting Files */,
 			);
 			path = StackOverFlowedTests;
@@ -246,6 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C69DB5B1A14303500CCBE83 /* sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

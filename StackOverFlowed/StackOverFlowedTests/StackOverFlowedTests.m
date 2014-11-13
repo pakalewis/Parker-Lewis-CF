@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "Question.h"
 
 @interface StackOverFlowedTests : XCTestCase
 
@@ -32,8 +33,13 @@
 
 
 - (void)testJSONParsing {
-    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"json"];
+    NSData *json = [NSData dataWithContentsOfFile:path];
+    NSMutableArray *array = [[Question alloc] parseJSONIntoQuestionArrayFrom:json];
+    XCTAssertEqual(array.count, 10);
 }
+
+
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
