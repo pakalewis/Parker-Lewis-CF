@@ -31,7 +31,7 @@
     [self.tableView registerNib:nib forCellReuseIdentifier:@"QUESTION_CELL"];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [self.dateFormatter setDateFormat:@"MM-dd-yyyy 'at' hh:mm a"];
 }
 
 
@@ -49,10 +49,22 @@
     Question *currentQuestion = self.questionsArray[indexPath.row];
     
     
-    // Convert to new Date Format
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:currentQuestion.creation_date];
+    NSDate *currentDate = [NSDate date];
+    NSTimeInterval timeElapsedInSeconds = [currentDate timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:currentQuestion.creation_date]];
+    NSLog(@"%f", timeElapsedInSeconds);
+    if (timeElapsedInSeconds > 60 && timeElapsedInSeconds < 60 * 60) {
+        NSTimeInterval timeInMinutes = timeElapsedInSeconds / 60;
+        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f minutes ago", timeInMinutes];
+    } else if (timeElapsedInSeconds > 60 * 60 && timeElapsedInSeconds < 60 * 60 * 24){
+        NSTimeInterval timeInHours = timeElapsedInSeconds / 60 / 60;
+        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f hours ago", timeInHours];
+    } else if (timeElapsedInSeconds > 60 * 60 * 24) {
+        NSTimeInterval timeInDays = timeElapsedInSeconds / 60 / 60 / 24;
+        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f days ago", timeInDays];
+    } else {
+        cell.dateLabel.text = [NSString stringWithFormat:@"%.0f seconds ago",timeElapsedInSeconds];
+    }
     
-    cell.dateLabel.text = [self.dateFormatter stringFromDate:date];
 
     cell.profileImage.backgroundColor = [UIColor blueColor];
     cell.questionLabel.text = currentQuestion.title;
