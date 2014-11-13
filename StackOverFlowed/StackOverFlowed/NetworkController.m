@@ -33,32 +33,16 @@
 
 
 
-- (void) fetchQuestionsForTag:(NSString *)tag withCompletion:(void (^)(NSString *, NSMutableArray *))success {
-    NSString *requestURLString;
+- (void) fetchJSONDataFrom:(NSString *)urlString withCompletion:(void (^)(NSString *, NSData *))success {
 
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
-        // authenticated
-        NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
-        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", tag, token];
-    } else {
-        // not authenticated = no token
-        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow", tag];
-    }
-
-
-    NSLog(@"Request URL: %@", requestURLString);
-    NSURL *requestURL = [NSURL URLWithString:requestURLString];
+    NSURL *requestURL = [NSURL URLWithString:urlString];
     
     NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass: [NSHTTPURLResponse class]]) {
             NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
             if ([httpResponse statusCode] >= 200 && [httpResponse statusCode] <= 204 ) {
-                NSLog(@"fetching questions");
-
-                // Make array to store the fetched questions
-                NSMutableArray *questions = [[Question alloc] parseJSONIntoQuestionArrayFrom:data];
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                    success(nil, questions);
+                    success(nil, data);
                 }];
             } else {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{

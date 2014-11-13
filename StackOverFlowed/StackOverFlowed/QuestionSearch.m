@@ -111,17 +111,29 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     NSLog(@"Searching for %@", searchBar.text);
-    [[NetworkController networkController] fetchQuestionsForTag:searchBar.text withCompletion:^(NSString * errorString, NSMutableArray * fetchedQuestions) {
+    
+    NSString *requestURLString;
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
+        // authenticated
+        NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
+    } else {
+        // not authenticated = no token
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow", searchBar.text];
+    }
+
+
+    [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString * errorString, NSData *rawJSONData) {
         if (errorString != nil) {
             NSLog(@"There was an error: %@", errorString);
         } else {
-            self.questionsArray = fetchedQuestions;
+            
+            NSMutableArray *questions = [[Question alloc] parseJSONIntoQuestionArrayFrom:rawJSONData];
+            self.questionsArray = questions;
             NSLog(@"%lu", self.questionsArray.count);
             [self.tableView reloadData];
         }
     }];
-    
-    
 }
 
 @end

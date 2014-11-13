@@ -13,7 +13,7 @@
 
 + (id)networkController;
 
-- (void)fetchQuestionsForTag: (NSString *) tag withCompletion: (void (^)(NSString *, NSMutableArray *))success;
+- (void) fetchJSONDataFrom:(NSString *)urlString withCompletion:(void (^)(NSString *, NSData *))success;
 
 - (void) fetchProfileImageForUser: (NSString *)profileImageURL withCompletion:(void (^)(UIImage *)) completionHandler;
 

@@ -10,6 +10,7 @@
 		2C3492841A127E3200AC6875 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3492831A127E3200AC6875 /* NetworkController.m */; };
 		2C34928A1A12D33A00AC6875 /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3492891A12D33A00AC6875 /* WebVC.m */; };
 		2C34928F1A13FDD500AC6875 /* ContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34928E1A13FDD500AC6875 /* ContainerVC.m */; };
+		2C509E451A15604B0024C2FC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C509E441A15604B0024C2FC /* User.m */; };
 		2C69DB581A14225400CCBE83 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69DB561A14225400CCBE83 /* QuestionCell.m */; };
 		2C69DB591A14225400CCBE83 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C69DB571A14225400CCBE83 /* QuestionCell.xib */; };
 		2C69DB5B1A14303500CCBE83 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C69DB5A1A14303500CCBE83 /* sample.json */; };
@@ -43,6 +44,8 @@
 		2C3492891A12D33A00AC6875 /* WebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebVC.m; path = ../WebVC.m; sourceTree = "<group>"; };
 		2C34928D1A13FDD500AC6875 /* ContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerVC.h; sourceTree = "<group>"; };
 		2C34928E1A13FDD500AC6875 /* ContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerVC.m; sourceTree = "<group>"; };
+		2C509E431A15604B0024C2FC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		2C509E441A15604B0024C2FC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		2C69DB551A14225400CCBE83 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		2C69DB561A14225400CCBE83 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		2C69DB571A14225400CCBE83 /* QuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 				2C70BB871A116CF70075593F /* QuestionSearch.m */,
 				2C3492811A1279F300AC6875 /* Question.h */,
 				2C70BBA81A1173C30075593F /* Question.m */,
+				2C509E431A15604B0024C2FC /* User.h */,
+				2C509E441A15604B0024C2FC /* User.m */,
 				2C3492821A127E3200AC6875 /* NetworkController.h */,
 				2C3492831A127E3200AC6875 /* NetworkController.m */,
 				2C69DB551A14225400CCBE83 /* QuestionCell.h */,
@@ -266,6 +271,7 @@
 				2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */,
 				2C70BB881A116CF70075593F /* QuestionSearch.m in Sources */,
 				2C69DB581A14225400CCBE83 /* QuestionCell.m in Sources */,
+				2C509E451A15604B0024C2FC /* User.m in Sources */,
 				2C70BBA91A1173C30075593F /* Question.m in Sources */,
 				2C3492841A127E3200AC6875 /* NetworkController.m in Sources */,
 				2C70BBA71A116F030075593F /* RootVC.m in Sources */,
