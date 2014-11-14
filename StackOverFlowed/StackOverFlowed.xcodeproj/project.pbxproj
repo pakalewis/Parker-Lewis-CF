@@ -12,6 +12,7 @@
 		2C34928F1A13FDD500AC6875 /* ContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C34928E1A13FDD500AC6875 /* ContainerVC.m */; };
 		2C509E451A15604B0024C2FC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C509E441A15604B0024C2FC /* User.m */; };
 		2C509E4C1A1567EF0024C2FC /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C509E4B1A1567EF0024C2FC /* ProfileVC.m */; };
+		2C509E4F1A157BDF0024C2FC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C509E4E1A157BDF0024C2FC /* NSString+HTML.m */; };
 		2C69DB581A14225400CCBE83 /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C69DB561A14225400CCBE83 /* QuestionCell.m */; };
 		2C69DB591A14225400CCBE83 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C69DB571A14225400CCBE83 /* QuestionCell.xib */; };
 		2C69DB5B1A14303500CCBE83 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C69DB5A1A14303500CCBE83 /* sample.json */; };
@@ -49,6 +50,8 @@
 		2C509E441A15604B0024C2FC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		2C509E4A1A1567EF0024C2FC /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
 		2C509E4B1A1567EF0024C2FC /* ProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileVC.m; sourceTree = "<group>"; };
+		2C509E4D1A157BDF0024C2FC /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		2C509E4E1A157BDF0024C2FC /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		2C69DB551A14225400CCBE83 /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		2C69DB561A14225400CCBE83 /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		2C69DB571A14225400CCBE83 /* QuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionCell.xib; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				2C70BB891A116CF70075593F /* Main.storyboard */,
+				2C509E4D1A157BDF0024C2FC /* NSString+HTML.h */,
+				2C509E4E1A157BDF0024C2FC /* NSString+HTML.m */,
 				2C3492821A127E3200AC6875 /* NetworkController.h */,
 				2C3492831A127E3200AC6875 /* NetworkController.m */,
 				2C70BB801A116CF70075593F /* AppDelegate.h */,
@@ -307,6 +312,7 @@
 				2C34928A1A12D33A00AC6875 /* WebVC.m in Sources */,
 				2C70BB851A116CF70075593F /* StackOverFlowed.xcdatamodeld in Sources */,
 				2C509E4C1A1567EF0024C2FC /* ProfileVC.m in Sources */,
+				2C509E4F1A157BDF0024C2FC /* NSString+HTML.m in Sources */,
 				2C70BB881A116CF70075593F /* QuestionSearchVC.m in Sources */,
 				2C69DB581A14225400CCBE83 /* QuestionCell.m in Sources */,
 				2C509E451A15604B0024C2FC /* User.m in Sources */,

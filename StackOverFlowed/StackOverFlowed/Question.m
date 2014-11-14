@@ -7,7 +7,7 @@
 //
 
 #import "Question.h"
-
+#import "NSString+HTML.h"
 
 @implementation Question
 
@@ -16,7 +16,8 @@
 - (instancetype) initWith: (NSDictionary *) questionItemDict {
     self = [super init];
     if (self) {
-        self.title = questionItemDict[@"title"];
+        
+        self.title = [questionItemDict[@"title"] kv_decodeHTMLCharacterEntities];
         self.link = questionItemDict[@"link"];
         self.question_id = questionItemDict[@"question_id"];
         self.score = [questionItemDict[@"score"] integerValue];
