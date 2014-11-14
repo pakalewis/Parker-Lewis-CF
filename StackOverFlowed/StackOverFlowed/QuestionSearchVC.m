@@ -12,6 +12,7 @@
 #import "WebVC.h"
 #import "QuestionCell.h"
 #import "math.h"
+#import <SVProgressHUD-0.8.1/SVProgressHUD.h>
 
 @interface QuestionSearchVC ()
 
@@ -112,6 +113,8 @@
     [searchBar resignFirstResponder];
     NSLog(@"Searching for %@", searchBar.text);
     
+    [SVProgressHUD show];
+    
     NSString *requestURLString;
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
         // authenticated
@@ -131,7 +134,9 @@
             NSMutableArray *questions = [[Question alloc] parseJSONIntoQuestionArrayFrom:rawJSONData];
             self.questionsArray = questions;
             NSLog(@"%lu", self.questionsArray.count);
+            
             [self.tableView reloadData];
+            [SVProgressHUD dismiss];
         }
     }];
 }

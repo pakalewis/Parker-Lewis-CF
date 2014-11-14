@@ -1,0 +1,5 @@
+#include "Pods-StackOverFlowed-SVProgressHUD-0.8.1.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/SVProgressHUD-0.8.1" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/SVProgressHUD-0.8.1"
+OTHER_LDFLAGS = ${PODS_STACKOVERFLOWED_SVPROGRESSHUD_______OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}
