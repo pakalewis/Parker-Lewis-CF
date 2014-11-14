@@ -9,6 +9,7 @@
 #import "ProfileVC.h"
 #import "User.h"
 #import "NetworkController.h"
+#import <SVProgressHUD.h>
 
 @interface ProfileVC ()
 
@@ -24,6 +25,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:true];
 
+    [SVProgressHUD show];
     
     self.countsLabel.text = @"";
     self.usernameLabel.text = @"";
@@ -38,7 +40,7 @@
         requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/me?order=desc&sort=reputation&site=stackoverflow"];
     }
     
-    
+    NSLog(@"%@",requestURLString);
     [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString *errorString, NSData *rawJSONData) {
         if (errorString != nil) {
             NSLog(@"There was an error: %@", errorString);
@@ -49,6 +51,7 @@
             
             [[NetworkController networkController] fetchProfileImageForUser:self.currentUser.profileImageURL withCompletion:^(UIImage *image) {
                 self.profileImageView.image = image;
+                [SVProgressHUD dismiss];
             }];
         }
     }];

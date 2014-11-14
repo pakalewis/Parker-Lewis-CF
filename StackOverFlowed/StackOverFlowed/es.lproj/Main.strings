@@ -1,0 +1,18 @@
+
+/* Class = "IBUINavigationItem"; title = "Root View Controller"; ObjectID = "Im7-jd-EmR"; */
+"Im7-jd-EmR.title" = "Root View Controller";
+
+/* Class = "IBUILabel"; text = "View your profile"; ObjectID = "Qox-kY-hkj"; */
+"Qox-kY-hkj.text" = "Ver su perfil";
+
+/* Class = "IBUILabel"; text = "username"; ObjectID = "exz-Iw-j15"; */
+"exz-Iw-j15.text" = "username";
+
+/* Class = "IBUISearchBar"; placeholder = "Search for questions by tag"; ObjectID = "oGh-fD-sHJ"; */
+"oGh-fD-sHJ.placeholder" = "Búsqueda de preguntas por etiqueta";
+
+/* Class = "IBUILabel"; text = "counts"; ObjectID = "q5c-7A-4ew"; */
+"q5c-7A-4ew.text" = "counts";
+
+/* Class = "IBUILabel"; text = "Search questions by tag"; ObjectID = "w99-Cy-YMC"; */
+"w99-Cy-YMC.text" = "Búsqueda de preguntas";

@@ -24,12 +24,12 @@
 
     self.navigationController.delegate = self;
     
-    self.title = @"HOME";
+    self.title = NSLocalizedString(@"HOME", nil);
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"LOGIN" style: UIBarButtonItemStylePlain target: self action: @selector(requestOAuthAccess:)];
+    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"LOG IN", nil) style: UIBarButtonItemStylePlain target: self action: @selector(requestOAuthAccess:)];
     
     if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
         NSLog(@"Token available");

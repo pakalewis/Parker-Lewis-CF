@@ -26,28 +26,17 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+
+
+- (void)testJSONParsing {
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSString *path = [bundle pathForResource:@"sample" ofType:@"json"];
+    NSData *json = [NSData dataWithContentsOfFile:path];
+    XCTAssertNotNil(json);
+    
+    NSMutableArray *array = [[Question alloc] parseJSONIntoQuestionArrayFrom:json];
+    XCTAssertEqual(array.count, 10);
 }
 
-//
-//- (void)testJSONParsing {
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"json"];
-//    NSData *json = [NSData dataWithContentsOfFile:path];
-//    XCTAssertNotNil(json);
-//    
-//    NSMutableArray *array = [[Question alloc] parseJSONIntoQuestionArrayFrom:json];
-//    XCTAssertEqual(array.count, 10);
-//}
-
-
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
 
 @end
