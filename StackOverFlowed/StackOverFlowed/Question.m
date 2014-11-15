@@ -28,7 +28,7 @@
         
         self.ownerDict = (NSDictionary *) questionItemDict[@"owner"];
         self.profileImageURL = (NSString *) self.ownerDict[@"profile_image"];
-        self.username = (NSString *) self.ownerDict[@"display_name"];
+        self.username = (NSString *) [self.ownerDict[@"display_name"] kv_decodeHTMLCharacterEntities];
     }
     return self;
 }

@@ -27,7 +27,7 @@
         <!--Root View Controller-->
         <scene sceneID="SDv-H4-7h3">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="7jj-FC-LLS" customClass="RootVC" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ROOT_VC" clearsSelectionOnViewWillAppear="NO" id="7jj-FC-LLS" customClass="RootVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i6O-DD-T1E">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,9 +53,6 @@
                                                 <constraint firstAttribute="centerX" secondItem="w99-Cy-YMC" secondAttribute="centerX" id="mk2-3C-NDw"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="4iQ-RF-8Yt" kind="showDetail" id="Mmf-Mn-Eg5"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CELL" rowHeight="150" id="cEq-55-H9o">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -75,9 +72,6 @@
                                                 <constraint firstAttribute="centerX" secondItem="Qox-kY-hkj" secondAttribute="centerX" id="63m-Vp-Pjh"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Ydt-OP-AW3" kind="showDetail" id="o8I-V4-IPB"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -96,7 +90,7 @@
         <!--Question SearchVC-->
         <scene sceneID="D9o-Oq-aaA">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="4iQ-RF-8Yt" customClass="QuestionSearchVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QUESTION_VC" automaticallyAdjustsScrollViewInsets="NO" id="4iQ-RF-8Yt" customClass="QuestionSearchVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q9q-FD-Lld"/>
                         <viewControllerLayoutGuide type="bottom" id="9Bc-ca-vPl"/>
@@ -106,7 +100,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fIs-Wn-hlZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for questions by tag" id="oGh-fD-sHJ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -144,7 +138,7 @@
         <!--ProfileVC-->
         <scene sceneID="BrM-IR-FJq">
             <objects>
-                <viewController id="Ydt-OP-AW3" customClass="ProfileVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PROFILE_VC" id="Ydt-OP-AW3" customClass="ProfileVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KNe-G8-BiT"/>
                         <viewControllerLayoutGuide type="bottom" id="dYs-gI-hRw"/>
