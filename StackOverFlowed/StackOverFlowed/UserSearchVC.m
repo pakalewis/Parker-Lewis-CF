@@ -111,11 +111,13 @@
         
         [SVProgressHUD show];
         
-        
+        NSString *searchForUserNamed = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+
         NSString *requestURLString;
         NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
-        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/users?order=desc&sort=reputation&inname=%@&site=stackoverflow&filter=!G*lE4GjY0j6tW*dQy5SwEQdm8i&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/users?order=desc&sort=reputation&inname=%@&site=stackoverflow&filter=!G*lE4GjY0j6tW*dQy5SwEQdm8i&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchForUserNamed, token];
         
+        NSLog(@"%@",requestURLString);
         
         [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString *errorString, NSData *rawJSONData) {
             if (errorString != nil) {

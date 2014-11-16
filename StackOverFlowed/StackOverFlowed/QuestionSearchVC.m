@@ -125,16 +125,17 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     if (self.isAuthenticated) {
-        NSLog(@"Searching for %@", searchBar.text);
-        
         [SVProgressHUD show];
-        
-        NSString *requestURLString;
+
+        NSString *searchForTags = [searchBar.text stringByReplacingOccurrencesOfString:@" " withString:@";"];
         NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
-        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
+
+        NSString *requestURLString;
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchForTags, token];
         
         
         [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString * errorString, NSData *rawJSONData) {
+            NSLog(@"HERE");
             if (errorString != nil) {
                 NSLog(@"There was an error: %@", errorString);
             } else {
