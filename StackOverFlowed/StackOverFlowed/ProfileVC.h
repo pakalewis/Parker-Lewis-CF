@@ -15,7 +15,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, weak) IBOutlet UILabel *countsLabel;
 
+
+
 @property (nonatomic, strong) User *currentUser;
 
+
+ -(IBAction) profileLinkButtonPressed : (id) sender;
 
 @end

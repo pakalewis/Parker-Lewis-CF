@@ -148,27 +148,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5dO-Ma-HPd">
-                                <rect key="frame" x="150" y="15" width="300" height="300"/>
+                                <rect key="frame" x="150" y="35" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5dO-Ma-HPd" secondAttribute="height" multiplier="1:1" id="5nb-wt-A3E"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exz-Iw-j15">
-                                <rect key="frame" x="262" y="325" width="76" height="21"/>
+                                <rect key="frame" x="262" y="345" width="76" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="counts" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-7A-4ew">
-                                <rect key="frame" x="274" y="366" width="53" height="21"/>
+                                <rect key="frame" x="274" y="386" width="53" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhj-S3-uw5">
+                                <rect key="frame" x="162" y="560" width="276" height="30"/>
+                                <state key="normal" title="View entire profile at stackoverflow.com ">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="profileLinkButtonPressed:" destination="Ydt-OP-AW3" eventType="touchUpInside" id="bk8-lS-RK6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5dO-Ma-HPd" firstAttribute="width" secondItem="wfW-1a-AxC" secondAttribute="width" multiplier="0.5" id="2ES-kC-9e3"/>
+                            <constraint firstItem="dYs-gI-hRw" firstAttribute="top" secondItem="lhj-S3-uw5" secondAttribute="bottom" constant="10" id="A2d-bH-hKV"/>
+                            <constraint firstAttribute="centerX" secondItem="lhj-S3-uw5" secondAttribute="centerX" id="GRe-wt-wji"/>
                             <constraint firstAttribute="centerX" secondItem="5dO-Ma-HPd" secondAttribute="centerX" id="OXb-dZ-ROf"/>
                             <constraint firstItem="5dO-Ma-HPd" firstAttribute="top" secondItem="KNe-G8-BiT" secondAttribute="bottom" constant="15" id="SX8-jQ-c5k"/>
                             <constraint firstItem="q5c-7A-4ew" firstAttribute="centerX" secondItem="exz-Iw-j15" secondAttribute="centerX" id="TtU-2G-Ojg"/>

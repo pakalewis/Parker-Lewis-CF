@@ -105,7 +105,14 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@",[self.questionsArray[indexPath.row] title]);
+    NSLog(@"%@",[self.questionsArray[indexPath.row] link]);
+
+    // Show new VC with a web view that will go to the url for the question selected
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WebVC *newWebVC = [storyboard instantiateViewControllerWithIdentifier:@"WEB_VC"];
+    newWebVC.questionURL = [self.questionsArray[indexPath.row] link];
+    [self.navigationController pushViewController:newWebVC animated:true];
+
 }
 
 

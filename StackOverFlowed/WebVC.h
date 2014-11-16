@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) WKWebView *webView;
 
+@property (nonatomic, strong) NSString *questionURL;
+@property (nonatomic, strong) NSString *profileURL;
 
 
 @end

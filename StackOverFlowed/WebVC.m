@@ -30,31 +30,39 @@
     self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
 
-    
-    self.publicKey = @"stuvaUJEX6kTlkHrvBNZVA((";
-    self.oAuthDomain = @"https://stackexchange.com/oauth/login_success";
-    self.clientID = @"3829";
+    // TODO: MOVE THESE TO CONSTANTS FILE
     self.oAuthURL = @"https://stackexchange.com/oauth/dialog";
+    self.clientID = @"3829";
+    self.oAuthDomain = @"https://stackexchange.com/oauth/login_success";
+    self.publicKey = @"stuvaUJEX6kTlkHrvBNZVA((";
 
     
+
+    NSString *loginURLString = [[NSString alloc] init];
+    if (self.questionURL) {
+        NSLog(@"there is a question url");
+        loginURLString = self.questionURL;
+    } else if (self.profileURL) {
+        NSLog(@"there is a profile url");
+        loginURLString = self.profileURL;
+    } else {
+        NSLog(@"requesting Oauth");
+        loginURLString = [NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&scope=read_inbox", self.oAuthURL, self.clientID, self.oAuthDomain];
+    }
     
-    NSString *loginURLString = [NSString stringWithFormat:@"%@?client_id=%@&redirect_uri=%@&scope=read_inbox", self.oAuthURL, self.clientID, self.oAuthDomain];
+    
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:loginURLString]];
     [self.webView loadRequest:urlRequest];
 }
 
 
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    
-}
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
-    NSLog(@"Decide Policy for Navigation");
 
     NSURLRequest *request = navigationAction.request;
     NSURL *url = request.URL;
     NSString *urlString = [url absoluteString];
-    NSLog(@"The url after requesting OAuth is: %@", urlString);
+//    NSLog(@"The url after requesting OAuth is: %@", urlString);
 
     if ([urlString containsString:@"access_token"]) {
         NSArray *urlComponents = [url.description componentsSeparatedByString:@"="];

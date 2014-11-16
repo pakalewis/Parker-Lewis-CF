@@ -40,12 +40,14 @@
     NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithURL:requestURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if ([response isKindOfClass: [NSHTTPURLResponse class]]) {
             NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *) response;
+            NSLog(@"status code is %ld",(long)[httpResponse statusCode]);
             if ([httpResponse statusCode] >= 200 && [httpResponse statusCode] <= 204 ) {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     success(nil, data);
                 }];
             } else {
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    NSLog(@"%@",error.localizedDescription);
                     success(error.localizedDescription, nil);
                 }];
             }
