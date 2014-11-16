@@ -10,6 +10,9 @@
 #import "Question.h"
 #import "NetworkController.h"
 #import "WebVC.h"
+#import "UserSearchVC.h"
+#import "QuestionSearchVC.h"
+#import "ProfileVC.h"
 
 @interface RootVC ()
 
@@ -41,7 +44,7 @@
 
 
 - (void)requestOAuthAccess:(id)sender {
-    NSLog(@"FIRED");
+    NSLog(@"Log in button fired");
 
     // initialize next view controller
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -59,12 +62,17 @@
         
         if (indexPath.row == 0) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            WebVC *newQuestionVC = [storyboard instantiateViewControllerWithIdentifier:@"QUESTION_VC"];
+            QuestionSearchVC *newQuestionVC = [storyboard instantiateViewControllerWithIdentifier:@"QUESTION_VC"];
             [self.navigationController pushViewController:newQuestionVC animated:true];
         }
         if (indexPath.row == 1) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            WebVC *newProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"PROFILE_VC"];
+            UserSearchVC *userSearchVC = [storyboard instantiateViewControllerWithIdentifier:@"USER_SEARCH_VC"];
+            [self.navigationController pushViewController:userSearchVC animated:true];
+        }
+        if (indexPath.row == 2) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            ProfileVC *newProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"PROFILE_VC"];
             [self.navigationController pushViewController:newProfileVC animated:true];
         }
 

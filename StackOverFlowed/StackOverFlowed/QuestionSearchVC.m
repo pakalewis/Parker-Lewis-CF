@@ -123,14 +123,8 @@
     [SVProgressHUD show];
     
     NSString *requestURLString;
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
-        // authenticated
-        NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
-        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
-    } else {
-        // not authenticated = no token
-        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow", searchBar.text];
-    }
+    NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
+    requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
 
 
     [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString * errorString, NSData *rawJSONData) {

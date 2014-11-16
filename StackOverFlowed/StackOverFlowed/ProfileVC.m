@@ -39,7 +39,9 @@
         if (errorString != nil) {
             NSLog(@"There was an error: %@", errorString);
         } else {
-            self.currentUser = [[User alloc] initWith:rawJSONData];
+            NSMutableArray *me = [[User alloc] parseJSONIntoUserArrayFrom:rawJSONData];
+            NSLog(@"COUNT OF ME ARRAY SHOULD BE ONE:  %lu",(unsigned long)me.count);
+            self.currentUser = me.firstObject;
             self.countsLabel.text = [NSString stringWithFormat:@"Profile views: %ld\nQuestions asked: %ld\nQuestions answered: %ld\nUpvotes: %ld\nDownvotes: %ld", self.currentUser.viewCount, self.currentUser.questionCount, self.currentUser.answerCount, self.currentUser.upvoteCount, self.currentUser.downvoteCount];
             self.usernameLabel.text = self.currentUser.displayName;
             

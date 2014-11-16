@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSString *profileImageURL;
 @property (nonatomic, strong) NSString *username;
 
-- (instancetype) initWith: (NSDictionary *) questionItemDict;
+- (instancetype) initWithQuestionItemDict: (NSDictionary *) questionItemDict;
 - (NSMutableArray *) parseJSONIntoQuestionArrayFrom:(NSData *) data;
 
 

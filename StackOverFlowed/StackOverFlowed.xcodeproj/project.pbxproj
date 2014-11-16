@@ -26,6 +26,9 @@
 		2C70BB9C1A116CF70075593F /* StackOverFlowedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BB9B1A116CF70075593F /* StackOverFlowedTests.m */; };
 		2C70BBA71A116F030075593F /* RootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BBA61A116F030075593F /* RootVC.m */; };
 		2C70BBA91A1173C30075593F /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C70BBA81A1173C30075593F /* Question.m */; };
+		2C7295851A1862B000B618B3 /* UserSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7295841A1862B000B618B3 /* UserSearchVC.m */; };
+		2C7295891A1886F900B618B3 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C7295871A1886F900B618B3 /* UserCell.m */; };
+		2C72958A1A1886F900B618B3 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C7295881A1886F900B618B3 /* UserCell.xib */; };
 		2C9D02701A16BF6700BF9151 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2C9D02721A16BF6700BF9151 /* Localizable.strings */; };
 		F5E80658F6B6045A4CBDF848 /* libPods-StackOverFlowed.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C69A579EA2EEC0B5795CF69A /* libPods-StackOverFlowed.a */; };
 /* End PBXBuildFile section */
@@ -75,6 +78,11 @@
 		2C70BBA51A116F030075593F /* RootVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootVC.h; sourceTree = "<group>"; };
 		2C70BBA61A116F030075593F /* RootVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootVC.m; sourceTree = "<group>"; };
 		2C70BBA81A1173C30075593F /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
+		2C7295831A1862B000B618B3 /* UserSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchVC.h; sourceTree = "<group>"; };
+		2C7295841A1862B000B618B3 /* UserSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSearchVC.m; sourceTree = "<group>"; };
+		2C7295861A1886F900B618B3 /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		2C7295871A1886F900B618B3 /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		2C7295881A1886F900B618B3 /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		2C9D026E1A16BF0100BF9151 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		2C9D026F1A16BF0100BF9151 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		2C9D02711A16BF6700BF9151 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -116,6 +124,8 @@
 				2C70BB871A116CF70075593F /* QuestionSearchVC.m */,
 				2C509E4A1A1567EF0024C2FC /* ProfileVC.h */,
 				2C509E4B1A1567EF0024C2FC /* ProfileVC.m */,
+				2C7295831A1862B000B618B3 /* UserSearchVC.h */,
+				2C7295841A1862B000B618B3 /* UserSearchVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -137,6 +147,9 @@
 				2C69DB551A14225400CCBE83 /* QuestionCell.h */,
 				2C69DB561A14225400CCBE83 /* QuestionCell.m */,
 				2C69DB571A14225400CCBE83 /* QuestionCell.xib */,
+				2C7295861A1886F900B618B3 /* UserCell.h */,
+				2C7295871A1886F900B618B3 /* UserCell.m */,
+				2C7295881A1886F900B618B3 /* UserCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -319,6 +332,7 @@
 			files = (
 				2C9D02701A16BF6700BF9151 /* Localizable.strings in Resources */,
 				2C70BB8B1A116CF70075593F /* Main.storyboard in Resources */,
+				2C72958A1A1886F900B618B3 /* UserCell.xib in Resources */,
 				2C69DB591A14225400CCBE83 /* QuestionCell.xib in Resources */,
 				2C70BB901A116CF70075593F /* LaunchScreen.xib in Resources */,
 				2C70BB8D1A116CF70075593F /* Images.xcassets in Resources */,
@@ -382,9 +396,11 @@
 				2C70BB881A116CF70075593F /* QuestionSearchVC.m in Sources */,
 				2C69DB581A14225400CCBE83 /* QuestionCell.m in Sources */,
 				2C509E451A15604B0024C2FC /* User.m in Sources */,
+				2C7295851A1862B000B618B3 /* UserSearchVC.m in Sources */,
 				2C70BBA91A1173C30075593F /* Question.m in Sources */,
 				2C3492841A127E3200AC6875 /* NetworkController.m in Sources */,
 				2C70BBA71A116F030075593F /* RootVC.m in Sources */,
+				2C7295891A1886F900B618B3 /* UserCell.m in Sources */,
 				2C70BB7F1A116CF70075593F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,7 +34,6 @@
     self.oAuthURL = @"https://stackexchange.com/oauth/dialog";
     self.clientID = @"3829";
     self.oAuthDomain = @"https://stackexchange.com/oauth/login_success";
-    self.publicKey = @"stuvaUJEX6kTlkHrvBNZVA((";
 
     
 
@@ -62,17 +61,14 @@
     NSURLRequest *request = navigationAction.request;
     NSURL *url = request.URL;
     NSString *urlString = [url absoluteString];
-//    NSLog(@"The url after requesting OAuth is: %@", urlString);
 
     if ([urlString containsString:@"access_token"]) {
         NSArray *urlComponents = [url.description componentsSeparatedByString:@"="];
-        NSLog(@"%@", [urlComponents description]);
         NSString *tokenToStore = urlComponents[1];
-        
         urlComponents = [tokenToStore componentsSeparatedByString:@"&"];
-        NSLog(@"%@", [urlComponents description]);
         tokenToStore = urlComponents[0];
         
+
         [[NSUserDefaults standardUserDefaults] setValue:tokenToStore forKey:@"token"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         

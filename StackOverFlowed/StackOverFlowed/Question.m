@@ -13,7 +13,7 @@
 
 
 
-- (instancetype) initWith: (NSDictionary *) questionItemDict {
+- (instancetype) initWithQuestionItemDict: (NSDictionary *) questionItemDict {
     self = [super init];
     if (self) {
         
@@ -44,7 +44,7 @@
 
     NSMutableArray *questions = [[NSMutableArray alloc] init];
     for (NSDictionary *item in items) {
-        Question *newQuestion = [[Question alloc] initWith: item];
+        Question *newQuestion = [[Question alloc] initWithQuestionItemDict: item];
         [questions addObject: newQuestion];
     }
     return questions;
