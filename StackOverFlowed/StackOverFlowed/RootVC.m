@@ -73,6 +73,7 @@
         if (indexPath.row == 2) {
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             ProfileVC *newProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"PROFILE_VC"];
+            newProfileVC.shouldDisplayMainUser = YES;
             [self.navigationController pushViewController:newProfileVC animated:true];
         }
 

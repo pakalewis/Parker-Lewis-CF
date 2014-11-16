@@ -17,9 +17,12 @@
 
 
 
+@property (nonatomic, assign) BOOL shouldDisplayMainUser;
 @property (nonatomic, strong) User *currentUser;
 
 
  -(IBAction) profileLinkButtonPressed : (id) sender;
+
+
 
 @end

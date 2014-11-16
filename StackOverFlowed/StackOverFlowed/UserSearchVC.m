@@ -11,7 +11,9 @@
 #import "NetworkController.h"
 #import "User.h"
 #import "UserCell.h"
-
+#import "ProfileVC.h"
+#import <UIKit/UIKit.h>
+#import "NSString+HTML.h"
 
 @interface UserSearchVC ()
 
@@ -45,8 +47,21 @@
     UserCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USER_CELL" forIndexPath:indexPath];
 
     User *currentUser = self.usersArray[indexPath.row];
-    cell.username.text = currentUser.displayName;
-    cell.backgroundColor = [UIColor redColor];
+    cell.username.text = [currentUser.displayName kv_decodeHTMLCharacterEntities];
+    
+    
+    // Get the profile images
+    NSInteger currentTag = cell.tag + 1;
+    cell.tag = currentTag;
+    cell.profileImage.image = nil;
+    [[NetworkController networkController] fetchProfileImageForUser:currentUser.profileImageURL withCompletion:^(UIImage *image) {
+        if (cell.tag == currentTag) {
+            cell.profileImage.image = image;
+        }
+    }];
+
+    
+    
     return cell;
 
 }
@@ -68,6 +83,20 @@
 
 
 
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ProfileVC *newProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"PROFILE_VC"];
+    newProfileVC.currentUser = self.usersArray[indexPath.row];
+    newProfileVC.shouldDisplayMainUser = NO;
+    [self.navigationController pushViewController:newProfileVC animated:true];
+
+
+    
+}
+
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"%@",searchBar.text);
     
@@ -87,20 +116,11 @@
             NSMutableArray *users = [[User alloc] parseJSONIntoUserArrayFrom:rawJSONData];
             self.usersArray = users;
             NSLog(@"%lu", self.usersArray.count);
-            
-            [self.collectionView reloadData];
-            [SVProgressHUD dismiss];
-
-            
-            
-//            [[NetworkController networkController] fetchProfileImageForUser:self.currentUser.profileImageURL withCompletion:^(UIImage *image) {
-//                self.profileImageView.image = image;
-//                [SVProgressHUD dismiss];
-//            }];
         }
+        
+        [self.collectionView reloadData];
+        [SVProgressHUD dismiss];
     }];
-    
-
 }
 
 
