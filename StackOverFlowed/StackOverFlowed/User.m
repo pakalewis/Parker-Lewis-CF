@@ -33,7 +33,6 @@
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
     // pull out items Array from the JSON
     NSMutableArray *items = jsonDict[@"items"];
-//    NSLog(@"USER ITEMS IS\n%@",items);
     
     NSMutableArray *users = [[NSMutableArray alloc] init];
     for (NSDictionary *item in items) {

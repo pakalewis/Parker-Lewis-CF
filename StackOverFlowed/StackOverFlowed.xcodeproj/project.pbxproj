@@ -122,10 +122,10 @@
 				2C70BBA61A116F030075593F /* RootVC.m */,
 				2C70BB861A116CF70075593F /* QuestionSearchVC.h */,
 				2C70BB871A116CF70075593F /* QuestionSearchVC.m */,
-				2C509E4A1A1567EF0024C2FC /* ProfileVC.h */,
-				2C509E4B1A1567EF0024C2FC /* ProfileVC.m */,
 				2C7295831A1862B000B618B3 /* UserSearchVC.h */,
 				2C7295841A1862B000B618B3 /* UserSearchVC.m */,
+				2C509E4A1A1567EF0024C2FC /* ProfileVC.h */,
+				2C509E4B1A1567EF0024C2FC /* ProfileVC.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

@@ -30,7 +30,7 @@
     self.webView.navigationDelegate = self;
     [self.view addSubview:self.webView];
 
-    // TODO: MOVE THESE TO CONSTANTS FILE
+    
     self.oAuthURL = @"https://stackexchange.com/oauth/dialog";
     self.clientID = @"3829";
     self.oAuthDomain = @"https://stackexchange.com/oauth/login_success";

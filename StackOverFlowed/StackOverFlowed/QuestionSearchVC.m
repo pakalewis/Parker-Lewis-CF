@@ -36,6 +36,15 @@
     [self.dateFormatter setDateFormat:@"MM-dd-yyyy 'at' hh:mm a"];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
+        NSLog(@"Token not available");
+        self.isAuthenticated = NO;
+    } else {
+        self.isAuthenticated = YES;
+    }
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.questionsArray.count > 0 ? self.questionsArray.count : 0;
@@ -105,41 +114,50 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%@",[self.questionsArray[indexPath.row] link]);
-
     // Show new VC with a web view that will go to the url for the question selected
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WebVC *newWebVC = [storyboard instantiateViewControllerWithIdentifier:@"WEB_VC"];
     newWebVC.questionURL = [self.questionsArray[indexPath.row] link];
     [self.navigationController pushViewController:newWebVC animated:true];
-
 }
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
-    NSLog(@"Searching for %@", searchBar.text);
-    
-    [SVProgressHUD show];
-    
-    NSString *requestURLString;
-    NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
-    requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
-
-
-    [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString * errorString, NSData *rawJSONData) {
-        if (errorString != nil) {
-            NSLog(@"There was an error: %@", errorString);
-        } else {
-            
-            NSMutableArray *questions = [[Question alloc] parseJSONIntoQuestionArrayFrom:rawJSONData];
-            self.questionsArray = questions;
-            NSLog(@"%lu", self.questionsArray.count);
-            
-            [self.tableView reloadData];
-            [SVProgressHUD dismiss];
-        }
-    }];
+    if (self.isAuthenticated) {
+        NSLog(@"Searching for %@", searchBar.text);
+        
+        [SVProgressHUD show];
+        
+        NSString *requestURLString;
+        NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/search?order=desc&sort=activity&tagged=%@&site=stackoverflow&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
+        
+        
+        [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString * errorString, NSData *rawJSONData) {
+            if (errorString != nil) {
+                NSLog(@"There was an error: %@", errorString);
+            } else {
+                
+                NSMutableArray *questions = [[Question alloc] parseJSONIntoQuestionArrayFrom:rawJSONData];
+                self.questionsArray = questions;
+                
+                [self.tableView reloadData];
+                [SVProgressHUD dismiss];
+            }
+        }];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please Log In!" message:@"You are not yet logged in to your Stack Exchange account." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"Log in" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            WebVC *newWebVC = [storyboard instantiateViewControllerWithIdentifier:@"WEB_VC"];
+            [self.navigationController pushViewController:newWebVC animated:true];
+        }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [alert addAction:loginAction];
+        [self presentViewController:alert animated:true completion:nil];
+    }
 }
 
 @end

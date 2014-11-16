@@ -10,4 +10,6 @@
 
 @interface RootVC : UITableViewController <UINavigationControllerDelegate>
 
+@property (nonatomic, assign) BOOL isAuthenticated;
+
 @end

@@ -14,6 +14,7 @@
 #import "ProfileVC.h"
 #import <UIKit/UIKit.h>
 #import "NSString+HTML.h"
+#import "WebVC.h"
 
 @interface UserSearchVC ()
 
@@ -31,9 +32,19 @@
     
     UINib *nib = [UINib nibWithNibName:@"UserCell" bundle:[NSBundle mainBundle]];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"USER_CELL"];
-
-
 }
+
+
+
+-(void)viewWillAppear:(BOOL)animated {
+    if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"token"] isKindOfClass:[NSString class]]) {
+        NSLog(@"Token not available");
+        self.isAuthenticated = NO;
+    } else {
+        self.isAuthenticated = YES;
+    }
+}
+
 
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -49,8 +60,7 @@
     User *currentUser = self.usersArray[indexPath.row];
     cell.username.text = [currentUser.displayName kv_decodeHTMLCharacterEntities];
     
-    
-    // Get the profile images
+    // Get the profile image
     NSInteger currentTag = cell.tag + 1;
     cell.tag = currentTag;
     cell.profileImage.image = nil;
@@ -59,11 +69,8 @@
             cell.profileImage.image = image;
         }
     }];
-
-    
     
     return cell;
-
 }
 
 
@@ -89,7 +96,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ProfileVC *newProfileVC = [storyboard instantiateViewControllerWithIdentifier:@"PROFILE_VC"];
     newProfileVC.currentUser = self.usersArray[indexPath.row];
-    newProfileVC.shouldDisplayMainUser = NO;
+    newProfileVC.showSelectedUser = YES;
     [self.navigationController pushViewController:newProfileVC animated:true];
 
 
@@ -98,29 +105,41 @@
 
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog(@"%@",searchBar.text);
-    
-    
-    [SVProgressHUD show];
-    
-    
-    NSString *requestURLString;
-    NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
-    requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/users?order=desc&sort=reputation&inname=%@&site=stackoverflow&filter=!G*lE4GjY0j6tW*dQy5SwEQdm8i&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
-    
-    
-    [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString *errorString, NSData *rawJSONData) {
-        if (errorString != nil) {
-            NSLog(@"There was an error: %@", errorString);
-        } else {
-            NSMutableArray *users = [[User alloc] parseJSONIntoUserArrayFrom:rawJSONData];
-            self.usersArray = users;
-            NSLog(@"%lu", self.usersArray.count);
-        }
+    [searchBar resignFirstResponder];
+    if (self.isAuthenticated) {
+        NSLog(@"Searching for %@", searchBar.text);
         
-        [self.collectionView reloadData];
-        [SVProgressHUD dismiss];
-    }];
+        [SVProgressHUD show];
+        
+        
+        NSString *requestURLString;
+        NSString *token = [[NSUserDefaults standardUserDefaults] valueForKey:@"token"];
+        requestURLString = [NSString stringWithFormat: @"https://api.stackexchange.com/2.2/users?order=desc&sort=reputation&inname=%@&site=stackoverflow&filter=!G*lE4GjY0j6tW*dQy5SwEQdm8i&access_token=%@&key=stuvaUJEX6kTlkHrvBNZVA((", searchBar.text, token];
+        
+        
+        [[NetworkController networkController] fetchJSONDataFrom:requestURLString withCompletion:^(NSString *errorString, NSData *rawJSONData) {
+            if (errorString != nil) {
+                NSLog(@"There was an error: %@", errorString);
+            } else {
+                NSMutableArray *users = [[User alloc] parseJSONIntoUserArrayFrom:rawJSONData];
+                self.usersArray = users;
+            }
+            
+            [self.collectionView reloadData];
+            [SVProgressHUD dismiss];
+        }];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Please Log In!" message:@"You are not yet logged in to your Stack Exchange account." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *loginAction = [UIAlertAction actionWithTitle:@"Log in" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            WebVC *newWebVC = [storyboard instantiateViewControllerWithIdentifier:@"WEB_VC"];
+            [self.navigationController pushViewController:newWebVC animated:true];
+        }];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [alert addAction:loginAction];
+        [self presentViewController:alert animated:true completion:nil];
+    }
 }
 
 

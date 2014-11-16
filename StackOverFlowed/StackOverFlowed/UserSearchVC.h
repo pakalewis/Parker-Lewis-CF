@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserSearchVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
+@interface UserSearchVC : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *usersArray;
+@property (nonatomic, assign) BOOL isAuthenticated;
 
 
 @end
