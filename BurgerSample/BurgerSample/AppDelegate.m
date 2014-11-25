@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "MenuVC.h"
+
+
 
 @interface AppDelegate ()
 
@@ -16,7 +19,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor greenColor];
+    
+    self.menuVC = [[MenuVC alloc] initWithNibName:@"MenuVC" bundle:nil];
+    self.window.rootViewController = self.menuVC;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

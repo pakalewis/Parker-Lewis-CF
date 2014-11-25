@@ -39,9 +39,11 @@ typedef enum {
     [super viewDidLoad];
     
     self.isMenuShown = YES;
-    self.menuSections = @[@"BURGER", @"TOPPINGS", @"SIDES"];
-    self.colors = [[NSArray alloc] initWithObjects: UIColorFromRGB(0x2162a6), UIColorFromRGB(0x57a515), UIColorFromRGB(0xd0661e), nil];
-    self.menuImages = [[NSArray alloc] initWithObjects: [UIImage imageNamed:@"burger"], [UIImage imageNamed:@"toppings"], [UIImage imageNamed:@"sides"], nil];
+    self.menuSections = [[[NSArray alloc] initWithObjects:@"BURGER", @"TOPPINGS", @"SIDES", nil] autorelease];
+                         
+    self.colors = [[[NSArray alloc] initWithObjects: UIColorFromRGB(0x2162a6), UIColorFromRGB(0x57a515), UIColorFromRGB(0xd0661e), nil] autorelease];
+    
+    self.menuImages = [[[NSArray alloc] initWithObjects: [UIImage imageNamed:@"burger"], [UIImage imageNamed:@"toppings"], [UIImage imageNamed:@"sides"], nil] autorelease];
 
   
     
@@ -57,19 +59,20 @@ typedef enum {
     
     
     // Initialize three detail VCs
-    self.burgerVC = [[self.storyboard instantiateViewControllerWithIdentifier:@"BURGER_VC"] autorelease];
+    self.burgerVC = [[BurgerVC alloc] initWithNibName:@"BurgerVC" bundle:nil];
     self.burgerVC.view.backgroundColor = self.colors[0];
-    self.toppingsVC = [[self.storyboard instantiateViewControllerWithIdentifier:@"TOPPINGS_VC"] autorelease];
+    self.toppingsVC = [[ToppingsVC alloc] initWithNibName:@"ToppingsVC" bundle:nil];
     self.toppingsVC.view.backgroundColor = self.colors[1];
-    self.sidesVC = [[self.storyboard instantiateViewControllerWithIdentifier:@"SIDES_VC"] autorelease];
+    self.sidesVC = [[SidesVC alloc] initWithNibName:@"SidesVC" bundle:nil];
     self.sidesVC.view.backgroundColor = self.colors[2];
+    
     
     [self addChildViewController: self.burgerVC];
     [self addChildViewController: self.toppingsVC];
     [self addChildViewController: self.sidesVC];
 
     // Make container view
-    self.containerView = [[UIView alloc] init];
+    self.containerView = [[[UIView alloc] init] autorelease];
     self.containerView.frame = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view insertSubview:self.containerView belowSubview:self.menuButton];
     
@@ -149,10 +152,10 @@ typedef enum {
     
     self.isMenuShown = YES;
     
-    [UIView animateWithDuration:0.5 delay:0.2 usingSpringWithDamping:0.8 initialSpringVelocity:0.2 options:0 animations:^{
+    [UIView animateWithDuration:0.5 delay:0.2 usingSpringWithDamping:2.8 initialSpringVelocity:0.2 options:0 animations:^{
 
         // Slide over menu button
-        self.menuButton.frame = CGRectMake(2000, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
+        self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         
         // Slide over container view
         self.containerView.frame = CGRectMake(self.view.frame.size.width, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
@@ -235,8 +238,10 @@ typedef enum {
 
 - (void)dealloc
 {
+    [_burgerVC release];
     [_toppingsVC release];
     [_sidesVC release];
+    [_containerView release];
     [_menuButtonConstraint release];
     [super dealloc];
 }

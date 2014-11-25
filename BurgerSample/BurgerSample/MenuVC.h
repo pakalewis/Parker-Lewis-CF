@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BurgerVC.h"
+#import "ToppingsVC.h"
+#import "SidesVC.h"
 
 @interface MenuVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
