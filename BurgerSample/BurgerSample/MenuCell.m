@@ -20,4 +20,8 @@
     // Configure the view for the selected state
 }
 
+- (void)dealloc {
+    [_menuCellImage release];
+    [super dealloc];
+}
 @end

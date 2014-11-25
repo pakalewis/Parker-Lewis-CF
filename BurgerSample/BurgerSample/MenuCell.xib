@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,20 +14,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H53-Mc-ZK5">
-                        <rect key="frame" x="139" y="51" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H53-Mc-ZK5">
+                        <rect key="frame" x="20" y="51" width="166" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EFV-Uk-b18">
+                        <rect key="frame" x="206" y="10" width="104" height="104"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="EFV-Uk-b18" secondAttribute="height" multiplier="1:1" id="KeU-gT-dau"/>
+                            <constraint firstAttribute="width" secondItem="EFV-Uk-b18" secondAttribute="height" multiplier="1:1" id="UPH-NV-San"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KeU-gT-dau"/>
+                            </mask>
+                        </variation>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.3977700508" green="1" blue="0.37452606649999998" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="H53-Mc-ZK5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="5cA-ZM-lCX"/>
+                    <constraint firstAttribute="trailing" secondItem="EFV-Uk-b18" secondAttribute="trailing" constant="10" id="CZK-9i-88p"/>
                     <constraint firstAttribute="centerY" secondItem="H53-Mc-ZK5" secondAttribute="centerY" id="MZM-d7-A8w"/>
-                    <constraint firstAttribute="centerX" secondItem="H53-Mc-ZK5" secondAttribute="centerX" id="dYS-ZU-CjN"/>
+                    <constraint firstAttribute="centerY" secondItem="EFV-Uk-b18" secondAttribute="centerY" id="Q7K-67-kp7"/>
+                    <constraint firstItem="EFV-Uk-b18" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="T4D-Z8-B3f"/>
+                    <constraint firstAttribute="bottom" secondItem="EFV-Uk-b18" secondAttribute="bottom" constant="10" id="lGt-Ot-Juk"/>
+                    <constraint firstItem="EFV-Uk-b18" firstAttribute="leading" secondItem="H53-Mc-ZK5" secondAttribute="trailing" constant="20" id="oNS-SX-n8W"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="menuCellImage" destination="EFV-Uk-b18" id="s7M-u6-kJ3"/>
                 <outlet property="menuLabel" destination="H53-Mc-ZK5" id="uzm-ix-fL8"/>
             </connections>
             <point key="canvasLocation" x="315" y="413.5"/>

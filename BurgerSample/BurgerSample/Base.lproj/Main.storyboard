@@ -3,7 +3,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--MenuVC-->
@@ -19,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="132" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ccy-7B-teP">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <sections/>
                             </tableView>
@@ -39,23 +38,42 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.22515914710000001" green="0.99134206830000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Ccy-7B-teP" secondAttribute="trailing" id="CEV-r3-ZjD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="IHE-b3-h6F" secondAttribute="bottom" constant="15" id="EiL-Dt-exj"/>
                             <constraint firstItem="Ccy-7B-teP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aBH-p1-XrM"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ccy-7B-teP" secondAttribute="bottom" id="d9K-uM-2ON"/>
-                            <constraint firstItem="Ccy-7B-teP" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="nKi-QI-I2N"/>
                             <constraint firstItem="Ccy-7B-teP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="oZO-uw-L6X"/>
                             <constraint firstAttribute="centerX" secondItem="IHE-b3-h6F" secondAttribute="centerX" id="oz6-15-21O"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="menuButton" destination="IHE-b3-h6F" id="tD4-cK-dDt"/>
+                        <outlet property="menuButtonConstraint" destination="oz6-15-21O" id="WfG-9Z-6wa"/>
                         <outlet property="menuTableView" destination="Ccy-7B-teP" id="zgr-uq-5Fp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--BurgerVC-->
+        <scene sceneID="KKT-sN-0bh">
+            <objects>
+                <viewController storyboardIdentifier="BURGER_VC" id="U7m-D6-UcH" customClass="BurgerVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="brA-ep-JgX"/>
+                        <viewControllerLayoutGuide type="bottom" id="MEN-TL-FnK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ck1-ib-XgI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.1271434367" blue="0.15422664729999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jd8-py-ZZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101" y="1010"/>
         </scene>
         <!--ToppingsVC-->
         <scene sceneID="D62-Ei-D0C">
@@ -150,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0z-DV-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876" y="-243"/>
+            <point key="canvasLocation" x="860" y="1093"/>
         </scene>
         <!--SidesVC-->
         <scene sceneID="r85-Oc-4NL">
@@ -238,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cOP-Bj-Aq0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893" y="523"/>
+            <point key="canvasLocation" x="1749" y="1115"/>
         </scene>
     </scenes>
 </document>
