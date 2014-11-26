@@ -23,9 +23,6 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
 
     self.menuVC = [[[MenuVC alloc] init] autorelease];
-
-    
-    self.menuVC = [[[MenuVC alloc] initWithNibName:@"MenuVC" bundle:nil] autorelease];
     self.window.rootViewController = self.menuVC;
     [self.window makeKeyAndVisible];
     
