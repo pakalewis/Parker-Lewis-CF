@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DrawView.h"
+#import "DrawBurgerChoices.h"
 
 @interface BurgerVC : UIViewController
 

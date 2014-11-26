@@ -55,7 +55,10 @@ typedef enum {
     
     
     // Table view set up
-    self.menuTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.menuTableView = [[[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain] autorelease];
+    self.menuTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.menuTableView setSeparatorInset:UIEdgeInsetsZero];
+    [self.menuTableView setLayoutMargins:UIEdgeInsetsZero];
     [self.view addSubview:self.menuTableView];
     self.menuTableView.delegate = self;
     self.menuTableView.dataSource = self;
@@ -185,6 +188,7 @@ typedef enum {
 
 
 -(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
     self.menuButton.frame = CGRectMake(2500, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
 
     [self animateToMenuLayout];
@@ -215,6 +219,7 @@ typedef enum {
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     cell.contentView.backgroundColor = self.colors[indexPath.row];
+    cell.clipsToBounds = NO;
     cell.menuCellImage.image = self.menuImages[indexPath.row];
     cell.menuLabel.text = self.menuSections[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -251,7 +256,7 @@ typedef enum {
     self.isMenuShown = YES;
     self.menuButton.enabled = NO;
 
-    [UIView animateWithDuration:1.7 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.3 options:0 animations:^{
+    [UIView animateWithDuration:0.7 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.3 options:0 animations:^{
 
         // Slide off menu button
         self.menuButton.frame = CGRectMake(2500, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);

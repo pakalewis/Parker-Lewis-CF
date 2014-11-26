@@ -13,7 +13,7 @@
 		2C005D771A246CDC00B0C343 /* toppings.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C005D761A246CDC00B0C343 /* toppings.png */; };
 		2C005DC11A25360A00B0C343 /* ToppingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C005DC01A25360A00B0C343 /* ToppingsVC.xib */; };
 		2C005DC31A25361300B0C343 /* SidesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C005DC21A25361300B0C343 /* SidesVC.xib */; };
-		2C005DC61A25454500B0C343 /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C005DC51A25454500B0C343 /* DrawView.m */; };
+		2C005DC61A25454500B0C343 /* DrawBurgerChoices.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C005DC51A25454500B0C343 /* DrawBurgerChoices.m */; };
 		2CD316311A23CFBA0066AA67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316301A23CFBA0066AA67 /* main.m */; };
 		2CD316341A23CFBA0066AA67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316331A23CFBA0066AA67 /* AppDelegate.m */; };
 		2CD316371A23CFBA0066AA67 /* BurgerSample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316351A23CFBA0066AA67 /* BurgerSample.xcdatamodeld */; };
@@ -46,8 +46,8 @@
 		2C005D761A246CDC00B0C343 /* toppings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toppings.png; sourceTree = "<group>"; };
 		2C005DC01A25360A00B0C343 /* ToppingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToppingsVC.xib; sourceTree = "<group>"; };
 		2C005DC21A25361300B0C343 /* SidesVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SidesVC.xib; sourceTree = "<group>"; };
-		2C005DC41A25454400B0C343 /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
-		2C005DC51A25454500B0C343 /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
+		2C005DC41A25454400B0C343 /* DrawBurgerChoices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBurgerChoices.h; sourceTree = "<group>"; };
+		2C005DC51A25454500B0C343 /* DrawBurgerChoices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBurgerChoices.m; sourceTree = "<group>"; };
 		2CD3162B1A23CFBA0066AA67 /* BurgerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BurgerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CD3162F1A23CFBA0066AA67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CD316301A23CFBA0066AA67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -185,8 +185,8 @@
 				2CD3165D1A23D3610066AA67 /* SidesVC.h */,
 				2CD3165E1A23D3610066AA67 /* SidesVC.m */,
 				2C005DC21A25361300B0C343 /* SidesVC.xib */,
-				2C005DC41A25454400B0C343 /* DrawView.h */,
-				2C005DC51A25454500B0C343 /* DrawView.m */,
+				2C005DC41A25454400B0C343 /* DrawBurgerChoices.h */,
+				2C005DC51A25454500B0C343 /* DrawBurgerChoices.m */,
 			);
 			name = CONTROLLER;
 			sourceTree = "<group>";
@@ -300,7 +300,7 @@
 				2CD316631A23F42B0066AA67 /* MenuCell.m in Sources */,
 				2CD316671A23FFA70066AA67 /* Burger.m in Sources */,
 				2C005D711A24535900B0C343 /* BurgerVC.m in Sources */,
-				2C005DC61A25454500B0C343 /* DrawView.m in Sources */,
+				2C005DC61A25454500B0C343 /* DrawBurgerChoices.m in Sources */,
 				2CD316311A23CFBA0066AA67 /* main.m in Sources */,
 				2CD316591A23D0300066AA67 /* MenuVC.m in Sources */,
 				2CD3165C1A23D3280066AA67 /* ToppingsVC.m in Sources */,
