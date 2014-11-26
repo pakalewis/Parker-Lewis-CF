@@ -20,15 +20,26 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor greenColor];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+
+    self.menuVC = [[[MenuVC alloc] init] autorelease];
+
     
-    self.menuVC = [[MenuVC alloc] initWithNibName:@"MenuVC" bundle:nil];
+    self.menuVC = [[[MenuVC alloc] initWithNibName:@"MenuVC" bundle:nil] autorelease];
     self.window.rootViewController = self.menuVC;
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+
+- (void)dealloc
+{
+    [_menuVC release];
+    [_window release];
+    [super dealloc];
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

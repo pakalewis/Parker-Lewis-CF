@@ -17,7 +17,6 @@
 @property (strong, nonatomic) UIViewController *toppingsVC;
 @property (strong, nonatomic) UIViewController *sidesVC;
 @property (strong, nonatomic) UIView *containerView;
-@property (assign, nonatomic) IBOutlet UIButton *menuButton;
 @property (assign, nonatomic) IBOutlet UITableView *menuTableView;
 
 

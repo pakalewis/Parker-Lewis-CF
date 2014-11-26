@@ -6,8 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuVC">
             <connections>
-                <outlet property="menuButton" destination="fHQ-ma-gdV" id="H56-iY-FNU"/>
-                <outlet property="menuButtonConstraint" destination="DjY-AQ-wsv" id="ubw-2a-kDg"/>
                 <outlet property="menuTableView" destination="1UW-l4-MAp" id="t66-DH-ViS"/>
                 <outlet property="view" destination="n3s-Tb-lJF" id="kUY-Qh-dpV"/>
             </connections>
@@ -22,30 +20,13 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <sections/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHQ-ma-gdV">
-                    <rect key="frame" x="255" y="543" width="90" height="42"/>
-                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="90" id="byo-Uo-syo"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <state key="normal" title="MENU">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="didPressMenuButton:" destination="-1" eventType="touchUpInside" id="KuM-KB-dNj"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="1UW-l4-MAp" secondAttribute="trailing" id="6Ny-28-cfX"/>
                 <constraint firstItem="1UW-l4-MAp" firstAttribute="top" secondItem="n3s-Tb-lJF" secondAttribute="top" id="AvN-DO-wYu"/>
-                <constraint firstAttribute="centerX" secondItem="fHQ-ma-gdV" secondAttribute="centerX" id="DjY-AQ-wsv"/>
                 <constraint firstAttribute="trailing" secondItem="1UW-l4-MAp" secondAttribute="trailing" id="PBH-Qt-Xu1"/>
                 <constraint firstItem="1UW-l4-MAp" firstAttribute="leading" secondItem="n3s-Tb-lJF" secondAttribute="leading" id="Xxu-1R-WC1"/>
-                <constraint firstAttribute="bottom" secondItem="fHQ-ma-gdV" secondAttribute="bottom" constant="15" id="iWa-NL-fY5"/>
                 <constraint firstItem="1UW-l4-MAp" firstAttribute="top" secondItem="n3s-Tb-lJF" secondAttribute="top" id="l78-C3-fzr"/>
                 <constraint firstAttribute="bottom" secondItem="1UW-l4-MAp" secondAttribute="bottom" id="nwp-rm-byd"/>
                 <constraint firstItem="1UW-l4-MAp" firstAttribute="leading" secondItem="n3s-Tb-lJF" secondAttribute="leading" id="sQz-5x-dsw"/>

@@ -19,11 +19,11 @@ typedef enum {
 
 
 @property (assign, nonatomic) BOOL isMenuShown;
-@property (retain, nonatomic) IBOutlet NSLayoutConstraint *menuButtonConstraint;
 @property (nonatomic, assign) MenuSection state;
 @property (strong, nonatomic) NSArray *menuSections;
 @property (nonatomic, strong) NSArray *colors;
 @property (strong, nonatomic) NSArray *menuImages;
+@property (strong, nonatomic) UIButton *menuButton;
 
 
 
@@ -46,8 +46,19 @@ typedef enum {
     self.menuImages = [[[NSArray alloc] initWithObjects: [UIImage imageNamed:@"burger"], [UIImage imageNamed:@"toppings"], [UIImage imageNamed:@"sides"], nil] autorelease];
 
   
+    // Create menu button
+    // TODO: add constraints programmatically
+    self.menuButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.menuButton.backgroundColor = [UIColor blueColor];
+    CGRect buttonFrame = CGRectMake(self.view.frame.size.width, CGRectGetMaxY(self.view.frame) - 40, 90, 30);
+    [self.menuButton setFrame: buttonFrame];
+    [self.menuButton setTitle:@"MENU" forState:UIControlStateNormal];
+
     
-    self.menuButtonConstraint.constant = -1000;
+    [self.menuButton addTarget:self action:@selector(didPressMenuButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview: self.menuButton];
+    
     self.view.backgroundColor = self.colors[0];
     
     
@@ -59,11 +70,11 @@ typedef enum {
     
     
     // Initialize three detail VCs
-    self.burgerVC = [[BurgerVC alloc] initWithNibName:@"BurgerVC" bundle:nil];
+    self.burgerVC = [[[BurgerVC alloc] init] autorelease];
     self.burgerVC.view.backgroundColor = self.colors[0];
-    self.toppingsVC = [[ToppingsVC alloc] initWithNibName:@"ToppingsVC" bundle:nil];
+    self.toppingsVC = [[[ToppingsVC alloc] initWithNibName:@"ToppingsVC" bundle:nil] autorelease];
     self.toppingsVC.view.backgroundColor = self.colors[1];
-    self.sidesVC = [[SidesVC alloc] initWithNibName:@"SidesVC" bundle:nil];
+    self.sidesVC = [[[SidesVC alloc] initWithNibName:@"SidesVC" bundle:nil] autorelease];
     self.sidesVC.view.backgroundColor = self.colors[2];
     
     
@@ -74,7 +85,7 @@ typedef enum {
     // Make container view
     self.containerView = [[[UIView alloc] init] autorelease];
     self.containerView.frame = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
-    [self.view insertSubview:self.containerView belowSubview:self.menuButton];
+    [self.view insertSubview:self.containerView belowSubview: self.menuButton];
     
     
     // Add three detail VCs to the containerview
@@ -154,7 +165,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.5 delay:0.2 usingSpringWithDamping:2.8 initialSpringVelocity:0.2 options:0 animations:^{
 
-        // Slide over menu button
+        // Slide off menu button
         self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         
         // Slide over container view
@@ -207,7 +218,6 @@ typedef enum {
 
             
             
-            self.menuButtonConstraint.constant = 0;
             self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
             self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         }];
@@ -220,29 +230,29 @@ typedef enum {
     
 }
 
-
+// This detects when rotating device
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
 
-    
-//    [UIView animateWithDuration:0.01 animations:^{
         if (self.isMenuShown) {
-            self.containerView.frame = CGRectMake(size.width / 2, 0, size.width, size.height);
+            [self animateToMenuLayout];
         } else {
-            self.containerView.frame = CGRectMake(0, 0, size.width, size.height);
+            [self animateToDetailLayout];
         }
-//    }];
 
 }
+
+
+
 
 
 
 - (void)dealloc
 {
     [_burgerVC release];
+    [_colors release];
     [_toppingsVC release];
     [_sidesVC release];
     [_containerView release];
-    [_menuButtonConstraint release];
     [super dealloc];
 }
 
