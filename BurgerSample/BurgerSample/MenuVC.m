@@ -86,7 +86,7 @@ typedef enum {
     self.menuButton.enabled = NO;
     self.menuButton.backgroundColor = [UIColor blueColor];
     self.menuButton.layer.cornerRadius = 15;
-    [self.menuButton setTitle:@"MENU" forState:UIControlStateNormal];
+    [self.menuButton setTitle:@"BACK TO MENU" forState:UIControlStateNormal];
     [self.menuButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [self.menuButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.menuButton.layer setBorderColor:[[UIColor blackColor] CGColor]];
@@ -114,7 +114,7 @@ typedef enum {
                                       @"tableView":self.menuTableView};
 
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[menuButton(100)]"
+                               constraintsWithVisualFormat:@"H:[menuButton(170)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
@@ -132,7 +132,7 @@ typedef enum {
                                views:viewsDictionary]];
 
 
-    // Container constraints
+    // Tableview constraints
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:|-0-[tableView]-0-|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
@@ -147,7 +147,23 @@ typedef enum {
     
     
     
-
+    
+    // Container constraints
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:|-0-[containerView]-0-|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:|-0-[containerView]-0-|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:viewsDictionary]];
+    
+    
+    
+    
     
     
     
@@ -187,12 +203,6 @@ typedef enum {
 }
 
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:YES];
-    self.menuButton.frame = CGRectMake(2500, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
-
-    [self animateToMenuLayout];
-}
 
 
 - (IBAction)didPressMenuButton:(id)sender {
@@ -284,6 +294,7 @@ typedef enum {
     self.menuButton.frame = CGRectMake(2500, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
     self.menuButton.alpha = 1;
     self.menuButton.enabled = YES;
+    self.containerView.frame = CGRectMake(2500, 0, self.view.frame.size.width, self.view.frame.size.height);
     self.containerView.alpha = 1;
 
     
@@ -321,7 +332,7 @@ typedef enum {
 -(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
 
         if (self.isMenuShown) {
-            self.menuButton.frame = CGRectMake(2500, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
+            
 //            [self animateToMenuLayout];
         } else {
 
