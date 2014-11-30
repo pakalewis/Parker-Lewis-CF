@@ -25,7 +25,7 @@
 		2CD3165F1A23D3610066AA67 /* SidesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3165E1A23D3610066AA67 /* SidesVC.m */; };
 		2CD316631A23F42B0066AA67 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316611A23F42B0066AA67 /* MenuCell.m */; };
 		2CD316641A23F42B0066AA67 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD316621A23F42B0066AA67 /* MenuCell.xib */; };
-		2CD316671A23FFA70066AA67 /* Burger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316661A23FFA70066AA67 /* Burger.m */; };
+		2CD316671A23FFA70066AA67 /* MealOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316661A23FFA70066AA67 /* MealOrder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +68,8 @@
 		2CD316601A23F42B0066AA67 /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
 		2CD316611A23F42B0066AA67 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		2CD316621A23F42B0066AA67 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
-		2CD316651A23FFA70066AA67 /* Burger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Burger.h; sourceTree = "<group>"; };
-		2CD316661A23FFA70066AA67 /* Burger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Burger.m; sourceTree = "<group>"; };
+		2CD316651A23FFA70066AA67 /* MealOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealOrder.h; sourceTree = "<group>"; };
+		2CD316661A23FFA70066AA67 /* MealOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealOrder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,8 +156,8 @@
 		2CD316681A23FFB00066AA67 /* MODEL */ = {
 			isa = PBXGroup;
 			children = (
-				2CD316651A23FFA70066AA67 /* Burger.h */,
-				2CD316661A23FFA70066AA67 /* Burger.m */,
+				2CD316651A23FFA70066AA67 /* MealOrder.h */,
+				2CD316661A23FFA70066AA67 /* MealOrder.m */,
 			);
 			name = MODEL;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 			files = (
 				2CD316341A23CFBA0066AA67 /* AppDelegate.m in Sources */,
 				2CD316631A23F42B0066AA67 /* MenuCell.m in Sources */,
-				2CD316671A23FFA70066AA67 /* Burger.m in Sources */,
+				2CD316671A23FFA70066AA67 /* MealOrder.m in Sources */,
 				2C005D711A24535900B0C343 /* BurgerVC.m in Sources */,
 				2C005DC61A25454500B0C343 /* DrawBurgerChoices.m in Sources */,
 				2CD316311A23CFBA0066AA67 /* main.m in Sources */,

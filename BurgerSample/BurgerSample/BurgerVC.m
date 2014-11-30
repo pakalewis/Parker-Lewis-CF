@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) DrawBurgerChoices *drawBurgerChoices;
 @property (strong, nonatomic) UILabel *burgerLabel;
+//@property (strong, nonatomic)  NSLayoutConstraint *burgerLabelX;
 
 @end
 
@@ -29,7 +30,7 @@
     // Make burger label
     self.burgerLabel = [[UILabel alloc] init];
     self.burgerLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.burgerLabel.text = @"Choose your burger";
+    self.burgerLabel.text = @"Choose your meal";
     self.burgerLabel.backgroundColor = [UIColor clearColor];
     self.burgerLabel.layer.cornerRadius = 15;
     self.burgerLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -49,16 +50,45 @@
 }
 
 
+-(void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    
+    
+    if (newCollection.verticalSizeClass == 1) {
+        NSLog(@"compact");
+    }
+    if (newCollection.verticalSizeClass == 2) {
+        NSLog(@"regular");
+    }
+    
+    
+//    
+//    2014-11-29 18:07:12.436 BurgerSample[10138:22656591] Trait collection = <UITraitCollection: 0x7fad2b4c6e40; _UITraitNameUserInterfaceIdiom = Phone, _UITraitNameDisplayScale = 2.000000, _UITraitNameHorizontalSizeClass = Compact, _UITraitNameVerticalSizeClass = Compact, _UITraitNameTouchLevel = 0, _UITraitNameInteractionModel = 1>
+//    2014-11-29 18:07:29.516 BurgerSample[10138:22656591] Trait collection = <UITraitCollection: 0x7fad2b4c9930; _UITraitNameUserInterfaceIdiom = Phone, _UITraitNameDisplayScale = 2.000000, _UITraitNameHorizontalSizeClass = Compact, _UITraitNameVerticalSizeClass = Regular, _UITraitNameTouchLevel = 0, _UITraitNameInteractionModel = 1>
+//
+//    
+//
+//    - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//    {
+//        [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//        
+//        if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
+//            self.mapViewHeightConstraint.constant = 480.0;
+//        else
+//            self.mapViewHeightConstraint.constant = 0.0;
+//    }
+}
+
+
 - (void) setupConstraints {
     
     NSDictionary *viewsDictionary = @{@"drawBurgerChoices":self.drawBurgerChoices,
                                       @"burgerLabel":self.burgerLabel};
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[burgerLabel(200)]"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:viewsDictionary]];
+                              constraintsWithVisualFormat:@"H:[burgerLabel(200)]"
+                              options:0
+                              metrics:nil
+                              views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[burgerLabel(50)]"
@@ -88,15 +118,14 @@
     
     
     
-    
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(300)]"
+                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(280)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[drawBurgerChoices(300)]"
+                               constraintsWithVisualFormat:@"V:[drawBurgerChoices(280)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
@@ -107,14 +136,14 @@
 //                               metrics:nil
 //                               views:viewsDictionary]];
 
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
-                                                          attribute: NSLayoutAttributeCenterX
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self.view
-                                                          attribute: NSLayoutAttributeCenterX
-                                                         multiplier: 1
-                                                           constant: 0]
-     ];
+//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
+//                                                          attribute: NSLayoutAttributeCenterX
+//                                                          relatedBy: NSLayoutRelationEqual
+//                                                             toItem: self.view
+//                                                          attribute: NSLayoutAttributeCenterX
+//                                                         multiplier: 1
+//                                                           constant: 0]
+//     ];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
                                                           attribute: NSLayoutAttributeCenterY
@@ -122,9 +151,34 @@
                                                              toItem: self.view
                                                           attribute: NSLayoutAttributeCenterY
                                                          multiplier: 1
-                                                           constant: 0]
+                                                           constant: -20]
      ];
-
+    
+//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
+//                                                          attribute: NSLayoutAttributeWidth
+//                                                          relatedBy: NSLayoutRelationEqual
+//                                                             toItem: self.drawBurgerChoices
+//                                                          attribute: NSLayoutAttributeHeight
+//                                                         multiplier: 1
+//                                                           constant: 0]
+//     ];
+//    
+//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
+//                                                          attribute: NSLayoutAttributeWidth
+//                                                          relatedBy: NSLayoutRelationEqual
+//                                                             toItem: self.view
+//                                                          attribute: NSLayoutAttributeWidth
+//                                                         multiplier: 0.8
+//                                                           constant: 0]
+//     ];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
+                                                          attribute: NSLayoutAttributeRight
+                                                          relatedBy: NSLayoutRelationEqual
+                                                             toItem: self.view
+                                                          attribute: NSLayoutAttributeRight
+                                                         multiplier: 0.9                                                           constant: 0]
+     ];
 }
 
 

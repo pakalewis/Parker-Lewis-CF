@@ -52,7 +52,6 @@
     [bottomBun fill];
     [bottomBun stroke];
     
-    
     // Meat patty
     UIBezierPath *meatPatty = [[[UIBezierPath alloc] init] autorelease];
     [meatPatty moveToPoint:CGPointMake(midX * .15, midY * .7)];
@@ -65,7 +64,6 @@
     [[UIColor blackColor] setStroke];
     [meatPatty fill];
     [meatPatty stroke];
-    
     
     // Tomato
     UIBezierPath *tomato = [[[UIBezierPath alloc] init] autorelease];
@@ -80,7 +78,6 @@
     [tomato fill];
     [tomato stroke];
     
-    
     // Lettuce
     UIBezierPath *lettuce = [[[UIBezierPath alloc] init] autorelease];
     [lettuce moveToPoint:CGPointMake(midX * .1, midY * .475)];
@@ -94,13 +91,11 @@
     [lettuce addCurveToPoint:CGPointMake(midX * .3, midY * .425) controlPoint1:CGPointMake(midX * .425, midY * .45) controlPoint2:CGPointMake(midX * .375, midY * .45)];
     [lettuce addCurveToPoint:CGPointMake(midX * .1, midY * .425) controlPoint1:CGPointMake(midX * .225, midY * .4) controlPoint2:CGPointMake(midX * .175, midY * .4)];
     [lettuce addLineToPoint:CGPointMake(midX * .1, midY * .475)];
-
     lettuce.lineWidth = 2;
     [[UIColor greenColor] setFill];
     [[UIColor blackColor] setStroke];
     [lettuce fill];
     [lettuce stroke];
-
     
     // Cheese
     UIBezierPath *cheese = [[[UIBezierPath alloc] init] autorelease];
@@ -114,10 +109,7 @@
     [[UIColor blackColor] setStroke];
     [cheese fill];
     [cheese stroke];
-    
-    
 
-    
     // Top bun
     UIBezierPath *topBun = [[[UIBezierPath alloc] init] autorelease];
     [topBun moveToPoint:CGPointMake(midX * .2, midY * .35)];
@@ -134,8 +126,8 @@
 
     
     
-    // MARK: HOT DOG:
     
+    // MARK: HOT DOG:
     // Bottom bun
     UIBezierPath *bottomHotDogBun = [[[UIBezierPath alloc] init] autorelease];
     [bottomHotDogBun moveToPoint:CGPointMake(midX + midX * .25, midY * .65)];
@@ -148,7 +140,6 @@
     [[UIColor blackColor] setStroke];
     [bottomHotDogBun fill];
     [bottomHotDogBun stroke];
-    
     
     // Hot dog
     UIBezierPath *hotDog = [[[UIBezierPath alloc] init] autorelease];
@@ -164,7 +155,6 @@
     [[UIColor blackColor] setStroke];
     [hotDog fill];
     [hotDog stroke];
-    
     
     // Top bun
     UIBezierPath *topHotDogBun = [[[UIBezierPath alloc] init] autorelease];
@@ -190,8 +180,6 @@
     [[UIColor redColor] setStroke];
     [ketchup stroke];
     
-    
-    
     // Mustard
     UIBezierPath *mustard = [[[UIBezierPath alloc] init] autorelease];
     [mustard moveToPoint:CGPointMake(midX + midX * .15, midY * .45)];
@@ -205,6 +193,81 @@
     
     
     
+    
+    // MARK: PIZZA
+    // Crust
+    UIBezierPath *crust = [[[UIBezierPath alloc] init] autorelease];
+    [crust moveToPoint:CGPointMake(midX * .2, midY + midY * .35)];
+    [crust addCurveToPoint:CGPointMake(midX * .1, midY + midY * .3) controlPoint1:CGPointMake(midX * .125, midY + midY * .35) controlPoint2:CGPointMake(midX * .1, midY + midY * .325)];
+    [crust addCurveToPoint:CGPointMake(midX * .5, midY + midY * .175) controlPoint1:CGPointMake(midX * .1, midY + midY * .225) controlPoint2:CGPointMake(midX * .2, midY + midY * .175)];
+    [crust addCurveToPoint:CGPointMake(midX * .9, midY + midY * .3) controlPoint1:CGPointMake(midX * .8, midY + midY * .175) controlPoint2:CGPointMake(midX * .9, midY + midY * .225)];
+    [crust addCurveToPoint:CGPointMake(midX * .8, midY + midY * .35) controlPoint1:CGPointMake(midX * .9, midY + midY * .325) controlPoint2:CGPointMake(midX * .875, midY + midY * .35)];
+    [crust addLineToPoint:CGPointMake(midX * .2, midY + midY * .35)];
+    crust.lineWidth = 3;
+    [[UIColor orangeColor] setFill];
+    [[UIColor blackColor] setStroke];
+    [crust fill];
+    [crust stroke];
+    
+    // Cheese
+    UIBezierPath *pizzaCheese = [[[UIBezierPath alloc] init] autorelease];
+    [pizzaCheese moveToPoint:CGPointMake(midX * .2, midY + midY * .35)];
+    [pizzaCheese addLineToPoint:CGPointMake(midX * .8, midY + midY * .35)];
+    [pizzaCheese addLineToPoint:CGPointMake(midX * .5, midY + midY * .9)];
+    [pizzaCheese addLineToPoint:CGPointMake(midX * .2, midY + midY * .35)];
+    pizzaCheese.lineWidth = 3;
+    [[UIColor yellowColor] setFill];
+    [[UIColor blackColor] setStroke];
+    [pizzaCheese fill];
+    [pizzaCheese stroke];
+
+    // Pepperoni
+    UIBezierPath *pepperoni = [[[UIBezierPath alloc] init] autorelease];
+    [pepperoni moveToPoint:CGPointMake(midX * .4, midY + midY * .5)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .45, midY + midY * .55) controlPoint1:CGPointMake(midX * .425, midY + midY * .5) controlPoint2:CGPointMake(midX * .45, midY + midY * .525)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .4, midY + midY * .6) controlPoint1:CGPointMake(midX * .45, midY + midY * .575) controlPoint2:CGPointMake(midX * .425, midY + midY * .6)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .35, midY + midY * .55) controlPoint1:CGPointMake(midX * .375, midY + midY * .6) controlPoint2:CGPointMake(midX * .35, midY + midY * .575)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .4, midY + midY * .5) controlPoint1:CGPointMake(midX * .35, midY + midY * .525) controlPoint2:CGPointMake(midX * .375, midY + midY * .5)];
+
+    [pepperoni moveToPoint:CGPointMake(midX * .6, midY + midY * .4)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .65, midY + midY * .45) controlPoint1:CGPointMake(midX * .625, midY + midY * .4) controlPoint2:CGPointMake(midX * .65, midY + midY * .425)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .6, midY + midY * .5) controlPoint1:CGPointMake(midX * .65, midY + midY * .475) controlPoint2:CGPointMake(midX * .625, midY + midY * .5)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .55, midY + midY * .45) controlPoint1:CGPointMake(midX * .575, midY + midY * .5) controlPoint2:CGPointMake(midX * .55, midY + midY * .475)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .6, midY + midY * .4) controlPoint1:CGPointMake(midX * .55, midY + midY * .425) controlPoint2:CGPointMake(midX * .575, midY + midY * .4)];
+    
+    [pepperoni moveToPoint:CGPointMake(midX * .5, midY + midY * .65)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .55, midY + midY * .7) controlPoint1:CGPointMake(midX * .525, midY + midY * .65) controlPoint2:CGPointMake(midX * .55, midY + midY * .675)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .5, midY + midY * .75) controlPoint1:CGPointMake(midX * .55, midY + midY * .725) controlPoint2:CGPointMake(midX * .525, midY + midY * .75)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .45, midY + midY * .7) controlPoint1:CGPointMake(midX * .475, midY + midY * .75) controlPoint2:CGPointMake(midX * .45, midY + midY * .725)];
+    [pepperoni addCurveToPoint:CGPointMake(midX * .5, midY + midY * .65) controlPoint1:CGPointMake(midX * .45, midY + midY * .675) controlPoint2:CGPointMake(midX * .475, midY + midY * .65)];
+    
+    pepperoni.lineWidth = 1;
+    [[UIColor redColor] setFill];
+    [[UIColor blackColor] setStroke];
+    [pepperoni fill];
+    [pepperoni stroke];
+
+    
+    
+    
+    // MARK: TACO
+    UIBezierPath *taco = [[[UIBezierPath alloc] init] autorelease];
+    [taco moveToPoint:CGPointMake(midX + midX * .9, midY + midY * .6)];
+    [taco addCurveToPoint:CGPointMake(midX + midX * .2, midY + midY * .9) controlPoint1:CGPointMake(midX + midX * .7, midY + midY * .1) controlPoint2:CGPointMake(midX + midX * .4, midY + midY * .2)];
+    [taco addLineToPoint:CGPointMake(midX + midX * .9, midY + midY * .6)];
+    taco.lineWidth = 3;
+    [[UIColor yellowColor] setFill];
+    [[UIColor blackColor] setStroke];
+    [taco fill];
+    [taco stroke];
+    [taco moveToPoint:CGPointMake(midX + midX * .2, midY + midY * .9)];
+    [taco addCurveToPoint:CGPointMake(midX + midX * .7, midY + midY * .1) controlPoint1:CGPointMake(midX + midX * .1, midY + midY * .9) controlPoint2:CGPointMake(midX + midX * .3, midY + midY * .2)];
+//    [taco addLineToPoint:CGPointMake(midX + midX * .9, midY + midY * .6)];
+    taco.lineWidth = 3;
+    [[UIColor brownColor] setFill];
+    [[UIColor blackColor] setStroke];
+    [taco fill];
+    [taco stroke];
     
 }
 

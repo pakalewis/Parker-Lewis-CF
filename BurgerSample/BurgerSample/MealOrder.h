@@ -1,5 +1,5 @@
 //
-//  Burger.h
+//  MealOrder.h
 //  BurgerSample
 //
 //  Created by Parker Lewis on 11/24/14.
@@ -8,7 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Burger : NSObject
+@interface MealOrder : NSObject
+
+
+typedef enum {
+    hamburger,
+    hotdog,
+    pizza,
+    taco
+} mainMeal;
+
+
 
 @property (assign, nonatomic) BOOL tomato;
 @property (assign, nonatomic) BOOL onion;

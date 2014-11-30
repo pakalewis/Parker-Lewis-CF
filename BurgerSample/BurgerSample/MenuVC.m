@@ -38,6 +38,9 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.mealOrder = [[[MealOrder alloc] init] autorelease];
+    
     self.view.backgroundColor = self.colors[0];
 
     // cancel all constraints
@@ -238,7 +241,7 @@ typedef enum {
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    NSLog(@"%lu", indexPath.row);
     if (indexPath.row == 0) {
         self.state = meat;
         self.view.backgroundColor = self.colors[0];
@@ -265,22 +268,18 @@ typedef enum {
     
     self.isMenuShown = YES;
     self.menuButton.enabled = NO;
-
-    [UIView animateWithDuration:0.7 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.3 options:0 animations:^{
-
+    
+    [UIView animateWithDuration:1.5 animations:^{
         // Slide off menu button
         self.menuButton.frame = CGRectMake(2500, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         
         // Slide over container view
         self.containerView.frame = CGRectMake(2500, 0, self.view.frame.size.width, self.view.frame.size.height);
-
         
-
     } completion:^(BOOL finished) {
+        
         self.menuButton.alpha = 0;
         self.containerView.alpha = 0;
-        
-        
     }];
 }
 
@@ -315,15 +314,16 @@ typedef enum {
 
     }
 
-    [UIView animateWithDuration:0.7 delay:0.0 usingSpringWithDamping:0.8 initialSpringVelocity:0.3 options:0 animations:^{
+    
+
+    [UIView animateWithDuration:1.0 delay:0.0 options:0 animations:^{
+
         self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
-        
-    } completion:^(BOOL finished) {
-        
-        
-    }];
+    } completion:nil];
 
+    
+    
 }
 
 
