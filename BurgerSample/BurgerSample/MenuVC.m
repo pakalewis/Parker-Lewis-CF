@@ -18,7 +18,7 @@ typedef enum {
 } MenuSection;
 
 
-@property (assign, nonatomic) BOOL isMenuShown;
+@property (assign, nonatomic) BOOL isOpeningDisplay;
 @property (nonatomic, assign) MenuSection state;
 @property (strong, nonatomic) NSArray *menuSections;
 @property (nonatomic, strong) NSArray *colors;
@@ -42,7 +42,7 @@ typedef enum {
     
     self.mealOrder = [[[MealOrder alloc] init] autorelease];
     self.view.backgroundColor = self.colors[0];
-    self.isMenuShown = YES;
+    self.isOpeningDisplay = YES;
 
     
     // TODO: What is the difference here?
@@ -82,7 +82,7 @@ typedef enum {
 //    self.menuButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.menuButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.menuButton.alpha = 0;
-    self.menuButton.enabled = NO;
+//    self.menuButton.enabled = NO;
     self.menuButton.backgroundColor = [UIColor blueColor];
     self.menuButton.layer.cornerRadius = 15;
     [self.menuButton setTitle:@"BACK TO MENU" forState:UIControlStateNormal];
@@ -243,6 +243,20 @@ typedef enum {
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%lu", indexPath.row);
+    
+    
+    if (indexPath.row == self.state && !self.isOpeningDisplay) {
+        NSLog(@"Selection is already loaded so just slide back in");
+
+
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
+        }];
+        return;
+    }
+
     if (indexPath.row == 0) {
         self.state = meat;
         self.view.backgroundColor = self.colors[0];
@@ -258,6 +272,8 @@ typedef enum {
     }
 
     [self animateToDetailLayout];
+    self.isOpeningDisplay = NO;
+    
 }
 
 
@@ -271,9 +287,6 @@ typedef enum {
 
 -(void)animateToMenuLayout {
     
-    self.isMenuShown = YES;
-    self.menuButton.enabled = NO;
-
 
     [UIView animateWithDuration:0.7 animations:^{
         // Slide off menu button
@@ -289,14 +302,6 @@ typedef enum {
 
 
 -(void)animateToDetailLayout {
-    
-    
-    self.isMenuShown = NO;
-    self.menuButton.enabled = YES;
-
-    
-
-    
 
     [UIView animateWithDuration:0.6 delay:0.0 options:0 animations:^{
 
