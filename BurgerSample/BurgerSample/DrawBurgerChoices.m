@@ -253,7 +253,7 @@
     // MARK: TACO
     UIBezierPath *taco = [[[UIBezierPath alloc] init] autorelease];
     [taco moveToPoint:CGPointMake(midX + midX * .9, midY + midY * .6)];
-    [taco addCurveToPoint:CGPointMake(midX + midX * .2, midY + midY * .9) controlPoint1:CGPointMake(midX + midX * .7, midY + midY * .1) controlPoint2:CGPointMake(midX + midX * .4, midY + midY * .2)];
+    [taco addCurveToPoint:CGPointMake(midX + midX * .2, midY + midY * .9) controlPoint1:CGPointMake(midX + midX * .6, midY + midY * .3) controlPoint2:CGPointMake(midX + midX * .2, midY + midY * .7)];
     [taco addLineToPoint:CGPointMake(midX + midX * .9, midY + midY * .6)];
     taco.lineWidth = 3;
     [[UIColor yellowColor] setFill];
@@ -261,7 +261,8 @@
     [taco fill];
     [taco stroke];
     [taco moveToPoint:CGPointMake(midX + midX * .2, midY + midY * .9)];
-    [taco addCurveToPoint:CGPointMake(midX + midX * .7, midY + midY * .1) controlPoint1:CGPointMake(midX + midX * .1, midY + midY * .9) controlPoint2:CGPointMake(midX + midX * .3, midY + midY * .2)];
+    [taco addCurveToPoint:CGPointMake(midX + midX * .1, midY + midY * .8) controlPoint1:CGPointMake(midX + midX * .15, midY + midY * .9) controlPoint2:CGPointMake(midX + midX * .1, midY + midY * .85)];
+    [taco addCurveToPoint:CGPointMake(midX + midX * .5, midY + midY * .3) controlPoint1:CGPointMake(midX + midX * .1, midY + midY * .7) controlPoint2:CGPointMake(midX + midX * .4, midY + midY * .3)];
 //    [taco addLineToPoint:CGPointMake(midX + midX * .9, midY + midY * .6)];
     taco.lineWidth = 3;
     [[UIColor brownColor] setFill];
