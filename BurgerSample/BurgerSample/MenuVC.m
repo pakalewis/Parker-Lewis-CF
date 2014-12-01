@@ -71,8 +71,17 @@ typedef enum {
     [self animateToMenuLayout];
     
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mealChoiceUpdated:) name:@"NEW_MEAL_CHOICE" object:nil];
 }
+
+     
+-(void) mealChoiceUpdated:(NSNotification*) notification {
+    
+    int check = [[notification.userInfo objectForKey:@"meal"] intValue];
+    self.mealOrder.state = check;
+ }
+
+
 
 
 // MARK: SETUP
@@ -133,8 +142,9 @@ typedef enum {
     // Table view set up
 //    self.menuTableView = [[[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain] autorelease];
     self.menuTableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.menuTableView setSeparatorInset:UIEdgeInsetsZero];
-    [self.menuTableView setLayoutMargins:UIEdgeInsetsZero];
+//    [self.menuTableView setSeparatorInset:UIEdgeInsetsZero];
+//    [self.menuTableView setLayoutMargins:UIEdgeInsetsZero];
+    self.menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.menuTableView];
     self.menuTableView.delegate = self;
     self.menuTableView.scrollEnabled = NO;
@@ -254,6 +264,7 @@ typedef enum {
             self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
             self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         }];
+        self.burgerVC.singleTapGestureRecognizer.enabled = YES;
         return;
     }
 
@@ -287,7 +298,7 @@ typedef enum {
 
 -(void)animateToMenuLayout {
     
-
+    self.burgerVC.singleTapGestureRecognizer.enabled = NO;
     [UIView animateWithDuration:0.7 animations:^{
         // Slide off menu button
         self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
@@ -334,6 +345,9 @@ typedef enum {
         self.containerView.alpha = 1;
 
         
+        self.burgerVC.singleTapGestureRecognizer.enabled = YES;
+
+        
         
         [UIView animateWithDuration:0.7 animations:^{
 
@@ -362,6 +376,7 @@ typedef enum {
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_burgerVC release];
     [_colors release];
     [_toppingsVC release];

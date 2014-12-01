@@ -16,15 +16,17 @@ typedef enum {
     hotdog,
     pizza,
     taco
-} mainMeal;
+} MainMeal;
 
 
-
+@property (nonatomic, assign) MainMeal state;
 @property (assign, nonatomic) BOOL tomato;
 @property (assign, nonatomic) BOOL onion;
 @property (assign, nonatomic) BOOL lettuce;
 @property (assign, nonatomic) BOOL ketchup;
 @property (assign, nonatomic) BOOL mustard;
+
+// make dictionary for all these properties rather than individual
 
 
 @end

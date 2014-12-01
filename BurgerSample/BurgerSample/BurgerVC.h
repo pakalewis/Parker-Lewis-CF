@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DrawBurgerChoices.h"
+#import "MealOrder.h"
 
 @interface BurgerVC : UIViewController
+
+@property (strong, nonatomic) UITapGestureRecognizer *singleTapGestureRecognizer;
 
 @end

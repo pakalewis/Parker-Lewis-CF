@@ -14,9 +14,9 @@
 
 @interface MenuVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) UIViewController *burgerVC;
-@property (strong, nonatomic) UIViewController *toppingsVC;
-@property (strong, nonatomic) UIViewController *sidesVC;
+@property (strong, nonatomic) BurgerVC *burgerVC;
+@property (strong, nonatomic) ToppingsVC *toppingsVC;
+@property (strong, nonatomic) SidesVC *sidesVC;
 @property (strong, nonatomic) UIView *containerView;
 @property (strong, nonatomic) MealOrder *mealOrder;
 

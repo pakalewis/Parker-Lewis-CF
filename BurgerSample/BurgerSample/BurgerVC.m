@@ -12,8 +12,11 @@
 
 
 @property (strong, nonatomic) DrawBurgerChoices *drawBurgerChoices;
-@property (strong, nonatomic) UILabel *burgerLabel;
-//@property (strong, nonatomic)  NSLayoutConstraint *burgerLabelX;
+@property (strong, nonatomic) UILabel *chooseYourMealLabel;
+@property (strong, nonatomic) UILabel *choiceLabel;
+
+
+-(void)handleSingleTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer;
 
 @end
 
@@ -22,88 +25,104 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // Load the drawings
     self.drawBurgerChoices = [[[DrawBurgerChoices alloc] init] autorelease];
     self.drawBurgerChoices.translatesAutoresizingMaskIntoConstraints = NO;
     self.drawBurgerChoices.backgroundColor = [UIColor clearColor];
-    
+    [self.view addSubview:self.drawBurgerChoices];
+
     
     // Make burger label
-    self.burgerLabel = [[UILabel alloc] init];
-    self.burgerLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.burgerLabel.text = @"Choose your meal";
-    self.burgerLabel.backgroundColor = [UIColor clearColor];
-    self.burgerLabel.layer.cornerRadius = 15;
-    self.burgerLabel.font = [UIFont boldSystemFontOfSize:20];
-    self.burgerLabel.textColor = [UIColor blackColor];
-    self.burgerLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.burgerLabel.layer.borderWidth = 4;
-
-    self.burgerLabel.textAlignment = NSTextAlignmentCenter;
-//    self.burgerLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin);
-
+    self.chooseYourMealLabel = [[UILabel alloc] init];
+    self.chooseYourMealLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.chooseYourMealLabel.text = @"Choose your meal";
+    self.chooseYourMealLabel.backgroundColor = [UIColor clearColor];
+    self.chooseYourMealLabel.font = [UIFont boldSystemFontOfSize:20];
+    self.chooseYourMealLabel.textColor = [UIColor blackColor];
+    self.chooseYourMealLabel.layer.cornerRadius = 15;
+    self.chooseYourMealLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.chooseYourMealLabel.layer.borderWidth = 4;
+    self.chooseYourMealLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.chooseYourMealLabel];
     
-    [self.view addSubview:self.burgerLabel];
-    [self.view addSubview:self.drawBurgerChoices];
+    // Make label
+    self.choiceLabel = [[UILabel alloc] init];
+    self.choiceLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.choiceLabel.text = @"You will eat: ";
+    self.choiceLabel.font = [UIFont boldSystemFontOfSize:20];
+    self.choiceLabel.textColor = [UIColor blackColor];
+    self.choiceLabel.backgroundColor = [UIColor clearColor];
+    self.choiceLabel.layer.borderColor = [[UIColor blackColor] CGColor];
+    self.choiceLabel.layer.borderWidth = 1;
+    self.choiceLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.choiceLabel];
+
+
+    self.singleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapGesture:)];
+    [self.drawBurgerChoices addGestureRecognizer: self.singleTapGestureRecognizer];
+    
     
     [self setupConstraints];
 
 }
 
+-(void)handleSingleTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer {
+    
 
--(void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    
-    
-    if (newCollection.verticalSizeClass == 1) {
-        NSLog(@"compact");
+
+    NSDictionary *userInfo = [[NSDictionary alloc] init];
+
+    CGPoint p = [tapGestureRecognizer locationInView:self.drawBurgerChoices];
+    if (p.x < self.drawBurgerChoices.frame.size.width / 2 && p.y < self.drawBurgerChoices.frame.size.height / 2) {
+        NSLog(@"it's in burger section");
+        self.choiceLabel.text = @"You will eat: BURGERS";
+        userInfo = @{@"meal": @0};
+    } else if (p.x > self.drawBurgerChoices.frame.size.width / 2 && p.y < self.drawBurgerChoices.frame.size.height / 2) {
+        NSLog(@"it's in hotdog section");
+        self.choiceLabel.text = @"You will eat: HOTDOGS";
+        userInfo = @{@"meal": @1};
+    } else if (p.x < self.drawBurgerChoices.frame.size.width / 2 && p.y > self.drawBurgerChoices.frame.size.height / 2) {
+        NSLog(@"it's in pizza section");
+        self.choiceLabel.text = @"You will eat: PIZZA";
+        userInfo = @{@"meal": @2};
+    } else {
+        NSLog(@"it's in taco");
+        self.choiceLabel.text = @"You will eat: TACOS";
+        userInfo = @{@"meal": @3};
     }
-    if (newCollection.verticalSizeClass == 2) {
-        NSLog(@"regular");
-    }
     
-    
-//    
-//    2014-11-29 18:07:12.436 BurgerSample[10138:22656591] Trait collection = <UITraitCollection: 0x7fad2b4c6e40; _UITraitNameUserInterfaceIdiom = Phone, _UITraitNameDisplayScale = 2.000000, _UITraitNameHorizontalSizeClass = Compact, _UITraitNameVerticalSizeClass = Compact, _UITraitNameTouchLevel = 0, _UITraitNameInteractionModel = 1>
-//    2014-11-29 18:07:29.516 BurgerSample[10138:22656591] Trait collection = <UITraitCollection: 0x7fad2b4c9930; _UITraitNameUserInterfaceIdiom = Phone, _UITraitNameDisplayScale = 2.000000, _UITraitNameHorizontalSizeClass = Compact, _UITraitNameVerticalSizeClass = Regular, _UITraitNameTouchLevel = 0, _UITraitNameInteractionModel = 1>
-//
-//    
-//
-//    - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//    {
-//        [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//        
-//        if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation))
-//            self.mapViewHeightConstraint.constant = 480.0;
-//        else
-//            self.mapViewHeightConstraint.constant = 0.0;
-//    }
+    NSNotification *newMealNotification = [[NSNotification alloc] initWithName:@"NEW_MEAL_CHOICE" object:nil userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:newMealNotification];
+
 }
 
 
 - (void) setupConstraints {
     
-    NSDictionary *viewsDictionary = @{@"drawBurgerChoices":self.drawBurgerChoices,
-                                      @"burgerLabel":self.burgerLabel};
+    NSDictionary *viewsDictionary = @{@"drawBurgerChoices": self.drawBurgerChoices,
+                                      @"chooseYourMealLabel": self.chooseYourMealLabel,
+                                      @"choiceLabel": self.choiceLabel};
     
     [self.view addConstraints:[NSLayoutConstraint
-                              constraintsWithVisualFormat:@"H:[burgerLabel(200)]"
+                              constraintsWithVisualFormat:@"H:[chooseYourMealLabel(200)]"
                               options:0
                               metrics:nil
                               views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[burgerLabel(50)]"
+                               constraintsWithVisualFormat:@"V:[chooseYourMealLabel(50)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:|-30-[burgerLabel]"
+                               constraintsWithVisualFormat:@"V:|-30-[chooseYourMealLabel]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
 
 
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.burgerLabel
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.chooseYourMealLabel
                                                           attribute: NSLayoutAttributeCenterX
                                                           relatedBy: NSLayoutRelationEqual
                                                              toItem: self.view
@@ -119,65 +138,60 @@
     
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(280)]"
+                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(300)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[drawBurgerChoices(280)]"
+                               constraintsWithVisualFormat:@"V:[drawBurgerChoices(300)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
     
-//    [self.view addConstraints:[NSLayoutConstraint
-//                               constraintsWithVisualFormat:@"V:|-30-[drawBurgerChoices]"
-//                               options:NSLayoutFormatDirectionLeadingToTrailing
-//                               metrics:nil
-//                               views:viewsDictionary]];
-
-//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
-//                                                          attribute: NSLayoutAttributeCenterX
-//                                                          relatedBy: NSLayoutRelationEqual
-//                                                             toItem: self.view
-//                                                          attribute: NSLayoutAttributeCenterX
-//                                                         multiplier: 1
-//                                                           constant: 0]
-//     ];
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:[chooseYourMealLabel]-30-[drawBurgerChoices]"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:viewsDictionary]];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
-                                                          attribute: NSLayoutAttributeCenterY
+                                                          attribute: NSLayoutAttributeCenterX
                                                           relatedBy: NSLayoutRelationEqual
                                                              toItem: self.view
-                                                          attribute: NSLayoutAttributeCenterY
+                                                          attribute: NSLayoutAttributeCenterX
                                                          multiplier: 1
-                                                           constant: -20]
+                                                           constant: 0]
      ];
+
     
-//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
-//                                                          attribute: NSLayoutAttributeWidth
-//                                                          relatedBy: NSLayoutRelationEqual
-//                                                             toItem: self.drawBurgerChoices
-//                                                          attribute: NSLayoutAttributeHeight
-//                                                         multiplier: 1
-//                                                           constant: 0]
-//     ];
-//    
-//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
-//                                                          attribute: NSLayoutAttributeWidth
-//                                                          relatedBy: NSLayoutRelationEqual
-//                                                             toItem: self.view
-//                                                          attribute: NSLayoutAttributeWidth
-//                                                         multiplier: 0.8
-//                                                           constant: 0]
-//     ];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
-                                                          attribute: NSLayoutAttributeRight
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:[choiceLabel(300)]"
+                               options:0
+                               metrics:nil
+                               views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:[choiceLabel(100)]"
+                               options:0
+                               metrics:nil
+                               views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"V:[drawBurgerChoices]-30-[choiceLabel]"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:viewsDictionary]];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.choiceLabel
+                                                          attribute: NSLayoutAttributeCenterX
                                                           relatedBy: NSLayoutRelationEqual
                                                              toItem: self.view
-                                                          attribute: NSLayoutAttributeRight
-                                                         multiplier: 0.9                                                           constant: 0]
+                                                          attribute: NSLayoutAttributeCenterX
+                                                         multiplier: 1
+                                                           constant: 0]
      ];
 }
 
