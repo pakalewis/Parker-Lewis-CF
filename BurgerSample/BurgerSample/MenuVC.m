@@ -270,18 +270,18 @@ typedef enum {
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row != 0 && self.mealOrder.state == 0) {
-        NSLog(@"nothing picked yet");
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:true completion:nil];
-
-        //    TODO:
-        // GO action triggers "slideOffChangeView(state or VC param)SLideON" func for changing the container view VC
-        return;
-    }
+//    if (indexPath.row != 0 && self.mealOrder.state == 0) {
+//        NSLog(@"nothing picked yet");
+//        
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//        [alert addAction:okAction];
+//        [self presentViewController:alert animated:true completion:nil];
+//
+//        //    TODO:
+//        // GO action triggers "slideOffChangeView(state or VC param)SLideON" func for changing the container view VC
+//        return;
+//    }
     
     if (indexPath.row == self.menuSectionState && !self.isOpeningDisplay) {
         NSLog(@"Selection is already loaded so just slide back in");
@@ -320,13 +320,13 @@ typedef enum {
 // MARK: ANIMATIONS
 - (IBAction)didPressMenuButton:(id)sender {
     
-    if (self.mealOrder.state == 0) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You didn't select a meal!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:true completion:nil];
-        return;
-    }
+//    if (self.mealOrder.state == 0) {
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You didn't select a meal!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//        [alert addAction:okAction];
+//        [self presentViewController:alert animated:true completion:nil];
+//        return;
+//    }
     
     self.mealChoiceVC.singleTapGestureRecognizer.enabled = NO;
     [UIView animateWithDuration:0.7 animations:^{

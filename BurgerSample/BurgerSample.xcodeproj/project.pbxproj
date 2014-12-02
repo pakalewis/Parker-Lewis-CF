@@ -24,6 +24,9 @@
 		2CD3165F1A23D3610066AA67 /* SidesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD3165E1A23D3610066AA67 /* SidesVC.m */; };
 		2CD316631A23F42B0066AA67 /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316611A23F42B0066AA67 /* MenuCell.m */; };
 		2CD316671A23FFA70066AA67 /* MealOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD316661A23FFA70066AA67 /* MealOrder.m */; };
+		2CDCA06B1A2E2CC700F8106C /* CheckListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCA06A1A2E2CC700F8106C /* CheckListCell.m */; };
+		2CDCA06E1A2E2DFE00F8106C /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */; };
+		2CDCA06F1A2E2DFE00F8106C /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,10 @@
 		2CD316611A23F42B0066AA67 /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		2CD316651A23FFA70066AA67 /* MealOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealOrder.h; sourceTree = "<group>"; };
 		2CD316661A23FFA70066AA67 /* MealOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealOrder.m; sourceTree = "<group>"; };
+		2CDCA0691A2E2CC700F8106C /* CheckListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckListCell.h; sourceTree = "<group>"; };
+		2CDCA06A1A2E2CC700F8106C /* CheckListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListCell.m; sourceTree = "<group>"; };
+		2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = "<group>"; };
+		2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +97,8 @@
 		2C0BF91A1A2D8288002B3F65 /* OTHER */ = {
 			isa = PBXGroup;
 			children = (
+				2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */,
+				2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */,
 				2C0BF91E1A2D85E1002B3F65 /* UILabel+padding.h */,
 				2C0BF91F1A2D85E1002B3F65 /* UILabel+padding.m */,
 			);
@@ -174,6 +183,8 @@
 			children = (
 				2CD316601A23F42B0066AA67 /* MenuCell.h */,
 				2CD316611A23F42B0066AA67 /* MenuCell.m */,
+				2CDCA0691A2E2CC700F8106C /* CheckListCell.h */,
+				2CDCA06A1A2E2CC700F8106C /* CheckListCell.m */,
 			);
 			name = VIEW;
 			sourceTree = "<group>";
@@ -276,8 +287,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C005D771A246CDC00B0C343 /* toppings.png in Resources */,
+				2CDCA06F1A2E2DFE00F8106C /* uncheckedBox.png in Resources */,
 				2C005D731A24649000B0C343 /* burger.png in Resources */,
 				2CD316421A23CFBA0066AA67 /* LaunchScreen.xib in Resources */,
+				2CDCA06E1A2E2DFE00F8106C /* checkedBox.png in Resources */,
 				2C005D751A246B8200B0C343 /* sides.png in Resources */,
 				2CD3163F1A23CFBA0066AA67 /* Images.xcassets in Resources */,
 			);
@@ -301,6 +314,7 @@
 				2CD316631A23F42B0066AA67 /* MenuCell.m in Sources */,
 				2CD316671A23FFA70066AA67 /* MealOrder.m in Sources */,
 				2C005D711A24535900B0C343 /* MealChoiceVC.m in Sources */,
+				2CDCA06B1A2E2CC700F8106C /* CheckListCell.m in Sources */,
 				2C005DC61A25454500B0C343 /* DrawMealChoices.m in Sources */,
 				2CD316311A23CFBA0066AA67 /* main.m in Sources */,
 				2CD316591A23D0300066AA67 /* MenuVC.m in Sources */,

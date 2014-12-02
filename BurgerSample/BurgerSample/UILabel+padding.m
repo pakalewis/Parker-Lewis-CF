@@ -13,7 +13,7 @@
 
 -(CGSize)intrinsicContentSize{
     CGSize contentSize = [super intrinsicContentSize];
-    return CGSizeMake(contentSize.width + 50, contentSize.height);
+    return CGSizeMake(contentSize.width + 30, contentSize.height);
 }
 
 

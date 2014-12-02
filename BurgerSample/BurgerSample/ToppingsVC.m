@@ -7,7 +7,7 @@
 //
 
 #import "ToppingsVC.h"
-#import "MenuCell.h"
+#import "CheckListCell.h"
 
 @interface ToppingsVC ()
 
@@ -115,17 +115,14 @@
 //   
 //    
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    CheckListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+        cell = [[CheckListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
     }
-    cell.backgroundView = [[UIView alloc] init];
-//    [cell.backgroundView setBackgroundColor:[UIColor clearColor]];
+    cell.checkboxImage.image = [UIImage imageNamed:@"uncheckedBox"];
+    cell.itemLabel.text = self.currentToppings[indexPath.row];
     cell.backgroundColor = self.view.backgroundColor;
-//    [[[cell contentView] subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
-    cell.textLabel.text = self.currentToppings[indexPath.row];
-    
     return cell;
 }
 
@@ -139,6 +136,11 @@
     return self.toppingsTableView.frame.size.height / [self.currentToppings count];
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CheckListCell *currentCell = (CheckListCell*) [self.toppingsTableView cellForRowAtIndexPath:indexPath];
+    currentCell.checkboxImage.image = [UIImage imageNamed:@"checkedBox"];
+}
 
 -(void) setupConstraints {
     NSDictionary *viewsDictionary = @{@"chooseYourToppingsLabel": self.chooseYourToppingsLabel,
@@ -174,17 +176,23 @@
     
     
     
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[toppingsTableView(300)]"
-                               options:0
-                               metrics:nil
-                               views:viewsDictionary]];
-//    
+//    [self.view addConstraints:[NSLayoutConstraint
+//                               constraintsWithVisualFormat:@"H:[toppingsTableView(300)]"
+//                               options:0
+//                               metrics:nil
+//                               views:viewsDictionary]];
+//
 //    [self.view addConstraints:[NSLayoutConstraint
 //                               constraintsWithVisualFormat:@"V:[toppingsTableView(300)]"
 //                               options:NSLayoutFormatDirectionLeadingToTrailing
 //                               metrics:nil
 //                               views:viewsDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint
+                               constraintsWithVisualFormat:@"H:|-30-[toppingsTableView]-30-|"
+                               options:NSLayoutFormatDirectionLeadingToTrailing
+                               metrics:nil
+                               views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[chooseYourToppingsLabel]-30-[toppingsTableView]-70-|"
