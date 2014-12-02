@@ -82,16 +82,16 @@
     
     int changedState = [[notification.userInfo objectForKey:@"meal"] intValue];
     NSLog(@"%D", changedState);
-    if (changedState == 0) {
+    if (changedState == 1) {
         self.currentToppings = self.hamburgerToppings;
         self.chooseYourToppingsLabel.text = @"Choose your hamburger toppings";
-    } else if (changedState == 1) {
+    } else if (changedState == 2) {
         self.currentToppings = self.hotdogToppings;
         self.chooseYourToppingsLabel.text = @"Choose your hot dog toppings";
-    } else if (changedState == 2) {
+    } else if (changedState == 3) {
         self.currentToppings = self.tacoToppings;
         self.chooseYourToppingsLabel.text = @"Choose your taco toppings";
-    } else if (changedState == 3) {
+    } else if (changedState == 4) {
         self.currentToppings = self.pizzaToppings;
         self.chooseYourToppingsLabel.text = @"Choose your pizza toppings";
     } else {

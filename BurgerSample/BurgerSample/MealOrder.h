@@ -12,11 +12,11 @@
 
 
 typedef enum {
+    none,
     hamburger,
     hotdog,
     taco,
-    pizza,
-    none
+    pizza
 } MainMeal;
 
 

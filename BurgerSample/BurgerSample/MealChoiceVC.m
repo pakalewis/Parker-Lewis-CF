@@ -75,19 +75,19 @@
     if (p.x < self.drawMealChoices.frame.size.width / 2 && p.y < self.drawMealChoices.frame.size.height / 2) {
         NSLog(@"it's in burger section");
         self.choiceLabel.text = @"You will eat: BURGERS";
-        userInfo = @{@"meal": @0};
+        userInfo = @{@"meal": @1};
     } else if (p.x > self.drawMealChoices.frame.size.width / 2 && p.y < self.drawMealChoices.frame.size.height / 2) {
         NSLog(@"it's in hotdog section");
         self.choiceLabel.text = @"You will eat: HOTDOGS";
-        userInfo = @{@"meal": @1};
+        userInfo = @{@"meal": @2};
     } else if (p.x < self.drawMealChoices.frame.size.width / 2 && p.y > self.drawMealChoices.frame.size.height / 2) {
         NSLog(@"it's in taco");
         self.choiceLabel.text = @"You will eat: TACOS";
-        userInfo = @{@"meal": @2};
+        userInfo = @{@"meal": @3};
     } else {
         NSLog(@"it's in pizza section");
         self.choiceLabel.text = @"You will eat: PIZZA";
-        userInfo = @{@"meal": @3};
+        userInfo = @{@"meal": @4};
     }
     
     NSNotification *newMealNotification = [[NSNotification alloc] initWithName:@"NEW_MEAL_CHOICE" object:nil userInfo:userInfo];
