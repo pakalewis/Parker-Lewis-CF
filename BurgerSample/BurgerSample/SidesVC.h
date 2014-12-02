@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SidesVC : UIViewController
+@interface SidesVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) UITableView *sidesTableView;
+
 
 @end

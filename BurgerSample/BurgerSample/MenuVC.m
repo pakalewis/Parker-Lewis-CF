@@ -194,7 +194,7 @@ typedef enum {
     self.mealChoiceVC.view.backgroundColor = self.colors[0];
     self.toppingsVC = [[[ToppingsVC alloc] init] autorelease];
     self.toppingsVC.view.backgroundColor = self.colors[1];
-    self.sidesVC = [[[SidesVC alloc] initWithNibName:@"SidesVC" bundle:nil] autorelease];
+    self.sidesVC = [[[SidesVC alloc] init] autorelease];
     self.sidesVC.view.backgroundColor = self.colors[2];
 
     // Add as child View Controllers
