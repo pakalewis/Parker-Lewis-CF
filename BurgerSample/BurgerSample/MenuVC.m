@@ -19,7 +19,7 @@ typedef enum {
 
 
 @property (assign, nonatomic) BOOL isOpeningDisplay;
-@property (nonatomic, assign) MenuSection state;
+@property (nonatomic, assign) MenuSection menuSectionState;
 @property (strong, nonatomic) NSArray *menuSections;
 @property (strong, nonatomic) NSArray *subliminalMessages;
 @property (nonatomic, strong) NSArray *colors;
@@ -42,6 +42,7 @@ typedef enum {
     [super viewDidLoad];
     
     self.mealOrder = [[[MealOrder alloc] init] autorelease];
+    self.mealOrder.state = 4;
     self.view.backgroundColor = self.colors[0];
     self.isOpeningDisplay = YES;
 
@@ -92,7 +93,6 @@ typedef enum {
 //    self.menuButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.menuButton.translatesAutoresizingMaskIntoConstraints = NO;
     self.menuButton.alpha = 0;
-//    self.menuButton.enabled = NO;
     self.menuButton.backgroundColor = [UIColor blueColor];
     self.menuButton.layer.cornerRadius = 15;
     [self.menuButton setTitle:@"BACK TO MENU" forState:UIControlStateNormal];
@@ -115,7 +115,7 @@ typedef enum {
      ];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[menuButton(170)]"
+                               constraintsWithVisualFormat:@"H:[menuButton(180)]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:self.viewsDictionary]];
@@ -271,7 +271,20 @@ typedef enum {
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == self.state && !self.isOpeningDisplay) {
+    if (indexPath.row != 0 && self.mealOrder.state == 4) {
+        NSLog(@"nothing picked yet");
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:true completion:nil];
+
+        
+        // GO action triggers "slideOffChangeView(state or VC param)SLideON" func for changing the container view VC
+        return;
+    }
+    
+    if (indexPath.row == self.menuSectionState && !self.isOpeningDisplay) {
         NSLog(@"Selection is already loaded so just slide back in");
 
 
@@ -285,15 +298,15 @@ typedef enum {
     }
 
     if (indexPath.row == 0) {
-        self.state = meat;
+        self.menuSectionState = meat;
         self.view.backgroundColor = self.colors[0];
         self.menuButton.backgroundColor = self.colors[0];
     } else if (indexPath.row == 1) {
-        self.state = toppings;
+        self.menuSectionState = toppings;
         self.view.backgroundColor = self.colors[1];
         self.menuButton.backgroundColor = self.colors[1];
     } else {
-        self.state = sides;
+        self.menuSectionState = sides;
         self.view.backgroundColor = self.colors[2];
         self.menuButton.backgroundColor = self.colors[2];
     }
@@ -337,7 +350,7 @@ typedef enum {
 
         // Switch out the view
         [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        switch (self.state) {
+        switch (self.menuSectionState) {
             case meat:
                 [self.containerView addSubview:self.mealChoiceVC.view];
                 self.mealChoiceVC.view.frame = self.containerView.bounds;

@@ -40,7 +40,7 @@
     self.chooseYourMealLabel.textColor = [UIColor blackColor];
     self.chooseYourMealLabel.layer.cornerRadius = 15;
     self.chooseYourMealLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.chooseYourMealLabel.layer.borderWidth = 4;
+    self.chooseYourMealLabel.layer.borderWidth = 2;
     self.chooseYourMealLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.chooseYourMealLabel];
     
@@ -194,14 +194,14 @@
                                                            constant: 0]
      ];
 
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.choiceLabel
-                                                          attribute: NSLayoutAttributeWidth
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self.drawMealChoices
-                                                          attribute: NSLayoutAttributeWidth
-                                                         multiplier: 0.9
-                                                           constant: 0]
-     ];
+//    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.choiceLabel
+//                                                          attribute: NSLayoutAttributeWidth
+//                                                          relatedBy: NSLayoutRelationEqual
+//                                                             toItem: self.drawMealChoices
+//                                                          attribute: NSLayoutAttributeWidth
+//                                                         multiplier: 0.75
+//                                                           constant: 0]
+//     ];
 }
 
 

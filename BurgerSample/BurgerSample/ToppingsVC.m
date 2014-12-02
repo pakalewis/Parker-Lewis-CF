@@ -55,7 +55,7 @@
     self.chooseYourToppingsLabel.textColor = [UIColor blackColor];
     self.chooseYourToppingsLabel.layer.cornerRadius = 15;
     self.chooseYourToppingsLabel.layer.borderColor = [[UIColor blackColor] CGColor];
-    self.chooseYourToppingsLabel.layer.borderWidth = 4;
+    self.chooseYourToppingsLabel.layer.borderWidth = 2;
     self.chooseYourToppingsLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.chooseYourToppingsLabel];
     
@@ -81,14 +81,21 @@
 -(void) mealChoiceUpdated:(NSNotification*) notification {
     
     int changedState = [[notification.userInfo objectForKey:@"meal"] intValue];
+    NSLog(@"%D", changedState);
     if (changedState == 0) {
         self.currentToppings = self.hamburgerToppings;
+        self.chooseYourToppingsLabel.text = @"Choose your hamburger toppings";
     } else if (changedState == 1) {
         self.currentToppings = self.hotdogToppings;
+        self.chooseYourToppingsLabel.text = @"Choose your hot dog toppings";
     } else if (changedState == 2) {
         self.currentToppings = self.tacoToppings;
-    } else {
+        self.chooseYourToppingsLabel.text = @"Choose your taco toppings";
+    } else if (changedState == 3) {
         self.currentToppings = self.pizzaToppings;
+        self.chooseYourToppingsLabel.text = @"Choose your pizza toppings";
+    } else {
+        NSLog(@"NO CHOICE");
     }
 
     
@@ -137,11 +144,11 @@
     NSDictionary *viewsDictionary = @{@"chooseYourToppingsLabel": self.chooseYourToppingsLabel,
                                       @"toppingsTableView": self.toppingsTableView};
     
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[chooseYourToppingsLabel(240)]"
-                               options:0
-                               metrics:nil
-                               views:viewsDictionary]];
+//    [self.view addConstraints:[NSLayoutConstraint
+//                               constraintsWithVisualFormat:@"H:[chooseYourToppingsLabel(240)]"
+//                               options:0
+//                               metrics:nil
+//                               views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[chooseYourToppingsLabel(50)]"
