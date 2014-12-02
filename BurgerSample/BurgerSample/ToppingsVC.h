@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MealOrder.h"
 
-@interface ToppingsVC : UIViewController
+@interface ToppingsVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+
+
+@property (nonatomic, assign) MainMeal state;
+@property (strong, nonatomic) UITableView *toppingsTableView;
+
+
+
 
 @end

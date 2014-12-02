@@ -68,7 +68,6 @@ typedef enum {
     [self setupMenuButton];
     
     
-    [self animateToMenuLayout];
     
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mealChoiceUpdated:) name:@"NEW_MEAL_CHOICE" object:nil];
@@ -142,8 +141,6 @@ typedef enum {
     // Table view set up
 //    self.menuTableView = [[[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain] autorelease];
     self.menuTableView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self.menuTableView setSeparatorInset:UIEdgeInsetsZero];
-//    [self.menuTableView setLayoutMargins:UIEdgeInsetsZero];
     self.menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.menuTableView];
     self.menuTableView.delegate = self;
@@ -194,27 +191,27 @@ typedef enum {
     
     
     // Initialize three detail VCs
-    self.burgerVC = [[[BurgerVC alloc] init] autorelease];
-    self.burgerVC.view.backgroundColor = self.colors[0];
-    self.toppingsVC = [[[ToppingsVC alloc] initWithNibName:@"ToppingsVC" bundle:nil] autorelease];
+    self.mealChoiceVC = [[[MealChoiceVC alloc] init] autorelease];
+    self.mealChoiceVC.view.backgroundColor = self.colors[0];
+    self.toppingsVC = [[[ToppingsVC alloc] init] autorelease];
     self.toppingsVC.view.backgroundColor = self.colors[1];
     self.sidesVC = [[[SidesVC alloc] initWithNibName:@"SidesVC" bundle:nil] autorelease];
     self.sidesVC.view.backgroundColor = self.colors[2];
 
     // Add as child View Controllers
-    [self addChildViewController: self.burgerVC];
+    [self addChildViewController: self.mealChoiceVC];
     [self addChildViewController: self.toppingsVC];
     [self addChildViewController: self.sidesVC];
     
     // Add three detail VCs to the containerview
-    [self.containerView addSubview:self.burgerVC.view];
-    self.burgerVC.view.frame = self.containerView.bounds;
+    [self.containerView addSubview:self.mealChoiceVC.view];
+    self.mealChoiceVC.view.frame = self.containerView.bounds;
     [self.containerView addSubview:self.toppingsVC.view];
     self.toppingsVC.view.frame = self.containerView.bounds;
     [self.containerView addSubview:self.sidesVC.view];
     self.sidesVC.view.frame = self.containerView.bounds;
     
-    [self.burgerVC didMoveToParentViewController: self];
+    [self.mealChoiceVC didMoveToParentViewController: self];
     [self.toppingsVC didMoveToParentViewController: self];
     [self.sidesVC didMoveToParentViewController: self];
     
@@ -264,7 +261,7 @@ typedef enum {
             self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
             self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         }];
-        self.burgerVC.singleTapGestureRecognizer.enabled = YES;
+        self.mealChoiceVC.singleTapGestureRecognizer.enabled = YES;
         return;
     }
 
@@ -292,13 +289,7 @@ typedef enum {
 // MARK: ANIMATIONS
 - (IBAction)didPressMenuButton:(id)sender {
     
-    [self animateToMenuLayout];
-}
-
-
--(void)animateToMenuLayout {
-    
-    self.burgerVC.singleTapGestureRecognizer.enabled = NO;
+    self.mealChoiceVC.singleTapGestureRecognizer.enabled = NO;
     [UIView animateWithDuration:0.7 animations:^{
         // Slide off menu button
         self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
@@ -308,6 +299,8 @@ typedef enum {
         
     }];
 }
+
+
 
 
 
@@ -327,8 +320,8 @@ typedef enum {
         [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         switch (self.state) {
             case meat:
-                [self.containerView addSubview:self.burgerVC.view];
-                self.burgerVC.view.frame = self.containerView.bounds;
+                [self.containerView addSubview:self.mealChoiceVC.view];
+                self.mealChoiceVC.view.frame = self.containerView.bounds;
                 break;
             case toppings:
                 [self.containerView addSubview:self.toppingsVC.view];
@@ -345,7 +338,7 @@ typedef enum {
         self.containerView.alpha = 1;
 
         
-        self.burgerVC.singleTapGestureRecognizer.enabled = YES;
+        self.mealChoiceVC.singleTapGestureRecognizer.enabled = YES;
 
         
         
@@ -377,7 +370,7 @@ typedef enum {
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_burgerVC release];
+    [_mealChoiceVC release];
     [_colors release];
     [_toppingsVC release];
     [_sidesVC release];

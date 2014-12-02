@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BurgerVC.h"
+#import "MealChoiceVC.h"
 #import "ToppingsVC.h"
 #import "SidesVC.h"
 #import "MealOrder.h"
 
 @interface MenuVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) BurgerVC *burgerVC;
+@property (strong, nonatomic) MealChoiceVC *mealChoiceVC;
 @property (strong, nonatomic) ToppingsVC *toppingsVC;
 @property (strong, nonatomic) SidesVC *sidesVC;
 @property (strong, nonatomic) UIView *containerView;

@@ -1,26 +1,26 @@
 //
-//  BurgerVC.m
+//  MealChoiceVC.m
 //  BurgerSample
 //
 //  Created by Parker Lewis on 11/24/14.
 //  Copyright (c) 2014 CodeFellows. All rights reserved.
 //
 
-#import "BurgerVC.h"
+#import "MealChoiceVC.h"
 
-@interface BurgerVC ()
+@interface MealChoiceVC ()
 
 
 @property (strong, nonatomic) DrawBurgerChoices *drawBurgerChoices;
 @property (strong, nonatomic) UILabel *chooseYourMealLabel;
 @property (strong, nonatomic) UILabel *choiceLabel;
 
-
 -(void)handleSingleTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer;
+
 
 @end
 
-@implementation BurgerVC
+@implementation MealChoiceVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,7 +31,6 @@
     self.drawBurgerChoices.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.drawBurgerChoices];
 
-    
     // Make burger label
     self.chooseYourMealLabel = [[UILabel alloc] init];
     self.chooseYourMealLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -135,13 +134,13 @@
     
     
     
+    // TODO: MAKE THESE CONSTRAINTS % of superview
     
-    
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(300)]"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:viewsDictionary]];
+//    [self.view addConstraints:[NSLayoutConstraint
+//                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(300)]"
+//                               options:NSLayoutFormatDirectionLeadingToTrailing
+//                               metrics:nil
+//                               views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[drawBurgerChoices(300)]"
@@ -154,7 +153,8 @@
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
-
+    
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
                                                           attribute: NSLayoutAttributeCenterX
                                                           relatedBy: NSLayoutRelationEqual
@@ -163,7 +163,16 @@
                                                          multiplier: 1
                                                            constant: 0]
      ];
-
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
+                                                          attribute: NSLayoutAttributeWidth
+                                                          relatedBy: NSLayoutRelationEqual
+                                                             toItem: self.view
+                                                          attribute: NSLayoutAttributeWidth
+                                                         multiplier: 1
+                                                           constant: 0.9]
+     ];
+    
     
     
     

@@ -1,5 +1,5 @@
 //
-//  BurgerVC.h
+//  MealChoiceVC.h
 //  BurgerSample
 //
 //  Created by Parker Lewis on 11/24/14.
@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DrawBurgerChoices.h"
-#import "MealOrder.h"
 
-@interface BurgerVC : UIViewController
+@interface MealChoiceVC : UIViewController
 
 @property (strong, nonatomic) UITapGestureRecognizer *singleTapGestureRecognizer;
 
