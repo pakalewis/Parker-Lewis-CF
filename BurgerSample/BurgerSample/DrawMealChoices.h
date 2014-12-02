@@ -1,5 +1,5 @@
 //
-//  DrawBurgerChoices.h
+//  DrawMealChoices.h
 //  BurgerSample
 //
 //  Created by Parker Lewis on 11/25/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DrawBurgerChoices : UIView
+@interface DrawMealChoices : UIView
 
 @end

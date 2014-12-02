@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DrawBurgerChoices.h"
+#import "DrawMealChoices.h"
 
 @interface MealChoiceVC : UIViewController
 

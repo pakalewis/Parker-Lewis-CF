@@ -21,6 +21,7 @@ typedef enum {
 @property (assign, nonatomic) BOOL isOpeningDisplay;
 @property (nonatomic, assign) MenuSection state;
 @property (strong, nonatomic) NSArray *menuSections;
+@property (strong, nonatomic) NSArray *subliminalMessages;
 @property (nonatomic, strong) NSArray *colors;
 @property (strong, nonatomic) NSArray *menuImages;
 @property (strong, nonatomic) NSDictionary *viewsDictionary;
@@ -48,6 +49,7 @@ typedef enum {
     // TODO: What is the difference here?
 //    self.menuSections = [[[NSArray alloc] initWithObjects:@"BURGER", @"TOPPINGS", @"SIDES", nil] autorelease];
     self.menuSections = @[@"MEAL", @"TOPPINGS", @"SIDES"];
+    self.subliminalMessages = @[@"Make it a combo meal!", @"You are very very hungry", @"Eat eat eat eat eat"];
     
     self.colors = [[[NSArray alloc] initWithObjects: UIColorFromRGB(0x2162a6), UIColorFromRGB(0x57a515), UIColorFromRGB(0xd0661e), nil] autorelease];
     
@@ -146,8 +148,6 @@ typedef enum {
     self.menuTableView.delegate = self;
     self.menuTableView.scrollEnabled = NO;
     self.menuTableView.dataSource = self;
-    UINib *nib = [UINib nibWithNibName:@"MenuCell" bundle: nil];
-    [self.menuTableView registerNib: nib forCellReuseIdentifier:@"CELL"];
     
     // Tableview constraints
     [self.view addConstraints:[NSLayoutConstraint
@@ -238,19 +238,38 @@ typedef enum {
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-    cell.contentView.backgroundColor = self.colors[indexPath.row];
-    cell.clipsToBounds = NO;
-    cell.menuCellImage.image = self.menuImages[indexPath.row];
-    cell.menuLabel.text = self.menuSections[indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    MenuCell *cell = [self.menuTableView dequeueReusableCellWithIdentifier:@"CELL"];
+    if (cell == nil) {
+        cell = [[MenuCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CELL"];
+
+        cell.contentView.backgroundColor = self.colors[indexPath.row];
+
+        cell.menuLabel.text = self.menuSections[indexPath.row];
+        cell.menuCellImage.image = self.menuImages[indexPath.row];
+        cell.subliminalMessageLabel.text = self.subliminalMessages[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    }
+    
+    
+//    UITableViewCell *cell = [self.menuTableView dequeueReusableCellWithIdentifier:@"CELL"];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+//
+//        cell.contentView.backgroundColor = self.colors[indexPath.row];
+//
+//        cell.textLabel.text = self.menuSections[indexPath.row];
+//        cell.imageView.image = self.menuImages[indexPath.row];
+//        cell.detailTextLabel.text = self.subliminalMessages[indexPath.row];
+//    }
+    
     return cell;
+
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%lu", indexPath.row);
-    
     
     if (indexPath.row == self.state && !self.isOpeningDisplay) {
         NSLog(@"Selection is already loaded so just slide back in");
@@ -295,7 +314,7 @@ typedef enum {
         self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
         
         // Slide over container view
-        self.containerView.frame = CGRectMake(self.view.frame.size.width * 0.4, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.containerView.frame = CGRectMake(self.view.frame.size.width * 0.5, 0, self.view.frame.size.width, self.view.frame.size.height);
         
     }];
 }

@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *menuLabel;
 @property (retain, nonatomic) IBOutlet UIImageView *menuCellImage;
+@property (strong, nonatomic) IBOutlet UILabel *subliminalMessageLabel;
 
 @end
