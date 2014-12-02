@@ -14,8 +14,8 @@
 typedef enum {
     hamburger,
     hotdog,
-    pizza,
-    taco
+    taco,
+    pizza
 } MainMeal;
 
 

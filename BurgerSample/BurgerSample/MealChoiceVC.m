@@ -81,12 +81,12 @@
         self.choiceLabel.text = @"You will eat: HOTDOGS";
         userInfo = @{@"meal": @1};
     } else if (p.x < self.drawBurgerChoices.frame.size.width / 2 && p.y > self.drawBurgerChoices.frame.size.height / 2) {
-        NSLog(@"it's in pizza section");
-        self.choiceLabel.text = @"You will eat: PIZZA";
-        userInfo = @{@"meal": @2};
-    } else {
         NSLog(@"it's in taco");
         self.choiceLabel.text = @"You will eat: TACOS";
+        userInfo = @{@"meal": @2};
+    } else {
+        NSLog(@"it's in pizza section");
+        self.choiceLabel.text = @"You will eat: PIZZA";
         userInfo = @{@"meal": @3};
     }
     
@@ -102,6 +102,7 @@
                                       @"chooseYourMealLabel": self.chooseYourMealLabel,
                                       @"choiceLabel": self.choiceLabel};
     
+    // Choose your meal label
     [self.view addConstraints:[NSLayoutConstraint
                               constraintsWithVisualFormat:@"H:[chooseYourMealLabel(200)]"
                               options:0
@@ -115,7 +116,7 @@
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:|-30-[chooseYourMealLabel]"
+                               constraintsWithVisualFormat:@"V:|-40-[chooseYourMealLabel]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
@@ -134,20 +135,7 @@
     
     
     
-    // TODO: MAKE THESE CONSTRAINTS % of superview
-    
-//    [self.view addConstraints:[NSLayoutConstraint
-//                               constraintsWithVisualFormat:@"H:[drawBurgerChoices(300)]"
-//                               options:NSLayoutFormatDirectionLeadingToTrailing
-//                               metrics:nil
-//                               views:viewsDictionary]];
-    
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[drawBurgerChoices(300)]"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:viewsDictionary]];
-    
+    // DrawBurgerChoices
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[chooseYourMealLabel]-30-[drawBurgerChoices]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
@@ -169,37 +157,49 @@
                                                           relatedBy: NSLayoutRelationEqual
                                                              toItem: self.view
                                                           attribute: NSLayoutAttributeWidth
+                                                         multiplier: 0.85
+                                                           constant: 0]
+     ];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.drawBurgerChoices
+                                                          attribute: NSLayoutAttributeHeight
+                                                          relatedBy: NSLayoutRelationEqual
+                                                             toItem: self.drawBurgerChoices
+                                                          attribute: NSLayoutAttributeWidth
                                                          multiplier: 1
-                                                           constant: 0.9]
+                                                           constant: 0]
      ];
     
     
     
-    
+    // Choice label
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:[choiceLabel(300)]"
+                               constraintsWithVisualFormat:@"V:[choiceLabel(80)]"
                                options:0
                                metrics:nil
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[choiceLabel(100)]"
-                               options:0
-                               metrics:nil
-                               views:viewsDictionary]];
-    
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[drawBurgerChoices]-30-[choiceLabel]"
+                               constraintsWithVisualFormat:@"V:[drawBurgerChoices]-20-[choiceLabel]"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
-
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.choiceLabel
                                                           attribute: NSLayoutAttributeCenterX
                                                           relatedBy: NSLayoutRelationEqual
                                                              toItem: self.view
                                                           attribute: NSLayoutAttributeCenterX
                                                          multiplier: 1
+                                                           constant: 0]
+     ];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.choiceLabel
+                                                          attribute: NSLayoutAttributeWidth
+                                                          relatedBy: NSLayoutRelationEqual
+                                                             toItem: self.drawBurgerChoices
+                                                          attribute: NSLayoutAttributeWidth
+                                                         multiplier: 0.9
                                                            constant: 0]
      ];
 }

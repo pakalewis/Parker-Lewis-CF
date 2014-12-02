@@ -42,8 +42,8 @@
     
     self.hamburgerToppings = @[@"Tomato", @"Lettuce", @"Cheese", @"Onion", @"Pickle", @"Mustard"];
     self.hotdogToppings = @[@"Ketchup", @"Relish", @"Mustard"];
-    self.pizzaToppings = @[@"Extra Cheese", @"Pepperoni", @"Sausage", @"Canadian Bacon", @"Pineapple", @"Peppers", @"Onion"];
     self.tacoToppings = @[@"Cheese", @"Salsa", @"Lettuce", @"TEST"];
+    self.pizzaToppings = @[@"Extra Cheese", @"Pepperoni", @"Sausage", @"Canadian Bacon", @"Pineapple", @"Peppers", @"Onion"];
     self.currentToppings = self.hamburgerToppings;
     
     // Make Toppings label
@@ -86,9 +86,9 @@
     } else if (changedState == 1) {
         self.currentToppings = self.hotdogToppings;
     } else if (changedState == 2) {
-        self.currentToppings = self.pizzaToppings;
-    } else {
         self.currentToppings = self.tacoToppings;
+    } else {
+        self.currentToppings = self.pizzaToppings;
     }
 
     
