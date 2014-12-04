@@ -13,5 +13,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *itemLabel;
 @property (retain, nonatomic) IBOutlet UIImageView *itemImage;
 @property (retain, nonatomic) IBOutlet UIImageView *checkboxImage;
+@property (assign, nonatomic) BOOL isChecked;
 
 @end

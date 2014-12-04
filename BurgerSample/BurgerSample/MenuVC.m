@@ -46,9 +46,7 @@ typedef enum {
     self.isOpeningDisplay = YES;
 
     
-    // TODO: What is the difference here?
-//    self.menuSections = [[[NSArray alloc] initWithObjects:@"BURGER", @"TOPPINGS", @"SIDES", nil] autorelease];
-    self.menuSections = @[@"MEAL", @"TOPPINGS", @"SIDES"];
+    self.menuSections = [NSArray arrayWithObjects:@"MEAL", @"TOPPINGS", @"SIDES", nil];
     self.subliminalMessages = @[@"Make it a combo meal!", @"You are very very hungry", @"Eat eat eat eat eat"];
     
     self.colors = [[[NSArray alloc] initWithObjects: UIColorFromRGB(0x2162a6), UIColorFromRGB(0x57a515), UIColorFromRGB(0xd0661e), nil] autorelease];
@@ -252,17 +250,6 @@ typedef enum {
     }
     
     
-//    UITableViewCell *cell = [self.menuTableView dequeueReusableCellWithIdentifier:@"CELL"];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
-//
-//        cell.contentView.backgroundColor = self.colors[indexPath.row];
-//
-//        cell.textLabel.text = self.menuSections[indexPath.row];
-//        cell.imageView.image = self.menuImages[indexPath.row];
-//        cell.detailTextLabel.text = self.subliminalMessages[indexPath.row];
-//    }
-    
     return cell;
 
 }
@@ -270,18 +257,19 @@ typedef enum {
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if (indexPath.row != 0 && self.mealOrder.state == 0) {
-//        NSLog(@"nothing picked yet");
-//        
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-//        [alert addAction:okAction];
-//        [self presentViewController:alert animated:true completion:nil];
-//
-//        //    TODO:
-//        // GO action triggers "slideOffChangeView(state or VC param)SLideON" func for changing the container view VC
-//        return;
-//    }
+    if (indexPath.row != 0 && self.mealOrder.state == 0) {
+        NSLog(@"nothing picked yet");
+        
+        UIAlertController *alert = [[[UIAlertController alloc] init] autorelease];
+        alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:true completion:nil];
+
+//            TODO:
+//         GO action triggers "slideOffChangeView(state or VC param)SLideON" func for changing the container view VC
+        return;
+    }
     
     if (indexPath.row == self.menuSectionState && !self.isOpeningDisplay) {
         NSLog(@"Selection is already loaded so just slide back in");
@@ -320,13 +308,13 @@ typedef enum {
 // MARK: ANIMATIONS
 - (IBAction)didPressMenuButton:(id)sender {
     
-//    if (self.mealOrder.state == 0) {
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You didn't select a meal!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-//        [alert addAction:okAction];
-//        [self presentViewController:alert animated:true completion:nil];
-//        return;
-//    }
+    if (self.mealOrder.state == 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"You didn't select a meal!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:true completion:nil];
+        return;
+    }
     
     self.mealChoiceVC.singleTapGestureRecognizer.enabled = NO;
     [UIView animateWithDuration:0.7 animations:^{

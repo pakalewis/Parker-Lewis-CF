@@ -106,15 +106,7 @@
 
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-//    cell.contentView.backgroundColor = [UIColor redColor];
-//    cell.clipsToBounds = NO;
-//    cell.textLabel.text = @"test";
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    return cell;
-//   
-//    
-    
+
     CheckListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     if (cell == nil) {
         cell = [[CheckListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
@@ -122,6 +114,8 @@
     cell.checkboxImage.image = [UIImage imageNamed:@"uncheckedBox"];
     cell.itemLabel.text = self.currentToppings[indexPath.row];
     cell.backgroundColor = self.view.backgroundColor;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
 
     return cell;
 }
@@ -139,8 +133,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CheckListCell *currentCell = (CheckListCell*) [self.toppingsTableView cellForRowAtIndexPath:indexPath];
-    currentCell.checkboxImage.image = [UIImage imageNamed:@"checkedBox"];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (!currentCell.isChecked) {
+        currentCell.checkboxImage.image = [UIImage imageNamed:@"checkedBox"];
+        currentCell.isChecked = YES;
+    } else {
+        currentCell.checkboxImage.image = [UIImage imageNamed:@"uncheckedBox"];
+        currentCell.isChecked = NO;
+    }
 }
+
+
 
 -(void) setupConstraints {
     NSDictionary *viewsDictionary = @{@"chooseYourToppingsLabel": self.chooseYourToppingsLabel,

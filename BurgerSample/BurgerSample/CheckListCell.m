@@ -16,13 +16,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.isChecked = NO;
+        
         // Item label
         self.itemLabel = [[[UILabel alloc] init] autorelease];
         self.itemLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.itemLabel.textColor = [UIColor blackColor];
         self.itemLabel.font = [UIFont boldSystemFontOfSize:30];
         self.itemLabel.textAlignment = NSTextAlignmentCenter;
-        self.itemLabel.backgroundColor = [UIColor redColor];
+        self.itemLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:self.itemLabel];
         
         
