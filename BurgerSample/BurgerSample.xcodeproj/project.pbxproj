@@ -27,6 +27,7 @@
 		2CDCA06B1A2E2CC700F8106C /* CheckListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDCA06A1A2E2CC700F8106C /* CheckListCell.m */; };
 		2CDCA06E1A2E2DFE00F8106C /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */; };
 		2CDCA06F1A2E2DFE00F8106C /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */; };
+		2CDCA0711A32383300F8106C /* milkshake.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0701A32383300F8106C /* milkshake.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		2CDCA06A1A2E2CC700F8106C /* CheckListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListCell.m; sourceTree = "<group>"; };
 		2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = "<group>"; };
 		2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = "<group>"; };
+		2CDCA0701A32383300F8106C /* milkshake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = milkshake.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		2C0BF91A1A2D8288002B3F65 /* OTHER */ = {
 			isa = PBXGroup;
 			children = (
+				2CDCA0701A32383300F8106C /* milkshake.png */,
 				2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */,
 				2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */,
 				2C0BF91E1A2D85E1002B3F65 /* UILabel+padding.h */,
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C005D771A246CDC00B0C343 /* toppings.png in Resources */,
+				2CDCA0711A32383300F8106C /* milkshake.png in Resources */,
 				2CDCA06F1A2E2DFE00F8106C /* uncheckedBox.png in Resources */,
 				2C005D731A24649000B0C343 /* burger.png in Resources */,
 				2CD316421A23CFBA0066AA67 /* LaunchScreen.xib in Resources */,

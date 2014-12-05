@@ -11,6 +11,7 @@
 @interface SidesVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *sidesTableView;
+@property (strong, nonatomic) UIColor *themeColor;
 
 
 @end

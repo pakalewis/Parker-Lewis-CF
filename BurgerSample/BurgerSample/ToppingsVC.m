@@ -67,6 +67,7 @@
     self.toppingsTableView.dataSource = self;
     self.toppingsTableView.scrollEnabled = NO;
     self.toppingsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.toppingsTableView.backgroundColor = self.themeColor;
     [self.view addSubview:self.toppingsTableView];
     
     
@@ -127,7 +128,7 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.toppingsTableView.frame.size.height / [self.currentToppings count];
+    return (self.toppingsTableView.frame.size.height / [self.currentToppings count]) < 100 ? self.toppingsTableView.frame.size.height / [self.currentToppings count] : 100;    
 }
 
 
@@ -149,12 +150,6 @@
 -(void) setupConstraints {
     NSDictionary *viewsDictionary = @{@"chooseYourToppingsLabel": self.chooseYourToppingsLabel,
                                       @"toppingsTableView": self.toppingsTableView};
-    
-//    [self.view addConstraints:[NSLayoutConstraint
-//                               constraintsWithVisualFormat:@"H:[chooseYourToppingsLabel(240)]"
-//                               options:0
-//                               metrics:nil
-//                               views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"V:[chooseYourToppingsLabel(50)]"
@@ -180,41 +175,18 @@
     
     
     
-//    [self.view addConstraints:[NSLayoutConstraint
-//                               constraintsWithVisualFormat:@"H:[toppingsTableView(300)]"
-//                               options:0
-//                               metrics:nil
-//                               views:viewsDictionary]];
-//
-//    [self.view addConstraints:[NSLayoutConstraint
-//                               constraintsWithVisualFormat:@"V:[toppingsTableView(300)]"
-//                               options:NSLayoutFormatDirectionLeadingToTrailing
-//                               metrics:nil
-//                               views:viewsDictionary]];
-    
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:|-30-[toppingsTableView]-30-|"
+                               constraintsWithVisualFormat:@"H:|-0-[toppingsTableView]-0-|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[chooseYourToppingsLabel]-30-[toppingsTableView]-70-|"
+                               constraintsWithVisualFormat:@"V:[chooseYourToppingsLabel]-20-[toppingsTableView]-70-|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
 
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.toppingsTableView
-                                                          attribute: NSLayoutAttributeCenterX
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self.view
-                                                          attribute: NSLayoutAttributeCenterX
-                                                         multiplier: 1
-                                                           constant: 0]
-     ];
-
-    
-    
 }
 
 @end

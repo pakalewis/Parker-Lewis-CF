@@ -22,16 +22,21 @@
         self.itemLabel = [[[UILabel alloc] init] autorelease];
         self.itemLabel.translatesAutoresizingMaskIntoConstraints = NO;
         self.itemLabel.textColor = [UIColor blackColor];
-        self.itemLabel.font = [UIFont boldSystemFontOfSize:30];
+        self.itemLabel.numberOfLines = 1;
+        self.itemLabel.minimumScaleFactor = 20;
+        self.itemLabel.adjustsFontSizeToFitWidth = YES;
+//
+//        self.itemLabel.font = [UIFont boldSystemFontOfSize:30];
         self.itemLabel.textAlignment = NSTextAlignmentCenter;
-        self.itemLabel.backgroundColor = [UIColor clearColor];
+        self.itemLabel.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:self.itemLabel];
         
         
         // Image
         self.itemImage = [[[UIImageView alloc] init] autorelease];
         self.itemImage.translatesAutoresizingMaskIntoConstraints = NO;
-        self.itemImage.backgroundColor = [UIColor clearColor];
+        self.itemImage.backgroundColor = [UIColor lightGrayColor];
+        self.itemImage.image = [UIImage imageNamed:@"milkshake"];
         [self.contentView addSubview:self.itemImage];
         
         // checkbox Image
@@ -46,7 +51,7 @@
                                           @"checkboxImage": self.checkboxImage};
         
         [self.contentView addConstraints:[NSLayoutConstraint
-                                          constraintsWithVisualFormat:@"H:|-20-[itemImage]-20-[itemLabel]-20-[checkboxImage]-20-|"
+                                          constraintsWithVisualFormat:@"H:|-10-[itemImage]-10-[itemLabel]-10-[checkboxImage]-10-|"
                                           options:NSLayoutFormatDirectionLeadingToTrailing
                                           metrics:nil
                                           views:viewsDictionary]];

@@ -15,6 +15,7 @@
 
 @property (nonatomic, assign) MainMeal state;
 @property (strong, nonatomic) UITableView *toppingsTableView;
+@property (strong, nonatomic) UIColor *themeColor;
 
 
 

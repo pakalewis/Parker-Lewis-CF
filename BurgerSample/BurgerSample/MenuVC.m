@@ -225,10 +225,15 @@ typedef enum {
     // Initialize three detail VCs
     self.mealChoiceVC = [[[MealChoiceVC alloc] init] autorelease];
     self.mealChoiceVC.view.backgroundColor = self.colors[0];
+
     self.toppingsVC = [[[ToppingsVC alloc] init] autorelease];
     self.toppingsVC.view.backgroundColor = self.colors[1];
+    self.toppingsVC.themeColor = self.colors[1];
+    
     self.sidesVC = [[[SidesVC alloc] init] autorelease];
     self.sidesVC.view.backgroundColor = self.colors[2];
+    self.sidesVC.themeColor = self.colors[2];
+
 
     // Add as child View Controllers
     [self addChildViewController: self.mealChoiceVC];
@@ -290,13 +295,13 @@ typedef enum {
     // User tries to proceed but has not picked a meal so present ALERT
     if (indexPath.row != 0 && self.mealOrder.state == 0) {
 
-        NSLog(@"nothing picked yet");
-        UIAlertController *alert = [[[UIAlertController alloc] init] autorelease];
-        alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:true completion:nil];
-        return;
+//        NSLog(@"nothing picked yet");
+//        UIAlertController *alert = [[[UIAlertController alloc] init] autorelease];
+//        alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//        [alert addAction:okAction];
+//        [self presentViewController:alert animated:true completion:nil];
+//        return;
     } else { // No alert necessary because user selected row 0 (meal choice)
         if (self.isOpeningDisplay) { // self.menusectionState is already set to meat = 0
             [self switchViews];
@@ -426,6 +431,8 @@ typedef enum {
 }
 
 
+
+// ARC stuff
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

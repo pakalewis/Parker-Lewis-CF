@@ -80,35 +80,18 @@
                                                          multiplier: 1
                                                            constant: 0]
      ];
-//    [self.view addConstraints:[NSLayoutConstraint
-//                               constraintsWithVisualFormat:@"H:[sidesTableView(300)]"
-//                               options:0
-//                               metrics:nil
-//                               views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:|-30-[sidesTableView]-30-|"
+                               constraintsWithVisualFormat:@"H:|-0-[sidesTableView]-0-|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
     
     [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:[chooseYourSidesLabel]-30-[sidesTableView]-70-|"
+                               constraintsWithVisualFormat:@"V:[chooseYourSidesLabel]-20-[sidesTableView]-70-|"
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:viewsDictionary]];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.sidesTableView
-                                                          attribute: NSLayoutAttributeCenterX
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self.view
-                                                          attribute: NSLayoutAttributeCenterX
-                                                         multiplier: 1
-                                                           constant: 0]
-     ];
-    
-    
-    
 }
 
 
@@ -134,7 +117,9 @@
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.sidesTableView.frame.size.height / [self.listOfSides count];
+//    return self.sidesTableView.frame.size.height / [self.listOfSides count];
+    return (self.sidesTableView.frame.size.height / [self.listOfSides count]) < 100 ? self.sidesTableView.frame.size.height / [self.listOfSides count] : 100;
+
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
