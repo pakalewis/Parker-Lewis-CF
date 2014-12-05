@@ -32,7 +32,7 @@
     [self.view addSubview:self.drawMealChoices];
 
     // Make burger label
-    self.chooseYourMealLabel = [[UILabel alloc] init];
+    self.chooseYourMealLabel = [[[UILabel alloc] init] autorelease];
     self.chooseYourMealLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.chooseYourMealLabel.text = @"Choose your meal";
     self.chooseYourMealLabel.backgroundColor = [UIColor clearColor];
@@ -45,7 +45,7 @@
     [self.view addSubview:self.chooseYourMealLabel];
     
     // Make label
-    self.choiceLabel = [[UILabel alloc] init];
+    self.choiceLabel = [[[UILabel alloc] init] autorelease];
     self.choiceLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.choiceLabel.text = @"You will eat: ";
     self.choiceLabel.font = [UIFont boldSystemFontOfSize:20];
@@ -69,7 +69,7 @@
     
 
 
-    NSDictionary *userInfo = [[NSDictionary alloc] init];
+    NSDictionary *userInfo = [[[NSDictionary alloc] init] autorelease];
 
     CGPoint p = [tapGestureRecognizer locationInView:self.drawMealChoices];
     if (p.x < self.drawMealChoices.frame.size.width / 2 && p.y < self.drawMealChoices.frame.size.height / 2) {
@@ -90,7 +90,7 @@
         userInfo = @{@"meal": @4};
     }
     
-    NSNotification *newMealNotification = [[NSNotification alloc] initWithName:@"NEW_MEAL_CHOICE" object:nil userInfo:userInfo];
+    NSNotification *newMealNotification = [[[NSNotification alloc] initWithName:@"NEW_MEAL_CHOICE" object:nil userInfo:userInfo] autorelease];
     [[NSNotificationCenter defaultCenter] postNotification:newMealNotification];
 
 }

@@ -28,6 +28,11 @@ typedef enum {
 @property (strong, nonatomic) UIButton *menuButton;
 @property (strong, nonatomic) UITableView *menuTableView;
 
+@property (strong, nonatomic) NSLayoutConstraint *containerViewCenterXConstraint;
+@property (strong, nonatomic) NSLayoutConstraint *menuButtonCenterXConstraint;
+
+
+-(void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipeGestureRecognizer;
 
 
 
@@ -62,18 +67,39 @@ typedef enum {
                              @"containerView":self.containerView,
                              @"tableView":self.menuTableView};
 
+    
+    UISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)] autorelease];
+    leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+
+    UISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)] autorelease];
+    rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    
+
+    [self.containerView addGestureRecognizer: rightSwipeGestureRecognizer];
+    [self.containerView addGestureRecognizer: leftSwipeGestureRecognizer];
+
+    
+
+    
+    
     // Set up views
     [self setupTableView];
     [self setupContainerView];
     [self setupMenuButton];
     
+    // start with these views off screen
+    self.menuButtonCenterXConstraint.constant = self.view.frame.size.width;
+    self.containerViewCenterXConstraint.constant = self.view.frame.size.width;
     
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mealChoiceUpdated:) name:@"NEW_MEAL_CHOICE" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(mealChoiceUpdated:)
+                                                 name:@"NEW_MEAL_CHOICE"
+                                               object:nil];
 }
 
-     
+// update for the final mealOrder
 -(void) mealChoiceUpdated:(NSNotification*) notification {
     
     int check = [[notification.userInfo objectForKey:@"meal"] intValue];
@@ -82,15 +108,12 @@ typedef enum {
 
 
 
-
 // MARK: SETUP
 
 -(void) setupMenuButton {
-    // Create menu button
 //    self.menuButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.menuButton.translatesAutoresizingMaskIntoConstraints = NO;
-    self.menuButton.alpha = 0;
-    self.menuButton.backgroundColor = [UIColor blueColor];
+    self.menuButton.backgroundColor = [UIColor clearColor];
     self.menuButton.layer.cornerRadius = 15;
     [self.menuButton setTitle:@"BACK TO MENU" forState:UIControlStateNormal];
     [self.menuButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
@@ -100,16 +123,16 @@ typedef enum {
     [self.menuButton addTarget:self action:@selector(didPressMenuButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview: self.menuButton];
 
-    
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.menuButton
-                                                          attribute: NSLayoutAttributeCenterX
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self.view
-                                                          attribute: NSLayoutAttributeCenterX
-                                                         multiplier: 1
-                                                           constant: 0]
-     ];
+    // Constraint is a property so I can get at the constant when animating
+    self.menuButtonCenterXConstraint = [NSLayoutConstraint constraintWithItem: self.menuButton
+                                                       attribute: NSLayoutAttributeCenterX
+                                                       relatedBy: NSLayoutRelationEqual
+                                                          toItem: self.view
+                                                       attribute: NSLayoutAttributeCenterX
+                                                      multiplier: 1
+                                                        constant: 0];
+    [self.view addConstraint:self.menuButtonCenterXConstraint];
+
     
     [self.view addConstraints:[NSLayoutConstraint
                                constraintsWithVisualFormat:@"H:[menuButton(180)]"
@@ -128,8 +151,6 @@ typedef enum {
                                options:NSLayoutFormatDirectionLeadingToTrailing
                                metrics:nil
                                views:self.viewsDictionary]];
-
-    
 }
 
 
@@ -159,6 +180,7 @@ typedef enum {
                                metrics:nil
                                views:self.viewsDictionary]];
     
+
     
     
 }
@@ -168,24 +190,37 @@ typedef enum {
     // Make container view
 //    self.containerView = [[[UIView alloc] init] autorelease];
     self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.containerView.alpha = 0;
     self.containerView.frame = CGRectMake(self.view.frame.size.width, 0, self.menuTableView.frame.size.width, self.menuTableView.frame.size.height);
     [self.view addSubview:self.containerView];
     
     
     // Container constraints
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"V:|-0-[containerView]-0-|"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:self.viewsDictionary]];
+    [self.view addConstraint: [NSLayoutConstraint constraintWithItem: self.containerView
+                                                           attribute: NSLayoutAttributeHeight
+                                                           relatedBy: NSLayoutRelationEqual
+                                                              toItem: self.view
+                                                           attribute: NSLayoutAttributeHeight
+                                                          multiplier: 1
+                                                            constant: 0]];
     
-    [self.view addConstraints:[NSLayoutConstraint
-                               constraintsWithVisualFormat:@"H:|-0-[containerView]-0-|"
-                               options:NSLayoutFormatDirectionLeadingToTrailing
-                               metrics:nil
-                               views:self.viewsDictionary]];
-    
+    [self.view addConstraint: [NSLayoutConstraint constraintWithItem: self.containerView
+                                                           attribute: NSLayoutAttributeWidth
+                                                           relatedBy: NSLayoutRelationEqual
+                                                              toItem: self.view
+                                                           attribute: NSLayoutAttributeWidth
+                                                          multiplier: 1
+                                                            constant: 0]];
+
+    // This constraint is a property so I can get at the constant when animating
+    self.containerViewCenterXConstraint = [NSLayoutConstraint constraintWithItem: self.containerView
+                                                                       attribute: NSLayoutAttributeCenterX
+                                                                       relatedBy: NSLayoutRelationEqual
+                                                                          toItem: self.view
+                                                                       attribute: NSLayoutAttributeCenterX
+                                                                      multiplier: 1
+                                                                        constant: 0];
+    [self.view addConstraint:self.containerViewCenterXConstraint];
+
     
     // Initialize three detail VCs
     self.mealChoiceVC = [[[MealChoiceVC alloc] init] autorelease];
@@ -211,8 +246,6 @@ typedef enum {
     [self.mealChoiceVC didMoveToParentViewController: self];
     [self.toppingsVC didMoveToParentViewController: self];
     [self.sidesVC didMoveToParentViewController: self];
-    
-
 }
 
 
@@ -246,66 +279,66 @@ typedef enum {
         cell.menuCellImage.image = self.menuImages[indexPath.row];
         cell.subliminalMessageLabel.text = self.subliminalMessages[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
     }
-    
-    
     return cell;
-
 }
 
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
+    // User tries to proceed but has not picked a meal so present ALERT
     if (indexPath.row != 0 && self.mealOrder.state == 0) {
+
         NSLog(@"nothing picked yet");
-        
         UIAlertController *alert = [[[UIAlertController alloc] init] autorelease];
         alert = [UIAlertController alertControllerWithTitle:@"First choose the main course!" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
         [alert addAction:okAction];
         [self presentViewController:alert animated:true completion:nil];
-
-//            TODO:
-//         GO action triggers "slideOffChangeView(state or VC param)SLideON" func for changing the container view VC
         return;
+    } else { // No alert necessary because user selected row 0 (meal choice)
+        if (self.isOpeningDisplay) { // self.menusectionState is already set to meat = 0
+            [self switchViews];
+            [self slideInViews];
+            self.isOpeningDisplay = NO;
+        } else {
+            if (indexPath.row == self.menuSectionState) {
+                // Container view already has the selection loaded so just slide back in
+                NSLog(@"Selection is already loaded so just slide back in");
+                [self slideInViews];
+            } else { // User selected a new VC. need to set the state and then update the containerView
+                NSLog(@"here");
+                // set the menuSelectionState
+                if (indexPath.row == 0) {
+                    self.menuSectionState = meat;
+                } else if (indexPath.row == 1) {
+                    self.menuSectionState = toppings;
+                } else {
+                    self.menuSectionState = sides;
+                }
+                [self updateContainerView];
+            }
+        }
     }
-    
-    if (indexPath.row == self.menuSectionState && !self.isOpeningDisplay) {
-        NSLog(@"Selection is already loaded so just slide back in");
-
-
-        [UIView animateWithDuration:0.7 animations:^{
-            
-            self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-            self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
-        }];
-        self.mealChoiceVC.singleTapGestureRecognizer.enabled = YES;
-        return;
-    }
-
-    if (indexPath.row == 0) {
-        self.menuSectionState = meat;
-        self.view.backgroundColor = self.colors[0];
-        self.menuButton.backgroundColor = self.colors[0];
-    } else if (indexPath.row == 1) {
-        self.menuSectionState = toppings;
-        self.view.backgroundColor = self.colors[1];
-        self.menuButton.backgroundColor = self.colors[1];
-    } else {
-        self.menuSectionState = sides;
-        self.view.backgroundColor = self.colors[2];
-        self.menuButton.backgroundColor = self.colors[2];
-    }
-
-    [self animateToDetailLayout];
-    self.isOpeningDisplay = NO;
-    
 }
 
 
 
 // MARK: ANIMATIONS
+-(void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipeGestureRecognizer {
+    
+    if (swipeGestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight) {
+        [self slideViewsHalfOff];
+    } else {
+        [self slideInViews];
+    }
+}
+
+
+
+// TODO: either remove this button (because the swipe gestures do the same thing) or make it three buttons that would hyperlink to the other three VC - set menuSectionState and then trigger updateContainerView
+
 - (IBAction)didPressMenuButton:(id)sender {
     
     if (self.mealOrder.state == 0) {
@@ -316,68 +349,67 @@ typedef enum {
         return;
     }
     
-    self.mealChoiceVC.singleTapGestureRecognizer.enabled = NO;
+    [self slideViewsHalfOff];
+}
+
+
+-(void)switchViews {
+
+    [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    switch (self.menuSectionState) {
+        case meat:
+            [self.containerView addSubview:self.mealChoiceVC.view];
+            self.mealChoiceVC.view.frame = self.containerView.bounds;
+            break;
+        case toppings:
+            [self.containerView addSubview:self.toppingsVC.view];
+            self.toppingsVC.view.frame = self.containerView.bounds;
+            break;
+        case sides:
+            [self.containerView addSubview:self.sidesVC.view];
+            self.sidesVC.view.frame = self.containerView.bounds;
+            break;
+    }
+}
+
+
+-(void)slideInViews {
+    
+    self.mealChoiceVC.singleTapGestureRecognizer.enabled = YES;
+    self.menuButtonCenterXConstraint.constant = 0;
+    self.containerViewCenterXConstraint.constant = 0;
+    [self.view setNeedsUpdateConstraints];
     [UIView animateWithDuration:0.7 animations:^{
-        // Slide off menu button
-        self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
-        
-        // Slide over container view
-        self.containerView.frame = CGRectMake(self.view.frame.size.width * 0.5, 0, self.view.frame.size.width, self.view.frame.size.height);
-        
+        [self.view layoutIfNeeded];
     }];
 }
 
 
-
-
-
-
--(void)animateToDetailLayout {
-
-    [UIView animateWithDuration:0.6 delay:0.0 options:0 animations:^{
-
-        // Move both off screen
-        self.menuButton.frame = CGRectMake(self.view.frame.size.width, self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
-        
-        self.containerView.frame = CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height);
+-(void)slideViewsHalfOff {
     
+    self.mealChoiceVC.singleTapGestureRecognizer.enabled = NO;
+    self.menuButtonCenterXConstraint.constant = self.view.frame.size.width;
+    self.containerViewCenterXConstraint.constant = self.view.frame.size.width * .5;
+    [self.view setNeedsUpdateConstraints];
+    [UIView animateWithDuration:0.7 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+
+-(void)updateContainerView {
+    
+    self.menuButtonCenterXConstraint.constant = self.view.frame.size.width;
+    self.containerViewCenterXConstraint.constant = self.view.frame.size.width;
+    [self.view setNeedsUpdateConstraints];
+    [UIView animateWithDuration:0.7 animations:^{
+        [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-
-        // Switch out the view
-        [self.containerView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        switch (self.menuSectionState) {
-            case meat:
-                [self.containerView addSubview:self.mealChoiceVC.view];
-                self.mealChoiceVC.view.frame = self.containerView.bounds;
-                break;
-            case toppings:
-                [self.containerView addSubview:self.toppingsVC.view];
-                self.toppingsVC.view.frame = self.containerView.bounds;
-                break;
-            case sides:
-                [self.containerView addSubview:self.sidesVC.view];
-                self.sidesVC.view.frame = self.containerView.bounds;
-                break;
-        }
         
-        // this only makes a difference the first time they are being shown
-        self.menuButton.alpha = 1;
-        self.containerView.alpha = 1;
-
-        
-        self.mealChoiceVC.singleTapGestureRecognizer.enabled = YES;
-
-        
-        
-        [UIView animateWithDuration:0.7 animations:^{
-
-            self.containerView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-            self.menuButton.frame = CGRectMake((self.view.frame.size.width / 2) - (self.menuButton.frame.size.width / 2), self.menuButton.frame.origin.y, self.menuButton.frame.size.width, self.menuButton.frame.size.height);
-        }];
+        [self switchViews];
+        [self slideInViews];
     }];
-    
 }
-
 
 
 
