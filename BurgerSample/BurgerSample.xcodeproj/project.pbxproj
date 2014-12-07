@@ -28,6 +28,12 @@
 		2CDCA06E1A2E2DFE00F8106C /* checkedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */; };
 		2CDCA06F1A2E2DFE00F8106C /* uncheckedBox.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */; };
 		2CDCA0711A32383300F8106C /* milkshake.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0701A32383300F8106C /* milkshake.png */; };
+		2CDCA0781A32474C00F8106C /* mustard.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0721A32474C00F8106C /* mustard.png */; };
+		2CDCA0791A32474C00F8106C /* onioin.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0731A32474C00F8106C /* onioin.png */; };
+		2CDCA07A1A32474C00F8106C /* pickles.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0741A32474C00F8106C /* pickles.png */; };
+		2CDCA07B1A32474C00F8106C /* cheese.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0751A32474C00F8106C /* cheese.jpeg */; };
+		2CDCA07C1A32474C00F8106C /* lettuce.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0761A32474C00F8106C /* lettuce.png */; };
+		2CDCA07D1A32474C00F8106C /* tomato.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDCA0771A32474C00F8106C /* tomato.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +82,12 @@
 		2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkedBox.png; sourceTree = "<group>"; };
 		2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheckedBox.png; sourceTree = "<group>"; };
 		2CDCA0701A32383300F8106C /* milkshake.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = milkshake.png; sourceTree = "<group>"; };
+		2CDCA0721A32474C00F8106C /* mustard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mustard.png; sourceTree = "<group>"; };
+		2CDCA0731A32474C00F8106C /* onioin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = onioin.png; sourceTree = "<group>"; };
+		2CDCA0741A32474C00F8106C /* pickles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pickles.png; sourceTree = "<group>"; };
+		2CDCA0751A32474C00F8106C /* cheese.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cheese.jpeg; sourceTree = "<group>"; };
+		2CDCA0761A32474C00F8106C /* lettuce.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lettuce.png; sourceTree = "<group>"; };
+		2CDCA0771A32474C00F8106C /* tomato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tomato.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +111,12 @@
 		2C0BF91A1A2D8288002B3F65 /* OTHER */ = {
 			isa = PBXGroup;
 			children = (
+				2CDCA0721A32474C00F8106C /* mustard.png */,
+				2CDCA0731A32474C00F8106C /* onioin.png */,
+				2CDCA0741A32474C00F8106C /* pickles.png */,
+				2CDCA0751A32474C00F8106C /* cheese.jpeg */,
+				2CDCA0761A32474C00F8106C /* lettuce.png */,
+				2CDCA0771A32474C00F8106C /* tomato.png */,
 				2CDCA0701A32383300F8106C /* milkshake.png */,
 				2CDCA06C1A2E2DFE00F8106C /* checkedBox.png */,
 				2CDCA06D1A2E2DFE00F8106C /* uncheckedBox.png */,
@@ -292,9 +310,15 @@
 				2C005D771A246CDC00B0C343 /* toppings.png in Resources */,
 				2CDCA0711A32383300F8106C /* milkshake.png in Resources */,
 				2CDCA06F1A2E2DFE00F8106C /* uncheckedBox.png in Resources */,
+				2CDCA07C1A32474C00F8106C /* lettuce.png in Resources */,
+				2CDCA0791A32474C00F8106C /* onioin.png in Resources */,
 				2C005D731A24649000B0C343 /* burger.png in Resources */,
+				2CDCA0781A32474C00F8106C /* mustard.png in Resources */,
 				2CD316421A23CFBA0066AA67 /* LaunchScreen.xib in Resources */,
 				2CDCA06E1A2E2DFE00F8106C /* checkedBox.png in Resources */,
+				2CDCA07B1A32474C00F8106C /* cheese.jpeg in Resources */,
+				2CDCA07A1A32474C00F8106C /* pickles.png in Resources */,
+				2CDCA07D1A32474C00F8106C /* tomato.png in Resources */,
 				2C005D751A246B8200B0C343 /* sides.png in Resources */,
 				2CD3163F1A23CFBA0066AA67 /* Images.xcassets in Resources */,
 			);

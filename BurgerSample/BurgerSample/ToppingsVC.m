@@ -18,6 +18,8 @@
 //@property (strong, nonatomic) NSDictionary *tacoToppings;
 
 @property (strong, nonatomic) NSArray *hamburgerToppings;
+@property (strong, nonatomic) NSArray *hamburgerToppingsImages;
+
 @property (strong, nonatomic) NSArray *hotdogToppings;
 @property (strong, nonatomic) NSArray *pizzaToppings;
 @property (strong, nonatomic) NSArray *tacoToppings;
@@ -40,7 +42,10 @@
 //    NSArray *keys = [NSArray arrayWithObjects: [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], [NSNumber numberWithBool:NO], nil];
 //    self.hamburgerToppings = [[NSDictionary alloc] initWithObjects:values forKeys: keys];
     
-    self.hamburgerToppings = @[@"Tomato", @"Lettuce", @"Cheese", @"Onion", @"Pickle", @"Mustard"];
+    self.hamburgerToppings = @[@"Tomato", @"Lettuce", @"Cheese", @"Onions", @"Pickles", @"Mustard"];
+//    self.hamburgerToppingsImages = @[[UIImage imageNamed:@"tomato"], [UIImage imageNamed:@"lettuce"], [UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"onion"], [UIImage imageNamed:@"pickles"], [UIImage imageNamed:@"mustard"]];
+    self.hamburgerToppingsImages = [[[NSArray alloc] initWithObjects: [UIImage imageNamed:@"tomato"], [UIImage imageNamed:@"lettuce"], [UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"onion"], [UIImage imageNamed:@"pickles"], [UIImage imageNamed:@"mustard"], nil] autorelease];
+
     self.hotdogToppings = @[@"Ketchup", @"Relish", @"Mustard"];
     self.tacoToppings = @[@"Cheese", @"Salsa", @"Lettuce", @"TEST"];
     self.pizzaToppings = @[@"Extra Cheese", @"Pepperoni", @"Sausage", @"Canadian Bacon", @"Pineapple", @"Peppers", @"Onion"];
@@ -117,7 +122,9 @@
     cell.backgroundColor = self.view.backgroundColor;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-
+    // make a check for the state to determine which images to load
+    cell.itemImage.image = self.hamburgerToppingsImages[0];
+    
     return cell;
 }
 

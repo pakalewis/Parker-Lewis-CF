@@ -48,6 +48,7 @@
     self.sidesTableView.dataSource = self;
     self.sidesTableView.scrollEnabled = NO;
     self.sidesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.sidesTableView.backgroundColor = self.themeColor;
     [self.view addSubview:self.sidesTableView];
 
     [self setupConstraints];
