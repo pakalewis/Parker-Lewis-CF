@@ -13,6 +13,7 @@
 
 
 @property (strong, nonatomic) NSArray *listOfSides;
+@property (strong, nonatomic) NSArray *sidesImages;
 
 @property (strong, nonatomic) UILabel *chooseYourSidesLabel;
 
@@ -24,7 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.listOfSides = @[@"French Fries", @"Onion Rings", @"Nuggets", @"Milkshake", @"Soda"];
+    self.listOfSides = @[@"French Fries", @"Onion Rings", @"Nuggets", @"Milkshake", @"Drink"];
+    self.sidesImages = @[[UIImage imageNamed:@"fries"], [UIImage imageNamed:@"onionRings"], [UIImage imageNamed:@"nuggets"], [UIImage imageNamed:@"milkshake"], [UIImage imageNamed:@"drinks"]];
 
     
     // Make Toppings label
@@ -106,6 +108,7 @@
     cell.checkboxImage.image = [UIImage imageNamed:@"uncheckedBox"];
     cell.itemLabel.text = self.listOfSides[indexPath.row];
     cell.backgroundColor = self.view.backgroundColor;
+    cell.itemImage.image = self.sidesImages[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;

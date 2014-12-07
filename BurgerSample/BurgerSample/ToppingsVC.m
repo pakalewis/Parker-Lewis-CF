@@ -21,9 +21,16 @@
 @property (strong, nonatomic) NSArray *hamburgerToppingsImages;
 
 @property (strong, nonatomic) NSArray *hotdogToppings;
+@property (strong, nonatomic) NSArray *hotdogToppingsImages;
+
 @property (strong, nonatomic) NSArray *pizzaToppings;
+@property (strong, nonatomic) NSArray *pizzaToppingsImages;
+
 @property (strong, nonatomic) NSArray *tacoToppings;
+@property (strong, nonatomic) NSArray *tacoToppingsImages;
+
 @property (strong, nonatomic) NSArray *currentToppings;
+@property (strong, nonatomic) NSArray *currentToppingsImages;
 
 
 
@@ -43,13 +50,20 @@
 //    self.hamburgerToppings = [[NSDictionary alloc] initWithObjects:values forKeys: keys];
     
     self.hamburgerToppings = @[@"Tomato", @"Lettuce", @"Cheese", @"Onions", @"Pickles", @"Mustard"];
-//    self.hamburgerToppingsImages = @[[UIImage imageNamed:@"tomato"], [UIImage imageNamed:@"lettuce"], [UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"onion"], [UIImage imageNamed:@"pickles"], [UIImage imageNamed:@"mustard"]];
-    self.hamburgerToppingsImages = [[[NSArray alloc] initWithObjects: [UIImage imageNamed:@"tomato"], [UIImage imageNamed:@"lettuce"], [UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"onion"], [UIImage imageNamed:@"pickles"], [UIImage imageNamed:@"mustard"], nil] autorelease];
+    self.hamburgerToppingsImages = @[[UIImage imageNamed:@"tomato"], [UIImage imageNamed:@"lettuce"], [UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"onion"], [UIImage imageNamed:@"pickles"], [UIImage imageNamed:@"mustard"]];
 
-    self.hotdogToppings = @[@"Ketchup", @"Relish", @"Mustard"];
-    self.tacoToppings = @[@"Cheese", @"Salsa", @"Lettuce", @"TEST"];
-    self.pizzaToppings = @[@"Extra Cheese", @"Pepperoni", @"Sausage", @"Canadian Bacon", @"Pineapple", @"Peppers", @"Onion"];
+    self.hotdogToppings = @[@"Ketchup", @"Mustard", @"Relish"];
+    self.hotdogToppingsImages = @[[UIImage imageNamed:@"ketchup"], [UIImage imageNamed:@"mustard"], [UIImage imageNamed:@"relish"]];
+    
+    self.tacoToppings = @[@"Lettuce", @"Cheese", @"Onion", @"Salsa"];
+    self.tacoToppingsImages = @[[UIImage imageNamed:@"lettuce"], [UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"onion"], [UIImage imageNamed:@"salsa"]];
+
+    self.pizzaToppings = @[@"Extra Cheese", @"Pepperoni", @"Sausage", @"Canadian Bacon", @"Mushroom", @"Pineapple", @"Olive", @"Garlic", @"Peppers", @"Onion"];
+    self.pizzaToppingsImages = @[[UIImage imageNamed:@"cheese"], [UIImage imageNamed:@"pepperoni"], [UIImage imageNamed:@"sausage"], [UIImage imageNamed:@"canadianBacon"], [UIImage imageNamed:@"mushroom"], [UIImage imageNamed:@"pineapple"], [UIImage imageNamed:@"olive"], [UIImage imageNamed:@"garlic"], [UIImage imageNamed:@"peppers"], [UIImage imageNamed:@"onion"]];
+
     self.currentToppings = self.hamburgerToppings;
+    self.currentToppingsImages = self.hamburgerToppingsImages;
+    
     
     // Make Toppings label
     self.chooseYourToppingsLabel = [[[UILabel alloc] init] autorelease];
@@ -90,15 +104,19 @@
     NSLog(@"%D", changedState);
     if (changedState == 1) {
         self.currentToppings = self.hamburgerToppings;
+        self.currentToppingsImages = self.hamburgerToppingsImages;
         self.chooseYourToppingsLabel.text = @"Choose your hamburger toppings";
     } else if (changedState == 2) {
         self.currentToppings = self.hotdogToppings;
+        self.currentToppingsImages = self.hotdogToppingsImages;
         self.chooseYourToppingsLabel.text = @"Choose your hot dog toppings";
     } else if (changedState == 3) {
         self.currentToppings = self.tacoToppings;
+        self.currentToppingsImages = self.tacoToppingsImages;
         self.chooseYourToppingsLabel.text = @"Choose your taco toppings";
     } else if (changedState == 4) {
         self.currentToppings = self.pizzaToppings;
+        self.currentToppingsImages = self.pizzaToppingsImages;
         self.chooseYourToppingsLabel.text = @"Choose your pizza toppings";
     } else {
         NSLog(@"NO CHOICE");
@@ -121,9 +139,7 @@
     cell.itemLabel.text = self.currentToppings[indexPath.row];
     cell.backgroundColor = self.view.backgroundColor;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    // make a check for the state to determine which images to load
-    cell.itemImage.image = self.hamburgerToppingsImages[0];
+    cell.itemImage.image = self.currentToppingsImages[indexPath.row];
     
     return cell;
 }
