@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         //set up URL
-        var myURL = NSURL(string: "http://www.clker.com/cliparts/w/x/m/w/d/D/green-square-hi.png")
+        var myURL = NSURL(string: "http://s2.reutersmedia.net/resources/r/?m=02&d=20140429&t=2&i=892620990&w=580&fh=&fw=&ll=&pl=&r=LYNXMPEA3S024")
         
         self.actInd.startAnimating()
         sleep(5)
@@ -43,9 +43,9 @@ class ViewController: UIViewController {
         // this puts the image DL on the second queue and then once the DL is done, you add a task to the mainQueue to set the imageView with the image we DLed
         imageDownloadQueue.addOperationWithBlock { () -> Void in
             // create data from url
-            var myData = NSData(contentsOfURL: myURL)
+            var myData = NSData(contentsOfURL: myURL!)
             // take data and turn into image
-            var myImage = UIImage(data: myData)
+            var myImage = UIImage(data: myData!)
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                 self.imageView.image = myImage
                 self.actInd.stopAnimating()

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
-        <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,52 +16,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Zi-wB-j6d">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9vM-w7-lyI">
+                                <rect key="frame" x="282" y="282" width="37" height="37"/>
+                                <color key="backgroundColor" red="1" green="0.1271434367" blue="0.15422664729999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Zi-wB-j6d">
+                                <rect key="frame" x="50" y="50" width="500" height="500"/>
                             </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="wdz-VR-pyR">
                                 <rect key="frame" x="241" y="494" width="118" height="31"/>
-                            </slider>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9vM-w7-lyI">
-                                <rect key="frame" x="250" y="250" width="100" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="T78-Hk-pHq"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="kyF-Cp-MI0"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="ocU-hz-hiL"/>
-                                    <constraint firstAttribute="width" constant="60" id="p17-w8-tdA"/>
+                                    <constraint firstAttribute="width" constant="114" id="0l0-LG-8yF"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="T78-Hk-pHq"/>
-                                        <exclude reference="p17-w8-tdA"/>
-                                    </mask>
-                                </variation>
-                            </activityIndicatorView>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wdz-VR-pyR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="227" id="0Nu-kE-ejn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wdz-VR-pyR" secondAttribute="trailing" constant="227" id="1zf-Ve-ii7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wdz-VR-pyR" secondAttribute="trailing" constant="227" id="2YF-Ks-Kia"/>
-                            <constraint firstItem="wdz-VR-pyR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="227" id="BmV-7O-sA3"/>
+                            <constraint firstAttribute="centerX" secondItem="9vM-w7-lyI" secondAttribute="centerX" id="8Rr-35-lb2"/>
+                            <constraint firstItem="2Zi-wB-j6d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="50" id="A6g-5i-y4P"/>
                             <constraint firstAttribute="centerY" secondItem="9vM-w7-lyI" secondAttribute="centerY" id="Bpj-Sr-b4G"/>
-                            <constraint firstItem="2Zi-wB-j6d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="FMj-uC-7KT"/>
+                            <constraint firstItem="2Zi-wB-j6d" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="50" id="F75-u0-HB5"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wdz-VR-pyR" secondAttribute="bottom" constant="76" id="IDM-0G-fXR"/>
-                            <constraint firstItem="2Zi-wB-j6d" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="ZWe-IX-D5q"/>
-                            <constraint firstItem="wdz-VR-pyR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="474" id="emA-6N-8Gx"/>
+                            <constraint firstAttribute="trailing" secondItem="2Zi-wB-j6d" secondAttribute="trailing" constant="50" id="YOI-ON-peC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Zi-wB-j6d" secondAttribute="bottom" constant="50" id="Zxq-j6-LVv"/>
+                            <constraint firstAttribute="centerX" secondItem="wdz-VR-pyR" secondAttribute="centerX" id="aJu-xM-qCZ"/>
                             <constraint firstAttribute="centerX" secondItem="9vM-w7-lyI" secondAttribute="centerX" id="gia-19-rZr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2Zi-wB-j6d" secondAttribute="trailing" constant="-16" id="ifx-h1-2Iq"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2Zi-wB-j6d" secondAttribute="bottom" id="m4n-HP-3To"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wdz-VR-pyR" secondAttribute="bottom" constant="76" id="tMc-IP-F6u"/>
+                            <constraint firstAttribute="centerY" secondItem="9vM-w7-lyI" secondAttribute="centerY" id="yaP-pe-iLa"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="0Nu-kE-ejn"/>
-                                <exclude reference="1zf-Ve-ii7"/>
-                                <exclude reference="emA-6N-8Gx"/>
-                                <exclude reference="tMc-IP-F6u"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="actInd" destination="9vM-w7-lyI" id="KdI-AN-vIZ"/>
