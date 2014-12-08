@@ -1,2 +1,0 @@
-
-can a textfield accept an empty string
