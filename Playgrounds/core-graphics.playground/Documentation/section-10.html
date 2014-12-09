@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Section 11</title>
+  <meta id="xcode-display" name="xcode-display" content="render">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+<div class="content-wrapper">
+  <section class="section">
+    <p>Finally we&#39;ll create a view that offset its drawing context inside <code>drawRect:</code>. Our view will do this to achieve a shine effect on the top of the view, in a sort of 2.5d fashion. First we&#39;ll draw a view that contains an internal <code>UILabel</code> property. The view will expose a <code>property</code>, and allow the title of the label to be set. Aside from the drawing code, their are two other <code>UIView</code> methods of interest: <code>initWithFrame:</code> and <code>layoutSubviews</code>. The first, <code>initWithFrame:</code>, is called when the view is initialized with a frame. We&#39;ll override this and initialize our <code>UILabel</code> property within. Note that while some properties are set on the label, it is not added to the superview. In addition we implemement <code>layoutSubviews</code> and add the text label into the view heirachy.</p>
+<p>With our view heirarchy setup, we can move on to implementing <code>drawRect:</code>. The first drawing operation is pretty standard: we create a circular path, set a stroke color, and stroke the path. Following that, we save the graphics context, add a clipping path, and then translate the original context by 1.5 points in the Y direction. Finally we set a white stroke color and stroke the oval path once more. Because a clipping region is set, and the context is translated, some of the pixels will be drawn outside the clip. This is intentional, and it provides a nice gently fading line effect. Finally the context is restored to its original state. Remember it is important to balance calls to <code>CGContextSaveGState</code> with calls to <code>CGContextRestoreGState</code>.</p>
+
+  </section>
+</div>
+</body>
+</html>

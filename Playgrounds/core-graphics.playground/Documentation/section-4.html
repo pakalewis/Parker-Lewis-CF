@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Section 5</title>
+  <meta id="xcode-display" name="xcode-display" content="render">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+<div class="content-wrapper">
+  <section class="section">
+    <p>Now let&#39;s create a simple <code>UIView</code> subclass that displays a colored rectangle. We&#39;ll implement <code>drawRect:</code>, as an exercise, even though the styling could be achieved by other means.</p>
+<p>Inside <code>drawRect:</code>, we first create a <code>UIBezierPath</code> object that describes a rounded rectangle matching our bounding rectangle. Next the line width of the path is set. After setting the <code>fillColor</code> and <code>strokeColor</code>, the path is first filled and then stroked.</p>
+<p>In this example, it&#39;s important to remember the <a href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_overview/dq_overview.html">Painter&#39;s Model</a>. If the path were stroked first and then filled, the stroke color would not show because the fill color was painted right over it. Alternatively, we first fill the path and then stroke the path, painting the stroke color on top of the fill color.</p>
+
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F77D3BDE19F932EE000A37D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77D3BDD19F932EE000A37D4 /* AppDelegate.swift */; };
+		F77D3BE019F932EE000A37D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77D3BDF19F932EE000A37D4 /* ViewController.swift */; };
+		F77D3BE319F932EE000A37D4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F77D3BE119F932EE000A37D4 /* Main.storyboard */; };
+		F77D3BE519F932EE000A37D4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F77D3BE419F932EE000A37D4 /* Images.xcassets */; };
+		F77D3BE819F932EE000A37D4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F77D3BE619F932EE000A37D4 /* LaunchScreen.xib */; };
+		F77D3BF419F932EE000A37D4 /* TorrentialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77D3BF319F932EE000A37D4 /* TorrentialTests.swift */; };
+		F77D3BFE19F9352B000A37D4 /* hood.JPG in Resources */ = {isa = PBXBuildFile; fileRef = F77D3BFD19F9352B000A37D4 /* hood.JPG */; };
+		F77D3C0019F93B20000A37D4 /* bg-header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F77D3BFF19F93B20000A37D4 /* bg-header.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F77D3BEE19F932EE000A37D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F77D3BD019F932EE000A37D4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F77D3BD719F932EE000A37D4;
+			remoteInfo = Torrential;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F77D3BD819F932EE000A37D4 /* Torrential.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Torrential.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F77D3BDC19F932EE000A37D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F77D3BDD19F932EE000A37D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F77D3BDF19F932EE000A37D4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F77D3BE219F932EE000A37D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F77D3BE419F932EE000A37D4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F77D3BE719F932EE000A37D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F77D3BED19F932EE000A37D4 /* TorrentialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TorrentialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F77D3BF219F932EE000A37D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F77D3BF319F932EE000A37D4 /* TorrentialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentialTests.swift; sourceTree = "<group>"; };
+		F77D3BFD19F9352B000A37D4 /* hood.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hood.JPG; sourceTree = "<group>"; };
+		F77D3BFF19F93B20000A37D4 /* bg-header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "bg-header.jpg"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F77D3BD519F932EE000A37D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F77D3BEA19F932EE000A37D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F77D3BCF19F932EE000A37D4 = {
+			isa = PBXGroup;
+			children = (
+				F77D3BDA19F932EE000A37D4 /* Torrential */,
+				F77D3BF019F932EE000A37D4 /* TorrentialTests */,
+				F77D3BD919F932EE000A37D4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F77D3BD919F932EE000A37D4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F77D3BD819F932EE000A37D4 /* Torrential.app */,
+				F77D3BED19F932EE000A37D4 /* TorrentialTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F77D3BDA19F932EE000A37D4 /* Torrential */ = {
+			isa = PBXGroup;
+			children = (
+				F77D3BFD19F9352B000A37D4 /* hood.JPG */,
+				F77D3BFF19F93B20000A37D4 /* bg-header.jpg */,
+				F77D3BDD19F932EE000A37D4 /* AppDelegate.swift */,
+				F77D3BDF19F932EE000A37D4 /* ViewController.swift */,
+				F77D3BE119F932EE000A37D4 /* Main.storyboard */,
+				F77D3BE419F932EE000A37D4 /* Images.xcassets */,
+				F77D3BE619F932EE000A37D4 /* LaunchScreen.xib */,
+				F77D3BDB19F932EE000A37D4 /* Supporting Files */,
+			);
+			path = Torrential;
+			sourceTree = "<group>";
+		};
+		F77D3BDB19F932EE000A37D4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F77D3BDC19F932EE000A37D4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F77D3BF019F932EE000A37D4 /* TorrentialTests */ = {
+			isa = PBXGroup;
+			children = (
+				F77D3BF319F932EE000A37D4 /* TorrentialTests.swift */,
+				F77D3BF119F932EE000A37D4 /* Supporting Files */,
+			);
+			path = TorrentialTests;
+			sourceTree = "<group>";
+		};
+		F77D3BF119F932EE000A37D4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F77D3BF219F932EE000A37D4 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F77D3BD719F932EE000A37D4 /* Torrential */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F77D3BF719F932EE000A37D4 /* Build configuration list for PBXNativeTarget "Torrential" */;
+			buildPhases = (
+				F77D3BD419F932EE000A37D4 /* Sources */,
+				F77D3BD519F932EE000A37D4 /* Frameworks */,
+				F77D3BD619F932EE000A37D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Torrential;
+			productName = Torrential;
+			productReference = F77D3BD819F932EE000A37D4 /* Torrential.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F77D3BEC19F932EE000A37D4 /* TorrentialTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F77D3BFA19F932EE000A37D4 /* Build configuration list for PBXNativeTarget "TorrentialTests" */;
+			buildPhases = (
+				F77D3BE919F932EE000A37D4 /* Sources */,
+				F77D3BEA19F932EE000A37D4 /* Frameworks */,
+				F77D3BEB19F932EE000A37D4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F77D3BEF19F932EE000A37D4 /* PBXTargetDependency */,
+			);
+			name = TorrentialTests;
+			productName = TorrentialTests;
+			productReference = F77D3BED19F932EE000A37D4 /* TorrentialTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F77D3BD019F932EE000A37D4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Andrew Shepard";
+				TargetAttributes = {
+					F77D3BD719F932EE000A37D4 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					F77D3BEC19F932EE000A37D4 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = F77D3BD719F932EE000A37D4;
+					};
+				};
+			};
+			buildConfigurationList = F77D3BD319F932EE000A37D4 /* Build configuration list for PBXProject "Torrential" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F77D3BCF19F932EE000A37D4;
+			productRefGroup = F77D3BD919F932EE000A37D4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F77D3BD719F932EE000A37D4 /* Torrential */,
+				F77D3BEC19F932EE000A37D4 /* TorrentialTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F77D3BD619F932EE000A37D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F77D3BE319F932EE000A37D4 /* Main.storyboard in Resources */,
+				F77D3BFE19F9352B000A37D4 /* hood.JPG in Resources */,
+				F77D3BE819F932EE000A37D4 /* LaunchScreen.xib in Resources */,
+				F77D3C0019F93B20000A37D4 /* bg-header.jpg in Resources */,
+				F77D3BE519F932EE000A37D4 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F77D3BEB19F932EE000A37D4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F77D3BD419F932EE000A37D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F77D3BE019F932EE000A37D4 /* ViewController.swift in Sources */,
+				F77D3BDE19F932EE000A37D4 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F77D3BE919F932EE000A37D4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F77D3BF419F932EE000A37D4 /* TorrentialTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F77D3BEF19F932EE000A37D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F77D3BD719F932EE000A37D4 /* Torrential */;
+			targetProxy = F77D3BEE19F932EE000A37D4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F77D3BE119F932EE000A37D4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F77D3BE219F932EE000A37D4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F77D3BE619F932EE000A37D4 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F77D3BE719F932EE000A37D4 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F77D3BF519F932EE000A37D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F77D3BF619F932EE000A37D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F77D3BF819F932EE000A37D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Torrential/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F77D3BF919F932EE000A37D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Torrential/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F77D3BFB19F932EE000A37D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TorrentialTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Torrential.app/Torrential";
+			};
+			name = Debug;
+		};
+		F77D3BFC19F932EE000A37D4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = TorrentialTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Torrential.app/Torrential";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F77D3BD319F932EE000A37D4 /* Build configuration list for PBXProject "Torrential" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F77D3BF519F932EE000A37D4 /* Debug */,
+				F77D3BF619F932EE000A37D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F77D3BF719F932EE000A37D4 /* Build configuration list for PBXNativeTarget "Torrential" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F77D3BF819F932EE000A37D4 /* Debug */,
+				F77D3BF919F932EE000A37D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F77D3BFA19F932EE000A37D4 /* Build configuration list for PBXNativeTarget "TorrentialTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F77D3BFB19F932EE000A37D4 /* Debug */,
+				F77D3BFC19F932EE000A37D4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F77D3BD019F932EE000A37D4 /* Project object */;
+}
