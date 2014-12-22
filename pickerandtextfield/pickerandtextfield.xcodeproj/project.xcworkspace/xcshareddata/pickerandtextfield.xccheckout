@@ -10,31 +10,31 @@
 	<string>pickerandtextfield</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1C4292696F43F8423C94F60119D5BB2C55669620</key>
-		<string>github.com:codefellows/sea-c19-ios.git</string>
+		<key>E71828A21DCECE3C4125E0E79397BAC5B101302F</key>
+		<string>github.com:pakalewis/Parker-Lewis-CF.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Code/pickerandtextfield/pickerandtextfield.xcodeproj</string>
+	<string>pickerandtextfield/pickerandtextfield.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1C4292696F43F8423C94F60119D5BB2C55669620</key>
-		<string>../../../..</string>
+		<key>E71828A21DCECE3C4125E0E79397BAC5B101302F</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>github.com:codefellows/sea-c19-ios.git</string>
+	<string>github.com:pakalewis/Parker-Lewis-CF.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1C4292696F43F8423C94F60119D5BB2C55669620</string>
+	<string>E71828A21DCECE3C4125E0E79397BAC5B101302F</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1C4292696F43F8423C94F60119D5BB2C55669620</string>
+			<string>E71828A21DCECE3C4125E0E79397BAC5B101302F</string>
 			<key>IDESourceControlWCCName</key>
-			<string>sea-c19-ios</string>
+			<string>Parker-Lewis-CF</string>
 		</dict>
 	</array>
 </dict>

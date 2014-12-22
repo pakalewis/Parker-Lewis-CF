@@ -24,39 +24,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         self.imageView.image = seahawksImage
     
-        // Do any additional setup after loading the view, typically from a nib.
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        if self.firstLoad == true {
-            self.firstLoad = false
-            //setup
-        }
-        println("view will appear")
-    }
-    override func viewDidDisappear(animated: Bool) {
-        //fully gone from the screen
-    }
-    
-    override func viewWillLayoutSubviews() {
-        println("view will layoutsubviews")
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-    }
-    override func viewWillDisappear(animated: Bool) {
-        
-    }
-    
-    
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+   
     //MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
@@ -76,7 +46,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         imagePickerController.allowsEditing = true
         
         
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.Camera
         
         self.presentViewController(imagePickerController, animated: true, completion: nil)
         
