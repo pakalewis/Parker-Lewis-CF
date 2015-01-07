@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Jjm-lr-FqS" customClass="CustomPicker" customModule="Practice" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="579" height="602"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="boz-te-FxB" userLabel="DisplayValue">
+                    <rect key="frame" x="0.0" y="0.0" width="301" height="602"/>
+                    <color key="backgroundColor" red="0.28243346759999999" green="0.72308084240000003" blue="0.26780771939999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtt-0k-D8j">
+                    <rect key="frame" x="278" y="0.0" width="301" height="301"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Qtt-0k-D8j" secondAttribute="height" multiplier="1:1" id="KFl-B7-hyh"/>
+                    </constraints>
+                    <state key="normal" image="upTriangle.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="upButtonPressed:" destination="Jjm-lr-FqS" eventType="touchUpInside" id="Em9-RY-0Z5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCn-Np-2lM">
+                    <rect key="frame" x="278" y="301" width="301" height="301"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="bCn-Np-2lM" secondAttribute="height" multiplier="1:1" id="I7C-Uj-mgq"/>
+                        <constraint firstAttribute="width" secondItem="bCn-Np-2lM" secondAttribute="height" multiplier="1:1" id="eUY-Lm-IP5"/>
+                    </constraints>
+                    <state key="normal" image="downTriangle.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="eUY-Lm-IP5"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="downButtonPressed:" destination="Jjm-lr-FqS" eventType="touchUpInside" id="WC0-h6-fKZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.9929069318" blue="0.17882314599999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Qtt-0k-D8j" firstAttribute="height" secondItem="boz-te-FxB" secondAttribute="height" multiplier="0.5" id="61n-yY-clj"/>
+                <constraint firstAttribute="bottom" secondItem="bCn-Np-2lM" secondAttribute="bottom" id="Bdw-OD-3oQ"/>
+                <constraint firstAttribute="trailing" secondItem="Qtt-0k-D8j" secondAttribute="trailing" id="EqW-rj-BC5"/>
+                <constraint firstItem="boz-te-FxB" firstAttribute="leading" secondItem="Jjm-lr-FqS" secondAttribute="leading" id="GFg-sZ-SAt"/>
+                <constraint firstItem="boz-te-FxB" firstAttribute="width" secondItem="Qtt-0k-D8j" secondAttribute="width" id="GkW-rI-pub"/>
+                <constraint firstItem="Qtt-0k-D8j" firstAttribute="top" secondItem="Jjm-lr-FqS" secondAttribute="top" id="NRI-mB-7jI"/>
+                <constraint firstItem="bCn-Np-2lM" firstAttribute="top" secondItem="Qtt-0k-D8j" secondAttribute="bottom" id="ON9-hW-O9f"/>
+                <constraint firstItem="boz-te-FxB" firstAttribute="top" secondItem="Jjm-lr-FqS" secondAttribute="top" id="gB4-Ls-NSy"/>
+                <constraint firstAttribute="bottom" secondItem="boz-te-FxB" secondAttribute="bottom" id="iTJ-S1-EjI"/>
+                <constraint firstAttribute="trailing" secondItem="bCn-Np-2lM" secondAttribute="trailing" id="vgo-Ce-E4V"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="downButton" destination="bCn-Np-2lM" id="opB-vp-wvc"/>
+                <outlet property="upButton" destination="bCn-Np-2lM" id="taz-uQ-NWU"/>
+                <outlet property="valueLabel" destination="boz-te-FxB" id="hsF-UY-UmB"/>
+            </connections>
+            <point key="canvasLocation" x="215.5" y="249"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="downTriangle.png" width="512" height="512"/>
+        <image name="upTriangle.png" width="512" height="512"/>
+    </resources>
+</document>
