@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    
+    var counter = 1
 
-    @IBOutlet weak var pickerview: CustomPicker!
+    @IBOutlet weak var testTile: Tile!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -27,9 +27,28 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.pickerview.initialize()
+    }
+
+    
+    
+    
+    @IBAction func testButton(sender: AnyObject) {
 
         
+        
+        // Animation calculations
+        let fullRotation = CGFloat(M_PI * 2) / CGFloat(self.counter / 4)
+
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            self.testTile.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 2))
+            
+        })
+        
+        self.counter++
+//        if self.counter == 4 {
+//            counter = 1
+//        }
         
     }
 }

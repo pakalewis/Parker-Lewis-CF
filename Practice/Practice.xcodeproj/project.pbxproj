@@ -17,6 +17,7 @@
 		2CD489D61A4A2605004535A6 /* CustomPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CD489D51A4A2605004535A6 /* CustomPicker.xib */; };
 		2CD489D91A4A3500004535A6 /* downTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD489D71A4A3500004535A6 /* downTriangle.png */; };
 		2CD489DA1A4A3500004535A6 /* upTriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CD489D81A4A3500004535A6 /* upTriangle.png */; };
+		2CEA17271A60922500559FAC /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA17261A60922500559FAC /* Tile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		2CD489D51A4A2605004535A6 /* CustomPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPicker.xib; sourceTree = "<group>"; };
 		2CD489D71A4A3500004535A6 /* downTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downTriangle.png; sourceTree = "<group>"; };
 		2CD489D81A4A3500004535A6 /* upTriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upTriangle.png; sourceTree = "<group>"; };
+		2CEA17261A60922500559FAC /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				2CD489D31A4A25ED004535A6 /* CustomPicker.swift */,
 				2CD489D51A4A2605004535A6 /* CustomPicker.xib */,
+				2CEA17261A60922500559FAC /* Tile.swift */,
 				2CD489B51A4A2563004535A6 /* ViewController.swift */,
 				2CD489B71A4A2563004535A6 /* Main.storyboard */,
 				2CD489D71A4A3500004535A6 /* downTriangle.png */,
@@ -244,6 +247,7 @@
 				2CD489B61A4A2563004535A6 /* ViewController.swift in Sources */,
 				2CD489B41A4A2563004535A6 /* AppDelegate.swift in Sources */,
 				2CD489D41A4A25ED004535A6 /* CustomPicker.swift in Sources */,
+				2CEA17271A60922500559FAC /* Tile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +441,7 @@
 				2CD489CF1A4A2563004535A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2CD489D01A4A2563004535A6 /* Build configuration list for PBXNativeTarget "PracticeTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +450,7 @@
 				2CD489D21A4A2563004535A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
