@@ -13,7 +13,6 @@
 		2C5525DD1A9D3AF3004334EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525DC1A9D3AF3004334EC /* Images.xcassets */; };
 		2C5525E01A9D3AF3004334EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C5525DE1A9D3AF3004334EC /* LaunchScreen.xib */; };
 		2C5525EC1A9D3AF4004334EC /* BingPhotoOfTheDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5525EB1A9D3AF4004334EC /* BingPhotoOfTheDayTests.swift */; };
-		2C5525F61A9D3BA7004334EC /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5525F51A9D3BA7004334EC /* NetworkController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,6 @@
 		2C5525E51A9D3AF4004334EC /* BingPhotoOfTheDayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BingPhotoOfTheDayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5525EA1A9D3AF4004334EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C5525EB1A9D3AF4004334EC /* BingPhotoOfTheDayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BingPhotoOfTheDayTests.swift; sourceTree = "<group>"; };
-		2C5525F51A9D3BA7004334EC /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 			children = (
 				2C5525D51A9D3AF3004334EC /* AppDelegate.swift */,
 				2C5525D71A9D3AF3004334EC /* ViewController.swift */,
-				2C5525F51A9D3BA7004334EC /* NetworkController.swift */,
 				2C5525D91A9D3AF3004334EC /* Main.storyboard */,
 				2C5525DC1A9D3AF3004334EC /* Images.xcassets */,
 				2C5525DE1A9D3AF3004334EC /* LaunchScreen.xib */,
@@ -217,7 +214,6 @@
 			files = (
 				2C5525D81A9D3AF3004334EC /* ViewController.swift in Sources */,
 				2C5525D61A9D3AF3004334EC /* AppDelegate.swift in Sources */,
-				2C5525F61A9D3BA7004334EC /* NetworkController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
